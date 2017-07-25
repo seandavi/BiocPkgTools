@@ -1,4 +1,4 @@
-#' Get full biocViews file
+#' Get full bioc software package listing
 #'
 #' The BiocViews-generated \code{VIEWS} file is available
 #' for bioconductor release and devel repositories. It
@@ -16,7 +16,16 @@
 #' @importFrom BiocInstaller biocVersion
 #'
 #' @export
-getBiocViewsFile = function(version = biocVersion()) {
+getBiocPkgList = function(version = biocVersion()) {
   viewsFileUrl = paste(biocinstallRepos(version=version)['BioCsoft'], 'VIEWS', sep = '/')
-  as.data.frame(read.dcf(url(viewsFileUrl)))
+  ret = as.data.frame(read.dcf(url(viewsFileUrl)))
+  # convert comma-delimted text columns into
+  # list columns
+  commaCols = c('Depends', 'Suggests', 'dependsOnMe', 'Imports', 'importsMe',
+                'Enhances', 'vignettes', 'vignetteTitles', 'suggestsMe',
+                'Author', 'Maintainer')
+  for(commaCol in commaCols) {
+    ret[[commaCol]] = str_split(ret[[commaCol]],'\\s?,\\s?')
+  }
+  ret
 }
