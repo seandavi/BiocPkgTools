@@ -2,6 +2,7 @@
 
 export(getBiocDownloadStats)
 export(getBiocPkgList)
+export(getVignette)
 export(githubURLParts)
 importFrom(BiocInstaller,biocVersion)
 importFrom(BiocInstaller,biocinstallRepos)
