@@ -7,14 +7,15 @@
 #' file. In particular, it contains \code{biocViews} annotations
 #' and URLs for vignettes and developer URLs.
 #'
-#' @param biocVersion The requested bioconductor version. Will
+#' @param version The requested bioconductor version. Will
 #'     default to use the BiocInstaller defaults (ie., \code{biocVersion()}).
 #'
 #' @return a \code{data.frame}
 #'
 #' @importFrom BiocInstaller biocinstallRepos
 #' @importFrom BiocInstaller biocVersion
-#'
+#' @importFrom stringr str_split
+#' 
 #' @export
 getBiocPkgList = function(version = biocVersion()) {
   viewsFileUrl = paste(biocinstallRepos(version=version)['BioCsoft'], 'VIEWS', sep = '/')

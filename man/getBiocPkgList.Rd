@@ -7,7 +7,7 @@
 getBiocPkgList(version = biocVersion())
 }
 \arguments{
-\item{biocVersion}{The requested bioconductor version. Will
+\item{version}{The requested bioconductor version. Will
 default to use the BiocInstaller defaults (ie., \code{biocVersion()}).}
 }
 \value{

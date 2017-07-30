@@ -3,6 +3,8 @@
 #' @details Note that bioconductor package download
 #' stats are not version-specific.
 #'
+#' @importFrom utils read.table
+#' 
 #' @return a \code{data.frame} of download stats for
 #' all bioconductor packages, in tidy format
 #'
