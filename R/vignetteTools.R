@@ -3,7 +3,8 @@
 #' @param vignettePath the additional path information to get to the vignette
 #' @param destfile the file location to store the vignette
 #' @param biocVersion defaults to user version
-#' 
+#'
+#' @importFrom utils download.file
 #' 
 #' @examples
 #' \dontrun{
