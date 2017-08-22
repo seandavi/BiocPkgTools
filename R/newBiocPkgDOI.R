@@ -42,20 +42,29 @@ generateBiocPkgDOI = function(pkg, authors, pubyear, testing=TRUE) {
   }
   require(httr)
   base_url = "https://ezid.cdlib.org/id"
-  bioc_shoulder = "doi:10.5072/FK2"
   bioc_doi_namespace = ".bioc."
   pkg_doi = paste0(bioc_shoulder,bioc_doi_namespace,pkg)
   url0 = file.path(base_url,pkg_doi)
   message(url0)
-  res = httr::PUT(url0,
+  body = paste(c(sprintf("datacite.title: %s",pkg),
+                 sprintf("datacite.creator: %s",gsub('\n','',paste(authors,collapse=", "))),
+                 "datacite.publisher: Bioconductor",
+                 sprintf("datacite.publicationyear: %d",pubyear),
+                 sprintf("datacite.resourcetype: %s","Software")),collapse="\n")
+  res = httr::POST(url0,
                   content_type('text/plain'),
                   accept("text/plain"),
-                  httr::authenticate('apitest','apitest'),
-                  body=paste(c(sprintf("datacite.title: %s",pkg),
-                               sprintf("datacite.creator: %s",authors),
-                               "datacite.publisher: Bioconductor",
-                               sprintf("datacite.publicationyear: %d",pubyear),
-                               sprintf("_target: https://bioconductor.org/package/%s",pkg),collapse="\n")))
+                  httr::authenticate(username,password),
+                  body=body,timeout(30))
+  if(status_code(res)==400) {
+    res = httr::PUT(url0,
+                     content_type('text/plain'),
+                     accept("text/plain"),
+                     httr::authenticate(username,password),
+                     body=body,timeout(30))
+  }
+  message(res)
+  return(res)
   tmp = strsplit(content(res),' ')[[1]][c(2,4)]
   return(tmp[1])
 }
