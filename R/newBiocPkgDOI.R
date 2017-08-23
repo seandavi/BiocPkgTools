@@ -14,7 +14,7 @@
 #' The GUI is available here: \url{https://ezid.lib.purdue.edu}.
 #' 
 #' @param pkg character(1) package name
-#' @param authors character(1) author list
+#' @param authors character vector of authors (will be "pasted" together)
 #' @param pubyear integer(1) publication year
 #' @param testing logical(1) If true, will use the apitest
 #'     user with the password apitest. These DOIs will expire. 
@@ -47,6 +47,7 @@ generateBiocPkgDOI = function(pkg, authors, pubyear, testing=TRUE) {
   url0 = file.path(base_url,pkg_doi)
   message(url0)
   body = paste(c(sprintf("datacite.title: %s",pkg),
+                 sprintf("_target: https://bioconductor.org/packages/%s",pkg),
                  sprintf("datacite.creator: %s",gsub('\n','',paste(authors,collapse=", "))),
                  "datacite.publisher: Bioconductor",
                  sprintf("datacite.publicationyear: %d",pubyear),
