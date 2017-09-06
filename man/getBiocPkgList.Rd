@@ -4,11 +4,14 @@
 \alias{getBiocPkgList}
 \title{Get full bioc software package listing}
 \usage{
-getBiocPkgList(version = biocVersion())
+getBiocPkgList(version = biocVersion(), repo = "BioCsoft")
 }
 \arguments{
 \item{version}{The requested bioconductor version. Will
 default to use the BiocInstaller defaults (ie., \code{biocVersion()}).}
+
+\item{repo}{The requested biooconductor repository. The default will be the
+Bioconductor software repository: BioCsoft.}
 }
 \value{
 a \code{data.frame}
