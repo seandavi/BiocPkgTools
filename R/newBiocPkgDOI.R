@@ -30,6 +30,7 @@
 #' \dontrun{
 #'   x = generateBiocPkgDOI('RANDOM_TEST_PACKAGE','Sean Davis',1972)
 #' }
+#' @export
 generateBiocPkgDOI = function(pkg, authors, pubyear, testing=TRUE) {
   if(testing) {
     username='apitest'
