@@ -3,17 +3,17 @@
 \name{getPackageInfo}
 \alias{getPackageInfo}
 \title{Generate needed inforamation to create DOI from a package
-DESCRIPTION file}
+directory}
 \usage{
-getPackageInfo(file)
+getPackageInfo(dir)
 }
 \arguments{
-\item{file}{character(1) Path to DESCRIPTION file}
+\item{dir}{character(1) Path to package}
 }
 \value{
 a \code{data.frame}
 }
 \description{
 Generate needed inforamation to create DOI from a package
-DESCRIPTION file
+directory
 }
