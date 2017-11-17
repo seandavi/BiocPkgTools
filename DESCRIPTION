@@ -1,14 +1,20 @@
 Package: BiocPkgTools
 Type: Package
 Title: Collection of simple tools for learning about Bioc Packages
-Version: 0.1.1
-Authors@R: person("Sean", "Davis", email = "seandavi@gmail.com",
-                  role = c("aut", "cre"))
+Version: 0.1.2
+Date: 2017-11-17
+Authors@R: c(person("Sean", "Davis", email = "seandavi@gmail.com",
+                  role = c("aut", "cre")),
+             person("Lori", "Shepherd",
+                  role = c("aut")))     
 Description: Bioconductor has many packages. 
 Imports:
     BiocInstaller,
     biocViews,
-    stringr
+    stringr,
+    rvest,
+    rex,
+    dplyr
 Suggests:
     pdftools
 License: MIT + file LICENSE
