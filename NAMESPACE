@@ -2,8 +2,10 @@
 
 export(build_report)
 export(dataciteXMLGenerate)
+export(generateBiocPkgDOI)
 export(getBiocDownloadStats)
 export(getBiocPkgList)
+export(getPackageInfo)
 export(getVignette)
 export(githubURLParts)
 import(rex)

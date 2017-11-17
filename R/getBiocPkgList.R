@@ -9,6 +9,8 @@
 #'
 #' @param version The requested bioconductor version. Will
 #'     default to use the BiocInstaller defaults (ie., \code{biocVersion()}).
+#' @param repo The requested biooconductor repository. The default will be the
+#'    Bioconductor software repository: BioCsoft. 
 #'
 #' @return a \code{data.frame}
 #'
@@ -17,8 +19,8 @@
 #' @importFrom stringr str_split
 #' 
 #' @export
-getBiocPkgList = function(version = biocVersion()) {
-  viewsFileUrl = paste(biocinstallRepos(version=version)['BioCsoft'], 'VIEWS', sep = '/')
+getBiocPkgList = function(version = biocVersion(), repo='BioCsoft') {
+  viewsFileUrl = paste(biocinstallRepos(version=version)[repo], 'VIEWS', sep = '/')
   ret = as.data.frame(read.dcf(url(viewsFileUrl)))
   # convert comma-delimted text columns into
   # list columns
