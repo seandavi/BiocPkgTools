@@ -15,7 +15,8 @@
 #' author, commit, date, node, stage, and result.
 #' 
 #' @importFrom readr read_lines
-#' @importFrom rvest html html_text html_nodes
+#' @importFrom rvest html_text html_nodes
+#' @importFrom xml2 read_html
 #' @import rex
 #' @importFrom dplyr left_join
 #' @importFrom BiocInstaller biocVersion
@@ -41,7 +42,7 @@ build_report <- function(version=biocVersion()) {
   ))
   
   
-  dat = html(sprintf('http://bioconductor.org/checkResults/%s/bioc-LATEST/',version))
+  dat = xml2::read_html(sprintf('http://bioconductor.org/checkResults/%s/bioc-LATEST/',version))
   
   pkgnames = html_text(html_nodes(dat,xpath='/html/body/table[@class="mainrep"]/tr/td[@rowspan="3"]'))
   
