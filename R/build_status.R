@@ -50,14 +50,14 @@ build_report <- function(version=biocVersion()) {
                       rex(
                         start,
                         capture(any_alnums, name='pkg'),
-                        space,
+                        maybe(any_blanks),
                         capture(except_any_of(any_alphas),name="version"),
-                        any_blanks,
+                        maybe(any_blanks),
                         capture(anything,name='author'),
-                        "Last",space,"Commit:",
+                        "Last",anything,"Commit:",
                         capture(anything,name="commit"),
-                        "Last",space,'Changed',space,"Date:",space,
-                        capture(any_of(list(digit,'-',blank,':')),name='date')
+                        "Last",anything,'Changed',anything,"Date:",any_non_alnums,
+                        capture(any_of(list(digit,'-',blank,':')),name='last_changed_date')
                       ))
   y = y[!is.na(y$pkg),]
   
