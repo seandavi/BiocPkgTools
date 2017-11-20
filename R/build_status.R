@@ -63,8 +63,8 @@ build_report <- function(version=biocVersion()) {
   
   library(dplyr)
   df = y %>% left_join(z)
-  df[['date']] = as.POSIXct(df[['date']])
-  attr(df,'date') = as.POSIXct(df[['date']][1])
+  df[['last_changed_date']] = as.POSIXct(df[['last_changed_date']])
+  attr(df,'last_changed_date') = as.POSIXct(df[['last_changed_date']][1])
   df
 }
 
