@@ -1,8 +1,8 @@
 Package: BiocPkgTools
 Type: Package
 Title: Collection of simple tools for learning about Bioc Packages
-Version: 0.1.7
-Date: 2017-12-05
+Version: 0.1.8
+Date: 2017-12-06
 Authors@R: c(person("Sean", "Davis", email = "seandavi@gmail.com",
                   role = c("aut", "cre")), 
 		  person("Lori", "Shepherd", role="ctb"))
@@ -14,9 +14,9 @@ Imports:
     rvest,
     rex,
     dplyr,
-    xml2
-Suggests:
-    pdftools
+    xml2,
+    readr,
+    httr
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
