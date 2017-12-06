@@ -13,9 +13,9 @@ notifications:
   email:
     on_success: seandavi@gmail.com
     on_failure: seandavi@gmail.com
-
+r_github_packages: hadley/pkgdown
 script:
-- Rscript -e 'bookdown::render_book("index.Rmd")'
+- Rscript -e 'pkgdown::build_site()'
 deploy:
   provider: pages
   skip_cleanup: true
