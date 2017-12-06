@@ -20,15 +20,17 @@
 #' 
 #' @export
 getBiocPkgList = function(version = biocVersion(), repo='BioCsoft') {
-  viewsFileUrl = paste(biocinstallRepos(version=version)[repo], 'VIEWS', sep = '/')
-  ret = as.data.frame(read.dcf(url(viewsFileUrl)))
-  # convert comma-delimted text columns into
-  # list columns
-  commaCols = c('Depends', 'Suggests', 'dependsOnMe', 'Imports', 'importsMe',
+    viewsFileUrl = paste(biocinstallRepos(version=version)[repo], 'VIEWS', sep = '/')
+    con = url(viewsFileUrl)
+    ret = as.data.frame(read.dcf(con))
+    close(con)
+    # convert comma-delimted text columns into
+    # list columns
+    commaCols = c('Depends', 'Suggests', 'dependsOnMe', 'Imports', 'importsMe',
                 'Enhances', 'vignettes', 'vignetteTitles', 'suggestsMe',
                 'Author', 'Maintainer')
-  for(commaCol in commaCols) {
-    ret[[commaCol]] = str_split(ret[[commaCol]],'\\s?,\\s?')
-  }
-  ret
+    for(commaCol in commaCols) {
+        ret[[commaCol]] = str_split(ret[[commaCol]],'\\s?,\\s?')
+    }
+    ret
 }
