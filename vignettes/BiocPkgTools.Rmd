@@ -1,0 +1,55 @@
+---
+title: "Vignette Title"
+author:
+- name: Sean Davis
+  affiliation: National Cancer Institute
+  email: seandavi@gmail.com
+package: BiocPkgTools
+output:
+  BiocStyle::html_document:
+    toc: false
+abstract: |
+  Bioconductor has a rich ecosystem of metadata around packages, usage, and build status. This package is a simple collection of functions to access that metadata from R in a tidy data format. The goal is to expose metadata for data mining and value-added functionality such as package searching, text mining, and analytics on packages. 
+vignette: |
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+Bioconductor has a rich ecosystem of metadata around packages, usage, and build status. This package is a simple collection of functions to access that metadata from R in a tidy data format. The goal is to expose metadata for data mining and value-added functionality such as package searching, text mining, and analytics on packages. 
+
+Functionality includes access to :
+
+- Download statistics
+- General package listing
+- Build reports
+- Vignettes
+
+```{r init, include=FALSE}
+library(knitr)
+opts_chunk$set(warning = FALSE, message = FALSE)
+```
+
+# Build reports
+
+```{r}
+library(BiocPkgTools)
+head(bioc_build_report())
+```
+
+# Download statistics
+
+```{r}
+head(getBiocDownloadStats())
+```
+
+# Package details
+
+```{r}
+require(dplyr)
+bpi = getBiocPkgList()
+bpi %>% 
+  filter(Package=="GEOquery") %>%
+  pull(importsMe)
+```
+
