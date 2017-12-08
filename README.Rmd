@@ -1,0 +1,45 @@
+---
+title: "BiocPkgTools"
+author: "Sean Davis"
+date: "12/8/2017"
+output: html_document
+---
+
+The BiocPkgTools package provides utility functions for getting
+information from the Bioconductor project. There is a focus on 
+providing data in tidy formats to facilitate data mashups
+and analysis. Functionality includes access to :
+
+- Download statistics
+- General package listing
+- Build reports
+- Vignettes
+
+```{r init, include=FALSE}
+library(knitr)
+opts_chunk$set(warning = FALSE, message = FALSE)
+```
+
+## Build reports
+
+```{r}
+library(BiocPkgTools)
+head(bioc_build_report())
+```
+
+## Download statistics
+
+```{r}
+head(getBiocDownloadStats())
+```
+
+## Package details
+
+```{r}
+require(dplyr)
+bpi = getBiocPkgList()
+bpi %>% 
+  filter(Package=="GEOquery") %>%
+  pull(importsMe)
+```
+
