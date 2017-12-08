@@ -28,6 +28,8 @@ Functionality includes access to :
 ```{r init, include=FALSE}
 library(knitr)
 opts_chunk$set(warning = FALSE, message = FALSE)
+library(devtools)
+devtools::install_github('seandavi/BiocPkgTools')
 ```
 
 # Build reports

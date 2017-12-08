@@ -9,4 +9,4 @@ navbar:
   right:
     - icon: fa-github fa-lg
       text: "github"
-      href: https://github.com/seandavi/BiocPkgTools/
+      href: https://github.com/seandavi/BiocPkgTools
