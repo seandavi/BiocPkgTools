@@ -62,6 +62,7 @@ build_report <- function(version=biocVersion()) {
   y = y[!is.na(y$pkg),]
   
   df = y %>% left_join(z)
+  df[['bioc_version']]=version
   df[['last_changed_date']] = as.POSIXct(df[['last_changed_date']])
   attr(df,'last_changed_date') = as.POSIXct(df[['last_changed_date']][1])
   df
