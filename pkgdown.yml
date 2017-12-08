@@ -1,0 +1,6 @@
+urls:
+  reference: http://seandavi.github.io/BiocPkgTools/reference
+  article: http://seandavi.github.io/BiocPkgTools/articles
+articles:
+  BiocPkgTools: BiocPkgTools.html
+
