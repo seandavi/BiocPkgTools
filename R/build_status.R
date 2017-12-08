@@ -23,12 +23,12 @@
 #' 
 #' @examples 
 #' 
-#' latest_build = build_report("3.6")
+#' latest_build = bioc_build_report()
 #' head(latest_build)
 #' 
 #' 
 #' @export
-build_report <- function(version=as.character(biocVersion())) {
+bioc_build_report <- function(version=as.character(biocVersion())) {
   url = sprintf('http://bioconductor.org/checkResults/%s/bioc-LATEST/STATUS_DB.txt',version)
   dat = readr::read_lines(url)
   z = re_matches(dat,rex(
