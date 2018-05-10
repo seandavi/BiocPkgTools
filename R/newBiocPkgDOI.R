@@ -26,7 +26,8 @@
 #'     
 #' @return The DOI as a character(1) vector.
 #'
-#' @importFrom httr POST status_code PUT authenticate timeout
+#' @importFrom httr POST status_code PUT authenticate timeout content_type accept content
+
 #' 
 #' @examples 
 #' \dontrun{
