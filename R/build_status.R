@@ -19,7 +19,8 @@
 #' @importFrom xml2 read_html
 #' @import rex
 #' @importFrom dplyr left_join
-#' @importFrom BiocInstaller biocVersion
+# # ' @importFrom BiocInstaller biocVersion
+#' @importFrom BiocManager version
 #' 
 #' @examples 
 #' 
@@ -28,7 +29,7 @@
 #' 
 #' 
 #' @export
-bioc_build_report <- function(version=as.character(biocVersion())) {
+bioc_build_report <- function(version=as.character(BiocManager::version())) {
   url = sprintf('http://bioconductor.org/checkResults/%s/bioc-LATEST/STATUS_DB.txt',version)
   dat = readr::read_lines(url)
   z = re_matches(dat,rex(

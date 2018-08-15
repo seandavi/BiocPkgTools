@@ -4,7 +4,7 @@
 \alias{bioc_build_report}
 \title{Tidy Bioconductor build report results}
 \usage{
-bioc_build_report(version = as.character(biocVersion()))
+bioc_build_report(version = as.character(BiocManager::version()))
 }
 \arguments{
 \item{version}{character(1) the version number

@@ -29,7 +29,7 @@
 #' @export
 getVignette <- function(vignettePath,
                         destfile = tempfile(),
-                        biocVersion = BiocInstaller::biocVersion()) {
+                        biocVersion = BiocManager::version()) {
     p = sprintf('https://bioconductor.org/packages/%s/bioc/%s',biocVersion,vignettePath)
     download.file(p,destfile)
     destfile
