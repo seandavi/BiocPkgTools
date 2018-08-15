@@ -5,7 +5,7 @@
 \title{Get vignette}
 \usage{
 getVignette(vignettePath, destfile = tempfile(),
-  biocVersion = BiocInstaller::biocVersion())
+  biocVersion = BiocManager::version())
 }
 \arguments{
 \item{vignettePath}{the additional path information to get to the vignette}
