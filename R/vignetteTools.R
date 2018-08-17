@@ -2,7 +2,7 @@
 #'
 #' @param vignettePath the additional path information to get to the vignette
 #' @param destfile the file location to store the vignette
-#' @param biocVersion defaults to user version
+#' @param version defaults to user version
 #'
 #' @importFrom utils download.file
 #' 
@@ -29,8 +29,8 @@
 #' @export
 getVignette <- function(vignettePath,
                         destfile = tempfile(),
-                        biocVersion = BiocInstaller::biocVersion()) {
-    p = sprintf('https://bioconductor.org/packages/%s/bioc/%s',biocVersion,vignettePath)
+                        version = BiocManager::version()) {
+    p = sprintf('https://bioconductor.org/packages/%s/bioc/%s',version,vignettePath)
     download.file(p,destfile)
     destfile
 }

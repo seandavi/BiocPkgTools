@@ -28,5 +28,4 @@ a tidy data frame version of the build report.
 latest_build = bioc_build_report()
 head(latest_build)
 
-
 }

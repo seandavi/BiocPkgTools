@@ -4,11 +4,11 @@
 \alias{getBiocPkgList}
 \title{Get full bioc software package listing}
 \usage{
-getBiocPkgList(version = biocVersion(), repo = "BioCsoft")
+getBiocPkgList(version = BiocManager::version(), repo = "BioCsoft")
 }
 \arguments{
 \item{version}{The requested bioconductor version. Will
-default to use the BiocInstaller defaults (ie., \code{biocVersion()}).}
+default to use the BiocManager defaults (ie., \code{version()}).}
 
 \item{repo}{The requested biooconductor repository. The default will be the
 Bioconductor software repository: BioCsoft.}
