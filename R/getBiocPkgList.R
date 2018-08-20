@@ -8,19 +8,18 @@
 #' and URLs for vignettes and developer URLs.
 #'
 #' @param version The requested bioconductor version. Will
-#'     default to use the BiocInstaller defaults (ie., \code{biocVersion()}).
+#'     default to use the BiocManager defaults (ie., \code{version()}).
 #' @param repo The requested biooconductor repository. The default will be the
 #'    Bioconductor software repository: BioCsoft. 
 #'
 #' @return a \code{data.frame}
 #'
-#' @importFrom BiocInstaller biocinstallRepos
-#' @importFrom BiocInstaller biocVersion
+#' @importFrom BiocManager repositories version
 #' @importFrom stringr str_split
 #' 
 #' @export
-getBiocPkgList = function(version = biocVersion(), repo='BioCsoft') {
-    viewsFileUrl = paste(biocinstallRepos(version=version)[repo], 'VIEWS', sep = '/')
+getBiocPkgList = function(version = BiocManager::version(), repo='BioCsoft') {
+    viewsFileUrl = paste(BiocManager::repositories(version = version)[repo], 'VIEWS', sep = '/')
     con = url(viewsFileUrl)
     ret = as.data.frame(read.dcf(con))
     close(con)
