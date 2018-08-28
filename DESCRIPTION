@@ -28,7 +28,7 @@ Imports:
     DT
 VignetteBuilder: knitr
 Suggests: BiocStyle, knitr, rmarkdown,
-    testthat
+    testthat, DT, htmltools
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

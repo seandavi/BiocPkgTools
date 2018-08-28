@@ -2,21 +2,31 @@
 % Please edit documentation in R/problemPage.R
 \name{problemPage}
 \alias{problemPage}
-\title{generate hyperlinked HTML for problematic build reports for Bioc packages}
+\title{generate hyperlinked HTML for build reports for Bioc packages}
 \usage{
-problemPage(authorPatt = "V.*Carey", ver = "3.8")
+problemPage(authorPattern = "V.*Carey", ver = "3.8",
+  includeOK = FALSE)
 }
 \arguments{
-\item{authorPatt}{character(1) regexp used with grep() to filter author field of package DESCRIPTION for listing}
+\item{authorPattern}{character(1) regexp used with grep() to filter author field of package DESCRIPTION for listing}
 
 \item{ver}{character(1) version tag for Bioconductor}
+
+\item{includeOK}{logical(1) include entries from the build report that are listed
+as "OK". Default FALSE will result in only those entries that
+are in WARNING or ERROR state.}
 }
 \value{
 DT::datatable call; if assigned to a variable, must evaluate to get the page to appear
 }
 \description{
-generate hyperlinked HTML for problematic build reports for Bioc packages
+This is a quick way to get an HTML report of a developer's packages.
+The function is keyed to filter based on maintainer name.
 }
 \examples{
 if (interactive()) problemPage()
+
+}
+\author{
+Vince Carey
 }
