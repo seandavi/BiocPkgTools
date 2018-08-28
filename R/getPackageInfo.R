@@ -8,6 +8,8 @@
 #' 
 #' @return a \code{data.frame}
 #'
+#' @keywords Internal
+#' 
 #' @export
 getPackageInfo <- function(dir){
     # the next line avoids warnings about unexported

@@ -17,3 +17,4 @@ a \code{data.frame}
 Generate needed inforamation to create DOI from a package
 directory
 }
+\keyword{Internal}
