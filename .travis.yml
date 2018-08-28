@@ -16,7 +16,7 @@ notifications:
 r_github_packages: hadley/pkgdown
 r_packages: devtools
 script:
-- Rscript -e 'devtools::install_packages("seandavi/BiocPkgTools"); pkgdown::build_site()'
+- Rscript -e 'devtools::install_github("seandavi/BiocPkgTools"); pkgdown::build_site()'
 deploy:
   provider: pages
   skip_cleanup: true
