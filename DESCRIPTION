@@ -1,11 +1,13 @@
 Package: BiocPkgTools
 Type: Package
 Title: Collection of simple tools for learning about Bioc Packages
-Version: 0.1.13
-Date: 2017-12-08
+Version: 0.1.14
+Date: 2018-08-28
 Authors@R: c(person("Sean", "Davis", email = "seandavi@gmail.com",
                   role = c("aut", "cre")), 
-		  person("Lori", "Shepherd", role="ctb"))
+		  person("Lori", "Shepherd", role="ctb", email = "Lori.Shepherd@roswellpark.org"),
+		  person("Martin", "Morgan", role="ctb", email = "martin.morgan@roswellpark.org"),
+		  person("Vince", "Carey", role="ctb", email="stvjc@channing.harvard.edu"))
 Description: Bioconductor has a rich ecosystem of metadata around
   packages, usage, and build status. This package is a simple
   collection of functions to access that metadata from R. The goal
@@ -25,7 +27,8 @@ Imports:
     htmltools,
     DT
 VignetteBuilder: knitr
-Suggests: BiocStyle, knitr, rmarkdown
+Suggests: BiocStyle, knitr, rmarkdown,
+    testthat
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
