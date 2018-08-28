@@ -14,8 +14,9 @@ notifications:
     on_success: seandavi@gmail.com
     on_failure: seandavi@gmail.com
 r_github_packages: hadley/pkgdown
+r_packages: devtools
 script:
-- Rscript -e 'pkgdown::build_site()'
+- Rscript -e 'devtools::install_packages("seandavi/BiocPkgTools"); pkgdown::build_site()'
 deploy:
   provider: pages
   skip_cleanup: true
