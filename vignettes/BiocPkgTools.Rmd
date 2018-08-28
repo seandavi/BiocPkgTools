@@ -1,6 +1,12 @@
 ---
 title: "Overview of BiocPkgTools"
 author:
+- name: Vince Carey
+  affiliation: Channing Lab, Harvard University
+- name: Lori Shepherd
+  affiliation: Roswell Park Cancer Institute
+- name: Martin Morgan
+  affiliation: Roswell Park Cancer Institute
 - name: Sean Davis
   affiliation: National Cancer Institute
   email: seandavi@gmail.com
@@ -11,11 +17,14 @@ output:
 abstract: |
   Bioconductor has a rich ecosystem of metadata around packages, usage, and build status. This package is a simple collection of functions to access that metadata from R in a tidy data format. The goal is to expose metadata for data mining and value-added functionality such as package searching, text mining, and analytics on packages. 
 vignette: |
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Overview of BiocPkgTools}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
+# Introduction
+
+Bioconductor has a rich ecosystem of metadata around packages, usage, and build status. This package is a simple collection of functions to access that metadata from R in a tidy data format. The goal is to expose metadata for data mining and value-added functionality such as package searching, text mining, and analytics on packages. 
 
 Functionality includes access to :
 
@@ -27,30 +36,91 @@ Functionality includes access to :
 ```{r init, include=FALSE}
 library(knitr)
 opts_chunk$set(warning = FALSE, message = FALSE)
-library(devtools)
-devtools::install_github('seandavi/BiocPkgTools')
+```
+
+```{r style, echo = FALSE, results = 'asis'}
+BiocStyle::markdown()
 ```
 
 # Build reports
 
+The Bioconductor build reports are available online as HTML pages. 
+However, they are not very computable.
+The `biocBuildReport` function does some heroic parsing of the HTML
+to produce a *tidy* data.frame for further processing in R. 
+
 ```{r}
 library(BiocPkgTools)
-head(bioc_build_report())
+head(biocBuildReport())
 ```
+
+## Personal build report
+
+Because developers may be interested in a quick view of their own
+packages, there is a simple function, `problemPage`, to produce an HTML report of
+the build status of packages matching a given author *regex*. The default is
+to report only "problem" build statuses (ERROR, WARNING).
+
+```{r}
+problemPage()
+```
+
+When run in an interactive environment, the `problemPage` function 
+will open a browser window for user interaction. Note that if you want
+to include all your package results, not just the broken ones, simply 
+specify `includeOK = TRUE`.
 
 # Download statistics
 
+Bioconductor supplies download stats for all packages. The `biocDownloadStats`
+function grabs all available download stats for all packages in all
+Experiment Data, Annotation Data, and Software packages. The results
+are returned as a tidy data.frame for further analysis.
+
 ```{r}
-head(getBiocDownloadStats())
+head(biocDownloadStats())
 ```
+
+The download statistics reported are for ***all available versions*** of a package.
+There are no separate, publicly available statistics broken down by version.
 
 # Package details
 
+The R `DESCRIPTION` file contains a plethora of information regarding package
+authors, dependencies, versions, etc. In a repository such as Bioconductor, these
+details are available in bulk for all inclucded packages. The `biocPkgList` returns
+a data.frame with a row for each package. Tons of information are avaiable, as 
+evidenced by the column names of the results.
+
 ```{r}
-require(dplyr)
-bpi = getBiocPkgList()
-bpi %>% 
-  filter(Package=="GEOquery") %>%
-  pull(importsMe)
+bpi = biocPkgList()
+colnames(bpi)
 ```
 
+Some of the variables are parsed to produce `list` columns. 
+
+```{r}
+head(bpi)
+```
+
+As a simple example of how these columns can be used, extracting
+the `importsMe` column to find the packages that import the 
+`r Biocpkg("GEOquery")` package.
+
+
+```{r}
+require(dplyr)
+bpi = biocPkgList()
+bpi %>% 
+    filter(Package=="GEOquery") %>%
+    pull(importsMe) %>%
+    unlist()
+```
+
+Much more complicated analyses are possible such as 
+
+# Provenance
+
+```{r}
+sessionInfo()
+```
