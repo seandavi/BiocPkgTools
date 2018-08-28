@@ -15,15 +15,15 @@ packages.
 }
 \section{For developers}{
 
-The \code{\link{build_status}} function returns a computable
+The \code{\link{biocBuildReport}} function returns a computable
 form of the Bioconductor Build Report.
 }
 
 \section{For users}{
 
-The \code{\link{getBiocDownloadStats}} function gets Bioconductor
+The \code{\link{biocDownloadStats}} function gets Bioconductor
 download stats, allowing users to quickly find commonly used
-packages. The \code{\link{getBiocPkgList}} is useful for getting
+packages. The \code{\link{biocPkgList}} is useful for getting
 a complete listing of all Bioconductor packages.
 }
 

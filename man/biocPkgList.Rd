@@ -17,7 +17,7 @@ that not all repos are available for all versions, particularly older
 versions (but who would use those, right?).}
 }
 \value{
-an object of class \code{\link[tibble]{tbl_df}}.
+an object of class \code{tbl_df}.
 }
 \description{
 The BiocViews-generated \code{VIEWS} file is available

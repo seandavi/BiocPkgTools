@@ -15,7 +15,7 @@
 #'    that not all repos are available for all versions, particularly older
 #'    versions (but who would use those, right?).
 #'
-#' @return an object of class \code{\link[tibble]{tbl_df}}.
+#' @return an object of class \code{tbl_df}.
 #' 
 #' @importFrom BiocManager repositories version
 #' @importFrom stringr str_split

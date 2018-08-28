@@ -10,10 +10,10 @@ biocBuildReport(version = as.character(BiocManager::version()))
 \item{version}{character(1) the version number
 as used to access the online build report. For 
 example, "3.6". The default is the "current version"
-as specified in \code{\link[BiocManager]{BiocManager::version}}.}
+as specified in \code{BiocManager::version}.}
 }
 \value{
-a \code{\link[tibble]{tbl_df}} object with columns pkg, version,
+a \code{tbl_df} object with columns pkg, version,
 author, commit, date, node, stage, and result.
 }
 \description{
