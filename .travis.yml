@@ -13,12 +13,3 @@ notifications:
   email:
     on_success: seandavi@gmail.com
     on_failure: seandavi@gmail.com
-r_github_packages: hadley/pkgdown
-r_packages: devtools
-script:
-- Rscript -e 'devtools::install_github("seandavi/BiocPkgTools"); pkgdown::build_site()'
-deploy:
-  provider: pages
-  skip_cleanup: true
-  github_token: $GITHUB_TOKEN
-  local-dir: docs
