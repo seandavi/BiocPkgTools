@@ -117,7 +117,7 @@ bpi %>%
     unlist()
 ```
 
-Much more complicated analyses are possible such as 
+Much more complicated analyses are possible based on dependency details.
 
 # Provenance
 
