@@ -14,6 +14,9 @@ getBiocVignette(vignettePath, destfile = tempfile(),
 
 \item{version}{chacter(1) such as "3.7", defaults to user version}
 }
+\value{
+character(1) the filename of the downloaded vignette
+}
 \description{
 The actual vignette path is available using
 \code{\link{biocPkgList}}.

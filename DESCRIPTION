@@ -1,7 +1,7 @@
 Package: BiocPkgTools
 Type: Package
 Title: Collection of simple tools for learning about Bioc Packages
-Version: 0.99.0
+Version: 0.99.1
 Date: 2018-08-28
 Authors@R: c(person("Sean", "Davis", email = "seandavi@gmail.com",
                   role = c("aut", "cre")), 
@@ -25,7 +25,9 @@ Imports:
     readr,
     httr,
     htmltools,
-    DT
+    DT,
+    tools,
+    utils
 VignetteBuilder: knitr
 Suggests: BiocStyle, knitr, rmarkdown,
     testthat

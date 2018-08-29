@@ -3,8 +3,9 @@
 #' @param pkg name of bioc package
 #' 
 #' @import xml2
+#'
+#' @return an xml element
 #' 
-#' @export
 dataciteXMLGenerate = function(pkg) {
   bioc_shoulder = "doi:10.5072/FK2"
   bioc_doi_namespace = ".bioc."

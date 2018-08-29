@@ -3,7 +3,6 @@
 export(biocBuildReport)
 export(biocDownloadStats)
 export(biocPkgList)
-export(dataciteXMLGenerate)
 export(generateBiocPkgDOI)
 export(getBiocVignette)
 export(getPackageInfo)

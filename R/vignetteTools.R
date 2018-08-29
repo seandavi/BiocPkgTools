@@ -8,6 +8,8 @@
 #' @param version chacter(1) such as "3.7", defaults to user version
 #'
 #' @importFrom utils download.file
+#'
+#' @return character(1) the filename of the downloaded vignette
 #' 
 #' @examples
 #' \dontrun{
