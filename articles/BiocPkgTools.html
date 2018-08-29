@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Overview of BiocPkgTools • BiocPkgTools</title>
-<!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Overview of BiocPkgTools">
@@ -15,11 +15,17 @@
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<![endif]--><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-93043521-1"></script><script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-93043521-1');
+</script>
 </head>
 <body>
     <div class="container template-article">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
@@ -29,7 +35,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BiocPkgTools</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.99.2</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.99.4</span>
       </span>
     </div>
 
@@ -48,7 +54,15 @@
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/seandavi/BiocPkgTools">
+    <span class="fa fa-github fa-lg"></span>
+     
+    github
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -77,7 +91,7 @@
       </address>
                   
       
-      
+      <small class="dont-index">Source: <a href="https://github.com/seandavi/BiocPkgTools/blob/master/vignettes/BiocPkgTools.Rmd"><code>vignettes/BiocPkgTools.Rmd</code></a></small>
       <div class="hidden name"><code>BiocPkgTools.Rmd</code></div>
 
     </address>
@@ -136,8 +150,8 @@ document.addEventListener("DOMContentLoaded", function() {
 <a href="#personal-build-report" class="anchor"></a>Personal build report</h2>
 <p>Because developers may be interested in a quick view of their own packages, there is a simple function, <code>problemPage</code>, to produce an HTML report of the build status of packages matching a given author <em>regex</em>. The default is to report only “problem” build statuses (ERROR, WARNING).</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="../reference/problemPage.html">problemPage</a></span>()</a></code></pre></div>
-<div id="htmlwidget-3b040d4c027ebeb1f709" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-3b040d4c027ebeb1f709">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17"],["<a href=\"https://bioconductor.org/checkResults/3.8/bioc-LATEST/affyContam/malbec1-checksrc.html\">affyContam<\/a>","<a href=\"https://bioconductor.org/checkResults/3.8/bioc-LATEST/affyContam/tokay1-checksrc.html\">affyContam<\/a>","<a href=\"https://bioconductor.org/checkResults/3.8/bioc-LATEST/affyContam/merida1-checksrc.html\">affyContam<\/a>","<a href=\"https://bioconductor.org/checkResults/3.8/bioc-LATEST/arrayMvout/malbec1-checksrc.html\">arrayMvout<\/a>","<a href=\"https://bioconductor.org/checkResults/3.8/bioc-LATEST/arrayMvout/tokay1-checksrc.html\">arrayMvout<\/a>","<a href=\"https://bioconductor.org/checkResults/3.8/bioc-LATEST/arrayMvout/merida1-checksrc.html\">arrayMvout<\/a>","<a href=\"https://bioconductor.org/checkResults/3.8/bioc-LATEST/GGtools/tokay1-checksrc.html\">GGtools<\/a>","<a href=\"https://bioconductor.org/checkResults/3.8/bioc-LATEST/gQTLstats/tokay1-checksrc.html\">gQTLstats<\/a>","<a href=\"https://bioconductor.org/checkResults/3.8/bioc-LATEST/ivygapSE/tokay1-checksrc.html\">ivygapSE<\/a>","<a href=\"https://bioconductor.org/checkResults/3.8/bioc-LATEST/ldblock/tokay1-checksrc.html\">ldblock<\/a>","<a href=\"https://bioconductor.org/checkResults/3.8/bioc-LATEST/MLInterfaces/tokay1-checksrc.html\">MLInterfaces<\/a>","<a href=\"https://bioconductor.org/checkResults/3.8/bioc-LATEST/parglms/malbec1-checksrc.html\">parglms<\/a>","<a href=\"https://bioconductor.org/checkResults/3.8/bioc-LATEST/parglms/tokay1-checksrc.html\">parglms<\/a>","<a href=\"https://bioconductor.org/checkResults/3.8/bioc-LATEST/parglms/merida1-checksrc.html\">parglms<\/a>","<a href=\"https://bioconductor.org/checkResults/3.8/bioc-LATEST/TxRegInfra/malbec1-checksrc.html\">TxRegInfra<\/a>","<a href=\"https://bioconductor.org/checkResults/3.8/bioc-LATEST/TxRegInfra/tokay1-checksrc.html\">TxRegInfra<\/a>","<a href=\"https://bioconductor.org/checkResults/3.8/bioc-LATEST/TxRegInfra/merida1-checksrc.html\">TxRegInfra<\/a>"],["1.39.0","1.39.0","1.39.0","1.39.0","1.39.0","1.39.0","5.17.0","1.13.1","1.3.0","1.11.1","1.61.1","1.13.3","1.13.3","1.13.3","1.1.3","1.1.3","1.1.3"],["malbec1","tokay1","merida1","malbec1","tokay1","merida1","tokay1","tokay1","tokay1","tokay1","tokay1","malbec1","tokay1","merida1","malbec1","tokay1","merida1"],["checksrc","checksrc","checksrc","checksrc","checksrc","checksrc","checksrc","checksrc","checksrc","checksrc","checksrc","checksrc","checksrc","checksrc","checksrc","checksrc","checksrc"],["WARNINGS","WARNINGS","WARNINGS","WARNINGS","WARNINGS","WARNINGS","WARNINGS","WARNINGS","WARNINGS","WARNINGS","WARNINGS","WARNINGS","WARNINGS","WARNINGS","WARNINGS","WARNINGS","WARNINGS"],["3.8","3.8","3.8","3.8","3.8","3.8","3.8","3.8","3.8","3.8","3.8","3.8","3.8","3.8","3.8","3.8","3.8"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>col1<\/th>\n      <th>version<\/th>\n      <th>node<\/th>\n      <th>stage<\/th>\n      <th>result<\/th>\n      <th>bioc_version<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"order":[],"autoWidth":false,"orderClasses":false,"columnDefs":[{"orderable":false,"targets":0}]}},"evals":[],"jsHooks":[]}</script><p>When run in an interactive environment, the <code>problemPage</code> function will open a browser window for user interaction. Note that if you want to include all your package results, not just the broken ones, simply specify <code>includeOK = TRUE</code>.</p>
+<div id="htmlwidget-aa82fe949684c47df8b2" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-aa82fe949684c47df8b2">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17"],["<a href=\"https://bioconductor.org/checkResults/3.8/bioc-LATEST/affyContam/malbec1-checksrc.html\">affyContam<\/a>","<a href=\"https://bioconductor.org/checkResults/3.8/bioc-LATEST/affyContam/tokay1-checksrc.html\">affyContam<\/a>","<a href=\"https://bioconductor.org/checkResults/3.8/bioc-LATEST/affyContam/merida1-checksrc.html\">affyContam<\/a>","<a href=\"https://bioconductor.org/checkResults/3.8/bioc-LATEST/arrayMvout/malbec1-checksrc.html\">arrayMvout<\/a>","<a href=\"https://bioconductor.org/checkResults/3.8/bioc-LATEST/arrayMvout/tokay1-checksrc.html\">arrayMvout<\/a>","<a href=\"https://bioconductor.org/checkResults/3.8/bioc-LATEST/arrayMvout/merida1-checksrc.html\">arrayMvout<\/a>","<a href=\"https://bioconductor.org/checkResults/3.8/bioc-LATEST/GGtools/tokay1-checksrc.html\">GGtools<\/a>","<a href=\"https://bioconductor.org/checkResults/3.8/bioc-LATEST/gQTLstats/tokay1-checksrc.html\">gQTLstats<\/a>","<a href=\"https://bioconductor.org/checkResults/3.8/bioc-LATEST/ivygapSE/tokay1-checksrc.html\">ivygapSE<\/a>","<a href=\"https://bioconductor.org/checkResults/3.8/bioc-LATEST/ldblock/tokay1-checksrc.html\">ldblock<\/a>","<a href=\"https://bioconductor.org/checkResults/3.8/bioc-LATEST/MLInterfaces/tokay1-checksrc.html\">MLInterfaces<\/a>","<a href=\"https://bioconductor.org/checkResults/3.8/bioc-LATEST/parglms/malbec1-checksrc.html\">parglms<\/a>","<a href=\"https://bioconductor.org/checkResults/3.8/bioc-LATEST/parglms/tokay1-checksrc.html\">parglms<\/a>","<a href=\"https://bioconductor.org/checkResults/3.8/bioc-LATEST/parglms/merida1-checksrc.html\">parglms<\/a>","<a href=\"https://bioconductor.org/checkResults/3.8/bioc-LATEST/TxRegInfra/malbec1-checksrc.html\">TxRegInfra<\/a>","<a href=\"https://bioconductor.org/checkResults/3.8/bioc-LATEST/TxRegInfra/tokay1-checksrc.html\">TxRegInfra<\/a>","<a href=\"https://bioconductor.org/checkResults/3.8/bioc-LATEST/TxRegInfra/merida1-checksrc.html\">TxRegInfra<\/a>"],["1.39.0","1.39.0","1.39.0","1.39.0","1.39.0","1.39.0","5.17.0","1.13.1","1.3.0","1.11.1","1.61.1","1.13.3","1.13.3","1.13.3","1.1.3","1.1.3","1.1.3"],["malbec1","tokay1","merida1","malbec1","tokay1","merida1","tokay1","tokay1","tokay1","tokay1","tokay1","malbec1","tokay1","merida1","malbec1","tokay1","merida1"],["checksrc","checksrc","checksrc","checksrc","checksrc","checksrc","checksrc","checksrc","checksrc","checksrc","checksrc","checksrc","checksrc","checksrc","checksrc","checksrc","checksrc"],["WARNINGS","WARNINGS","WARNINGS","WARNINGS","WARNINGS","WARNINGS","WARNINGS","WARNINGS","WARNINGS","WARNINGS","WARNINGS","WARNINGS","WARNINGS","WARNINGS","WARNINGS","WARNINGS","WARNINGS"],["3.8","3.8","3.8","3.8","3.8","3.8","3.8","3.8","3.8","3.8","3.8","3.8","3.8","3.8","3.8","3.8","3.8"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>col1<\/th>\n      <th>version<\/th>\n      <th>node<\/th>\n      <th>stage<\/th>\n      <th>result<\/th>\n      <th>bioc_version<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"order":[],"autoWidth":false,"orderClasses":false,"columnDefs":[{"orderable":false,"targets":0}]}},"evals":[],"jsHooks":[]}</script><p>When run in an interactive environment, the <code>problemPage</code> function will open a browser window for user interaction. Note that if you want to include all your package results, not just the broken ones, simply specify <code>includeOK = TRUE</code>.</p>
 </div>
 </div>
 <div id="download-statistics" class="section level1">
