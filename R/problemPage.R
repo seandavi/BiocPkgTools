@@ -42,7 +42,7 @@ problemPage = function(authorPattern="V.*Carey", ver="3.8", includeOK = FALSE) {
     nn = nrow(mm)
     if (is.null(nn)) stop("all packages fine")
     cc = chkURL(mm[["bioc_version"]], mm[["pkg"]], mm[["node"]], mm[["stage"]])
-    hr = lapply(1:nrow(mm), function(x)
+    hr = lapply(seq_len(nrow(mm)), function(x)
         htmltools::a(mm[x, "pkg"], href=cc[[x]]))
     col1 = unlist(lapply(hr, as.character))
     DT::datatable(data.frame(col1, mm[,-1], stringsAsFactors=FALSE), escape=FALSE)
