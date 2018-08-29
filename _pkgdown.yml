@@ -1,0 +1,12 @@
+title: BiocPkgTools
+url: http://seandavi.github.io/BiocPkgTools
+template:
+  params:
+    bootswatch: flatly
+    ganalytics: UA-93043521-1
+navbar:
+  type: inverse
+  right:
+    - icon: fa-github fa-lg
+      text: "github"
+      href: https://github.com/seandavi/BiocPkgTools
