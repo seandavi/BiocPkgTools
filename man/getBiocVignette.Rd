@@ -23,7 +23,7 @@ The actual vignette path is available using
 }
 \examples{
 x = biocPkgList()
-tmp = getVignette(x$vignettes[[1]][1])
+tmp = getBiocVignette(x$vignettes[[1]][1])
 tmp
 
 \dontrun{
