@@ -12,9 +12,11 @@
 #' @return character(1) the filename of the downloaded vignette
 #' 
 #' @examples
-#' \dontrun{
 #' x = biocPkgList()
 #' tmp = getVignette(x$vignettes[[1]][1])
+#' tmp
+#' 
+#' \dontrun{
 #' library(pdftools)
 #' y = pdf_text(tmp)
 #' y = paste(y,collapse=" ")

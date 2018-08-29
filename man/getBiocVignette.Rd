@@ -22,9 +22,11 @@ The actual vignette path is available using
 \code{\link{biocPkgList}}.
 }
 \examples{
-\dontrun{
 x = biocPkgList()
 tmp = getVignette(x$vignettes[[1]][1])
+tmp
+
+\dontrun{
 library(pdftools)
 y = pdf_text(tmp)
 y = paste(y,collapse=" ")
