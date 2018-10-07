@@ -37,7 +37,7 @@
 biocPkgList = function(version = BiocManager::version(), repo='BioCsoft') {
     viewsFileUrl = paste(BiocManager::repositories(version = version)[repo], 'VIEWS', sep = '/')
     con = url(viewsFileUrl)
-    ret = as.data.frame(read.dcf(con))
+    ret = as.data.frame(read.dcf(con), stringsAsFactors = FALSE)
     close(con)
     # convert comma-delimted text columns into
     # list columns
