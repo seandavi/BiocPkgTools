@@ -1,7 +1,7 @@
 Package: BiocPkgTools
 Type: Package
 Title: Collection of simple tools for learning about Bioc Packages
-Version: 0.99.9
+Version: 0.99.10
 Date: 2018-10-08
 Authors@R: c(person("Sean", "Davis", email = "seandavi@gmail.com",
                   role = c("aut", "cre")), 
@@ -27,10 +27,13 @@ Imports:
     htmltools,
     DT,
     tools,
-    utils
+    utils,
+    igraph,
+    tidyr
 VignetteBuilder: knitr
 Suggests: BiocStyle, knitr, rmarkdown,
-    testthat, tm, SnowballC, pdftools
+    testthat, tm, SnowballC, pdftools,
+    visNetwork
 License: MIT + file LICENSE
 BugReports: https://github.com/seandavi/BiocPkgTools/issues/new
 URL: https://github.com/seandavi/BiocPkgTools
