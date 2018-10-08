@@ -79,7 +79,7 @@ attributes (see graph_from_data_frame)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BiocPkgTools</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.99.8</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.99.9</span>
       </span>
     </div>
 
@@ -179,9 +179,9 @@ package for details of what can be done.</p>
 <span class='co'># dependency data frame as you see fit.</span>
 
 <span class='no'>g</span> <span class='kw'>=</span> <span class='fu'>buildPkgDependencyIgraph</span>(<span class='no'>pkg_dep_df</span>)
-<span class='no'>g</span></div><div class='output co'>#&gt; IGRAPH cce2816 DN-- 2796 21840 -- 
+<span class='no'>g</span></div><div class='output co'>#&gt; IGRAPH 7a0d9ea DN-- 2796 21840 -- 
 #&gt; + attr: name (v/c), edgetype (e/c)
-#&gt; + edges from cce2816 (vertex names):
+#&gt; + edges from 7a0d9ea (vertex names):
 #&gt;  [1] a4       -&gt;a4Base        a4       -&gt;a4Preproc     a4       -&gt;a4Classif    
 #&gt;  [4] a4       -&gt;a4Core        a4       -&gt;a4Reporting   a4Base   -&gt;methods      
 #&gt;  [7] a4Base   -&gt;graphics      a4Base   -&gt;grid          a4Base   -&gt;Biobase      
@@ -192,8 +192,8 @@ package for details of what can be done.</p>
 #&gt; [22] a4Classif-&gt;a4Preproc     a4Classif-&gt;MLInterfaces  a4Classif-&gt;ROCR         
 #&gt; + ... omitted several edges</div><div class='input'>
 <span class='co'># Look at nodes and edges</span>
-<span class='fu'>head</span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/V'>V</a></span>(<span class='no'>g</span>)) <span class='co'># vertices</span></div><div class='output co'>#&gt; + 6/2796 vertices, named, from cce2816:
-#&gt; [1] a4          a4Base      a4Classif   a4Core      a4Preproc   a4Reporting</div><div class='input'><span class='fu'>head</span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/E'>E</a></span>(<span class='no'>g</span>)) <span class='co'># edges</span></div><div class='output co'>#&gt; + 6/21840 edges from cce2816 (vertex names):
+<span class='fu'>head</span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/V'>V</a></span>(<span class='no'>g</span>)) <span class='co'># vertices</span></div><div class='output co'>#&gt; + 6/2796 vertices, named, from 7a0d9ea:
+#&gt; [1] a4          a4Base      a4Classif   a4Core      a4Preproc   a4Reporting</div><div class='input'><span class='fu'>head</span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/E'>E</a></span>(<span class='no'>g</span>)) <span class='co'># edges</span></div><div class='output co'>#&gt; + 6/21840 edges from 7a0d9ea (vertex names):
 #&gt; [1] a4    -&gt;a4Base      a4    -&gt;a4Preproc   a4    -&gt;a4Classif  
 #&gt; [4] a4    -&gt;a4Core      a4    -&gt;a4Reporting a4Base-&gt;methods    </div><div class='input'>
 <span class='co'># subset graph by attributes</span>
