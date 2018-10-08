@@ -72,7 +72,7 @@ biocPkgList." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BiocPkgTools</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.99.5</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.99.8</span>
       </span>
     </div>
 
@@ -152,22 +152,22 @@ biocPkgList." />
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>=</span> <span class='fu'><a href='biocPkgList.html'>biocPkgList</a></span>()
 <span class='no'>tmp</span> <span class='kw'>=</span> <span class='fu'>getBiocVignette</span>(<span class='no'>x</span>$<span class='no'>vignettes</span><span class='kw'>[[</span><span class='fl'>1</span>]][<span class='fl'>1</span>])
-<span class='no'>tmp</span></div><div class='output co'>#&gt; [1] "/var/folders/hq/pzgtdx7j55j0g7r4647vqzrr2yvxz9/T//Rtmpxhbt0T/file125a178e86806"</div><div class='input'>
+<span class='no'>tmp</span></div><div class='output co'>#&gt; [1] "/var/folders/hq/pzgtdx7j55j0g7r4647vqzrr2yvxz9/T//RtmpVcse37/filea1937bbc96f6"</div><div class='input'>
 </div><span class='co'># NOT RUN {</span>
 <span class='fu'>library</span>(<span class='no'>pdftools</span>)
-<span class='no'>y</span> <span class='kw'>=</span> <span class='fu'>pdf_text</span>(<span class='no'>tmp</span>)
+<span class='no'>y</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/pdftools/topics/pdftools'>pdf_text</a></span>(<span class='no'>tmp</span>)
 <span class='no'>y</span> <span class='kw'>=</span> <span class='fu'>paste</span>(<span class='no'>y</span>,<span class='kw'>collapse</span><span class='kw'>=</span><span class='st'>" "</span>)
 <span class='fu'>library</span>(<span class='no'>tm</span>)
-<span class='no'>v</span> <span class='kw'>=</span> <span class='fu'>VCorpus</span>(<span class='fu'>VectorSource</span>(<span class='no'>y</span>))
+<span class='no'>v</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/tm/topics/VCorpus'>VCorpus</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/tm/topics/VectorSource'>VectorSource</a></span>(<span class='no'>y</span>))
 <span class='fu'>library</span>(<span class='no'>magrittr</span>)
 
 <span class='no'>v</span> <span class='kw'>&lt;-</span> <span class='no'>v</span> <span class='kw'>%&gt;%</span>
-    <span class='fu'>tm_map</span>(<span class='no'>stripWhitespace</span>) <span class='kw'>%&gt;%</span>
-    <span class='fu'>tm_map</span>(<span class='fu'>content_transformer</span>(<span class='no'>tolower</span>)) <span class='kw'>%&gt;%</span>
-    <span class='fu'>tm_map</span>(<span class='no'>removeWords</span>, <span class='fu'>stopwords</span>(<span class='st'>"english"</span>)) <span class='kw'>%&gt;%</span>
-    <span class='fu'>tm_map</span>(<span class='no'>stemDocument</span>)
-<span class='no'>dtm</span> <span class='kw'>=</span> <span class='fu'>DocumentTermMatrix</span>(<span class='no'>v</span>)
-<span class='fu'>inspect</span>(<span class='fu'>DocumentTermMatrix</span>(<span class='no'>v</span>,
+    <span class='fu'><a href='http://www.rdocumentation.org/packages/tm/topics/tm_map'>tm_map</a></span>(<span class='no'>stripWhitespace</span>) <span class='kw'>%&gt;%</span>
+    <span class='fu'><a href='http://www.rdocumentation.org/packages/tm/topics/tm_map'>tm_map</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/tm/topics/content_transformer'>content_transformer</a></span>(<span class='no'>tolower</span>)) <span class='kw'>%&gt;%</span>
+    <span class='fu'><a href='http://www.rdocumentation.org/packages/tm/topics/tm_map'>tm_map</a></span>(<span class='no'>removeWords</span>, <span class='fu'><a href='http://www.rdocumentation.org/packages/tm/topics/stopwords'>stopwords</a></span>(<span class='st'>"english"</span>)) <span class='kw'>%&gt;%</span>
+    <span class='fu'><a href='http://www.rdocumentation.org/packages/tm/topics/tm_map'>tm_map</a></span>(<span class='no'>stemDocument</span>)
+<span class='no'>dtm</span> <span class='kw'>=</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/tm/topics/matrix'>DocumentTermMatrix</a></span>(<span class='no'>v</span>)
+<span class='fu'><a href='http://www.rdocumentation.org/packages/tm/topics/inspect'>inspect</a></span>(<span class='fu'><a href='http://www.rdocumentation.org/packages/tm/topics/matrix'>DocumentTermMatrix</a></span>(<span class='no'>v</span>,
     <span class='fu'>list</span>(<span class='kw'>dictionary</span> <span class='kw'>=</span> <span class='fu'>as.character</span>(<span class='no'>x</span>$<span class='no'>Package</span>))))
 <span class='co'># }</span></pre>
   </div>

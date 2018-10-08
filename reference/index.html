@@ -68,7 +68,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BiocPkgTools</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.99.5</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.99.8</span>
       </span>
     </div>
 
@@ -122,8 +122,8 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
+          <h2 id="section-general-package-information" class="hasAnchor"><a href="#section-general-package-information" class="anchor"></a>General package information</h2>
+          <p class="section-desc"><p>These functions access Bioconductor package metadata and return results as R objects.</p></p>
         </th>
       </tr>
       <tr>
@@ -153,18 +153,6 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="dataciteXMLGenerate.html">dataciteXMLGenerate()</a></code> </p>
-        </td>
-        <td><p>Bioc datacite xml generator</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="generateBiocPkgDOI.html">generateBiocPkgDOI()</a></code> </p>
-        </td>
-        <td><p>Generate a DOI for a bioconductor package</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="getBiocVignette.html">getBiocVignette()</a></code> </p>
         </td>
         <td><p>Download a Bioconductor vignette</p></td>
@@ -178,15 +166,67 @@ directory</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="githubURLParts.html">githubURLParts()</a></code> </p>
-        </td>
-        <td><p>Extract github user and repo name from github URL</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="problemPage.html">problemPage()</a></code> </p>
         </td>
         <td><p>generate hyperlinked HTML for build reports for Bioc packages</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-dependency-graphs" class="hasAnchor"><a href="#section-dependency-graphs" class="anchor"></a>Dependency graphs</h2>
+          <p class="section-desc"><p>Work with package dependencies as graphs.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="buildPkgDependencyDataFrame.html">buildPkgDependencyDataFrame()</a></code> </p>
+        </td>
+        <td><p>Work with Bioconductor package dependencies</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="buildPkgDependencyIgraph.html">buildPkgDependencyIgraph()</a></code> </p>
+        </td>
+        <td><p>Work with package dependencies as a graph</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="inducedSubgraphByPkgs.html">inducedSubgraphByPkgs()</a></code> </p>
+        </td>
+        <td><p>Return a minimal subgraph based on package name(s)</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="subgraphByDegree.html">subgraphByDegree()</a></code> </p>
+        </td>
+        <td><p>Subset graph by degree</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-utilities" class="hasAnchor"><a href="#section-utilities" class="anchor"></a>Utilities</h2>
+          <p class="section-desc"><p>Some of these are internal to the Bioconductor project. In particular, the DOI-related functions are available for completeness, but not meant to be used by individuals.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="dataciteXMLGenerate.html">dataciteXMLGenerate()</a></code> </p>
+        </td>
+        <td><p>Bioc datacite xml generator</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="generateBiocPkgDOI.html">generateBiocPkgDOI()</a></code> </p>
+        </td>
+        <td><p>Generate a DOI for a bioconductor package</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="githubURLParts.html">githubURLParts()</a></code> </p>
+        </td>
+        <td><p>Extract github user and repo name from github URL</p></td>
       </tr>
     </tbody>
     </table>
@@ -195,7 +235,9 @@ directory</p></td>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#section-general-package-information">General package information</a></li>
+      <li><a href="#section-dependency-graphs">Dependency graphs</a></li>
+      <li><a href="#section-utilities">Utilities</a></li>
     </ul>
   </div>
 </div>

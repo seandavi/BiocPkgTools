@@ -16,6 +16,12 @@
     <loc>http://seandavi.github.io/BiocPkgTools/reference/biocPkgList.html</loc>
   </url>
   <url>
+    <loc>http://seandavi.github.io/BiocPkgTools/reference/buildPkgDependencyDataFrame.html</loc>
+  </url>
+  <url>
+    <loc>http://seandavi.github.io/BiocPkgTools/reference/buildPkgDependencyIgraph.html</loc>
+  </url>
+  <url>
     <loc>http://seandavi.github.io/BiocPkgTools/reference/dataciteXMLGenerate.html</loc>
   </url>
   <url>
@@ -31,7 +37,13 @@
     <loc>http://seandavi.github.io/BiocPkgTools/reference/githubURLParts.html</loc>
   </url>
   <url>
+    <loc>http://seandavi.github.io/BiocPkgTools/reference/inducedSubgraphByPkgs.html</loc>
+  </url>
+  <url>
     <loc>http://seandavi.github.io/BiocPkgTools/reference/problemPage.html</loc>
+  </url>
+  <url>
+    <loc>http://seandavi.github.io/BiocPkgTools/reference/subgraphByDegree.html</loc>
   </url>
   <url>
     <loc>http://seandavi.github.io/BiocPkgTools/articles/BiocPkgTools.html</loc>
