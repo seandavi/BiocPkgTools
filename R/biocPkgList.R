@@ -51,3 +51,5 @@ biocPkgList = function(version = BiocManager::version(), repo='BioCsoft') {
     class(ret) = c("biocPkgList", class(ret))
     ret
 }
+
+stripVersionString = function(s) sub('\\s?\\(.*\\)\\s?','',s)

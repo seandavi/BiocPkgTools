@@ -1,0 +1,6 @@
+BiocPkgTools v0.99.9 (Release date: 2018-10-08)
+==============
+
+Added functionality to treat package dependencies
+as a graph. 
+

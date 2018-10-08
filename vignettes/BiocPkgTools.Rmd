@@ -1,15 +1,15 @@
 ---
 title: "Overview of BiocPkgTools"
 author:
+- name: Sean Davis
+  affiliation: National Cancer Institute
+  email: seandavi@gmail.com
 - name: Vince Carey
   affiliation: Channing Lab, Harvard University
 - name: Lori Shepherd
   affiliation: Roswell Park Cancer Institute
 - name: Martin Morgan
   affiliation: Roswell Park Cancer Institute
-- name: Sean Davis
-  affiliation: National Cancer Institute
-  email: seandavi@gmail.com
 package: BiocPkgTools
 output:
   BiocStyle::html_document:
@@ -31,11 +31,12 @@ Functionality includes access to :
 - Download statistics
 - General package listing
 - Build reports
+- Package dependency graphs
 - Vignettes
 
 ```{r init, include=FALSE}
 library(knitr)
-opts_chunk$set(warning = FALSE, message = FALSE)
+opts_chunk$set(warning = FALSE, message = FALSE, cache=FALSE)
 ```
 
 ```{r style, echo = FALSE, results = 'asis'}
@@ -117,7 +118,107 @@ bpi %>%
     unlist()
 ```
 
-Much more complicated analyses are possible based on dependency details.
+# Dependency graphs
+
+The Bioconductor ecosystem is built around the concept of interoperability
+and dependencies. These interdependencies are available as part of the
+`biocPkgList()` output. The `BiocPkgTools` provides some convenience
+functions to convert package dependencies to R graphs. A modular approach leads
+to the following workflow.
+
+1. Create a `data.frame` of dependencies using `buildPkgDependencyDataFrame`.
+2. Create an `igraph` object from the dependency data frame using `buildPkgDependencyIgraph`
+3. Use native `igraph` functionality to perform arbitrary network operations. 
+Convenience functions, `inducedSubgraphByPkgs` and `subgraphByDegree` are available.
+4. Visualize with packages such as `r CRANpkg("visNetwork")`.
+
+
+## Working with dependency graphs
+
+A dependency graph for all of Bioconductor is a starting place.
+
+```{r}
+library(BiocPkgTools)
+dep_df = buildPkgDependencyDataFrame()
+g = buildPkgDependencyIgraph(dep_df)
+g
+library(igraph)
+head(V(g))
+head(E(g))
+```
+
+See `inducedSubgraphByPkgs` and `subgraphByDegree` to produce
+subgraphs based on a subset of packages.
+
+See the igraph documentation for more detail on graph analytics, setting
+vertex and edge attributes, and advanced subsetting.
+
+## Graph visualization
+
+The visNetwork package is a nice interactive visualization tool
+that implements graph plotting in a browser. It can be integrated
+into shiny applications. Interactive graphs can also be included in
+Rmarkdown documents (see vignette)
+
+```{r}
+igraph_network = buildPkgDependencyIgraph(buildPkgDependencyDataFrame())
+``` 
+
+The full dependency graph is really not that informative to look at, though
+doing so is possible. A common use case is to visualize the graph of
+dependencies "centered" on a package of interest. In this case, I will 
+focus on the `r Biocpkg("GEOquery")` package. 
+
+```{r}
+igraph_geoquery_network = subgraphByDegree(igraph_network, "GEOquery")
+```
+
+The `subgraphByDegree()` function returns all nodes and connections within
+`degree` of the named package; the default `degree` is `1`.
+
+The visNework package can plot `igraph` objects directly, but more flexibility
+is offered by first converting the graph to visNetwork form.
+
+```{r}
+library(visNetwork)
+data <- toVisNetworkData(igraph_geoquery_network)
+```
+
+The next few code chunks highlight just a few examples of the visNetwork
+capabilities, starting with a basic plot.
+
+```{r}
+visNetwork(nodes = data$nodes, edges = data$edges, height = "500px")
+```
+
+For fun, we can watch the graph stabilize during drawing, best viewed
+interactively.
+
+```{r}
+visNetwork(nodes = data$nodes, edges = data$edges, height = "500px") %>%
+    visPhysics(stabilization=FALSE)
+```
+
+Add arrows and colors to better capture dependencies.
+
+```{r}
+data$edges$color='lightblue'
+data$edges[data$edges$edgetype=='Imports','color']= 'red'
+data$edges[data$edges$edgetype=='Depends','color']= 'green'
+
+visNetwork(nodes = data$nodes, edges = data$edges, height = "500px") %>%
+    visEdges(arrows='from') 
+```
+
+Add a legend.
+
+```{r}
+ledges <- data.frame(color = c("green", "lightblue", "red"),
+  label = c("Depends", "Suggests", "Imports"), arrows =c("from", "from", "from"))
+visNetwork(nodes = data$nodes, edges = data$edges, height = "500px") %>%
+  visEdges(arrows='from') %>%
+  visLegend(addEdges=ledges)
+```
 
 # Provenance
 
