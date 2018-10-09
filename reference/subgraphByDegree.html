@@ -76,7 +76,7 @@ package named." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BiocPkgTools</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.99.9</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.99.11</span>
       </span>
     </div>
 
@@ -138,6 +138,11 @@ package named.</p>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>g</th>
+      <td><p>an igraph graph, typically created by
+<code><a href='buildPkgDependencyIgraph.html'>buildPkgDependencyIgraph</a></code></p></td>
+    </tr>
+    <tr>
       <th>pkg</th>
       <td><p>character(1) package name from which to
 measure degree.</p></td>
@@ -162,7 +167,20 @@ edges within degree of the named package</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='no'>g</span> <span class='kw'>=</span> <span class='fu'><a href='buildPkgDependencyIgraph.html'>buildPkgDependencyIgraph</a></span>(<span class='fu'><a href='buildPkgDependencyDataFrame.html'>buildPkgDependencyDataFrame</a></span>())
-<span class='no'>g2</span> <span class='kw'>=</span> <span class='no'>subgraphByDegree</span></div></pre>
+<span class='no'>g2</span> <span class='kw'>=</span> <span class='fu'>subgraphByDegree</span>(<span class='no'>g</span>, <span class='st'>'GEOquery'</span>)
+<span class='no'>g2</span></div><div class='output co'>#&gt; IGRAPH 7a5d057 DN-- 50 180 -- 
+#&gt; + attr: name (v/c), edgetype (e/c)
+#&gt; + edges from 7a5d057 (vertex names):
+#&gt;  [1] AnnotationHubData-&gt;Biobase      AnnotationHubData-&gt;BiocGenerics
+#&gt;  [3] AnnotationHubData-&gt;GEOquery     AnnotationHubData-&gt;methods     
+#&gt;  [5] AnnotationHubData-&gt;knitr        bigmelon         -&gt;Biobase     
+#&gt;  [7] bigmelon         -&gt;BiocGenerics bigmelon         -&gt;BiocGenerics
+#&gt;  [9] bigmelon         -&gt;GEOquery     bigmelon         -&gt;minfi       
+#&gt; [11] bigmelon         -&gt;methods      Biobase          -&gt;BiocGenerics
+#&gt; [13] Biobase          -&gt;methods      BiocGenerics     -&gt;Biobase     
+#&gt; [15] BiocGenerics     -&gt;methods      BiocGenerics     -&gt;methods     
+#&gt; + ... omitted several edges</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

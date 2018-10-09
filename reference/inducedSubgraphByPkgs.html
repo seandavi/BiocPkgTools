@@ -76,7 +76,7 @@ and their intervening dependencies." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BiocPkgTools</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.99.9</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.99.11</span>
       </span>
     </div>
 
@@ -138,6 +138,11 @@ and their intervening dependencies.</p>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>g</th>
+      <td><p>an igraph graph, typically created by
+<code><a href='buildPkgDependencyIgraph.html'>buildPkgDependencyIgraph</a></code></p></td>
+    </tr>
+    <tr>
       <th>pkgs</th>
       <td><p>character() vector of packages to
 include. Package names not included in
@@ -153,18 +158,18 @@ connecting paths will be colored as the igraph default.</p></td>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>g</span> <span class='kw'>=</span> <span class='fu'><a href='buildPkgDependencyIgraph.html'>buildPkgDependencyIgraph</a></span>(<span class='fu'><a href='buildPkgDependencyDataFrame.html'>buildPkgDependencyDataFrame</a></span>())
-<span class='no'>g2</span> <span class='kw'>=</span> <span class='fu'>inducedSubgraphByPkgs</span>(<span class='no'>g</span>, <span class='kw'>pkgs</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='st'>'GenomicFeatures'</span>,<span class='st'>'TCGAbiolinksGUI'</span>, <span class='st'>'BiocGenerics'</span>, <span class='st'>'org.Hs.eg.db'</span>, <span class='st'>'minfi'</span>, <span class='st'>'limma'</span>))
-<span class='no'>g2</span></div><div class='output co'>#&gt; IGRAPH 50b86a2 DN-- 6 6 -- 
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>igraph</span>)
+<span class='no'>g</span> <span class='kw'>=</span> <span class='fu'><a href='buildPkgDependencyIgraph.html'>buildPkgDependencyIgraph</a></span>(<span class='fu'><a href='buildPkgDependencyDataFrame.html'>buildPkgDependencyDataFrame</a></span>())
+<span class='no'>g2</span> <span class='kw'>=</span> <span class='fu'>inducedSubgraphByPkgs</span>(<span class='no'>g</span>, <span class='kw'>pkgs</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='st'>'GenomicFeatures'</span>,
+<span class='st'>'TCGAbiolinksGUI'</span>, <span class='st'>'BiocGenerics'</span>, <span class='st'>'org.Hs.eg.db'</span>, <span class='st'>'minfi'</span>, <span class='st'>'limma'</span>))
+<span class='no'>g2</span></div><div class='output co'>#&gt; IGRAPH 16de09d DN-- 6 6 -- 
 #&gt; + attr: name (v/c), color (v/c), edgetype (e/c)
-#&gt; + edges from 50b86a2 (vertex names):
+#&gt; + edges from 16de09d (vertex names):
 #&gt; [1] GenomicFeatures-&gt;BiocGenerics GenomicFeatures-&gt;org.Hs.eg.db
 #&gt; [3] limma          -&gt;org.Hs.eg.db minfi          -&gt;BiocGenerics
-#&gt; [5] minfi          -&gt;limma        TCGAbiolinksGUI-&gt;minfi       </div><div class='input'><span class='fu'>V</span>(<span class='no'>g2</span>)</div><div class='output co'>#&gt; + 6/6 vertices, named, from 50b86a2:
+#&gt; [5] minfi          -&gt;limma        TCGAbiolinksGUI-&gt;minfi       </div><div class='input'><span class='fu'><a href='http://www.rdocumentation.org/packages/igraph/topics/V'>V</a></span>(<span class='no'>g2</span>)</div><div class='output co'>#&gt; + 6/6 vertices, named, from 16de09d:
 #&gt; [1] BiocGenerics    GenomicFeatures limma           minfi          
 #&gt; [5] TCGAbiolinksGUI org.Hs.eg.db   </div><div class='input'>
-<span class='co'># load igraph to plot)\</span>
-<span class='fu'>library</span>(<span class='no'>igraph</span>)
 <span class='fu'>plot</span>(<span class='no'>g2</span>)</div><div class='img'><img src='inducedSubgraphByPkgs-1.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
