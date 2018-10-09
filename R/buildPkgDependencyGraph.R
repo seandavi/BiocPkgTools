@@ -29,6 +29,8 @@
 #' include all possibilities.
 #'
 #' @param ... parameters passed along to \code{\link{biocPkgList}}
+#'
+#' @importFrom dplyr bind_rows
 #' 
 #' @seealso See \code{\link{buildPkgDependencyIgraph}}, \code{\link{biocPkgList}}.
 #'
@@ -96,7 +98,8 @@ buildPkgDependencyDataFrame = function(dependencies = c('Depends','Imports', 'Su
 #'
 #' @seealso See \code{\link{buildPkgDependencyDataFrame}},
 #' \code{\link[igraph]{graph_from_data_frame}},
-#' \code{\link{subgraph.biocDepGraph}}, \code{\link[igraph]{igraph-es-indexing}},
+#' \code{\link{inducedSubgraphByPkgs}}, \code{\link{subgraphByDegree}},
+#' \code{\link[igraph]{igraph-es-indexing}},
 #' \code{\link[igraph]{igraph-vs-indexing}}
 #'
 #' @return an igraph directed graph. See the igraph
@@ -140,6 +143,9 @@ buildPkgDependencyIgraph = function(pkgDepDF) {
 #' for a developer, for example, to examine her packages
 #' and their intervening dependencies.
 #'
+#' @param g an igraph graph, typically created by
+#' \code{\link{buildPkgDependencyIgraph}}
+#'
 #' @param pkgs character() vector of packages to
 #' include. Package names not included in
 #' the graph are ignored.
@@ -148,16 +154,17 @@ buildPkgDependencyIgraph = function(pkgDepDF) {
 #' packages. Other packages in the graph that fall in
 #' connecting paths will be colored as the igraph default.
 #' 
-#' @importFrom igraph induced_subgraph
-#'
+#' @importFrom igraph induced_subgraph V
+#' @importMethodsFrom igraph V<-
+#' 
 #' @examples
+#' library(igraph)
 #' g = buildPkgDependencyIgraph(buildPkgDependencyDataFrame())
-#' g2 = inducedSubgraphByPkgs(g, pkgs=c('GenomicFeatures','TCGAbiolinksGUI', 'BiocGenerics', 'org.Hs.eg.db', 'minfi', 'limma'))
+#' g2 = inducedSubgraphByPkgs(g, pkgs=c('GenomicFeatures',
+#' 'TCGAbiolinksGUI', 'BiocGenerics', 'org.Hs.eg.db', 'minfi', 'limma'))
 #' g2
 #' V(g2)
 #'
-#' # load igraph to plot)\
-#' library(igraph)
 #' plot(g2)
 #'
 #' @export
@@ -177,6 +184,9 @@ inducedSubgraphByPkgs = function(g, pkgs, pkg_color='red') {
 #' subgraph(s) that are within \code{degree} of the
 #' package named.
 #'
+#' @param g an igraph graph, typically created by
+#' \code{\link{buildPkgDependencyIgraph}}
+#' 
 #' @param pkg character(1) package name from which to
 #' measure degree.
 #'
@@ -185,6 +195,8 @@ inducedSubgraphByPkgs = function(g, pkgs, pkg_color='red') {
 #'
 #' @param ... passed on to \code{\link[igraph]{distances}}
 #'
+#' @importFrom igraph distances induced_subgraph V is.igraph
+#' 
 #' @return an igraph graph, with only nodes and their
 #' edges within degree of the named package
 #'

@@ -7,6 +7,9 @@
 subgraphByDegree(g, pkg, degree = 1, ...)
 }
 \arguments{
+\item{g}{an igraph graph, typically created by
+\code{\link{buildPkgDependencyIgraph}}}
+
 \item{pkg}{character(1) package name from which to
 measure degree.}
 

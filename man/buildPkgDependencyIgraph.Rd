@@ -51,6 +51,7 @@ head(sort(degree(g, mode='out'), decreasing=TRUE))
 \seealso{
 See \code{\link{buildPkgDependencyDataFrame}},
 \code{\link[igraph]{graph_from_data_frame}},
-\code{\link{subgraph.biocDepGraph}}, \code{\link[igraph]{igraph-es-indexing}},
+\code{\link{inducedSubgraphByPkgs}}, \code{\link{subgraphByDegree}},
+\code{\link[igraph]{igraph-es-indexing}},
 \code{\link[igraph]{igraph-vs-indexing}}
 }

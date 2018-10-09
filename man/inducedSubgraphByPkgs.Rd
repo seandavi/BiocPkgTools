@@ -7,6 +7,9 @@
 inducedSubgraphByPkgs(g, pkgs, pkg_color = "red")
 }
 \arguments{
+\item{g}{an igraph graph, typically created by
+\code{\link{buildPkgDependencyIgraph}}}
+
 \item{pkgs}{character() vector of packages to
 include. Package names not included in
 the graph are ignored.}
@@ -24,13 +27,13 @@ for a developer, for example, to examine her packages
 and their intervening dependencies.
 }
 \examples{
+library(igraph)
 g = buildPkgDependencyIgraph(buildPkgDependencyDataFrame())
-g2 = inducedSubgraphByPkgs(g, pkgs=c('GenomicFeatures','TCGAbiolinksGUI', 'BiocGenerics', 'org.Hs.eg.db', 'minfi', 'limma'))
+g2 = inducedSubgraphByPkgs(g, pkgs=c('GenomicFeatures',
+'TCGAbiolinksGUI', 'BiocGenerics', 'org.Hs.eg.db', 'minfi', 'limma'))
 g2
 V(g2)
 
-# load igraph to plot)\\
-library(igraph)
 plot(g2)
 
 }
