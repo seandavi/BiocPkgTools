@@ -30,6 +30,7 @@ package named.
 \examples{
 
 g = buildPkgDependencyIgraph(buildPkgDependencyDataFrame())
-g2 = subgraphByDegree
+g2 = subgraphByDegree(g, 'GEOquery')
+g2
 
 }

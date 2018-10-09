@@ -1,4 +1,4 @@
-#' @importFrom dplyr select rename_ mutate filter
+#' @importFrom dplyr select rename_ mutate filter one_of
 #' @importFrom tidyr unnest
 .processPkgListForDependencyGraph = function(pkglist, dependency) {
     select_list = c("Package", dependency)
@@ -191,7 +191,8 @@ inducedSubgraphByPkgs = function(g, pkgs, pkg_color='red') {
 #' @examples
 #'
 #' g = buildPkgDependencyIgraph(buildPkgDependencyDataFrame())
-#' g2 = subgraphByDegree
+#' g2 = subgraphByDegree(g, 'GEOquery')
+#' g2
 #'
 #' @export
 subgraphByDegree = function(g, pkg, degree=1, ...) {
