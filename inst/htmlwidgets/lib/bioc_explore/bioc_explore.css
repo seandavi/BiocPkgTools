@@ -1,0 +1,68 @@
+p {
+	padding-left: 10px;
+	padding-right: 10px;
+	max-height: 270px;
+	overflow: scroll;
+}
+
+circle {
+	transition: all .1s ease-in-out;
+}
+
+circle:hover {
+	transform: scale(1.05);
+	cursor: pointer;
+}
+
+.bubble-text {
+  font: 13px sans-serif;
+  pointer-events: none;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.point {
+  fill: steelblue;
+  stroke: #000;
+}
+
+.info-box {
+	border: 6px solid;
+	border-radius: 4px;
+	position: absolute;
+	top: 100px;
+	left: 200px;
+	overflow-x: hidden;
+}
+
+.package-name {
+	font-size: 25px;
+	color: white;
+	padding: .6em 1em .6em;
+}
+
+.info-text {
+	font-size: 14px;
+	padding: .1em .3em .1em 1em;
+  	max-height: 300px;
+	border-top: 2px solid;
+	border-top-color: inherit;
+}
+
+.info-title {
+	font-size: 16px;
+	padding-left: 5px;
+	font-weight: bold;
+}
+
+.scrollable-menu {
+    height: auto;
+    max-height: 300px;
+    overflow-x: hidden;
+}
+

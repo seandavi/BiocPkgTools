@@ -1,10 +1,11 @@
 Package: BiocPkgTools
 Type: Package
 Title: Collection of simple tools for learning about Bioc Packages
-Version: 0.99.11
-Date: 2018-10-08
+Version: 0.99.12
+Date: 2018-10-13
 Authors@R: c(person("Sean", "Davis", email = "seandavi@gmail.com",
                   role = c("aut", "cre")), 
+		  person("Shian", "Su", role="ctb", email = "su.s@wehi.edu.au"),
 		  person("Lori", "Shepherd", role="ctb", email = "Lori.Shepherd@roswellpark.org"),
 		  person("Martin", "Morgan", role="ctb", email = "martin.morgan@roswellpark.org"),
 		  person("Vince", "Carey", role="ctb", email="stvjc@channing.harvard.edu"))
@@ -14,6 +15,7 @@ Description: Bioconductor has a rich ecosystem of metadata around
   is to expose metadata for data mining and value-added functionality
   such as package searching, text mining, and analytics on
   packages.
+Depends: htmlwidgets
 Imports:
     BiocManager,
     tibble,

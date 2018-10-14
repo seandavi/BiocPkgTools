@@ -1,0 +1,13 @@
+dependencies:
+  - name: bioc_explore
+    version: 1.0.0
+    src: htmlwidgets/lib/bioc_explore
+    script:
+      - jquery-2.2.4.min.js
+      - underscore-min.js
+      - bootstrap.min.js
+      - d3.v3.min.js
+      - bubblechart.js
+    stylesheet:
+      - bioc_explore.css
+      - bootstrap.min.css
