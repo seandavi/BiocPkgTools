@@ -9,6 +9,9 @@ dataciteXMLGenerate(pkg)
 \arguments{
 \item{pkg}{name of bioc package}
 }
+\value{
+an xml element
+}
 \description{
 Bioc datacite xml generator
 }

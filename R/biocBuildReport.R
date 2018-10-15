@@ -9,25 +9,30 @@
 #' 
 #' @param version character(1) the version number
 #' as used to access the online build report. For 
-#' example, "3.6".
+#' example, "3.6". The default is the "current version"
+#' as specified in \code{BiocManager::version}.
 #' 
-#' @return a data.frame with columns pkg, version,
+#' @return a \code{tbl_df} object with columns pkg, version,
 #' author, commit, date, node, stage, and result.
 #' 
 #' @importFrom readr read_lines
+#' @importFrom tibble as_tibble
 #' @importFrom rvest html_text html_nodes
 #' @importFrom xml2 read_html
 #' @import rex
 #' @importFrom dplyr left_join
-#' @importFrom BiocInstaller biocVersion
+#' @importFrom BiocManager version
 #' 
 #' @examples 
 #' 
-#' latest_build = build_report("3.6")
+#' latest_build = biocBuildReport()
 #' head(latest_build)
 #' 
 #' @export
-build_report <- function(version=biocVersion()) {
+biocBuildReport <- function(version=as.character(BiocManager::version())) {
+    if(!is.character(version)) {
+        stop('version should be a character string representing the Bioconductor version, such as "3.6"')
+    }
   url = sprintf('http://bioconductor.org/checkResults/%s/bioc-LATEST/STATUS_DB.txt',version)
   dat = readr::read_lines(url)
   z = re_matches(dat,rex(
@@ -61,10 +66,12 @@ build_report <- function(version=biocVersion()) {
                       ))
   y = y[!is.na(y$pkg),]
   
-  library(dplyr)
-  df = y %>% left_join(z)
-  df[['date']] = as.POSIXct(df[['date']])
-  attr(df,'date') = as.POSIXct(df[['date']][1])
+  df = suppressMessages(y %>% left_join(z)) # just suppress "Joining by...."
+  df = as_tibble(df)
+  df[['bioc_version']]=version
+  df[['last_changed_date']] = as.POSIXct(df[['last_changed_date']])
+  attr(df,'last_changed_date') = as.POSIXct(df[['last_changed_date']][1])
+  attr(df,'class') = c('biocBuildReport',class(df))
   df
 }
 

@@ -1,2 +1,6 @@
+^_pkgdown\.yml$
 ^.*\.Rproj$
 ^\.Rproj\.user$
+.travis.yml
+.httr-oauth
+^docs$

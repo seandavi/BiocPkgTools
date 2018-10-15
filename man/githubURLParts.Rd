@@ -21,3 +21,12 @@ a \code{data.frame} with four columns:
 \description{
 Extract github user and repo name from github URL
 }
+\examples{
+# find github URL details for
+# Bioc packages
+bpkgl = biocPkgList()
+urldetails = githubURLParts(bpkgl$URL)
+urldetails = urldetails[!is.na(urldetails$url),]
+head(urldetails)
+
+}

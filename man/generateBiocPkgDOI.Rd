@@ -43,3 +43,4 @@ The GUI is available here: \url{https://ezid.lib.purdue.edu}.
   x = generateBiocPkgDOI('RANDOM_TEST_PACKAGE','Sean Davis',1972)
 }
 }
+\keyword{Internal}

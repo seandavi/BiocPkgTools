@@ -25,12 +25,15 @@
 #'     variables
 #'     
 #' @return The DOI as a character(1) vector.
-#'     
+#'
+#' @importFrom httr POST status_code PUT authenticate timeout content_type accept content
+#'
+#' @keywords Internal
+#' 
 #' @examples 
 #' \dontrun{
 #'   x = generateBiocPkgDOI('RANDOM_TEST_PACKAGE','Sean Davis',1972)
 #' }
-#' @export
 generateBiocPkgDOI = function(pkg, authors, pubyear, testing=TRUE) {
   if(testing) {
     username='apitest'
@@ -41,7 +44,6 @@ generateBiocPkgDOI = function(pkg, authors, pubyear, testing=TRUE) {
     password=Sys.getenv('EZID_PASSWORD')
     bioc_shoulder='doi:10.18129/B9'
   }
-  require(httr)
   base_url = "https://ezid.cdlib.org/id"
   bioc_doi_namespace = ".bioc."
   pkg_doi = paste0(bioc_shoulder,bioc_doi_namespace,pkg)

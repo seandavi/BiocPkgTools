@@ -1,0 +1,18 @@
+language: r
+r:
+  - bioc-release
+  - bioc-devel
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install -y libpoppler-cpp-dev
+cache:
+  packages: true
+  directories:
+  - docs
+warnings_are_errors: false
+after_success:
+  - Rscript -e 'covr::codecov()'
+notifications:
+  email:
+    on_success: seandavi@gmail.com
+    on_failure: seandavi@gmail.com

@@ -1,15 +1,22 @@
-#' Get vignette
+#' Download a Bioconductor vignette
 #'
-#' @param vignettePath the additional path information to get to the vignette
-#' @param destfile the file location to store the vignette
-#' @param biocVersion defaults to user version
+#' The actual vignette path is available using
+#' \code{\link{biocPkgList}}.
+#'
+#' @param vignettePath character(1) the additional path information to get to the vignette
+#' @param destfile character(1) the file location to store the vignette
+#' @param version chacter(1) such as "3.7", defaults to user version
 #'
 #' @importFrom utils download.file
+#'
+#' @return character(1) the filename of the downloaded vignette
 #' 
 #' @examples
+#' x = biocPkgList()
+#' tmp = getBiocVignette(x$vignettes[[1]][1])
+#' tmp
+#' 
 #' \dontrun{
-#' x = getBiocPkgList()
-#' tmp = getVignette(x$vignettes[[1]][1])
 #' library(pdftools)
 #' y = pdf_text(tmp)
 #' y = paste(y,collapse=" ")
@@ -27,10 +34,11 @@
 #'     list(dictionary = as.character(x$Package))))
 #'}
 #' @export
-getVignette <- function(vignettePath,
+getBiocVignette <- function(vignettePath,
                         destfile = tempfile(),
-                        biocVersion = BiocInstaller::biocVersion()) {
-    p = sprintf('https://bioconductor.org/packages/%s/bioc/%s',biocVersion,vignettePath)
+                        version = BiocManager::version()) {
+    stopifnot(is.character(vignettePath) & length(vignettePath)==1)
+    p = sprintf('https://bioconductor.org/packages/%s/bioc/%s',version,vignettePath)
     download.file(p,destfile)
     destfile
 }

@@ -12,8 +12,18 @@
 #'
 #' @importFrom stringr str_match
 #'
+#' @examples
+#' # find github URL details for
+#' # Bioc packages
+#' bpkgl = biocPkgList()
+#' urldetails = githubURLParts(bpkgl$URL)
+#' urldetails = urldetails[!is.na(urldetails$url),]
+#' head(urldetails)
+#'
 #' @export
 githubURLParts = function(urls) {
-  tmp = as.data.frame(str_match(urls,'https://github.com/((.*)/(.*))'))
-  colnames(tmp) = c('url', 'user_repo', 'user', 'repo')
+    tmp = str_match(urls,'https://github.com/(([^/]+)/([^/]+)).*')
+    tmp = data.frame(tmp, stringsAsFactors = FALSE)
+    colnames(tmp) = c('url', 'user_repo', 'user', 'repo')
+    tmp
 }

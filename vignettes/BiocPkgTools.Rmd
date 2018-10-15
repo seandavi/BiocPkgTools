@@ -1,0 +1,245 @@
+---
+title: "Overview of BiocPkgTools"
+author:
+- name: Sean Davis
+  affiliation: National Cancer Institute, National Institutes of Health, Bethesda, MD USA
+  email: seandavi@gmail.com
+- name: Vince Carey
+  affiliation: Channing Lab, Brigham and Womens Hospital, Harvard University, Boston, MA USA
+- name: Lori Shepherd
+  affiliation: Roswell Park Comprehensive Cancer Center, Buffalo, NY USA
+- name: Martin Morgan
+  affiliation: Roswell Park Comprehensive Cancer Center, Buffalo, NY USA
+package: BiocPkgTools
+output:
+  BiocStyle::html_document:
+    toc: false
+abstract: |
+  Bioconductor has a rich ecosystem of metadata around packages, usage, and build status. This package is a simple collection of functions to access that metadata from R in a tidy data format. The goal is to expose metadata for data mining and value-added functionality such as package searching, text mining, and analytics on packages. 
+vignette: |
+  %\VignetteIndexEntry{Overview of BiocPkgTools}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Introduction
+
+Bioconductor has a rich ecosystem of metadata around packages, usage, and build status. This package is a simple collection of functions to access that metadata from R in a tidy data format. The goal is to expose metadata for data mining and value-added functionality such as package searching, text mining, and analytics on packages. 
+
+Functionality includes access to :
+
+- Download statistics
+- General package listing
+- Build reports
+- Package dependency graphs
+- Vignettes
+
+```{r init, include=FALSE}
+library(knitr)
+opts_chunk$set(warning = FALSE, message = FALSE, cache=FALSE)
+```
+
+```{r style, echo = FALSE, results = 'asis'}
+BiocStyle::markdown()
+```
+
+# Build reports
+
+The Bioconductor build reports are available online as HTML pages. 
+However, they are not very computable.
+The `biocBuildReport` function does some heroic parsing of the HTML
+to produce a *tidy* data.frame for further processing in R. 
+
+```{r}
+library(BiocPkgTools)
+head(biocBuildReport())
+```
+
+## Personal build report
+
+Because developers may be interested in a quick view of their own
+packages, there is a simple function, `problemPage`, to produce an HTML report of
+the build status of packages matching a given author *regex*. The default is
+to report only "problem" build statuses (ERROR, WARNING).
+
+```{r}
+problemPage()
+```
+
+When run in an interactive environment, the `problemPage` function 
+will open a browser window for user interaction. Note that if you want
+to include all your package results, not just the broken ones, simply 
+specify `includeOK = TRUE`.
+
+# Download statistics
+
+Bioconductor supplies download stats for all packages. The `biocDownloadStats`
+function grabs all available download stats for all packages in all
+Experiment Data, Annotation Data, and Software packages. The results
+are returned as a tidy data.frame for further analysis.
+
+```{r}
+head(biocDownloadStats())
+```
+
+The download statistics reported are for ***all available versions*** of a package.
+There are no separate, publicly available statistics broken down by version.
+
+# Package details
+
+The R `DESCRIPTION` file contains a plethora of information regarding package
+authors, dependencies, versions, etc. In a repository such as Bioconductor, these
+details are available in bulk for all inclucded packages. The `biocPkgList` returns
+a data.frame with a row for each package. Tons of information are avaiable, as 
+evidenced by the column names of the results.
+
+```{r}
+bpi = biocPkgList()
+colnames(bpi)
+```
+
+Some of the variables are parsed to produce `list` columns. 
+
+```{r}
+head(bpi)
+```
+
+As a simple example of how these columns can be used, extracting
+the `importsMe` column to find the packages that import the 
+`r Biocpkg("GEOquery")` package.
+
+
+```{r}
+require(dplyr)
+bpi = biocPkgList()
+bpi %>% 
+    filter(Package=="GEOquery") %>%
+    pull(importsMe) %>%
+    unlist()
+```
+
+# Dependency graphs
+
+The Bioconductor ecosystem is built around the concept of interoperability
+and dependencies. These interdependencies are available as part of the
+`biocPkgList()` output. The `BiocPkgTools` provides some convenience
+functions to convert package dependencies to R graphs. A modular approach leads
+to the following workflow.
+
+1. Create a `data.frame` of dependencies using `buildPkgDependencyDataFrame`.
+2. Create an `igraph` object from the dependency data frame using `buildPkgDependencyIgraph`
+3. Use native `igraph` functionality to perform arbitrary network operations. 
+Convenience functions, `inducedSubgraphByPkgs` and `subgraphByDegree` are available.
+4. Visualize with packages such as `r CRANpkg("visNetwork")`.
+
+
+## Working with dependency graphs
+
+A dependency graph for all of Bioconductor is a starting place.
+
+```{r}
+library(BiocPkgTools)
+dep_df = buildPkgDependencyDataFrame()
+g = buildPkgDependencyIgraph(dep_df)
+g
+library(igraph)
+head(V(g))
+head(E(g))
+```
+
+See `inducedSubgraphByPkgs` and `subgraphByDegree` to produce
+subgraphs based on a subset of packages.
+
+See the igraph documentation for more detail on graph analytics, setting
+vertex and edge attributes, and advanced subsetting.
+
+## Graph visualization
+
+The visNetwork package is a nice interactive visualization tool
+that implements graph plotting in a browser. It can be integrated
+into shiny applications. Interactive graphs can also be included in
+Rmarkdown documents (see vignette)
+
+```{r}
+igraph_network = buildPkgDependencyIgraph(buildPkgDependencyDataFrame())
+``` 
+
+The full dependency graph is really not that informative to look at, though
+doing so is possible. A common use case is to visualize the graph of
+dependencies "centered" on a package of interest. In this case, I will 
+focus on the `r Biocpkg("GEOquery")` package. 
+
+```{r}
+igraph_geoquery_network = subgraphByDegree(igraph_network, "GEOquery")
+```
+
+The `subgraphByDegree()` function returns all nodes and connections within
+`degree` of the named package; the default `degree` is `1`.
+
+The visNework package can plot `igraph` objects directly, but more flexibility
+is offered by first converting the graph to visNetwork form.
+
+```{r}
+library(visNetwork)
+data <- toVisNetworkData(igraph_geoquery_network)
+```
+
+The next few code chunks highlight just a few examples of the visNetwork
+capabilities, starting with a basic plot.
+
+```{r}
+visNetwork(nodes = data$nodes, edges = data$edges, height = "500px")
+```
+
+For fun, we can watch the graph stabilize during drawing, best viewed
+interactively.
+
+```{r}
+visNetwork(nodes = data$nodes, edges = data$edges, height = "500px") %>%
+    visPhysics(stabilization=FALSE)
+```
+
+Add arrows and colors to better capture dependencies.
+
+```{r}
+data$edges$color='lightblue'
+data$edges[data$edges$edgetype=='Imports','color']= 'red'
+data$edges[data$edges$edgetype=='Depends','color']= 'green'
+
+visNetwork(nodes = data$nodes, edges = data$edges, height = "500px") %>%
+    visEdges(arrows='from') 
+```
+
+Add a legend.
+
+```{r}
+ledges <- data.frame(color = c("green", "lightblue", "red"),
+  label = c("Depends", "Suggests", "Imports"), arrows =c("from", "from", "from"))
+visNetwork(nodes = data$nodes, edges = data$edges, height = "500px") %>%
+  visEdges(arrows='from') %>%
+  visLegend(addEdges=ledges)
+```
+
+## Integration with `r Biocpkg("BiocViews")`
+
+The `r Biocpkg("biocViews")` package is a small ontology of terms describing
+Bioconductor packages. 
+
+```{r biocViews}
+library(biocViews)
+data(biocViewsVocab)
+biocViewsVocab
+library(igraph)
+g = igraph.from.graphNEL(biocViewsVocab)
+library(visNetwork)
+gv = toVisNetworkData(g)
+visNetwork(gv$nodes, gv$edges, width="100%") %>%
+    visIgraphLayout(layout = "layout_as_tree", circular=TRUE)
+```
+
+
+# Provenance
+
+```{r}
+sessionInfo()
+```

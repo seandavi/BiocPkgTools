@@ -4,12 +4,16 @@
 #' stats are not version-specific.
 #'
 #' @importFrom utils read.table
+#' @importFrom tibble as_tibble
 #' 
 #' @return a \code{data.frame} of download stats for
 #' all bioconductor packages, in tidy format
 #'
+#' @examples
+#' biocDownloadStats()
+#'
 #' @export
-getBiocDownloadStats = function() {
+biocDownloadStats = function() {
   tmp = read.table('http://bioconductor.org/packages/stats/bioc/bioc_pkg_stats.tab',
                    sep="\t", header = TRUE)
   tmp$repo = 'Software'
@@ -19,5 +23,6 @@ getBiocDownloadStats = function() {
   tmp3 = read.table('http://bioconductor.org/packages/stats/data-experiment/experiment_pkg_stats.tab',
                     sep="\t", header = TRUE)
   tmp3$repo = 'ExperimentData'
-  return(rbind(tmp,tmp2,tmp3))
+  tmp = rbind(tmp,tmp2,tmp3)
+  as_tibble(tmp)
 }
