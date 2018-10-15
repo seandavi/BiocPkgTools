@@ -16,10 +16,6 @@ get_bioc_data <- function() {
         raw_dl_stats = BiocPkgTools::biocDownloadStats()
     )
 
-    full_data$tags <- as.character(full_data$tags) %>%
-        stringr::str_replace_all("[[:blank:]]", "") %>%
-        stringr::str_replace_all("\n", "")
-
     full_data <- full_data %>%
         dplyr::filter(!is.na(tags))
 
@@ -56,8 +52,7 @@ process_data <- function(pkg_list, raw_dl_stats) {
             downloads_total
         ) %>%
         dplyr::mutate(
-            page = pkg_link(Package),
-            package = stringr::str_split(biocViews, ", ")
+            page = pkg_link(Package)
         ) %>%
         dplyr::rename(
             authors = Author,

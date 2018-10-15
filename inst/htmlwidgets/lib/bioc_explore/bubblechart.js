@@ -23,8 +23,6 @@ function drawBubblePlot(el, width, height, data, top, reformat_data) {
         data = data.sort(function(a,b) { return b.downloads_month - a.downloads_month; });
         // convert numerical values from strings to numbers
         data = data.map(function(d) { d.value = Math.sqrt(+d.downloads_total); return d; });
-        // split tags
-        data = data.map(function(d) { d.tags = typeof d.tags === "undefined" ? "" : d.tags.split(","); return d; });        
     }
     var diameter = Math.min(width, height), // max size of the bubbles
         color    = d3.scale.category20c(); // color category
