@@ -4,11 +4,11 @@
 #' @param ... parameters passed to \code{htmlwidgets::createWidget()}
 #'
 #' @importFrom htmlwidgets createWidget
-#' 
+#'
 #' @return bubble plot of Bioconductor packages
 #'
 #' @export
-bioc_explore <- function(top = 500, ...) {
+biocExplore <- function(top = 500, ...) {
     # instruction messages
     message("- Hover over bubbles to see full name and lifetime downloads")
     message("- Click on bubbles to see more information about package")
