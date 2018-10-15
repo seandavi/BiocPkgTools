@@ -2,8 +2,8 @@
 % Please edit documentation in R/getPackageInfo.R
 \name{getPackageInfo}
 \alias{getPackageInfo}
-\title{Generate needed inforamation to create DOI from a package
-directory}
+\title{Generate needed information to create DOI from a package
+directory.}
 \usage{
 getPackageInfo(dir)
 }
@@ -14,7 +14,7 @@ getPackageInfo(dir)
 a \code{data.frame}
 }
 \description{
-Generate needed inforamation to create DOI from a package
-directory
+Generate needed information to create DOI from a package
+directory.
 }
 \keyword{Internal}

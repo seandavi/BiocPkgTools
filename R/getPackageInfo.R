@@ -1,4 +1,4 @@
-#' Generate needed inforamation to create DOI from a package
+#' Generate needed information to create DOI from a package
 #' directory.
 #'
 #' @param dir character(1) Path to package
