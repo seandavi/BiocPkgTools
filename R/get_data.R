@@ -1,6 +1,9 @@
 #' Get data from bioconductor
 #'
 #' @return json string containing bioconductor package details
+#'
+#' @importFrom jsonlite toJSON
+#' 
 #' @export
 #'
 #' @examples

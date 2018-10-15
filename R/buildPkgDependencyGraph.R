@@ -155,7 +155,6 @@ buildPkgDependencyIgraph = function(pkgDepDF) {
 #' connecting paths will be colored as the igraph default.
 #' 
 #' @importFrom igraph induced_subgraph V
-#' @importMethodsFrom igraph V<-
 #' 
 #' @examples
 #' library(igraph)
