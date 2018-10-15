@@ -23,7 +23,7 @@
 #' from \code{\link{biocPkgList}} and returns a tidy
 #' \code{data.frame} that can be used for analysis
 #' and to build graph structures of package dependencies.
-#' 
+#'
 #' @param dependencies character() vector including one or more
 #' of "Depends", "Imports", or "Suggests". Default is to
 #' include all possibilities.
@@ -31,7 +31,7 @@
 #' @param ... parameters passed along to \code{\link{biocPkgList}}
 #'
 #' @importFrom dplyr bind_rows
-#' 
+#'
 #' @seealso See \code{\link{buildPkgDependencyIgraph}}, \code{\link{biocPkgList}}.
 #'
 #' @note This function requires network access.
@@ -92,7 +92,7 @@ buildPkgDependencyDataFrame = function(dependencies = c('Depends','Imports', 'Su
 #' attributes (see \code{\link[igraph]{graph_from_data_frame}}).
 #'
 #' @importFrom igraph graph_from_data_frame
-#' 
+#'
 #' @param pkgDepDF a tidy data frame. See description for
 #' details.
 #'
@@ -103,12 +103,12 @@ buildPkgDependencyDataFrame = function(dependencies = c('Depends','Imports', 'Su
 #' \code{\link[igraph]{igraph-vs-indexing}}
 #'
 #' @return an igraph directed graph. See the igraph
-#' package for details of what can be done. 
-#' 
+#' package for details of what can be done.
+#'
 #' @examples
 #'
 #' library(igraph)
-#' 
+#'
 #' pkg_dep_df = buildPkgDependencyDataFrame()
 #'
 #' # at this point, filter or join to manipulate
@@ -122,11 +122,11 @@ buildPkgDependencyDataFrame = function(dependencies = c('Depends','Imports', 'Su
 #' head(E(g)) # edges
 #'
 #' # subset graph by attributes
-#' 
+#'
 #'
 #' head(sort(degree(g, mode='in'), decreasing=TRUE))
 #' head(sort(degree(g, mode='out'), decreasing=TRUE))
-#' 
+#'
 #' @export
 buildPkgDependencyIgraph = function(pkgDepDF) {
     g = igraph::graph_from_data_frame(pkgDepDF)
@@ -153,10 +153,9 @@ buildPkgDependencyIgraph = function(pkgDepDF) {
 #' @param pkg_color character(1) giving color of named
 #' packages. Other packages in the graph that fall in
 #' connecting paths will be colored as the igraph default.
-#' 
+#'
 #' @importFrom igraph induced_subgraph V
-#' @importMethodsFrom igraph V<-
-#' 
+#'
 #' @examples
 #' library(igraph)
 #' g = buildPkgDependencyIgraph(buildPkgDependencyDataFrame())
@@ -186,7 +185,7 @@ inducedSubgraphByPkgs = function(g, pkgs, pkg_color='red') {
 #'
 #' @param g an igraph graph, typically created by
 #' \code{\link{buildPkgDependencyIgraph}}
-#' 
+#'
 #' @param pkg character(1) package name from which to
 #' measure degree.
 #'
@@ -196,7 +195,7 @@ inducedSubgraphByPkgs = function(g, pkgs, pkg_color='red') {
 #' @param ... passed on to \code{\link[igraph]{distances}}
 #'
 #' @importFrom igraph distances induced_subgraph V is.igraph
-#' 
+#'
 #' @return an igraph graph, with only nodes and their
 #' edges within degree of the named package
 #'
