@@ -1,15 +1,17 @@
 ---
 title: "Overview of BiocPkgTools"
 author:
-- name: Sean Davis
-  affiliation: National Cancer Institute, National Institutes of Health, Bethesda, MD USA
-  email: seandavi@gmail.com
+- name: Shian Su
+  affiliation: Walter and Eliza Hall Institute, Melbourne, Australia
 - name: Vince Carey
   affiliation: Channing Lab, Brigham and Womens Hospital, Harvard University, Boston, MA USA
 - name: Lori Shepherd
   affiliation: Roswell Park Comprehensive Cancer Center, Buffalo, NY USA
 - name: Martin Morgan
   affiliation: Roswell Park Comprehensive Cancer Center, Buffalo, NY USA
+- name: Sean Davis
+  affiliation: National Cancer Institute, National Institutes of Health, Bethesda, MD USA
+  email: seandavi@gmail.com
 package: BiocPkgTools
 output:
   BiocStyle::html_document:
@@ -118,6 +120,19 @@ bpi %>%
     unlist()
 ```
 
+# Package Explorer
+
+For the end user of Bioconductor, an analysis often starts with finding a
+package or set of packages that perform required tasks or are tailored 
+to a specific operation or data type. The `bioc_explorer()` function
+implements an interactive bubble visualization with filtering based on 
+biocViews terms. Bubbles are sized based on download statistics. Tooltip
+and detail-on-click capabilities are included. To start a local session:
+
+```{r bioc_explorer, eval=FALSE}
+bioc_explore()
+```
+
 # Dependency graphs
 
 The Bioconductor ecosystem is built around the concept of interoperability
@@ -222,8 +237,11 @@ visNetwork(nodes = data$nodes, edges = data$edges, height = "500px") %>%
 
 ## Integration with `r Biocpkg("BiocViews")`
 
+[Work in progress]
+
 The `r Biocpkg("biocViews")` package is a small ontology of terms describing
-Bioconductor packages. 
+Bioconductor packages. This is a work-in-progress section, but here is a small example of 
+plotting the biocViews graph.
 
 ```{r biocViews}
 library(biocViews)
@@ -234,9 +252,10 @@ g = igraph.from.graphNEL(biocViewsVocab)
 library(visNetwork)
 gv = toVisNetworkData(g)
 visNetwork(gv$nodes, gv$edges, width="100%") %>%
-    visIgraphLayout(layout = "layout_as_tree", circular=TRUE)
+    visIgraphLayout(layout = "layout_as_tree", circular=TRUE) %>%
+    visNodes(size=20) %>%
+    visPhysics(stabilization=FALSE)
 ```
-
 
 # Provenance
 
