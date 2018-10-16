@@ -2,8 +2,8 @@
 
 export(biocBuildReport)
 export(biocDownloadStats)
+export(biocExplore)
 export(biocPkgList)
-export(bioc_explore)
 export(buildPkgDependencyDataFrame)
 export(buildPkgDependencyIgraph)
 export(getBiocVignette)
