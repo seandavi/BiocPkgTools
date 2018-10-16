@@ -1,8 +1,8 @@
 Package: BiocPkgTools
 Type: Package
 Title: Collection of simple tools for learning about Bioc Packages
-Version: 0.99.15
-Date: 2018-10-15
+Version: 0.99.16
+Date: 2018-10-16
 Authors@R: c(person("Sean", "Davis", email = "seandavi@gmail.com",
                   role = c("aut", "cre")), 
 		  person("Shian", "Su", role="ctb", email = "su.s@wehi.edu.au"),
