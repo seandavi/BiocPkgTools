@@ -1,8 +1,8 @@
 Package: BiocPkgTools
 Type: Package
 Title: Collection of simple tools for learning about Bioc Packages
-Version: 0.99.13
-Date: 2018-10-14
+Version: 0.99.15
+Date: 2018-10-15
 Authors@R: c(person("Sean", "Davis", email = "seandavi@gmail.com",
                   role = c("aut", "cre")), 
 		  person("Shian", "Su", role="ctb", email = "su.s@wehi.edu.au"),
@@ -31,7 +31,8 @@ Imports:
     tools,
     utils,
     igraph,
-    tidyr
+    tidyr,
+    jsonlite
 VignetteBuilder: knitr
 Suggests: BiocStyle, knitr, rmarkdown,
     testthat, tm, SnowballC, pdftools,
