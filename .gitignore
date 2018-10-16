@@ -9,3 +9,5 @@ inst/doc/
 docs/*
 *#
 *.Rproj
+/vignettes/BiocPkgTools.R
+/vignettes/.build.timestamp
