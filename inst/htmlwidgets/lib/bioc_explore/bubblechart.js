@@ -109,12 +109,12 @@ function drawBubblePlot(el, width, height, data, top, reformat_data) {
 
     drawChart(partialData);
 
+    // esc escapes out of info screen
     $(document).keydown(
-		function(e) {
-			// esc escapes out of info screen
-			if (e.keyCode === 27) curtainClick();
-		}
-	);
+        function(e) {
+            if (e.keyCode === 27) curtainClick();
+        }
+    );
 
     function clickFunc(d) {
         curtainUp();
@@ -175,30 +175,20 @@ function drawBubblePlot(el, width, height, data, top, reformat_data) {
                         .style("top", "10px")
                         .style("left", "10px");
     
-        outer.append("button")
-                .attr("class", "btn btn-primary dropdown-toggle")
-                .attr("type", "button")
-                .attr("data-toggle", "dropdown")
-                .html("BiocViews Filter")
-                .append("span")
-                .attr("class", "caret");
+        var inner = outer.append("select");
     
-    
-        var inner = outer.append("ul").attr("class", "dropdown-menu scrollable-menu");
-    
-        for (var i = 0; i < allTags.sort().length; i++) {
-            inner.append("li")
-                .append("a")
-                .attr("href", "#")
-                .html(allTags[i])
-                .on("click", function(d) { 
-                    d3.select(this.parentNode.parentNode)
-                        .selectAll("li")
-                        .classed("disabled", false);
-                    d3.select(this.parentNode).classed("disabled", true);
-                    filterByTag(this.innerHTML);
-                });
+        for (let tag of allTags.sort()) {
+            var opt = inner.append("option")
+                .attr("value", tag)
+                .html(tag);
+
+            // default selection is "Software"
+            if (tag === "Software") {
+                opt.attr("selected", "");
+            }
         }
+
+        inner.on("change", function() { filterByTag(this.value); });
     }
     
     function drawBackground() {
