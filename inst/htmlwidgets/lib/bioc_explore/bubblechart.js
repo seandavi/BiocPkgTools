@@ -32,13 +32,16 @@ function drawBubblePlot(el, width, height, data, top, reformat_data) {
         .size([diameter, diameter])
         .padding(1.5);
 
-    var svg = d3.select(el)
+    var widgetContainer = d3.select(el)
         .append("div")
+        .attr("class", "bioc-explore-container")
+        .style("position", "relative")
         .style("width", diameter+"px")
-        .style("height", diameter+"px")
-        .append("svg")
+        .style("height", diameter+"px");
+
+    var svg = widgetContainer.append("svg")
         .attr("width", diameter)
-        .attr("height", diameter)
+        .attr("height", diameter);
 
     var allTags = _.flatten(data.map(function(d) { return d.tags; }));
     var tagCount = _.countBy(allTags, function(d) { return d; });
@@ -160,11 +163,12 @@ function drawBubblePlot(el, width, height, data, top, reformat_data) {
     }
     
     function infoBoxClick() {
-        console.log("Info box clicked!");
+        // placeholder for future implementation
     }
     
     function drawOptions() {
-        var outer = d3.select("body")
+        var outer = d3.select(el)
+                        .select(".bioc-explore-container")
                         .append("div")
                         .attr("class", "dropdown")
                         .style("position", "absolute")
@@ -198,7 +202,8 @@ function drawBubblePlot(el, width, height, data, top, reformat_data) {
     }
     
     function drawBackground() {
-        d3.select("body")
+        d3.select(el)
+            .select(".bioc-explore-container")
             .append("div")
             .attr("class", "bg")
             .style({"position": "absolute",
@@ -217,9 +222,12 @@ function drawBubblePlot(el, width, height, data, top, reformat_data) {
     
     function drawInfoBox() {
         // remove old info box
-        var sel = d3.select("div.info-box");
+        var sel = d3.select(el)
+            .select(".bioc-explore-container")
+            .select("div.info-box");
         if (sel.node() == null) {
-            d3.select("body")
+            d3.select(el)
+                .select(".bioc-explore-container")
                 .append("div")
                 .attr("class", "info-box")
                 .style({"position": "absolute",
@@ -232,8 +240,6 @@ function drawBubblePlot(el, width, height, data, top, reformat_data) {
 
             layoutInfoBox();
         }
-
-        
     }
     
     function layoutInfoBox() {
