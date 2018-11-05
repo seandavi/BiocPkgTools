@@ -64,7 +64,7 @@ packages, there is a simple function, `problemPage`, to produce an HTML report o
 the build status of packages matching a given author *regex*. The default is
 to report only "problem" build statuses (ERROR, WARNING).
 
-```{r}
+```{r eval=FALSE}
 problemPage()
 ```
 
@@ -129,8 +129,8 @@ implements an interactive bubble visualization with filtering based on
 biocViews terms. Bubbles are sized based on download statistics. Tooltip
 and detail-on-click capabilities are included. To start a local session:
 
-```{r bioc_explorer, eval=FALSE}
-bioc_explore()
+```{r biocExplore}
+biocExplore()
 ```
 
 # Dependency graphs
@@ -202,7 +202,7 @@ data <- toVisNetworkData(igraph_geoquery_network)
 The next few code chunks highlight just a few examples of the visNetwork
 capabilities, starting with a basic plot.
 
-```{r}
+```{r }
 visNetwork(nodes = data$nodes, edges = data$edges, height = "500px")
 ```
 
