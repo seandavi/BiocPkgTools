@@ -256,7 +256,8 @@ function drawBubblePlot(el, width, height, data, top, reformat_data) {
     
             row.append("div")
                 .attr("class", "info-title");
-            row.append("p");
+            row.append("p")
+	        .attr("class", "info-paragraph");
         }
     }
     

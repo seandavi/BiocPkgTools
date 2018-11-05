@@ -1,9 +1,10 @@
-p {
+.info-paragraph {
 	padding-left: 10px;
 	padding-right: 10px;
 	max-height: 270px;
 	overflow: scroll;
 }
+
 
 circle {
 	transition: all .1s ease-in-out;
@@ -45,6 +46,7 @@ circle:hover {
 	color: white;
 	padding: .6em 1em .6em;
 }
+
 
 .info-text {
 	font-size: 14px;
