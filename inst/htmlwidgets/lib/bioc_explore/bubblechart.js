@@ -270,7 +270,11 @@ function drawBubblePlot(el, width, height, data, top, reformat_data) {
         fillSection("downloads", "Downloads Last Month", downloads_month);
         fillSection("license", "License", license);
         fillSection("authors", "Authors", authors);
-        fillSection("install", "Install", "source(\"https:// bioconductor.org/biocLite.R\")<br />biocLite(\"" + name + "\")");
+        fillSection("install", "Install", 
+            `if (!requireNamespace("BiocManager", quietly = TRUE))<br />` +
+            `&nbsp;&nbsp;&nbsp;&nbsp;install.packages("BiocManager")<br />` +
+            `BiocManager::install("${name}", version = "3.8")`
+        );
     
         d3.select("div.info-box")
             .select(".row.page")
