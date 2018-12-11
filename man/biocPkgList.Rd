@@ -28,7 +28,10 @@ file. In particular, it contains \code{biocViews} annotations
 and URLs for vignettes and developer URLs.
 }
 \examples{
-bpkgl = biocPkgList("3.7")
+# BiocManager::version() will retrieve the current version of
+# Bioconductor (i.e "3.7")
+
+bpkgl = biocPkgList(BiocManager::version())
 bpkgl
 unlist(bpkgl[1,'Depends'])
 
