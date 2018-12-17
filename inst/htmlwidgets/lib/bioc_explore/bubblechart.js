@@ -174,18 +174,20 @@ function drawBubblePlot(el, width, height, data, top, reformat_data) {
                         .style("position", "absolute")
                         .style("top", "10px")
                         .style("left", "10px");
-    
+        
+        outer.append("div")
+            .html("Filter:");
         var inner = outer.append("select");
     
+        inner.append("option")
+            .attr("value", "None")
+            .html("None")
+            .attr("selected", "");
+
         for (let tag of allTags.sort()) {
             var opt = inner.append("option")
                 .attr("value", tag)
                 .html(tag);
-
-            // default selection is "Software"
-            if (tag === "Software") {
-                opt.attr("selected", "");
-            }
         }
 
         inner.on("change", function() { filterByTag(this.value); });
@@ -327,7 +329,11 @@ function drawBubblePlot(el, width, height, data, top, reformat_data) {
     }
     
     function filterByTag(tag) {
-        partialData = tagFilter(data, tag);
+        if (tag == "None") {
+            partialData = data;
+        } else {
+            partialData = tagFilter(data, tag);
+        }
         partialData = topFilter(partialData, top)
         drawChart(partialData);
     }
