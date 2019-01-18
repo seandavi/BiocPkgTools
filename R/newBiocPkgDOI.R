@@ -11,7 +11,7 @@
 #' should be stored in the environment variables "EZID_USERNAME"
 #' and "EZID_PASSWORD".
 #' 
-#' The GUI is available here: \url{https://ezid.lib.purdue.edu}.
+#' The GUI is available here: \url{https://doi.datacite.org/}.
 #' 
 #' @param pkg character(1) package name
 #' @param authors character vector of authors (will be "pasted" together)
@@ -36,19 +36,27 @@
 #' }
 generateBiocPkgDOI = function(pkg, authors, pubyear, testing=TRUE) {
   if(testing) {
-    username='apitest'
-    password='apitest'
+    # View results at: https://doi.test.datacite.org
+    # The testing piece does not work with new API?
+    username='TESTING_USERNAME'
+    password='TESTING_PASSWORD'
     bioc_shoulder='doi:10.5072/FK2'
+    base_url = 'https://ez.test.datacite.org/id'
   } else {
     username=Sys.getenv('EZID_USERNAME')
     password=Sys.getenv('EZID_PASSWORD')
     bioc_shoulder='doi:10.18129/B9'
+    base_url = "https://ez.datacite.org/id"
   }
-  base_url = "https://ezid.cdlib.org/id"
   bioc_doi_namespace = ".bioc."
   pkg_doi = paste0(bioc_shoulder,bioc_doi_namespace,pkg)
   url0 = file.path(base_url,pkg_doi)
+  res = httr::DELETE(url0,
+                     content_type('text/plain'),
+                     accept("text/plain"),
+                     httr::authenticate(username,password))
   message(url0)
+  return(res)
   body = paste(c(sprintf("datacite.title: %s",pkg),
                  sprintf("_target: https://bioconductor.org/packages/%s",pkg),
                  sprintf("datacite.creator: %s",gsub('\n','',paste(authors,collapse=", "))),
