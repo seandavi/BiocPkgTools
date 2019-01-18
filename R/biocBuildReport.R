@@ -50,6 +50,11 @@ biocBuildReport <- function(version=as.character(BiocManager::version())) {
   dat = xml2::read_html(sprintf('http://bioconductor.org/checkResults/%s/bioc-LATEST/',version))
   
   pkgnames = html_text(html_nodes(dat,xpath='/html/body/table[@class="mainrep"]/tr/td[@rowspan="3"]'))
+  # Note that bioc-3.9 has TWO mac builders, so the number of build rows
+  # is "4", not "3". 
+  if(length(pkgnames)==0) {
+    pkgnames = html_text(html_nodes(dat,xpath='/html/body/table[@class="mainrep"]/tr/td[@rowspan="4"]'))
+  }
   
   y = rex::re_matches(pkgnames,
                       rex(
