@@ -51,12 +51,6 @@ generateBiocPkgDOI = function(pkg, authors, pubyear, testing=TRUE) {
   bioc_doi_namespace = ".bioc."
   pkg_doi = paste0(bioc_shoulder,bioc_doi_namespace,pkg)
   url0 = file.path(base_url,pkg_doi)
-  res = httr::DELETE(url0,
-                     content_type('text/plain'),
-                     accept("text/plain"),
-                     httr::authenticate(username,password))
-  message(url0)
-  return(res)
   body = paste(c(sprintf("datacite.title: %s",pkg),
                  sprintf("_target: https://bioconductor.org/packages/%s",pkg),
                  sprintf("datacite.creator: %s",gsub('\n','',paste(authors,collapse=", "))),
