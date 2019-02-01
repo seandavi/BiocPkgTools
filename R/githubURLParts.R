@@ -41,7 +41,7 @@ githubURLParts = function(urls) {
     f[is.null(f)]=""
     f
 }
-    
+
 
 #' Get package details from GitHub
 #'
@@ -62,7 +62,7 @@ githubURLParts = function(urls) {
 #' Access Token on GitHub and register it. See the \code{gh}
 #' package for details.
 #'
-#' @importFrom gh
+#' @importFrom gh gh
 #'
 #' @examples
 #' pkglist = biocPkgList()
@@ -70,7 +70,7 @@ githubURLParts = function(urls) {
 #' gh_list = gh_list[!is.null(gh_list$user_repo),]
 #' ghd = githubDetails(gh_list$user_repo[1:5])
 #' lapply(ghd, '[[', "stargazers")
-#' 
+#'
 #' @export
 githubDetails = function(pkgs, sleep=0) {
     vals = lapply(pkgs, function(pkg) {
@@ -81,4 +81,4 @@ githubDetails = function(pkgs, sleep=0) {
     vals = vals[!is.na(vals)]
     vals
 }
-                  
+
