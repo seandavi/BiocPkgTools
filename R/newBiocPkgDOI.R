@@ -62,7 +62,7 @@ generateBiocPkgDOI = function(pkg, authors, pubyear, testing=TRUE) {
                   accept("text/plain"),
                   httr::authenticate(username,password),
                   body=body,timeout(30))
-  if(status_code(res)==400) {
+  if(status_code(res)>=400) {
     res = httr::PUT(url0,
                      content_type('text/plain'),
                      accept("text/plain"),
