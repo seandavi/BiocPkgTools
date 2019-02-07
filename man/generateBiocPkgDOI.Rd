@@ -36,7 +36,7 @@ The login information for the "real" Bioconductor account
 should be stored in the environment variables "EZID_USERNAME"
 and "EZID_PASSWORD".
 
-The GUI is available here: \url{https://ezid.lib.purdue.edu}.
+The GUI is available here: \url{https://doi.datacite.org/}.
 }
 \examples{
 \dontrun{

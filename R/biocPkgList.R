@@ -16,9 +16,9 @@
 #'    versions (but who would use those, right?).
 #'
 #' @return an object of class \code{tbl_df}.
-#' 
+#'
 #' @importFrom BiocManager repositories version
-#' @importFrom stringr str_split
+#' @importFrom stringr str_split str_replace_all str_remove_all str_squish
 #' @importFrom tibble as_tibble
 #'
 #' @examples
@@ -32,7 +32,7 @@
 #' bpkgl %>%
 #'   filter(Package=='GEOquery') %>%
 #'   pull(c('importsMe'))
-#' 
+#'
 #' @export
 biocPkgList = function(version = BiocManager::version(), repo='BioCsoft') {
     viewsFileUrl = paste(BiocManager::repositories(version = version)[repo], 'VIEWS', sep = '/')
@@ -43,10 +43,27 @@ biocPkgList = function(version = BiocManager::version(), repo='BioCsoft') {
     # list columns
     commaCols = c('Depends', 'Suggests', 'dependsOnMe', 'Imports', 'importsMe',
                 'Enhances', 'vignettes', 'vignetteTitles', 'suggestsMe',
-                'Author', 'Maintainer', 'biocViews')
+                'Maintainer', 'biocViews')
     for(commaCol in commaCols) {
         ret[[commaCol]] = str_split(ret[[commaCol]],'\\s?,\\s?')
     }
+
+    ret[["Author"]] = ret[["Author"]] %>%
+        str_replace_all("\n", " ") %>%
+        str_remove_all("\\[.*?\\]") %>%
+        str_remove_all("<.*?>") %>%
+        str_remove_all("\\(.*?\\)") %>%
+        str_squish() %>%
+        str_replace_all("\\w* contributions ?\\w*", ", ") %>%
+        str_replace_all("\\sand\\s", ", ") %>%
+        str_replace_all(",\\s+,", ",") %>%
+        str_replace_all(",+", ",")
+
+    ret[["Author"]] = lapply(
+        str_split(ret[["Author"]], ","),
+        str_squish
+    )
+
     ret = as_tibble(ret)
     class(ret) = c("biocPkgList", class(ret))
     ret
