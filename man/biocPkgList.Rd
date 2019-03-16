@@ -4,7 +4,8 @@
 \alias{biocPkgList}
 \title{Get full bioc software package listing, with details}
 \usage{
-biocPkgList(version = BiocManager::version(), repo = "BioCsoft")
+biocPkgList(version = BiocManager::version(), repo = "BioCsoft",
+  addBiocViewParents = TRUE)
 }
 \arguments{
 \item{version}{The requested bioconductor version. Will
@@ -15,6 +16,9 @@ Bioconductor software repository: BioCsoft. Available repos include:
 "BioCsoft", "BioCann", "BioCexp", "BioCworkflows", and "CRAN". Note
 that not all repos are available for all versions, particularly older
 versions (but who would use those, right?).}
+
+\item{addBiocViewParents}{logical(), whether to add all biocViews
+parents to biocViews annotations.}
 }
 \value{
 an object of class \code{tbl_df}.
@@ -26,6 +30,14 @@ contains quite a bit more information from the
 package \code{DESCRIPTION} files than the \code{PACKAGES}
 file. In particular, it contains \code{biocViews} annotations
 and URLs for vignettes and developer URLs.
+}
+\details{
+Since packages are annotated with the most specific 
+views, the default functionality here is to add parent terms
+for all views for each package. For example, in the bioCsoft
+repository, all packages will have at least "Software" added
+to their biocViews. If one wants to stick to only the most
+specific terms, set \code{addBiocViewParents} to \code{FALSE}.
 }
 \examples{
 bpkgl = biocPkgList()

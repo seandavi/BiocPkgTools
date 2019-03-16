@@ -1,3 +1,21 @@
+#' @importFrom RBGL transitive.closure
+.computeBiocViewsTransitiveClosure = function() {
+  data("biocViewsVocab")
+  return(RBGL::transitive.closure(biocViewsVocab))
+}
+
+.biocChildToParent = function() {
+  biocViewsTC = .computeBiocViewsTransitiveClosure()
+  chlist = unlist(edges(biocViewsTC), use.names = FALSE)
+  biocViewsTCEdges = edges(biocViewsTC)
+  df = data.frame(child = unlist(biocViewsTCEdges, use.names = FALSE),
+                  parent = rep(names(biocViewsTCEdges), sapply(biocViewsTCEdges, length)),
+                  stringsAsFactors = FALSE)
+  # Remove BiocViews, as this is simply the root
+  df = df[df$parent!='BiocViews',]
+  return(split(df$parent, df$child))
+}
+
 #' Get full bioc software package listing, with details
 #'
 #' The BiocViews-generated \code{VIEWS} file is available
@@ -6,6 +24,13 @@
 #' package \code{DESCRIPTION} files than the \code{PACKAGES}
 #' file. In particular, it contains \code{biocViews} annotations
 #' and URLs for vignettes and developer URLs.
+#' 
+#' Since packages are annotated with the most specific 
+#' views, the default functionality here is to add parent terms
+#' for all views for each package. For example, in the bioCsoft
+#' repository, all packages will have at least "Software" added
+#' to their biocViews. If one wants to stick to only the most
+#' specific terms, set \code{addBiocViewParents} to \code{FALSE}.
 #'
 #' @param version The requested bioconductor version. Will
 #'     default to use the BiocManager defaults (ie., \code{version()}).
@@ -14,6 +39,9 @@
 #'    "BioCsoft", "BioCann", "BioCexp", "BioCworkflows", and "CRAN". Note
 #'    that not all repos are available for all versions, particularly older
 #'    versions (but who would use those, right?).
+#'    
+#' @param addBiocViewParents logical(), whether to add all biocViews
+#'    parents to biocViews annotations. 
 #'
 #' @return an object of class \code{tbl_df}.
 #'
@@ -34,7 +62,8 @@
 #'   pull(c('importsMe'))
 #'
 #' @export
-biocPkgList = function(version = BiocManager::version(), repo='BioCsoft') {
+biocPkgList = function(version = BiocManager::version(), repo='BioCsoft', 
+                       addBiocViewParents = TRUE) {
     viewsFileUrl = paste(BiocManager::repositories(version = version)[repo], 'VIEWS', sep = '/')
     con = url(viewsFileUrl)
     ret = as.data.frame(read.dcf(con), stringsAsFactors = FALSE)
@@ -46,6 +75,13 @@ biocPkgList = function(version = BiocManager::version(), repo='BioCsoft') {
                 'Maintainer', 'biocViews')
     for(commaCol in commaCols) {
         ret[[commaCol]] = str_split(ret[[commaCol]],'\\s?,\\s?')
+    }
+    if(addBiocViewParents) {
+      child2parentMap = .biocChildToParent()
+      tmp = lapply(ret$biocViews, function(views) {
+        return(distinct(c(unlist(child2parentMap[views]),views)))
+      })
+      ret$biocViews = tmp
     }
 
     ret[["Author"]] = ret[["Author"]] %>%
