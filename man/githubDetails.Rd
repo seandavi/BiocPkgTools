@@ -6,6 +6,17 @@
 \usage{
 githubDetails(pkgs, sleep = 0)
 }
+\arguments{
+\item{pkgs}{a character() vector of username/repo 
+for one or more github repos, such as `seandavi/GEOquery`.}
+
+\item{sleep}{numeric() denoting the number of seconds to
+sleep between GitHub API calls. Since GitHub rate limits
+its APIs, it might be necessary to either use small
+chunks of packages iteratively or to supply a non-zero
+argument here. See the `details` section for a better 
+solution using GitHub tokens.}
+}
 \description{
 For packages that live on github, we can mine
 further details. This function returns the
@@ -26,8 +37,15 @@ package for details.
 }
 \examples{
 pkglist = biocPkgList()
+
+# example of "pkgs" format.
+head(pkglist$URL)
+
 gh_list = githubURLParts(pkglist$URL)
 gh_list = gh_list[!is.null(gh_list$user_repo),]
+
+head(gh_list$user_repo)
+
 ghd = githubDetails(gh_list$user_repo[1:5])
 lapply(ghd, '[[', "stargazers")
 
