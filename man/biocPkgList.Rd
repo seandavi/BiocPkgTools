@@ -28,7 +28,7 @@ file. In particular, it contains \code{biocViews} annotations
 and URLs for vignettes and developer URLs.
 }
 \examples{
-bpkgl = biocPkgList("3.7")
+bpkgl = biocPkgList()
 bpkgl
 unlist(bpkgl[1,'Depends'])
 

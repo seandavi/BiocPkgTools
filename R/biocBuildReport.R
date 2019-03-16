@@ -3,14 +3,15 @@
 #' The online Bioconoductor build reports
 #' are great for humans to look at, but
 #' they are not easily computable. This function
-#' simply scrapes HTML and text files available
+#' scrapes HTML and text files available
 #' from the build report online pages to generate
 #' a tidy data frame version of the build report.
 #' 
 #' @param version character(1) the version number
 #' as used to access the online build report. For 
 #' example, "3.6". The default is the "current version"
-#' as specified in \code{BiocManager::version}.
+#' as specified in \code{BiocManager::version}. Note
+#' that this is a character() variable, not a number.
 #' 
 #' @return a \code{tbl_df} object with columns pkg, version,
 #' author, commit, date, node, stage, and result.
@@ -24,6 +25,10 @@
 #' @importFrom BiocManager version
 #' 
 #' @examples 
+#' 
+#' # Set the stage--what version of Bioc am 
+#' # I using?
+#' BiocManager::version()
 #' 
 #' latest_build = biocBuildReport()
 #' head(latest_build)
