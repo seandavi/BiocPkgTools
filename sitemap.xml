@@ -13,6 +13,9 @@
     <loc>http://seandavi.github.io/BiocPkgTools/reference/biocDownloadStats.html</loc>
   </url>
   <url>
+    <loc>http://seandavi.github.io/BiocPkgTools/reference/biocExplore.html</loc>
+  </url>
+  <url>
     <loc>http://seandavi.github.io/BiocPkgTools/reference/biocPkgList.html</loc>
   </url>
   <url>
@@ -32,6 +35,12 @@
   </url>
   <url>
     <loc>http://seandavi.github.io/BiocPkgTools/reference/getPackageInfo.html</loc>
+  </url>
+  <url>
+    <loc>http://seandavi.github.io/BiocPkgTools/reference/get_bioc_data.html</loc>
+  </url>
+  <url>
+    <loc>http://seandavi.github.io/BiocPkgTools/reference/githubDetails.html</loc>
   </url>
   <url>
     <loc>http://seandavi.github.io/BiocPkgTools/reference/githubURLParts.html</loc>

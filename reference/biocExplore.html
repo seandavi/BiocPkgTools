@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Extract github user and repo name from github URL — githubURLParts • BiocPkgTools</title>
+<title>Explore Bioconductor packages interactively — biocExplore • BiocPkgTools</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Extract github user and repo name from github URL — githubURLParts" />
+<meta property="og:title" content="Explore Bioconductor packages interactively — biocExplore" />
 
-<meta property="og:description" content="Extract github user and repo name from github URL" />
+<meta property="og:description" content="Explore Bioconductor packages through an interactive bubble plot. Click on bubbles to bring up additional information about the package. Size and proximity to center of a bubble is based on the downloads the package has in the past month." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -113,44 +113,37 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Extract github user and repo name from github URL</h1>
-    <small class="dont-index">Source: <a href='https://github.com/seandavi/BiocPkgTools/blob/master/R/githubURLParts.R'><code>R/githubURLParts.R</code></a></small>
-    <div class="hidden name"><code>githubURLParts.Rd</code></div>
+    <h1>Explore Bioconductor packages interactively</h1>
+    <small class="dont-index">Source: <a href='https://github.com/seandavi/BiocPkgTools/blob/master/R/biocExplore.R'><code>R/biocExplore.R</code></a></small>
+    <div class="hidden name"><code>biocExplore.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Extract github user and repo name from github URL</p>
+    <p>Explore Bioconductor packages through an interactive bubble plot. Click on bubbles to bring up additional information about the package. Size and proximity to center of a bubble is based on the downloads the package has in the past month.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>githubURLParts</span>(<span class='no'>urls</span>)</pre>
+    <pre class="usage"><span class='fu'>biocExplore</span>(<span class='kw'>top</span> <span class='kw'>=</span> <span class='fl'>500</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>urls</th>
-      <td><p>a <code><a href='https://www.rdocumentation.org/packages/base/topics/character'>character()</a></code> vector of urls.</p></td>
+      <th>top</th>
+      <td><p>maximum number of packages displayed in any biocView</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>parameters passed to <code><a href='https://www.rdocumentation.org/packages/htmlwidgets/topics/createWidget'>htmlwidgets::createWidget()</a></code></p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a <code>data.frame</code> with four columns:</p><ul>
-<li><p>urlThe original github URL</p></li>
-<li><p>user_repoThe github "username/repo", combined</p></li>
-<li><p>userThe github username</p></li>
-<li><p>repoThe github repo name</p></li>
-</ul>
-
+    <p>bubble plot of Bioconductor packages</p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># find github URL details for</span>
-<span class='co'># Bioc packages</span>
-<span class='no'>bpkgl</span> <span class='kw'>=</span> <span class='fu'><a href='biocPkgList.html'>biocPkgList</a></span>()</div><div class='output co'>#&gt; <span class='warning'>Warning: data set ‘biocViewsVocab’ not found</span></div><div class='output co'>#&gt; <span class='error'>Error in nodes(g): object 'biocViewsVocab' not found</span></div><div class='input'><span class='no'>urldetails</span> <span class='kw'>=</span> <span class='fu'>githubURLParts</span>(<span class='no'>bpkgl</span>$<span class='no'>URL</span>)</div><div class='output co'>#&gt; <span class='error'>Error in stri_match_first_regex(string, pattern, opts_regex = opts(pattern)): object 'bpkgl' not found</span></div><div class='input'><span class='no'>urldetails</span> <span class='kw'>=</span> <span class='no'>urldetails</span>[!<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/NA'>is.na</a></span>(<span class='no'>urldetails</span>$<span class='no'>url</span>),]</div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'urldetails' not found</span></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/head'>head</a></span>(<span class='no'>urldetails</span>)</div><div class='output co'>#&gt; <span class='error'>Error in head(urldetails): object 'urldetails' not found</span></div><div class='input'>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -158,9 +151,7 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+          </ul>
 
   </div>
 </div>
