@@ -3,6 +3,8 @@
 #' @details Note that bioconductor package download
 #' stats are not version-specific.
 #'
+#' @importFrom dplyr mutate
+#' @importFrom magrittr %>%
 #' @importFrom utils read.table
 #' @importFrom tibble as_tibble
 #' 
@@ -15,14 +17,41 @@
 #' @export
 biocDownloadStats = function() {
   tmp = read.table('http://bioconductor.org/packages/stats/bioc/bioc_pkg_stats.tab',
-                   sep="\t", header = TRUE)
+                   sep="\t", header = TRUE, stringsAsFactors = FALSE)
   tmp$repo = 'Software'
   tmp2 = read.table('http://bioconductor.org/packages/stats/data-annotation/annotation_pkg_stats.tab',
-                    sep="\t", header = TRUE)
+                    sep="\t", header = TRUE, stringsAsFactors = FALSE)
   tmp2$repo = 'AnnotationData'
   tmp3 = read.table('http://bioconductor.org/packages/stats/data-experiment/experiment_pkg_stats.tab',
-                    sep="\t", header = TRUE)
+                    sep="\t", header = TRUE, stringsAsFactors = FALSE)
   tmp3$repo = 'ExperimentData'
   tmp = rbind(tmp,tmp2,tmp3)
-  as_tibble(tmp)
+  tmp = as_tibble(tmp) %>% 
+    mutate(Date = as.Date(paste(Year, Month, '01'), '%Y %b %d'))
+  class(tmp) = c('bioc_downloads', class(tmp))
+  tmp
+}
+
+#' When did a package enter Bioconductor?
+#' 
+#' This function uses the biocDownloadStats
+#' data to *approximate* when a package entered
+#' Bioconductor. Note that the download stats
+#' go back only to 2009.
+#' 
+#' @importFrom dplyr filter group_by top_n collect
+#' 
+#' @param download_stats a data.frame from \code{\link{biocDownloadStats}}
+#' 
+#' @example 
+#' dls = biocDownloadStats()
+#' tail(firstInBioc(dls))
+#' @export
+firstInBioc = function(download_stats) {
+  download_stats %>% 
+    filter(Month!='all') %>%
+    group_by(Package) %>%
+    # thanks: https://stackoverflow.com/questions/43832434/arrange-within-a-group-with-dplyr
+    top_n(1, desc(Date)) %>%
+    collect()
 }

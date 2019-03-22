@@ -1,13 +1,16 @@
+#' @import biocViews
 #' @importFrom RBGL transitive.closure
 .computeBiocViewsTransitiveClosure = function() {
-  data("biocViewsVocab")
+  data("biocViewsVocab", package = "biocViews")
   return(RBGL::transitive.closure(biocViewsVocab))
 }
 
+
+#' @importFrom graph edges nodes
 .biocChildToParent = function() {
   biocViewsTC = .computeBiocViewsTransitiveClosure()
-  chlist = unlist(edges(biocViewsTC), use.names = FALSE)
-  biocViewsTCEdges = edges(biocViewsTC)
+  chlist = unlist(graph::edges(biocViewsTC), use.names = FALSE)
+  biocViewsTCEdges = graph::edges(biocViewsTC)
   df = data.frame(child = unlist(biocViewsTCEdges, use.names = FALSE),
                   parent = rep(names(biocViewsTCEdges), sapply(biocViewsTCEdges, length)),
                   stringsAsFactors = FALSE)
@@ -64,7 +67,11 @@
 #' @export
 biocPkgList = function(version = BiocManager::version(), repo='BioCsoft', 
                        addBiocViewParents = TRUE) {
-    viewsFileUrl = paste(BiocManager::repositories(version = version)[repo], 'VIEWS', sep = '/')
+    # nasty hack here, but BiocManager::repositories throws errors for 
+    # repositories not matching the current R version--counterproductive
+    # for this function.
+    viewsFileUrl = paste(BiocManager:::.repositories(site_repository=NA, version = version)[repo],
+                         'VIEWS', sep = '/')
     con = url(viewsFileUrl)
     ret = as.data.frame(read.dcf(con), stringsAsFactors = FALSE)
     close(con)
@@ -80,7 +87,7 @@ biocPkgList = function(version = BiocManager::version(), repo='BioCsoft',
     if(addBiocViewParents) {
       child2parentMap = .biocChildToParent()
       tmp = lapply(ret$biocViews, function(views) {
-        return(distinct(c(unlist(child2parentMap[views]),views)))
+        return(unique(c(unlist(child2parentMap[views]),views)))
       })
       ret$biocViews = tmp
     }

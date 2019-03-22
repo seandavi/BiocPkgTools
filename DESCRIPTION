@@ -19,6 +19,7 @@ Description: Bioconductor has a rich ecosystem of metadata around
 Depends: htmlwidgets
 Imports:
     BiocManager,
+    biocViews,
     tibble,
     stringr,
     rvest,
@@ -35,11 +36,13 @@ Imports:
     tidyr,
     jsonlite,
     gh,
-    RBGL
+    RBGL,
+    graph,
+    magrittr
 VignetteBuilder: knitr
 Suggests: BiocStyle, knitr, rmarkdown,
     testthat, tm, SnowballC, pdftools,
-    visNetwork, biocViews
+    visNetwork
 License: MIT + file LICENSE
 BugReports: https://github.com/seandavi/BiocPkgTools/issues/new
 URL: https://github.com/seandavi/BiocPkgTools
