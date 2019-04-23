@@ -6,7 +6,6 @@
 
 .biocChildToParent = function() {
   biocViewsTC = .computeBiocViewsTransitiveClosure()
-  chlist = unlist(edges(biocViewsTC), use.names = FALSE)
   biocViewsTCEdges = edges(biocViewsTC)
   df = data.frame(child = unlist(biocViewsTCEdges, use.names = FALSE),
                   parent = rep(names(biocViewsTCEdges), sapply(biocViewsTCEdges, length)),

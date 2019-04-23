@@ -1,15 +1,15 @@
 Package: BiocPkgTools
 Type: Package
 Title: Collection of simple tools for learning about Bioc Packages
-Version: 1.1.8
+Version: 1.1.9
 Date: 2019-03-16
 Authors@R: c( 
-		  person("Shian", "Su", role=c("aut", "ctb"), email = "su.s@wehi.edu.au"),
-		  person("Lori", "Shepherd", role="ctb", email = "Lori.Shepherd@roswellpark.org"),
-		  person("Martin", "Morgan", role="ctb", email = "martin.morgan@roswellpark.org"),
-		  person("Vince", "Carey", role="ctb", email="stvjc@channing.harvard.edu"),
-		  person("Sean", "Davis", email = "seandavi@gmail.com",role = c("aut", "cre"))
-		  )
+    person("Shian", "Su", role=c("aut", "ctb"), email = "su.s@wehi.edu.au"),
+    person("Lori", "Shepherd", role="ctb", email = "Lori.Shepherd@roswellpark.org"),
+    person("Martin", "Morgan", role="ctb", email = "martin.morgan@roswellpark.org"),
+    person("Vince", "Carey", role="ctb", email="stvjc@channing.harvard.edu"),
+    person("Sean", "Davis", email = "seandavi@gmail.com",role = c("aut", "cre"))
+    )
 Description: Bioconductor has a rich ecosystem of metadata around
   packages, usage, and build status. This package is a simple
   collection of functions to access that metadata from R. The goal
