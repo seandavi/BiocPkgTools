@@ -1,6 +1,6 @@
 #' @importFrom RBGL transitive.closure
-.computeBiocViewsTransitiveClosure = function() {
-  data("biocViewsVocab")
+.computeBiocViewsTransitiveClosure <- function() {
+  data("biocViewsVocab", package = "biocViews")
   return(RBGL::transitive.closure(biocViewsVocab))
 }
 
