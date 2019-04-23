@@ -1,0 +1,4 @@
+name: Bioconductor Package Report
+description: >
+  Template for basic Bioconductor Package Report.
+create_dir: false

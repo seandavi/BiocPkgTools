@@ -1,41 +1,21 @@
-BiocPkgTools v1.1.1 (Release date: 2018-11-04)
-==============
+BiocPkgTools v1.2
+=================
 
+* Add HTML Package Report template as RStudio rmarkdown
+  template to quickly generate overviews of package stats
+  for grants, etc.
+* Add parent terms to biocViews to support better
+  search and browse by term
+
+Bug fixes
+---------
 * Fix small css bug that caused paragraph tag
   mis-rendering in vignettes when biocExplore()
   used.
+* Completed list column extraction for all list
+  columns in biocPkgList
 
 BiocPkgTools v1.0.0 (Release date: 2018-10-31)
 ==============
 
 * Bioc release
-
-BiocPkgTools v0.99.12 (Release date: 2018-10-13)
-==============
-
-Add bioc_explore bubble plot visualization from Shian Su.
-
-BiocPkgTools v0.99.11 (Release date: 2018-10-08)
-==============
-
-Small bug fixes.
-
-BiocPkgTools v0.99.10 (Release date: 2018-10-08)
-==============
-
-Fix a couple of missing imports.
-
-BiocPkgTools v0.99.9 (Release date: 2018-10-08)
-==============
-
-Added functionality to treat package dependencies
-as a graph. 
-
-BiocPkgTools v0.99.8
-==============
-
-* Accepted to Bioconductor
-
-Basic functionality to access:
-* Download stats
-* Package metadata details
