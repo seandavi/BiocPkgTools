@@ -15,6 +15,8 @@ as used to access the online build report. For
 example, "3.6". The default is the "current version"
 as specified in \code{BiocManager::version}. Note
 that this is a character() variable, not a number.}
+
+\item{emailTemplate}{The path to the email template.}
 }
 \value{
 a character string of the email
