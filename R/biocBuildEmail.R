@@ -1,26 +1,14 @@
-.nameCut <- function(str) {
-    gsub("(.*)\\s+<.*", "\\1", str)
-}
-
-.getOnlineMainInfo <- function(pkg, version = BiocManager::version()) {
-    doc <- xml2::read_html(
-        sprintf(
-            "http://bioconductor.org/packages/%s/bioc/html/%s.html",
-            version,
-            pkg
-        )
+.nameCut <- function(string) {
+    gsub("\n", " ",
+        gsub("(.*)\\s+<.*", "\\1", string),
+    fixed = TRUE
     )
-    maint <- grep("Maintainer:",
-        rvest::html_text(rvest::html_nodes(doc, "p")), value = TRUE)
-    email <- gsub("(.*)<(.*)>.*", "\\2", maint)
-    name <- gsub("Maintainer: ", "", maint)
-
-    list(name = .nameCut(name), email = gsub(" at ", "@", email))
 }
 
-.getInstMainInfo <- function(pkg) {
-    maint <- utils::maintainer(pkg)
-    list(name = .nameCut(maint), email = gsub("(.*)<(.*)>", "\\2", maint))
+.emailCut <- function(string) {
+    gsub(" at ", "@",
+        gsub("(.*)<(.*)>.*", "\\2", string)
+    )
 }
 
 .getTemplatePath <- function() {
@@ -58,15 +46,20 @@ biocBuildEmail <-
     if (!requireNamespace("clipr", quietly = TRUE))
         stop("Install the 'clipr' package to use 'biocBuildEmail'")
 
-    maintainer <-
-        if (pkg %in% rownames(installed.packages()))
-            .getInstMainInfo(pkg)
-        else
-            .getOnlineMainInfo(pkg, version)
+    listall <- biocPkgList()
+    pkgMeta <- listall[listall[["Package"]] == pkg, ]
+    mainInfo <- pkgMeta[["Maintainer"]][[1L]]
+
+    mainName <- vapply(mainInfo, .nameCut, character(1L))
+    mainEmail <- vapply(mainInfo, .emailCut, character(1L))
+
+    if (length(mainName) > 1L)
+        mainName <- paste0(mainName, collapse = " & ")
+    if (length(mainEmail) > 1L)
+        mainEmail <- paste0(mainEmail, collapse = ", ")
 
     mail <- paste0(readLines(emailTemplate), collapse = "\n")
-    send <- sprintf(mail,
-        maintainer[["name"]], maintainer[["email"]], pkg, version, version, pkg)
+    send <- sprintf(mail, mainName, mainEmail, pkg, version, version, pkg)
 
     if (clipr::clipr_available()) {
         clipr::write_clip(send)
