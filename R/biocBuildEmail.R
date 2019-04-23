@@ -38,8 +38,10 @@
 #' within the package and provides a copy in the clipboard.
 #'
 #' @param pkg The name of the package in trouble
+#' @param emailTemplate The path to the email template.
+#' 
 #' @inheritParams biocBuildReport
-#'
+#' 
 #' @return a character string of the email
 #'
 #' @export
