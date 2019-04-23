@@ -1,0 +1,16 @@
+Dear %s (%s),
+
+I am contacting you concerning the '%s' package, on the %s
+branch of Bioconductor, for which you are listed as the maintainer.
+
+The latest build/check report shows that your package is failing on one or more
+platforms.
+Please resolve the issues for your package's continued inclusion in
+Bioconductor.
+
+https://bioconductor.org/checkResults/%s/bioc-LATEST/%s/
+
+Please let me know if you have any questions.
+
+Regards,
+

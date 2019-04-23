@@ -9,8 +9,7 @@
 #' @importFrom graph edges nodes
 .biocChildToParent = function() {
   biocViewsTC = .computeBiocViewsTransitiveClosure()
-  chlist = unlist(graph::edges(biocViewsTC), use.names = FALSE)
-  biocViewsTCEdges = graph::edges(biocViewsTC)
+  biocViewsTCEdges = edges(biocViewsTC)
   df = data.frame(child = unlist(biocViewsTCEdges, use.names = FALSE),
                   parent = rep(names(biocViewsTCEdges), sapply(biocViewsTCEdges, length)),
                   stringsAsFactors = FALSE)
