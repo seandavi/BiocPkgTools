@@ -1,4 +1,4 @@
-checkMe = function(ver="3.8", authorPattern="V.*Carey", includeOK = FALSE) {
+checkMe = function(ver="devel", authorPattern="V.*Carey", includeOK = FALSE) {
  rep = biocBuildReport(ver)
  kp = grep(authorPattern, rep$author)
  mine = rep[kp,]
@@ -9,7 +9,7 @@ checkMe = function(ver="3.8", authorPattern="V.*Carey", includeOK = FALSE) {
  if (nrow(bad)>0) return(bad[,-c(3,4,5)]) else return(NULL)
 }
  
-chkURL = function(ver="3.8", pack="BiocOncoTK",
+chkURL = function(ver="devel", pack="BiocOncoTK",
    node="malbec1", stage="buildsrc")
   sprintf("https://bioconductor.org/checkResults/%s/bioc-LATEST/%s/%s-%s.html", ver, pack, node, stage)
 
@@ -35,9 +35,10 @@ chkURL = function(ver="3.8", pack="BiocOncoTK",
 #' if (interactive()) problemPage()
 #'
 #' @export
-problemPage = function(authorPattern="V.*Carey", ver="3.8", includeOK = FALSE) {
+problemPage = function(authorPattern="V.*Carey", ver="devel", includeOK = FALSE) {
     if (!requireNamespace("htmltools")) stop("install htmltools to use this function")
     if (!requireNamespace("DT")) stop("install DT to use this function")
+    ver = as.character(ver)
     mm = checkMe(authorPattern=authorPattern, ver=ver, includeOK = includeOK)
     nn = nrow(mm)
     if (is.null(nn)) stop("all packages fine")

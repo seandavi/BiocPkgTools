@@ -4,7 +4,7 @@
 \alias{problemPage}
 \title{generate hyperlinked HTML for build reports for Bioc packages}
 \usage{
-problemPage(authorPattern = "V.*Carey", ver = "3.8",
+problemPage(authorPattern = "V.*Carey", ver = "devel",
   includeOK = FALSE)
 }
 \arguments{
