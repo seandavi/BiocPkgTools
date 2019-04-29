@@ -124,7 +124,7 @@ bpi %>%
 
 For the end user of Bioconductor, an analysis often starts with finding a
 package or set of packages that perform required tasks or are tailored 
-to a specific operation or data type. The `bioc_explorer()` function
+to a specific operation or data type. The `biocExplore()` function
 implements an interactive bubble visualization with filtering based on 
 biocViews terms. Bubbles are sized based on download statistics. Tooltip
 and detail-on-click capabilities are included. To start a local session:
