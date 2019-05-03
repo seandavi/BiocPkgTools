@@ -1,0 +1,15 @@
+Dear %s (%s),
+
+I am contacting you concerning the '%s' package, on the %s
+branch of Bioconductor, for which you are listed as the maintainer.
+
+The size of your package's tarball very much exceeds the normal recommended
+limit. Please reduce the size of your package's tarball to about *5 Megabytes*.
+
+See the 'build' section at:
+https://bioconductor.org/checkResults/%s/bioc-LATEST/%s/
+
+Thank you for your cooperation in following Bioconductor guidelines.
+Let me know if you have any questions.
+
+Best regards,
