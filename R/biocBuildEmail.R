@@ -80,6 +80,8 @@ biocBuildEmail <-
 
     listall <- biocPkgList()
     pkgMeta <- listall[listall[["Package"]] == pkg, ]
+    if (!nrow(pkgMeta))
+        stop("Package not found in Bioconductor repository")
     mainInfo <- pkgMeta[["Maintainer"]][[1L]]
 
     mainName <- vapply(mainInfo, .nameCut, character(1L))
