@@ -15,3 +15,9 @@ data to *approximate* when a package entered
 Bioconductor. Note that the download stats
 go back only to 2009.
 }
+\examples{
+
+dls = biocDownloadStats()
+tail(firstInBioc(dls))
+
+}

@@ -19,8 +19,10 @@ Description: Bioconductor has a rich ecosystem of metadata around
   packages.
 Depends: htmlwidgets
 Imports:
+    BiocFileCache,
     BiocManager,
     biocViews,
+    desc,
     tibble,
     stringr,
     rvest,

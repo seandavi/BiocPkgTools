@@ -4,8 +4,9 @@
 \alias{biocBuildEmail}
 \title{Create and copy e-mail package notification template to clipboard}
 \usage{
-biocBuildEmail(pkg, version = BiocManager::version(),
-  emailTemplate = .getTemplatePath())
+biocBuildEmail(pkg, version = c("release", "devel"),
+  emailTemplate = .getTemplatePath(), core.name = NULL,
+  core.email = NULL)
 }
 \arguments{
 \item{pkg}{The name of the package in trouble}
