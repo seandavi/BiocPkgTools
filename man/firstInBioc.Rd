@@ -17,7 +17,7 @@ go back only to 2009.
 }
 \examples{
 
-dls = biocDownloadStats()
+dls <- biocDownloadStats()
 tail(firstInBioc(dls))
 
 }

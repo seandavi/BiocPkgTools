@@ -45,7 +45,7 @@ biocDownloadStats = function() {
 #'
 #' @examples
 #'
-#' dls = biocDownloadStats()
+#' dls <- biocDownloadStats()
 #' tail(firstInBioc(dls))
 #'
 #' @export

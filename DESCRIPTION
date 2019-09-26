@@ -6,7 +6,7 @@ Date: 2019-06-25
 Authors@R: c( 
     person("Shian", "Su", role=c("aut", "ctb"), email = "su.s@wehi.edu.au"),
     person("Lori", "Shepherd", role="ctb", email = "Lori.Shepherd@roswellpark.org"),
-    person("Marcel", "Ramos", role="ctb", email = "mramos09@gmail.com"),
+    person("Marcel", "Ramos", role="ctb", email = "marcel.ramos@roswellpark.org"),
     person("Martin", "Morgan", role="ctb", email = "martin.morgan@roswellpark.org"),
     person("Vince", "Carey", role="ctb", email="stvjc@channing.harvard.edu"),
     person("Sean", "Davis", email = "seandavi@gmail.com",role = c("aut", "cre"))
