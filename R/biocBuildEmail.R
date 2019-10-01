@@ -13,8 +13,8 @@
 
 .getTemplatePath <- function() {
     system.file(
-        package = "BiocPkgTools", "resources",
-        "e-template.txt", mustWork = TRUE
+        package = "BiocPkgTools", "resources", "BiocBuildEmail_Template.Rmd",
+        mustWork = TRUE
     )
 }
 
@@ -36,13 +36,18 @@
 biocBuildEmail <-
     function(pkg, version = c("release", "devel"),
         emailTemplate = .getTemplatePath(), core.name = NULL,
-        core.email = NULL)
+        core.email = NULL, core.id = NULL, textOnly = FALSE)
 {
     stopifnot(
         is.character(pkg),
         identical(length(pkg), 1L),
         file.exists(emailTemplate)
     )
+
+    if (!textOnly) {
+        if (!requireNamespace("blastula"))
+            stop("Install the 'blastula' package to send HTML emails")
+    }
 
     bfc <- .get_cache()
     rid <- BiocFileCache::bfcquery(bfc, "userinfo", "rname", exact = TRUE)$rid
@@ -56,27 +61,30 @@ biocBuildEmail <-
             core.name <- readline("Provide your full name: ")
         if (is.null(core.email))
             core.email <- readline("What is your core-team email? ")
+        if (is.null(core.id))
+            core.id <- readline("What is your Roswell Park employee ID (matches ^[A-Z]{2}[0-9]{5})?  ")
 
-        writeLines(c(core.name, core.email), con = userfile)
+        writeLines(c(core.name, core.email, core.id), con = userfile)
         message("Saved data to: ", pkgToolsCache())
     } else {
         devinfo <- readLines(userfile)
         core.name <- devinfo[[1L]]
         core.email <- devinfo[[2L]]
+        core.id <- devinfo[[3L]]
     }
 
     stopifnot(
-        is.character(core.name), is.character(core.email),
-        !is.na(core.name), !is.na(core.email),
-        nchar(core.name) > 4, nchar(core.email) != 0
+        is.character(core.name), is.character(core.email), is.character(core.id),
+        !is.na(core.name), !is.na(core.email), !is.na(core.id),
+        nchar(core.name) > 4, nchar(core.email) != 0, nchar(core.id) > 6
     )
 
     coredomain <- grepl("@roswellpark.org$", ignore.case = TRUE, x = core.email)
     if (!coredomain)
         stop("Provide only a core team email address")
 
-    if (!requireNamespace("clipr", quietly = TRUE))
-        stop("Install the 'clipr' package to use 'biocBuildEmail'")
+    if (textOnly && !requireNamespace("clipr", quietly = TRUE))
+        stop(paste0("Install the 'clipr' package to use the 'textOnly = TRUE'"))
 
     listall <- biocPkgList()
     pkgMeta <- listall[listall[["Package"]] == pkg, ]
@@ -105,14 +113,33 @@ biocBuildEmail <-
 
     firstname <- vapply(strsplit(core.name, "\\s"), `[`, character(1L), 1L)
     mail <- paste0(readLines(emailTemplate), collapse = "\n")
-    send <- sprintf(mail, mainName, mainEmail, pkg, vers, repolink,
-        firstname, core.name)
+    maildate <- format(Sys.time(), "%B %d, %Y")
+    send <- sprintf(mail, pkg, core.name, maildate, pkg, mainName, pkg,
+        vers, repolink, firstname, core.name)
 
-    if (clipr::clipr_available()) {
-        clipr::write_clip(send)
-        message("Message copied to clipboard")
-    } else
-        message("Unable to put result on the clipboard")
+    title <- sprintf("%s Bioconductor package", pkg)
 
-    send
+    if (textOnly) {
+        send <- strsplit(send, "---")[[1L]][[4L]]
+        if (clipr::clipr_available()) {
+            clipr::write_clip(send)
+            message("Message copied to clipboard")
+        } else
+            message("Unable to put result on the clipboard")
+        return(send)
+    } else {
+        tfile <- tempfile(fileext = ".Rmd")
+        writeLines(send, tfile)
+        biocmail <- blastula::render_email(tfile)
+        blastula::smtp_send(email = biocmail,
+            from = core.email, to = mainEmail, subject = title,
+            credentials = creds(
+                user = paste0(core.id, "@roswellpark.org"),
+                provider = "office365",
+                sender_name = core.name,
+                use_ssl = FALSE
+            )
+        )
+        return(biocmail)
+    }
 }
