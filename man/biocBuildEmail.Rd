@@ -6,7 +6,7 @@
 \usage{
 biocBuildEmail(pkg, version = c("release", "devel"),
   emailTemplate = .getTemplatePath(), core.name = NULL,
-  core.email = NULL)
+  core.email = NULL, core.id = NULL, textOnly = FALSE)
 }
 \arguments{
 \item{pkg}{The name of the package in trouble}

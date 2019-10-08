@@ -11,11 +11,44 @@
     )
 }
 
-.getTemplatePath <- function() {
+.getTemplatePath <- function(type = c("buildemail", "cranreport")) {
+    type <- match.arg(type)
+    type <- switch(
+        type,
+        buildemail = "BiocBuildEmail_Template.Rmd",
+        cranreport = "CRANReport_Template.Rmd"
+    )
     system.file(
-        package = "BiocPkgTools", "resources", "BiocBuildEmail_Template.Rmd",
+        package = "BiocPkgTools", "resources", type,
         mustWork = TRUE
     )
+}
+
+.getUserInfo <- function(core.name = NULL, core.email = NULL, core.id = NULL) {
+    bfc <- .get_cache()
+    rid <- BiocFileCache::bfcquery(bfc, "userinfo", "rname", exact = TRUE)$rid
+    if (!length(rid))
+        userfile <- BiocFileCache::bfcnew(bfc, "userinfo", ext = ".txt")
+    else
+        userfile <- BiocFileCache::bfcrpath(bfc, rids = rid)
+
+    if (!file.exists(userfile)) {
+        if (is.null(core.name))
+            core.name <- readline("Provide your full name: ")
+        if (is.null(core.email))
+            core.email <- readline("What is your core-team email? ")
+        if (is.null(core.id))
+            core.id <- readline("What is your Roswell Park employee ID (matches ^[A-Z]{2}[0-9]{5})?  ")
+
+        writeLines(c(core.name, core.email, core.id), con = userfile)
+        message("Saved data to: ", pkgToolsCache())
+    } else {
+        devinfo <- readLines(userfile)
+        core.name <- devinfo[[1L]]
+        core.email <- devinfo[[2L]]
+        core.id <- devinfo[[3L]]
+    }
+    list(core.name = core.name, core.email = core.email, core.id = core.id)
 }
 
 #' Create and copy e-mail package notification template to clipboard
@@ -41,37 +74,20 @@ biocBuildEmail <-
     stopifnot(
         is.character(pkg),
         identical(length(pkg), 1L),
+        !is.na(pkg),
         file.exists(emailTemplate)
     )
 
     if (!textOnly) {
         if (!requireNamespace("blastula"))
-            stop("Install the 'blastula' package to send HTML emails")
+            stop("Install the 'blastula' package to send HTML emails or use\n",
+                "  'textOnly=TRUE'")
     }
 
-    bfc <- .get_cache()
-    rid <- BiocFileCache::bfcquery(bfc, "userinfo", "rname", exact = TRUE)$rid
-    if (!length(rid))
-        userfile <- BiocFileCache::bfcnew(bfc, "userinfo", ext = ".txt")
-    else
-        userfile <- BiocFileCache::bfcrpath(bfc, rids = rid)
-
-    if (!file.exists(userfile)) {
-        if (is.null(core.name))
-            core.name <- readline("Provide your full name: ")
-        if (is.null(core.email))
-            core.email <- readline("What is your core-team email? ")
-        if (is.null(core.id))
-            core.id <- readline("What is your Roswell Park employee ID (matches ^[A-Z]{2}[0-9]{5})?  ")
-
-        writeLines(c(core.name, core.email, core.id), con = userfile)
-        message("Saved data to: ", pkgToolsCache())
-    } else {
-        devinfo <- readLines(userfile)
-        core.name <- devinfo[[1L]]
-        core.email <- devinfo[[2L]]
-        core.id <- devinfo[[3L]]
-    }
+    core.list <- .getUserInfo(core.name, core.email, core.id)
+    core.name <- core.list[["core.name"]]
+    core.email <- core.list[["core.email"]]
+    core.id <- core.list[["core.id"]]
 
     stopifnot(
         is.character(core.name), is.character(core.email), is.character(core.id),
