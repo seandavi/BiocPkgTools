@@ -149,7 +149,7 @@ biocBuildEmail <-
         biocmail <- blastula::render_email(tfile)
         blastula::smtp_send(email = biocmail,
             from = core.email, to = mainEmail, subject = title,
-            credentials = creds(
+            credentials = blastula::creds(
                 user = paste0(core.id, "@roswellpark.org"),
                 provider = "office365",
                 sender_name = core.name,
