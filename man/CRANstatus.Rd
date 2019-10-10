@@ -5,15 +5,15 @@
 \title{Check the CRAN build report page and email a notification}
 \usage{
 CRANstatus(pkg, core.email = NULL,
-  to.mail = "maintainer@roswellpark.org",
+  to.mail = "maintainer@bioconductor.org",
   emailTemplate = .getTemplatePath("cranreport"))
 }
 \arguments{
-\item{pkg}{The name of the package in trouble}
+\item{pkg}{character(1) The name of the package in trouble}
 
 \item{to.mail}{The email of the CRAN report recipient}
 
-\item{emailTemplate}{The path to the email template.}
+\item{emailTemplate}{character(1) The path to the email template.}
 }
 \description{
 The \code{CRANstatus} function allows users to check the status of a package

@@ -5,11 +5,12 @@
 \title{Create and copy e-mail package notification template to clipboard}
 \usage{
 biocBuildEmail(pkg, version = c("release", "devel"),
-  emailTemplate = .getTemplatePath(), core.name = NULL,
-  core.email = NULL, core.id = NULL, textOnly = FALSE)
+  PS = character(1L), emailTemplate = .getTemplatePath(),
+  core.name = NULL, core.email = NULL, core.id = NULL,
+  textOnly = FALSE, dry.run = FALSE)
 }
 \arguments{
-\item{pkg}{The name of the package in trouble}
+\item{pkg}{character(1) The name of the package in trouble}
 
 \item{version}{character(1) the version number
 as used to access the online build report. For 
@@ -17,7 +18,13 @@ example, "3.6". The default is the "current version"
 as specified in \code{BiocManager::version}. Note
 that this is a character() variable, not a number.}
 
-\item{emailTemplate}{The path to the email template.}
+\item{PS}{character(1) Postscript, an additional note to the recipient of
+the email (i.e., the package maintainer)}
+
+\item{emailTemplate}{character(1) The path to the email template.}
+
+\item{dry.run}{logical(1) Display the email without sending to the recipient.
+It only works for HTML email reports and ignored when `textOnly=TRUE`}
 }
 \value{
 a character string of the email

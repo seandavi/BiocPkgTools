@@ -58,8 +58,15 @@
 #' convenience function returns the body of the email from a template
 #' within the package and provides a copy in the clipboard.
 #'
-#' @param pkg The name of the package in trouble
-#' @param emailTemplate The path to the email template.
+#' @param pkg character(1) The name of the package in trouble
+#'
+#' @param PS character(1) Postscript, an additional note to the recipient of
+#'     the email (i.e., the package maintainer)
+#'
+#' @param emailTemplate character(1) The path to the email template.
+#'
+#' @param dry.run logical(1) Display the email without sending to the recipient.
+#'     It only works for HTML email reports and ignored when `textOnly=TRUE`
 #'
 #' @inheritParams biocBuildReport
 #'
@@ -67,14 +74,14 @@
 #'
 #' @export
 biocBuildEmail <-
-    function(pkg, version = c("release", "devel"),
+    function(pkg, version = c("release", "devel"), PS = character(1L),
         emailTemplate = .getTemplatePath(), core.name = NULL,
-        core.email = NULL, core.id = NULL, textOnly = FALSE)
+        core.email = NULL, core.id = NULL, textOnly = FALSE, dry.run = FALSE)
 {
     stopifnot(
-        is.character(pkg),
-        identical(length(pkg), 1L),
-        !is.na(pkg),
+        is.character(pkg), identical(length(pkg), 1L),
+        is.character(PS), identical(length(PS), 1L),
+        !is.na(pkg), !is.na(PS),
         file.exists(emailTemplate)
     )
 
@@ -127,11 +134,14 @@ biocBuildEmail <-
     }, character(1L))
     repolink <- paste0(repolink, collapse = "\n")
 
+    if (nchar(PS))
+        PS <- paste0("P.S. ", PS)
+
     firstname <- vapply(strsplit(core.name, "\\s"), `[`, character(1L), 1L)
     mail <- paste0(readLines(emailTemplate), collapse = "\n")
     maildate <- format(Sys.time(), "%B %d, %Y")
     send <- sprintf(mail, pkg, core.name, maildate, pkg, mainName, pkg,
-        vers, repolink, firstname, core.name)
+        vers, repolink, PS, firstname, core.name)
 
     title <- sprintf("%s Bioconductor package", pkg)
 
@@ -147,15 +157,16 @@ biocBuildEmail <-
         tfile <- tempfile(fileext = ".Rmd")
         writeLines(send, tfile)
         biocmail <- blastula::render_email(tfile)
-        blastula::smtp_send(email = biocmail,
-            from = core.email, to = mainEmail, subject = title,
-            credentials = blastula::creds(
-                user = paste0(core.id, "@roswellpark.org"),
-                provider = "office365",
-                sender_name = core.name,
-                use_ssl = FALSE
+        if (!dry.run)
+            blastula::smtp_send(email = biocmail,
+                from = core.email, to = mainEmail, subject = title,
+                credentials = blastula::creds(
+                    user = paste0(core.id, "@roswellpark.org"),
+                    provider = "office365",
+                    sender_name = core.name,
+                    use_ssl = FALSE
+                )
             )
-        )
         return(biocmail)
     }
 }
