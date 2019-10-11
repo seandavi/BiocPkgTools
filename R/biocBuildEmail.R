@@ -51,9 +51,48 @@
     list(core.name = core.name, core.email = core.email, core.id = core.id)
 }
 
-#' Create and copy e-mail package notification template to clipboard
+.sentStatus <- function(recipient, pkg, date, dry.run) {
+    if (dry.run) return(FALSE)
+    bfc <- .get_cache()
+    mailinfo <- data.frame(maintainer = recipient,
+        package = pkg, dateSent = date, stringsAsFactors = FALSE)
+
+    ## first build data.frame logger
+    rid <- BiocFileCache::bfcquery(bfc, "email.log", "rname", exact = TRUE)$rid
+    if (!length(rid)) {
+        logpath <- BiocFileCache::bfcnew(bfc, "email.log", ext = ".rda")
+        metainfo <- data.frame(maintainer = character(), package = character(),
+            dateSent = character(), stringsAsFactors = FALSE)
+        metainfo <- do.call(rbind.data.frame, list(metainfo, mailinfo))
+        save(metainfo, file = logpath)
+        FALSE
+    } else {
+        logpath <- BiocFileCache::bfcrpath(bfc, rids = rid)
+        dataenv <- new.env(parent = emptyenv())
+        load(logpath, dataenv)
+        metainfo <- dataenv[["metainfo"]]
+        newinfo <- do.call(rbind.data.frame, list(metainfo, mailinfo))
+        anydups <- anyDuplicated(newinfo)
+        if (!anyDuplicated(newinfo)) {
+            metainfo <- newinfo
+            save(metainfo, file = logpath)
+            FALSE
+        } else {
+            TRUE
+        }
+}
+
+
+
+
+}
+
+#' @rdname biocBuildEmail
 #'
-#' The \code{biocBuildEmail} function provides a template for notifying
+#' @title Create and copy e-mail package notification template to clipboard
+#'
+#' @description
+#'     The \code{biocBuildEmail} function provides a template for notifying
 #' maintainers of errors in the Bioconductor Build System (BBS). This
 #' convenience function returns the body of the email from a template
 #' within the package and provides a copy in the clipboard.
@@ -76,7 +115,8 @@
 biocBuildEmail <-
     function(pkg, version = c("release", "devel"), PS = character(1L),
         emailTemplate = .getTemplatePath(), core.name = NULL,
-        core.email = NULL, core.id = NULL, textOnly = FALSE, dry.run = FALSE)
+        core.email = NULL, core.id = NULL, textOnly = FALSE,
+        dry.run = TRUE, resend = FALSE)
 {
     stopifnot(
         is.character(pkg), identical(length(pkg), 1L),
@@ -141,9 +181,12 @@ biocBuildEmail <-
     mail <- paste0(readLines(emailTemplate), collapse = "\n")
     maildate <- format(Sys.time(), "%B %d, %Y")
     send <- sprintf(mail, pkg, core.name, maildate, pkg, mainName, pkg,
-        vers, repolink, PS, firstname, core.name)
+        vers, repolink, PS, firstname)
 
     title <- sprintf("%s Bioconductor package", pkg)
+    sent_status <- .sentStatus(mainEmail, pkg, maildate, dry.run)
+    if (dry.run)
+        message("Message not sent: Set 'dry.run=FALSE'")
 
     if (textOnly) {
         send <- strsplit(send, "---")[[1L]][[4L]]
@@ -157,16 +200,35 @@ biocBuildEmail <-
         tfile <- tempfile(fileext = ".Rmd")
         writeLines(send, tfile)
         biocmail <- blastula::render_email(tfile)
-        if (!dry.run)
+        if (!dry.run && !sent_status) {
             blastula::smtp_send(email = biocmail,
                 from = core.email, to = mainEmail, subject = title,
-                credentials = blastula::creds(
-                    user = paste0(core.id, "@roswellpark.org"),
-                    provider = "office365",
-                    sender_name = core.name,
-                    use_ssl = FALSE
-                )
+                credentials =
+                    blastula::creds(
+                        user = paste0(core.id, "@roswellpark.org"),
+                        provider = "office365",
+                        sender_name = core.name,
+                        use_ssl = FALSE
+                    )
             )
+        }
         return(biocmail)
     }
+}
+
+#' @name biocBuildEmail
+#'
+#' @section sentHistory: Check the history of emails sent
+#'
+#' @export
+sentHistory <- function() {
+    bfc <- .get_cache()
+    ## first build data.frame logger
+    rid <- BiocFileCache::bfcquery(bfc, "email.log", "rname", exact = TRUE)$rid
+    if (!length(rid))
+        stop("No log available. Send some emails.")
+
+    minienv <- new.env(parent = emptyenv())
+    load(BiocFileCache::bfcrpath(bfc, rids = rid), env = minienv)
+    minienv[["metainfo"]]
 }

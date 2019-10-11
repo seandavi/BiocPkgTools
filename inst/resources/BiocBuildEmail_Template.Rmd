@@ -16,7 +16,7 @@ output:
 ---
 
 
-Dear %s, 
+Dear %s,
 
 I am contacting you concerning the `%s` package, on the %s
 branch of Bioconductor, for which you are listed as the maintainer.
@@ -38,8 +38,7 @@ Regards,
 ---
 
 <footer>
-<p>%s
-<br>Bioconductor Core Team
+<p>Bioconductor Core Team
 <br>Roswell Park Comprehensive Cancer Center
 <br>Dept. of Biostatistics & Bioinformatics
 <br>Elm & Carlton Streets

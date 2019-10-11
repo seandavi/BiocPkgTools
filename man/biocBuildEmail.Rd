@@ -2,12 +2,15 @@
 % Please edit documentation in R/biocBuildEmail.R
 \name{biocBuildEmail}
 \alias{biocBuildEmail}
+\alias{sentHistory}
 \title{Create and copy e-mail package notification template to clipboard}
 \usage{
 biocBuildEmail(pkg, version = c("release", "devel"),
   PS = character(1L), emailTemplate = .getTemplatePath(),
   core.name = NULL, core.email = NULL, core.id = NULL,
-  textOnly = FALSE, dry.run = FALSE)
+  textOnly = FALSE, dry.run = TRUE, resend = FALSE)
+
+sentHistory()
 }
 \arguments{
 \item{pkg}{character(1) The name of the package in trouble}
@@ -35,3 +38,7 @@ maintainers of errors in the Bioconductor Build System (BBS). This
 convenience function returns the body of the email from a template
 within the package and provides a copy in the clipboard.
 }
+\section{sentHistory}{
+ Check the history of emails sent
+}
+
