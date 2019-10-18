@@ -26,9 +26,9 @@
 
 .getUserInfo <- function(core.name = NULL, core.email = NULL, core.id = NULL) {
     bfc <- .get_cache()
-    rid <- BiocFileCache::bfcquery(bfc, "userinfo", "rname", exact = TRUE)$rid
+    rid <- BiocFileCache::bfcquery(bfc, "user.info", "rname", exact = TRUE)$rid
     if (!length(rid))
-        userfile <- BiocFileCache::bfcnew(bfc, "userinfo", ext = ".txt")
+        userfile <- BiocFileCache::bfcnew(bfc, "user.info", ext = ".txt")
     else
         userfile <- BiocFileCache::bfcrpath(bfc, rids = rid)
 
@@ -51,40 +51,44 @@
     list(core.name = core.name, core.email = core.email, core.id = core.id)
 }
 
-.sentStatus <- function(recipient, pkg, date, dry.run) {
-    if (dry.run) return(FALSE)
+.getMailLog <- function() {
     bfc <- .get_cache()
-    mailinfo <- data.frame(maintainer = recipient,
-        package = pkg, dateSent = date, stringsAsFactors = FALSE)
-
-    ## first build data.frame logger
     rid <- BiocFileCache::bfcquery(bfc, "email.log", "rname", exact = TRUE)$rid
     if (!length(rid)) {
         logpath <- BiocFileCache::bfcnew(bfc, "email.log", ext = ".rda")
-        metainfo <- data.frame(maintainer = character(), package = character(),
-            dateSent = character(), stringsAsFactors = FALSE)
-        metainfo <- do.call(rbind.data.frame, list(metainfo, mailinfo))
+        metainfo <- data.frame(maintainer = character(), email = character(),
+            package = character(), dateSent = character(),
+            stringsAsFactors = FALSE)
         save(metainfo, file = logpath)
-        FALSE
     } else {
         logpath <- BiocFileCache::bfcrpath(bfc, rids = rid)
-        dataenv <- new.env(parent = emptyenv())
-        load(logpath, dataenv)
-        metainfo <- dataenv[["metainfo"]]
-        newinfo <- do.call(rbind.data.frame, list(metainfo, mailinfo))
-        anydups <- anyDuplicated(newinfo)
-        if (!anyDuplicated(newinfo)) {
-            metainfo <- newinfo
-            save(metainfo, file = logpath)
-            FALSE
-        } else {
-            TRUE
-        }
+    }
+    logpath
 }
 
+.checkEntry <- function(logloc, mainname, mainemail, pkg, date, dry.run) {
+    if (dry.run) return(FALSE)
+    mailinfo <- data.frame(maintainer = mainname, email = mainemail,
+        package = pkg, dateSent = date, stringsAsFactors = FALSE)
 
+    dataenv <- new.env(parent = emptyenv())
+    load(logloc, dataenv)
+    metainfo <- dataenv[["metainfo"]]
+    newinfo <- do.call(rbind.data.frame, list(metainfo, mailinfo))
 
+    anyDuplicated(newinfo)
+}
 
+.addEntry <- function(logloc, mainname, mainemail, pkg, date) {
+    mailinfo <- data.frame(maintainer = mainname, email = mainemail,
+        package = pkg, dateSent = date, stringsAsFactors = FALSE)
+
+    dataenv <- new.env(parent = emptyenv())
+    load(logloc, dataenv)
+    metainfo <- dataenv[["metainfo"]]
+    metainfo <- do.call(rbind.data.frame, list(metainfo, mailinfo))
+
+    save(metainfo, file = logloc)
 }
 
 #' @rdname biocBuildEmail
@@ -155,8 +159,8 @@ biocBuildEmail <-
         stop("Package not found in Bioconductor repository")
     mainInfo <- pkgMeta[["Maintainer"]][[1L]]
 
-    mainName <- vapply(mainInfo, .nameCut, character(1L))
-    mainEmail <- vapply(mainInfo, .emailCut, character(1L))
+    mainName <- unname(vapply(mainInfo, .nameCut, character(1L)))
+    mainEmail <- unname(vapply(mainInfo, .emailCut, character(1L)))
 
     if (length(mainName) > 1L)
         mainName <- paste0(mainName, collapse = " & ")
@@ -184,7 +188,9 @@ biocBuildEmail <-
         vers, repolink, PS, firstname)
 
     title <- sprintf("%s Bioconductor package", pkg)
-    sent_status <- .sentStatus(mainEmail, pkg, maildate, dry.run)
+    logfile <- .getMailLog()
+    sent_status <- .checkEntry(logfile, mainName, mainEmail, pkg, maildate, dry.run)
+
     if (dry.run)
         message("Message not sent: Set 'dry.run=FALSE'")
 
@@ -211,6 +217,7 @@ biocBuildEmail <-
                         use_ssl = FALSE
                     )
             )
+            .addEntry(logfile, mainName, mainEmail, pkg, maildate)
         }
         return(biocmail)
     }
