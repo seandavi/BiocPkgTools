@@ -80,6 +80,7 @@ biocPkgList = function(version = BiocManager::version(), repo='BioCsoft',
                 'Enhances', 'vignettes', 'vignetteTitles', 'suggestsMe',
                 'Maintainer', 'biocViews', 'Archs', 'linksToMe', 'LinkingTo',
                 'Rfiles')
+    commaCols = intersect(commaCols, colnames(ret))
     for(commaCol in commaCols) {
         ret[[commaCol]] = str_split(ret[[commaCol]],'\\s?,\\s?')
     }
