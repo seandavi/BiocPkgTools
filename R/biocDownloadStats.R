@@ -54,6 +54,6 @@ firstInBioc = function(download_stats) {
     filter(Month!='all') %>%
     group_by(Package) %>%
     # thanks: https://stackoverflow.com/questions/43832434/arrange-within-a-group-with-dplyr
-    top_n(1, desc(Date)) %>%
+    top_n(1, desc::desc(Date)) %>%
     collect()
 }

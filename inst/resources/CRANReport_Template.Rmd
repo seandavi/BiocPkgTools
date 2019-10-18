@@ -1,0 +1,21 @@
+---
+title: "%s CRAN Package Report"
+date: "%s"
+output:
+  BiocStyle::html_document:
+    toc: false
+    number_sections: false
+---
+
+## Package: %s
+
+---
+
+Please be advised that the `%s` CRAN package has at least one
+error in the build results. Please see the status table below:
+
+```{r echo = FALSE, results='asis'}
+knitr::kable(%s, caption = "CRAN Build Report")
+```
+
+---
