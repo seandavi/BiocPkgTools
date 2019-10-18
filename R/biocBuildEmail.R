@@ -24,7 +24,7 @@
     )
 }
 
-.getUserInfo <- function(core.name = NULL, core.email = NULL, core.id = NULL) {
+.getUserInfo <- function(core.name, core.email, core.id) {
     bfc <- .get_cache()
     rid <- BiocFileCache::bfcquery(bfc, "user.info", "rname", exact = TRUE)$rid
     if (!length(rid))
@@ -38,7 +38,8 @@
         if (is.null(core.email))
             core.email <- readline("What is your core-team email? ")
         if (is.null(core.id))
-            core.id <- readline("What is your Roswell Park employee ID (matches ^[A-Z]{2}[0-9]{5})?  ")
+            core.id <- readline(paste0("What is your Roswell Park employee ID",
+                " (matches ^[A-Z]{2}[0-9]{5})?  "))
 
         writeLines(c(core.name, core.email, core.id), con = userfile)
         message("Saved data to: ", pkgToolsCache())
@@ -57,7 +58,7 @@
     if (!length(rid)) {
         logpath <- BiocFileCache::bfcnew(bfc, "email.log", ext = ".rda")
         metainfo <- data.frame(maintainer = character(), email = character(),
-            package = character(), dateSent = character(),
+            package = character(), dateSent = character(), times = integer(),
             stringsAsFactors = FALSE)
         save(metainfo, file = logpath)
     } else {
@@ -69,24 +70,36 @@
 .checkEntry <- function(logloc, mainname, mainemail, pkg, date, dry.run) {
     if (dry.run) return(FALSE)
     mailinfo <- data.frame(maintainer = mainname, email = mainemail,
-        package = pkg, dateSent = date, stringsAsFactors = FALSE)
+        package = pkg, dateSent = date, times = 1L, stringsAsFactors = FALSE)
 
     dataenv <- new.env(parent = emptyenv())
     load(logloc, dataenv)
     metainfo <- dataenv[["metainfo"]]
     newinfo <- do.call(rbind.data.frame, list(metainfo, mailinfo))
 
-    anyDuplicated(newinfo)
+    anyDuplicated(newinfo[, names(newinfo) != "times"])
 }
 
-.addEntry <- function(logloc, mainname, mainemail, pkg, date) {
+.addEntry <- function(logloc, mainname, mainemail, pkg, date, resend) {
     mailinfo <- data.frame(maintainer = mainname, email = mainemail,
-        package = pkg, dateSent = date, stringsAsFactors = FALSE)
+        package = pkg, dateSent = date, times = 1L, stringsAsFactors = FALSE)
 
     dataenv <- new.env(parent = emptyenv())
     load(logloc, dataenv)
     metainfo <- dataenv[["metainfo"]]
-    metainfo <- do.call(rbind.data.frame, list(metainfo, mailinfo))
+
+    impcols <- names(metainfo)[names(metainfo) != "times"]
+    bound <- do.call(rbind.data.frame, list(metainfo, mailinfo))
+
+    if (resend) {
+        dup <- duplicated(bound[, impcols], fromLast = TRUE)
+        if (!any(dup))
+            stop("'resend' used in the wrong context")
+        dup <- dup[-length(dup)]
+        metainfo[dup, "times"] <- metainfo[dup, "times"] + 1L
+    } else {
+        metainfo <- do.call(rbind.data.frame, list(metainfo, mailinfo))
+    }
 
     save(metainfo, file = logloc)
 }
@@ -103,16 +116,31 @@
 #'
 #' @param pkg character(1) The name of the package in trouble
 #'
+#' @param version character() A vector indicating which version of Bioconductor
+#'     the package is failing in (either 'release' or 'devel'; defaults to both)
+#'
 #' @param PS character(1) Postscript, an additional note to the recipient of
 #'     the email (i.e., the package maintainer)
 #'
-#' @param emailTemplate character(1) The path to the email template.
+#' @param emailTemplate character(1) The path to the email template. The default
+#'     path lies in the 'inst' package folder.
+#'
+#' @param core.name character(1) The full name of the core team member
+#'
+#' @param core.email character(1) The Roswell Park email of the core team
+#'     member
+#'
+#' @param core.id character(1) The internal identifier for the Roswell employee.
+#'     This ID usually matches `^[A-Z]{2}[0-9]{5}` for more recent identifiers.
+#'
+#' @param textOnly logical(1) Whether to return the text of the email only.
+#'     This avoids the use of the 'blastula' package and adds the text to the
+#'     system clipboard if the `clipr` package is installed (default: FALSE)
 #'
 #' @param dry.run logical(1) Display the email without sending to the recipient.
 #'     It only works for HTML email reports and ignored when `textOnly=TRUE`
 #'
-#' @inheritParams biocBuildReport
-#'
+#' @param resend logical(1) Whether to force a resend of the email
 #' @return a character string of the email
 #'
 #' @export
@@ -189,7 +217,9 @@ biocBuildEmail <-
 
     title <- sprintf("%s Bioconductor package", pkg)
     logfile <- .getMailLog()
-    sent_status <- .checkEntry(logfile, mainName, mainEmail, pkg, maildate, dry.run)
+    sent_status <- .checkEntry(logfile, mainName, mainEmail, pkg, maildate,
+        dry.run)
+    sendagain <- (sent_status && resend)
 
     if (dry.run)
         message("Message not sent: Set 'dry.run=FALSE'")
@@ -217,7 +247,7 @@ biocBuildEmail <-
                         use_ssl = FALSE
                     )
             )
-            .addEntry(logfile, mainName, mainEmail, pkg, maildate)
+            .addEntry(logfile, mainName, mainEmail, pkg, maildate, sendagain)
         }
         return(biocmail)
     }

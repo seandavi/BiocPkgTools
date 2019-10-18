@@ -11,9 +11,13 @@ CRANstatus(pkg, core.email = NULL,
 \arguments{
 \item{pkg}{character(1) The name of the package in trouble}
 
+\item{core.email}{character(1) The Roswell Park email of the core team
+member}
+
 \item{to.mail}{The email of the CRAN report recipient}
 
-\item{emailTemplate}{character(1) The path to the email template.}
+\item{emailTemplate}{character(1) The path to the email template. The default
+path lies in the 'inst' package folder.}
 }
 \description{
 The \code{CRANstatus} function allows users to check the status of a package
