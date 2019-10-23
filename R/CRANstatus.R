@@ -9,16 +9,20 @@
 #'
 #' @export
 CRANstatus <-
-    function(pkg, core.email = NULL, to.mail = "maintainer@bioconductor.org",
+    function(pkg, core.name = NULL, core.email = NULL, core.id = NULL,
+        to.mail = "maintainer@bioconductor.org", dry.run = TRUE,
         emailTemplate = .getTemplatePath("cranreport")) {
 
     stopifnot(is.character(pkg), identical(length(pkg), 1L), !is.na(pkg))
 
-    if (!requireNamespace("blastula"))
+    if (!requireNamespace("blastula", quietly = TRUE))
         stop("Install the 'blastula' package to send HTML emails or use\n",
             "  'textOnly=TRUE'")
+    if (!requireNamespace("kableExtra", quietly = TRUE))
+        stop("Install the 'kableExtra' package to create HTML tables")
 
-    core.list <- .getUserInfo(core.email = core.email)
+    core.list <- .getUserInfo(core.email = core.email, core.name = core.name,
+        core.id = core.id)
     core.name <- core.list[["core.name"]]
     core.email <- core.list[["core.email"]]
     core.id <- core.list[["core.id"]]
@@ -36,10 +40,10 @@ CRANstatus <-
     else
         htmlfile <- BiocFileCache::bfcrpath(bfc, rids = rid)
 
-    updater <- bfcneedsupdate(bfc, names(htmlfile))
+    updater <- BiocFileCache::bfcneedsupdate(bfc, names(htmlfile))
 
     if (updater)
-        bfcdownload(bfc, names(htmlfile), ask = FALSE)
+        BiocFileCache::bfcdownload(bfc, names(htmlfile), ask = FALSE)
 
     html <- xml2::read_html(htmlfile)
     cran_results <- rvest::html_table(html)[[1L]]
@@ -55,17 +59,19 @@ CRANstatus <-
         titletext <- paste0(pkg, " has at least one ERROR")
         tfile <- tempfile(fileext = ".Rmd")
         writeLines(send, tfile)
-        repmail <- blastula::render_email(tfile)
-        blastula::smtp_send(email = repmail,
-            from = core.email, to = to.mail, subject = titletext,
-            credentials = creds(
-                user = paste0(core.id, "@roswellpark.org"),
-                provider = "office365",
-                sender_name = core.name,
-                use_ssl = FALSE
+        print(repmail <- blastula::render_email(tfile))
+        if (!dry.run) {
+            blastula::smtp_send(email = repmail,
+                from = core.email, to = to.mail, subject = titletext,
+                credentials = blastula::creds(
+                    user = paste0(core.id, "@roswellpark.org"),
+                    provider = "office365",
+                    sender_name = core.name,
+                    use_ssl = FALSE
+                )
             )
-        )
-        message("Email sent to: ", to.mail)
+            message("Email sent to: ", to.mail)
+        }
         c(OK = FALSE)
 
     } else {

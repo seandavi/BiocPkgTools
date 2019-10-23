@@ -141,6 +141,7 @@
 #'     It only works for HTML email reports and ignored when `textOnly=TRUE`
 #'
 #' @param resend logical(1) Whether to force a resend of the email
+#'
 #' @return a character string of the email
 #'
 #' @export

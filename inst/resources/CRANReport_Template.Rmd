@@ -14,8 +14,14 @@ output:
 Please be advised that the `%s` CRAN package has at least one
 error in the build results. Please see the status table below:
 
-```{r echo = FALSE, results='asis'}
-knitr::kable(%s, caption = "CRAN Build Report")
+```{r echo = FALSE, results='asis', out.width="\\maxwidth"}
+kableExtra::kable_styling(
+    knitr::kable(%s, caption = "CRAN Build Report",
+        align = "l", escape = FALSE
+    ),
+    bootstrap_options = c("hover", "striped", "responsive"),
+    full_width = FALSE
+)
 ```
 
 ---

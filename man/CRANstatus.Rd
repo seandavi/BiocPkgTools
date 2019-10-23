@@ -4,17 +4,25 @@
 \alias{CRANstatus}
 \title{Check the CRAN build report page and email a notification}
 \usage{
-CRANstatus(pkg, core.email = NULL,
-  to.mail = "maintainer@bioconductor.org",
+CRANstatus(pkg, core.name = NULL, core.email = NULL, core.id = NULL,
+  to.mail = "maintainer@bioconductor.org", dry.run = TRUE,
   emailTemplate = .getTemplatePath("cranreport"))
 }
 \arguments{
 \item{pkg}{character(1) The name of the package in trouble}
 
+\item{core.name}{character(1) The full name of the core team member}
+
 \item{core.email}{character(1) The Roswell Park email of the core team
 member}
 
+\item{core.id}{character(1) The internal identifier for the Roswell employee.
+This ID usually matches `^[A-Z]{2}[0-9]{5}` for more recent identifiers.}
+
 \item{to.mail}{The email of the CRAN report recipient}
+
+\item{dry.run}{logical(1) Display the email without sending to the recipient.
+It only works for HTML email reports and ignored when `textOnly=TRUE`}
 
 \item{emailTemplate}{character(1) The path to the email template. The default
 path lies in the 'inst' package folder.}
