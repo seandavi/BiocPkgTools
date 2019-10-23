@@ -24,4 +24,6 @@ kableExtra::kable_styling(
 )
 ```
 
+%s
+
 ---

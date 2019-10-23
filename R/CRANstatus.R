@@ -52,7 +52,7 @@ CRANstatus <-
 
     mail <- paste0(readLines(emailTemplate), collapse = "\n")
     maildate <- format(Sys.time(), "%B %d, %Y")
-    send <- sprintf(mail, pkg, maildate, pkg, pkg, "cran_results")
+    send <- sprintf(mail, pkg, maildate, pkg, pkg, "cran_results", URL)
 
     if ("ERROR" %in% toupper(status)) {
 
