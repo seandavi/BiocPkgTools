@@ -54,12 +54,9 @@ biocBuildReport <- function(version=as.character(BiocManager::version())) {
   
   dat = xml2::read_html(sprintf('http://bioconductor.org/checkResults/%s/bioc-LATEST/',version))
   
-  pkgnames = html_text(html_nodes(dat,xpath='/html/body/table[@class="mainrep"]/tr/td[@rowspan="3"]'))
-  # Note that bioc-3.9 has TWO mac builders, so the number of build rows
-  # is "4", not "3". 
-  if(length(pkgnames)==0) {
-    pkgnames = html_text(html_nodes(dat,xpath='/html/body/table[@class="mainrep"]/tr/td[@rowspan="4"]'))
-  }
+  rowspan = length(html_text(html_nodes(dat,xpath='/html/body/table[@class="node_specs"]/tr[@class!=""]')))
+  
+  pkgnames = html_text(html_nodes(dat,xpath=sprintf('/html/body/table[@class="mainrep"]/tr/td[@rowspan="%s"]',rowspan)))
   
   y = rex::re_matches(pkgnames,
                       rex(
@@ -78,6 +75,10 @@ biocBuildReport <- function(version=as.character(BiocManager::version())) {
   
   df = suppressMessages(y %>% left_join(z)) # just suppress "Joining by...."
   df = as_tibble(df)
+  if(nrow(df) == 0){
+    warning("No Bioconductor build report found.")
+    return(df)
+  }
   df[['bioc_version']]=version
   df[['last_changed_date']] = as.POSIXct(df[['last_changed_date']])
   attr(df,'last_changed_date') = as.POSIXct(df[['last_changed_date']][1])
