@@ -55,7 +55,9 @@ biocBuildReport <- function(version=as.character(BiocManager::version())) {
   dat = xml2::read_html(sprintf('http://bioconductor.org/checkResults/%s/bioc-LATEST/',version))
   
   rowspan = length(html_text(html_nodes(dat,xpath='/html/body/table[@class="node_specs"]/tr[@class!=""]')))
-  
+  if(rowspan > 5L || rowspan < 2L){
+    warning("Detected an unusual number of builders == ",rowspan," ... ")
+  }
   pkgnames = html_text(html_nodes(dat,xpath=sprintf('/html/body/table[@class="mainrep"]/tr/td[@rowspan="%s"]',rowspan)))
   
   y = rex::re_matches(pkgnames,
