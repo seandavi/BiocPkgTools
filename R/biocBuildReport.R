@@ -66,7 +66,8 @@ biocBuildReport <- function(version=as.character(BiocManager::version())) {
                         # matches .standard_regexps()$valid_package_name
                         capture(alpha,any_of(alnum,"."),alnum, name = "pkg"),
                         maybe(any_blanks),
-                        capture(except_any_of(any_alphas),name="version"),
+                        # matches .standard_regexps()$valid_package_version
+                        capture(between(group(digits,character_class(".-")),1,""),digits, name = "version"),
                         maybe(any_blanks),
                         capture(anything,name='author'),
                         "Last",anything,"Commit:",
