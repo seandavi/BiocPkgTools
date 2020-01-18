@@ -9,7 +9,7 @@ test_that("catch non-character version parameter ", {
 })
 
 test_that("nrow is correct", {
-  expect_equal(nrow(bioc3.5_build), 14913)
+  expect_equal(nrow(bioc3.5_build), 15003)
 })
 
 test_that("ncol is correct", {
