@@ -63,7 +63,8 @@ biocBuildReport <- function(version=as.character(BiocManager::version())) {
   y = rex::re_matches(pkgnames,
                       rex(
                         start,
-                        capture(any_alnums, name='pkg'),
+                        # matches .standard_regexps()$valid_package_name
+                        capture(alpha,any_of(alnum,"."),alnum, name = "pkg"),
                         maybe(any_blanks),
                         capture(except_any_of(any_alphas),name="version"),
                         maybe(any_blanks),
