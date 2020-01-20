@@ -9,9 +9,16 @@ checkMe = function(ver="devel", authorPattern="V.*Carey", includeOK = FALSE) {
  if (nrow(bad)>0) return(bad[,-c(3,4,5)]) else return(NULL)
 }
  
-chkURL = function(ver="devel", pack="BiocOncoTK",
-   node="malbec1", stage="buildsrc")
-  sprintf("https://bioconductor.org/checkResults/%s/bioc-LATEST/%s/%s-%s.html", ver, pack, node, stage)
+chkURL = function(ver="devel", result = "ERROR", pack="BiocOncoTK",
+   node="malbec1", stage="buildsrc"){
+  urls <- rep("",length(ver))
+  skipped <- result == "skipped"
+  urls[!skipped] <- sprintf("https://bioconductor.org/checkResults/%s/bioc-LATEST/%s/%s-%s.html", 
+                            ver[!skipped], pack[!skipped], node[!skipped], stage[!skipped])
+  urls[skipped] <- sprintf("https://bioconductor.org/checkResults/%s/bioc-LATEST/%s/", 
+                           ver[skipped], pack[skipped])
+  urls
+}
 
 #' generate hyperlinked HTML for build reports for Bioc packages
 #'
@@ -42,7 +49,8 @@ problemPage = function(authorPattern="V.*Carey", ver="devel", includeOK = FALSE)
     mm = checkMe(authorPattern=authorPattern, ver=ver, includeOK = includeOK)
     nn = nrow(mm)
     if (is.null(nn)) stop("all packages fine")
-    cc = chkURL(mm[["bioc_version"]], mm[["pkg"]], mm[["node"]], mm[["stage"]])
+    cc = chkURL(mm[["bioc_version"]], mm[["result"]], mm[["pkg"]], mm[["node"]],
+                mm[["stage"]])
     hr = lapply(seq_len(nrow(mm)), function(x)
         htmltools::a(mm[x, "pkg"], href=cc[[x]]))
     col1 = unlist(lapply(hr, as.character))
