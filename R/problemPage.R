@@ -12,7 +12,7 @@ checkMe = function(ver="devel", authorPattern="V.*Carey", includeOK = FALSE) {
 chkURL = function(ver="devel", result = "ERROR", pack="BiocOncoTK",
    node="malbec1", stage="buildsrc"){
   urls <- rep("",length(ver))
-  skipped <- result == "skipped"
+  skipped <- result %in% c("skipped","NA")
   urls[!skipped] <- sprintf("https://bioconductor.org/checkResults/%s/bioc-LATEST/%s/%s-%s.html", 
                             ver[!skipped], pack[!skipped], node[!skipped], stage[!skipped])
   urls[skipped] <- sprintf("https://bioconductor.org/checkResults/%s/bioc-LATEST/%s/", 
