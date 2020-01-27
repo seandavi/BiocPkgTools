@@ -7,7 +7,7 @@
 #' @importFrom magrittr %>%
 #' @importFrom utils read.table
 #' @importFrom tibble as_tibble
-#' 
+#'
 #' @return a \code{data.frame} of download stats for
 #' all bioconductor packages, in tidy format
 #'
@@ -26,32 +26,34 @@ biocDownloadStats = function() {
                     sep="\t", header = TRUE, stringsAsFactors = FALSE)
   tmp3$repo = 'ExperimentData'
   tmp = rbind(tmp,tmp2,tmp3)
-  tmp = as_tibble(tmp) %>% 
+  tmp = as_tibble(tmp) %>%
     mutate(Date = as.Date(paste(Year, Month, '01'), '%Y %b %d'))
   class(tmp) = c('bioc_downloads', class(tmp))
   tmp
 }
 
 #' When did a package enter Bioconductor?
-#' 
+#'
 #' This function uses the biocDownloadStats
 #' data to *approximate* when a package entered
 #' Bioconductor. Note that the download stats
 #' go back only to 2009.
-#' 
+#'
 #' @importFrom dplyr filter group_by top_n collect
-#' 
+#'
 #' @param download_stats a data.frame from \code{\link{biocDownloadStats}}
-#' 
-#' @example 
-#' dls = biocDownloadStats()
+#'
+#' @examples
+#'
+#' dls <- biocDownloadStats()
 #' tail(firstInBioc(dls))
+#'
 #' @export
 firstInBioc = function(download_stats) {
-  download_stats %>% 
+  download_stats %>%
     filter(Month!='all') %>%
     group_by(Package) %>%
     # thanks: https://stackoverflow.com/questions/43832434/arrange-within-a-group-with-dplyr
-    top_n(1, desc(Date)) %>%
+    top_n(1, desc::desc(Date)) %>%
     collect()
 }
