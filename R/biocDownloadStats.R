@@ -27,7 +27,8 @@ biocDownloadStats = function() {
   tmp3$repo = 'ExperimentData'
   tmp = rbind(tmp,tmp2,tmp3)
   tmp = as_tibble(tmp) %>% 
-    mutate(Date = as.Date(paste(Year, Month, '01'), '%Y %b %d'))
+    dplyr::mutate(Date = as.Date(paste(.data$Year, .data$Month, '01'), 
+                                 '%Y %b %d'))
   class(tmp) = c('bioc_downloads', class(tmp))
   tmp
 }
@@ -49,9 +50,9 @@ biocDownloadStats = function() {
 #' @export
 firstInBioc = function(download_stats) {
   download_stats %>% 
-    filter(Month!='all') %>%
-    group_by(Package) %>%
+    dplyr::filter(.data$Month!='all') %>%
+    dplyr::group_by(.data$Package) %>%
     # thanks: https://stackoverflow.com/questions/43832434/arrange-within-a-group-with-dplyr
-    top_n(1, desc(Date)) %>%
-    collect()
+    dplyr::top_n(1, dplyr::desc(.data$Date)) %>%
+    dplyr::collect()
 }

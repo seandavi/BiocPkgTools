@@ -35,6 +35,7 @@
 #' 
 #' @export
 biocBuildReport <- function(version=as.character(BiocManager::version())) {
+  requireNamespace("rex")
     if(!is.character(version)) {
         stop('version should be a character string representing the Bioconductor version, such as "3.6"')
     }
@@ -60,21 +61,21 @@ biocBuildReport <- function(version=as.character(BiocManager::version())) {
   }
   pkgnames = html_text(html_nodes(dat,xpath=sprintf('/html/body/table[@class="mainrep"]/tr/td[@rowspan="%s"]',rowspan)))
   
-  y = rex::re_matches(pkgnames,
-                      rex(
-                        start,
-                        # matches .standard_regexps()$valid_package_name
-                        capture(alpha,any_of(alnum,"."),alnum, name = "pkg"),
-                        maybe(any_blanks),
-                        # matches .standard_regexps()$valid_package_version
-                        capture(between(group(digits,character_class(".-")),1,""),digits, name = "version"),
-                        maybe(any_blanks),
-                        capture(anything,name='author'),
-                        "Last",anything,"Commit:",
-                        capture(anything,name="commit"),
-                        "Last",anything,'Changed',anything,"Date:",any_non_alnums,
-                        capture(any_of(list(digit,'-',blank,':')),name='last_changed_date')
-                      ))
+  y = re_matches(pkgnames,
+                 rex(
+                   start,
+                   # matches .standard_regexps()$valid_package_name
+                   capture(alpha,any_of(alnum,"."),alnum, name = "pkg"),
+                   maybe(any_blanks),
+                   # matches .standard_regexps()$valid_package_version
+                   capture(between(group(digits,character_class(".-")),1,""),digits, name = "version"),
+                   maybe(any_blanks),
+                   capture(anything,name='author'),
+                   "Last",anything,"Commit:",
+                   capture(anything,name="commit"),
+                   "Last",anything,'Changed',anything,"Date:",any_non_alnums,
+                   capture(any_of(list(digit,'-',blank,':')),name='last_changed_date')
+                 ))
   y = y[!is.na(y$pkg),]
   
   df = suppressMessages(y %>% left_join(z)) # just suppress "Joining by...."
@@ -89,4 +90,5 @@ biocBuildReport <- function(version=as.character(BiocManager::version())) {
   attr(df,'class') = c('biocBuildReport',class(df))
   df
 }
+
 

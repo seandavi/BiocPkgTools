@@ -5,7 +5,6 @@
   return(RBGL::transitive.closure(biocViewsVocab))
 }
 
-
 #' @importFrom graph edges nodes
 .biocChildToParent = function() {
   biocViewsTC = .computeBiocViewsTransitiveClosure()
@@ -81,7 +80,7 @@ biocPkgList = function(version = BiocManager::version(), repo='BioCsoft',
     viewsFileUrl = paste(repos[repo], 'VIEWS', sep = '/')
     con = url(viewsFileUrl)
     ret <- suppressWarnings(try(read.dcf(con), silent = TRUE))
-    if(is(ret,'try-error'))
+    if(methods::is(ret,'try-error'))
       stop('No dcf file found for repo ',repo,'(version ',version,') at ',
            viewsFileUrl,'. Check that the version is available.')
     ret = as.data.frame(ret, stringsAsFactors = FALSE)

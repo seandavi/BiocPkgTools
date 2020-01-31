@@ -22,6 +22,7 @@ Imports:
     BiocManager,
     biocViews,
     tibble,
+    methods,
     stringr,
     rvest,
     rex,
