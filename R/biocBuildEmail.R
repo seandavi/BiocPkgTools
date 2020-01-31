@@ -46,8 +46,10 @@ biocBuildEmail <-
     if (!requireNamespace("clipr", quietly = TRUE))
         stop("Install the 'clipr' package to use 'biocBuildEmail'")
 
-    listall <- biocPkgList()
-    pkgMeta <- listall[listall[["Package"]] == pkg, ]
+    listall <- biocPkgList(version = version)
+    pkgMeta <- listall[listall[["Package"]] %in% pkg, ]
+    if(nrow(pkgMeta) == 0L) stop("No pkg '",pkg,"' found on Bioconductor for ",
+                                 "version '",version,"'")
     mainInfo <- pkgMeta[["Maintainer"]][[1L]]
 
     mainName <- vapply(mainInfo, .nameCut, character(1L))
