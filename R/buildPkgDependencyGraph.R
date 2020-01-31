@@ -69,6 +69,7 @@
 #'   head()
 #' @export
 buildPkgDependencyDataFrame = function(dependencies = c('Depends','Imports', 'Suggests'), ...) {
+    dependencies <- match.arg(dependencies)
     x = biocPkgList(...)
     df = list()
     for(i in dependencies) {
