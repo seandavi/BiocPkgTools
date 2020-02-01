@@ -1,0 +1,47 @@
+---
+title: "%s Bioconductor Package Report"
+author:
+- name: "%s"
+  affiliation:
+  - Roswell Park Comprehensive Cancer Center, Buffalo, NY, USA
+date: "%s"
+output:
+  BiocStyle::html_document:
+    toc: false
+    number_sections: false
+---
+
+## Package: %s
+
+---
+
+
+Dear %s,
+
+I am contacting you concerning the `%s` package, on the %s
+branch of Bioconductor, for which you are listed as the maintainer.
+
+The latest build/check report shows that your package is failing on one or more
+platforms.
+Please resolve the issues for your package's continued inclusion in
+Bioconductor.
+
+%s
+
+Please let me know if you have any questions.
+
+%s
+
+Regards,
+<br>%s
+
+---
+
+<footer>
+<p>Bioconductor Core Team
+<br>Roswell Park Comprehensive Cancer Center
+<br>Dept. of Biostatistics & Bioinformatics
+<br>Elm & Carlton Streets
+<br>Buffalo, New York 14263
+</p>
+</footer>

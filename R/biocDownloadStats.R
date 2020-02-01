@@ -7,7 +7,7 @@
 #' @importFrom magrittr %>%
 #' @importFrom utils read.table
 #' @importFrom tibble as_tibble
-#' 
+#'
 #' @return a \code{data.frame} of download stats for
 #' all bioconductor packages, in tidy format
 #'
@@ -34,19 +34,21 @@ biocDownloadStats = function() {
 }
 
 #' When did a package enter Bioconductor?
-#' 
+#'
 #' This function uses the biocDownloadStats
 #' data to *approximate* when a package entered
 #' Bioconductor. Note that the download stats
 #' go back only to 2009.
-#' 
+#'
 #' @importFrom dplyr filter group_by top_n collect
-#' 
+#'
 #' @param download_stats a data.frame from \code{\link{biocDownloadStats}}
-#' 
-#' @example 
-#' dls = biocDownloadStats()
+#'
+#' @examples
+#'
+#' dls <- biocDownloadStats()
 #' tail(firstInBioc(dls))
+#'
 #' @export
 firstInBioc = function(download_stats) {
   download_stats %>% 
