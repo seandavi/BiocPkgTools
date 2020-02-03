@@ -47,8 +47,8 @@ biocBuildReport <- function(version=as.character(BiocManager::version())) {
     '#',
     capture(except_any_of('#'),name='node'),
     '#',
-    capture(except_any_of(blank,':'),name='stage'),
-    ':',blank,
+    capture(except_any_of(blank_pcre_utf8,':'),name='stage'),
+    ':',blank_pcre_utf8,
     capture(anything,name='result')
   ))
   
@@ -61,24 +61,20 @@ biocBuildReport <- function(version=as.character(BiocManager::version())) {
   }
   pkgnames = html_text(html_nodes(dat,xpath=sprintf('/html/body/table[@class="mainrep"]/tr/td[@rowspan="%s"]',rowspan)))
   
-  # FIX for pkgnames being UTF-8 encoded. Currently regexpr does not work with UTF-8 encoded
-  # characters
-  pkgnames <- gsub("\032", " ",suppressWarnings(stringi::stri_encode(pkgnames, from = "UTF-8", to="US-ASCII")))
-  
   y = re_matches(pkgnames,
                  rex(
                    start,
                    # matches .standard_regexps()$valid_package_name
                    capture(alpha,any_of(alnum,"."),alnum, name = "pkg"),
-                   maybe(any_blanks),
+                   maybe(blank_pcre_utf8),
                    # matches .standard_regexps()$valid_package_version
                    capture(between(group(digits,character_class(".-")),1,""),digits, name = "version"),
-                   maybe(any_blanks),
+                   maybe(blank_pcre_utf8),
                    capture(anything,name='author'),
                    "Last",anything,"Commit:",
                    capture(anything,name="commit"),
                    "Last",anything,'Changed',anything,"Date:",any_non_alnums,
-                   capture(any_of(list(digit,'-',blank,':')),name='last_changed_date')
+                   capture(any_of(list(digit,'-',blank_pcre_utf8,':')),name='last_changed_date')
                  ))
   y = y[!is.na(y$pkg),]
   
@@ -95,4 +91,4 @@ biocBuildReport <- function(version=as.character(BiocManager::version())) {
   df
 }
 
-
+blank_pcre_utf8 <- rex:::character_class("\\p{Zs}")
