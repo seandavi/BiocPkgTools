@@ -61,6 +61,10 @@ biocBuildReport <- function(version=as.character(BiocManager::version())) {
   }
   pkgnames = html_text(html_nodes(dat,xpath=sprintf('/html/body/table[@class="mainrep"]/tr/td[@rowspan="%s"]',rowspan)))
   
+  # FIX for pkgnames being UTF-8 encoded. Currently regexpr does not work with UTF-8 encoded
+  # characters
+  pkgnames <- gsub("\032", " ",suppressWarnings(stringi::stri_encode(pkgnames, from = "UTF-8", to="US-ASCII")))
+  
   y = re_matches(pkgnames,
                  rex(
                    start,
