@@ -2,6 +2,8 @@ checkMe = function(ver="devel", authorPattern="V.*Carey", includeOK = FALSE) {
  rep = biocBuildReport(ver)
  kp = grep(authorPattern, rep$author)
  mine = rep[kp,]
+ if(nrow(mine) == 0L) stop("Used authorPattern return zero results.",
+                           call. = FALSE)
  if(includeOK)
      bad = mine
  else
@@ -54,5 +56,6 @@ problemPage = function(authorPattern="V.*Carey", ver="devel", includeOK = FALSE)
     hr = lapply(seq_len(nrow(mm)), function(x)
         htmltools::a(mm[x, "pkg"], href=cc[[x]]))
     col1 = unlist(lapply(hr, as.character))
-    DT::datatable(data.frame(col1, mm[,-1], stringsAsFactors=FALSE), escape=FALSE)
+    DT::datatable(data.frame(package = col1, mm[,-1], stringsAsFactors=FALSE),
+                  escape=FALSE)
 }

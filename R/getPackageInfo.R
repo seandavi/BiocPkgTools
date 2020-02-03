@@ -12,6 +12,10 @@
 #' 
 #' @export
 getPackageInfo <- function(dir){
+    if(!dir.exists(file.path(dir)))
+        stop('dir "',dir,'" does not exist.')
+    if(!dir.exists(file.path(dir, "DESCRIPTION")))
+        stop('dir "',dir,'" does contain a DESCRIPTION file.')
     # the next line avoids warnings about unexported
     # functions. see: https://github.com/rstudio/learnr/commit/8cf2ad60993108079f38123300b23d96ef58bd4c
     db <- asNamespace('tools')$.read_description(file.path(dir, "DESCRIPTION"))

@@ -5,7 +5,6 @@
   return(RBGL::transitive.closure(biocViewsVocab))
 }
 
-
 #' @importFrom graph edges nodes
 .biocChildToParent = function() {
   biocViewsTC = .computeBiocViewsTransitiveClosure()
@@ -66,13 +65,25 @@
 #' @export
 biocPkgList = function(version = BiocManager::version(), repo='BioCsoft', 
                        addBiocViewParents = TRUE) {
+    if(!is.logical(addBiocViewParents) || 
+       !(addBiocViewParents %in% c(TRUE,FALSE))) 
+      stop('addBiocViewParents must be a single logical.')
+    if(!is.character(repo) || length(repo) > 1L )
+      stop('repo must contain a single character value.')
     # nasty hack here, but BiocManager::repositories throws errors for 
     # repositories not matching the current R version--counterproductive
     # for this function.
-    viewsFileUrl = paste(BiocManager:::.repositories(site_repository=NA, version = version)[repo],
-                         'VIEWS', sep = '/')
+    repos <- BiocManager:::.repositories(site_repository=NA, version = version)
+    if(!(repo %in% names(repos)))
+      stop('repo "',repo,'" not found in known repositories. Valid values for ',
+           'repo can be shown by running names(BiocManager::repositories()).')
+    viewsFileUrl = paste(repos[repo], 'VIEWS', sep = '/')
     con = url(viewsFileUrl)
-    ret = as.data.frame(read.dcf(con), stringsAsFactors = FALSE)
+    ret <- suppressWarnings(try(read.dcf(con), silent = TRUE))
+    if(methods::is(ret,'try-error'))
+      stop('No dcf file found for repo ',repo,'(version ',version,') at ',
+           viewsFileUrl,'. Check that the version is available.')
+    ret = as.data.frame(ret, stringsAsFactors = FALSE)
     close(con)
     # convert comma-delimted text columns into
     # list columns
