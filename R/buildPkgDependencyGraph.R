@@ -69,6 +69,7 @@
 #'   head()
 #' @export
 buildPkgDependencyDataFrame = function(dependencies = c('Depends','Imports', 'Suggests'), ...) {
+    dependencies <- match.arg(dependencies)
     x = biocPkgList(...)
     df = list()
     for(i in dependencies) {
@@ -168,9 +169,9 @@ buildPkgDependencyIgraph = function(pkgDepDF) {
 #'
 #' @export
 inducedSubgraphByPkgs = function(g, pkgs, pkg_color='red') {
-    pkgs = intersect(pkgs, names(V(g)))
-    g2 = induced_subgraph(g, v=pkgs)
-    V(g2)[pkgs]$color='red'
+    pkgs = intersect(pkgs, names(igraph::V(g)))
+    g2 = igraph::induced_subgraph(graph=g, vids=pkgs)
+    igraph::V(g2)[pkgs]$color='red'
     g2
 }
 
@@ -207,9 +208,9 @@ inducedSubgraphByPkgs = function(g, pkgs, pkg_color='red') {
 #'
 #' @export
 subgraphByDegree = function(g, pkg, degree=1, ...) {
-    stopifnot(is.character(pkg) & pkg %in% names(V(g)) & length(pkg)==1)
+    stopifnot(is.character(pkg) & pkg %in% names(igraph::V(g)) & length(pkg)==1)
     stopifnot(is.igraph(g))
-    d = distances(g, v=pkg, ...)
+    d = igraph::distances(graph=g, v=pkg, ...)
     d2 = d[1,d[1,]<= degree]
-    induced_subgraph(g, v=names(d2))
+    igraph::induced_subgraph(graph=g, vids=names(d2))
 }

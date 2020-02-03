@@ -25,3 +25,5 @@
 #' @docType package
 #' @name BiocPkgTools
 NULL
+
+rex::register_shortcuts("BiocPkgTools")
