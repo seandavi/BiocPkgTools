@@ -1,4 +1,4 @@
-context("githubURLParts")
+context("getPackageInfo")
 library(BiocPkgTools)
 
 test_that("getPackageInfo", {
