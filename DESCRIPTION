@@ -1,7 +1,7 @@
 Package: BiocPkgTools
 Type: Package
 Title: Collection of simple tools for learning about Bioc Packages
-Version: 1.5.3
+Version: 1.5.4
 Date: 2020-02-27
 Authors@R: c( 
     person("Shian", "Su", role=c("aut", "ctb"), email = "su.s@wehi.edu.au"),
@@ -26,6 +26,8 @@ Imports:
     desc,
     tibble,
     methods,
+    rlang,
+    tidyselect,
     stringi,
     stringr,
     rvest,
@@ -54,6 +56,6 @@ BugReports: https://github.com/seandavi/BiocPkgTools/issues/new
 URL: https://github.com/seandavi/BiocPkgTools
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.0
 SystemRequirements: mailsend-go
 biocViews: Software, Infrastructure

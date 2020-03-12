@@ -4,8 +4,11 @@
 \alias{getBiocVignette}
 \title{Download a Bioconductor vignette}
 \usage{
-getBiocVignette(vignettePath, destfile = tempfile(),
-  version = BiocManager::version())
+getBiocVignette(
+  vignettePath,
+  destfile = tempfile(),
+  version = BiocManager::version()
+)
 }
 \arguments{
 \item{vignettePath}{character(1) the additional path information to get to the vignette}

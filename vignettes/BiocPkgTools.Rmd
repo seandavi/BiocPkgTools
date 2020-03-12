@@ -257,6 +257,77 @@ visNetwork(gv$nodes, gv$edges, width="100%") %>%
     visPhysics(stabilization=FALSE)
 ```
 
+# Dependency burden
+
+The dependency burden of a package, namely the amount of functionality that
+a given package is importing, is an important parameter to take into account
+during package development. A package may break because one or more of its
+dependencies have changed the part of the API our package is importing or
+this part has even broken. For this reason, it may be useful for package
+developers to quantify the dependency burden of a given package. To do that
+we should first gather all dependency information using the function
+`buildPkgDependencyDataFrame()` but setting the arguments to work with
+packages in Bioconductor and CRAN and dependencies categorised as `Depends`
+or `Imports`, which are the ones installed by default for a given package.
+
+```{r}
+library(BiocPkgTools)
+
+depdf <- buildPkgDependencyDataFrame(repo=c("BioCsoft", "CRAN"),
+                                     dependencies=c("Depends", "Imports"))
+depdf
+```
+
+Finally, we call the function `pkgDepMetrics()` to obtain different metrics
+on the dependency burden of a package we want to analyze, in the case below,
+the package `BiocPkgTools` itself:
+
+```{r}
+pkgDepMetrics("BiocPkgTools", depdf)
+```
+
+In this resulting table, rows correspond to dependencies and columns provide
+the following information:
+
+  * `ImportedAndUsed`: number of functionality calls imported and used in
+    the package.
+  * `Exported`: number of functionality calls exported by the dependency.
+  * `Usage`: (`ImportedAndUsed`x 100) / `Exported`. This value provides an
+    estimate of what fraction of the functionality of the dependency is
+    actually used in the given package.
+  * `DepOverlap`: Similarity between the dependency graph structure of the
+    given package and the one of the dependency in the corresponding row,
+    estimated as the [Jaccard index](https://en.wikipedia.org/wiki/Jaccard_index)
+    between the two sets of vertices of the corresponding graphs. Its values
+    goes between 0 and 1, where 0 indicates that no dependency is shared, while
+    1 indicates that the given package and the corresponding dependency depend
+    on an identical subset of packages.
+
+The reported information is ordered by the `Usage` column to facilitate the
+identification of dependencies for which the analyzed package is using a small
+fraction of their functionality and therefore, it could be easier remove them.
+To aid in that decision, the column `DepOverlap` reports the overlap of the
+dependency graph of each dependency with the one of the analyzed package. Here
+a value above, e.g., 0.5, could, albeit not necessarily, imply that removing
+that dependency could substantially lighten the dependency burden of the analyzed
+package.
+
+An `NA` value in the `ImportedAndUsed` column indicates that the function
+`pkgDepMetrics()` could not identify what functionality calls in the analyzed
+package are made to the dependency. This may happen because `pkgDepMetrics()`
+has failed to identify the corresponding calls, as it happens with imported
+constants such as `DNA_BASES` from `Biostrings`, or that although the given
+package is importing that dependency, none of its functionality is actually
+being used. In such a case, this dependency could be safely removed without
+any further change in the analyzed package.
+
+We can find out what actually functionality calls are we importing as follows:
+
+```{r}
+imp <- pkgDepImports("BiocPkgTools")
+imp %>% filter(pkg == "DT")
+```
+
 # Provenance
 
 ```{r}

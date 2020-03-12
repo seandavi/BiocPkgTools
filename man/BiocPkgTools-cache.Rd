@@ -6,8 +6,11 @@
 \alias{pkgToolsCache}
 \title{Manage cache for BiocPkgTools}
 \usage{
-setCache(directory = rappdirs::user_cache_dir("BiocPkgTools"),
-  verbose = TRUE, ask = interactive())
+setCache(
+  directory = rappdirs::user_cache_dir("BiocPkgTools"),
+  verbose = TRUE,
+  ask = interactive()
+)
 
 pkgToolsCache(...)
 }

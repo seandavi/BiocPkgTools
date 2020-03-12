@@ -4,8 +4,10 @@
 \alias{buildPkgDependencyDataFrame}
 \title{Work with Bioconductor package dependencies}
 \usage{
-buildPkgDependencyDataFrame(dependencies = c("Depends", "Imports",
-  "Suggests"), ...)
+buildPkgDependencyDataFrame(
+  dependencies = c("Depends", "Imports", "Suggests"),
+  ...
+)
 }
 \arguments{
 \item{dependencies}{character() vector including one or more

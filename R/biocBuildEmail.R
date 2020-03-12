@@ -268,6 +268,6 @@ sentHistory <- function() {
         stop("No log available. Send some emails.")
 
     minienv <- new.env(parent = emptyenv())
-    load(BiocFileCache::bfcrpath(bfc, rids = rid), env = minienv)
+    load(BiocFileCache::bfcrpath(bfc, rids = rid), envir = minienv)
     minienv[["metainfo"]]
 }

@@ -5,10 +5,18 @@
 \alias{sentHistory}
 \title{Create and copy e-mail package notification template to clipboard}
 \usage{
-biocBuildEmail(pkg, version = c("release", "devel"),
-  PS = character(1L), emailTemplate = .getTemplatePath(),
-  core.name = NULL, core.email = NULL, core.id = NULL,
-  textOnly = FALSE, dry.run = TRUE, resend = FALSE)
+biocBuildEmail(
+  pkg,
+  version = c("release", "devel"),
+  PS = character(1L),
+  emailTemplate = .getTemplatePath(),
+  core.name = NULL,
+  core.email = NULL,
+  core.id = NULL,
+  textOnly = FALSE,
+  dry.run = TRUE,
+  resend = FALSE
+)
 
 sentHistory()
 }

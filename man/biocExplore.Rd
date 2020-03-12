@@ -4,7 +4,7 @@
 \alias{biocExplore}
 \title{Explore Bioconductor packages interactively}
 \usage{
-biocExplore(top = 500, ...)
+biocExplore(top = 500L, ...)
 }
 \arguments{
 \item{top}{maximum number of packages displayed in any biocView}
