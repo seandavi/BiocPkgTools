@@ -6,8 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Generate needed information to create DOI from a package
-directory. — getPackageInfo • BiocPkgTools</title>
+<title>Report package imported functionality — pkgDepImports • BiocPkgTools</title>
 
 
 <!-- jquery -->
@@ -36,10 +35,8 @@ directory. — getPackageInfo • BiocPkgTools</title>
 
 
 
-<meta property="og:title" content="Generate needed information to create DOI from a package
-directory. — getPackageInfo" />
-<meta property="og:description" content="Generate needed information to create DOI from a package
-directory." />
+<meta property="og:title" content="Report package imported functionality — pkgDepImports" />
+<meta property="og:description" content="Function adapted from 'itdepends::dep_usage_pkg' at https://github.com/r-lib/itdepends" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -122,31 +119,31 @@ directory." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Generate needed information to create DOI from a package
-directory.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/seandavi/BiocPkgTools/blob/master/R/getPackageInfo.R'><code>R/getPackageInfo.R</code></a></small>
-    <div class="hidden name"><code>getPackageInfo.Rd</code></div>
+    <h1>Report package imported functionality</h1>
+    <small class="dont-index">Source: <a href='https://github.com/seandavi/BiocPkgTools/blob/master/R/pkgDependencyMetrics.R'><code>R/pkgDependencyMetrics.R</code></a></small>
+    <div class="hidden name"><code>pkgDepImports.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Generate needed information to create DOI from a package
-directory.</p>
+    <p>Function adapted from 'itdepends::dep_usage_pkg' at https://github.com/r-lib/itdepends</p>
     </div>
 
-    <pre class="usage"><span class='fu'>getPackageInfo</span>(<span class='no'>dir</span>)</pre>
+    <pre class="usage"><span class='fu'>pkgDepImports</span>(<span class='no'>pkg</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>dir</th>
-      <td><p>character(1) Path to package</p></td>
+      <th>pkg</th>
+      <td><p>character() name of the packge for which we want
+to obtain metrics on its dependency burden.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a <code>data.frame</code></p>
+    <p>a tidy data frame with different metrics on the
+package dependency burden.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

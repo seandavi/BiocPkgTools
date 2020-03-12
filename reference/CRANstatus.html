@@ -6,8 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Generate needed information to create DOI from a package
-directory. — getPackageInfo • BiocPkgTools</title>
+<title>Check the CRAN build report page and email a notification — CRANstatus • BiocPkgTools</title>
 
 
 <!-- jquery -->
@@ -36,10 +35,9 @@ directory. — getPackageInfo • BiocPkgTools</title>
 
 
 
-<meta property="og:title" content="Generate needed information to create DOI from a package
-directory. — getPackageInfo" />
-<meta property="og:description" content="Generate needed information to create DOI from a package
-directory." />
+<meta property="og:title" content="Check the CRAN build report page and email a notification — CRANstatus" />
+<meta property="og:description" content="The CRANstatus function allows users to check the status of a package
+and send an email report of any failures." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -122,38 +120,69 @@ directory." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Generate needed information to create DOI from a package
-directory.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/seandavi/BiocPkgTools/blob/master/R/getPackageInfo.R'><code>R/getPackageInfo.R</code></a></small>
-    <div class="hidden name"><code>getPackageInfo.Rd</code></div>
+    <h1>Check the CRAN build report page and email a notification</h1>
+    <small class="dont-index">Source: <a href='https://github.com/seandavi/BiocPkgTools/blob/master/R/CRANstatus.R'><code>R/CRANstatus.R</code></a></small>
+    <div class="hidden name"><code>CRANstatus.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Generate needed information to create DOI from a package
-directory.</p>
+    <p>The <code>CRANstatus</code> function allows users to check the status of a package
+and send an email report of any failures.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>getPackageInfo</span>(<span class='no'>dir</span>)</pre>
+    <pre class="usage"><span class='fu'>CRANstatus</span>(
+  <span class='no'>pkg</span>,
+  <span class='kw'>core.name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>core.email</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>core.id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>to.mail</span> <span class='kw'>=</span> <span class='st'>"maintainer@bioconductor.org"</span>,
+  <span class='kw'>dry.run</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>emailTemplate</span> <span class='kw'>=</span> <span class='fu'>.getTemplatePath</span>(<span class='st'>"cranreport"</span>)
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>dir</th>
-      <td><p>character(1) Path to package</p></td>
+      <th>pkg</th>
+      <td><p>character(1) The name of the package in trouble</p></td>
+    </tr>
+    <tr>
+      <th>core.name</th>
+      <td><p>character(1) The full name of the core team member</p></td>
+    </tr>
+    <tr>
+      <th>core.email</th>
+      <td><p>character(1) The Roswell Park email of the core team
+member</p></td>
+    </tr>
+    <tr>
+      <th>core.id</th>
+      <td><p>character(1) The internal identifier for the Roswell employee.
+This ID usually matches `^[A-Z]2[0-9]5` for more recent identifiers.</p></td>
+    </tr>
+    <tr>
+      <th>to.mail</th>
+      <td><p>The email of the CRAN report recipient</p></td>
+    </tr>
+    <tr>
+      <th>dry.run</th>
+      <td><p>logical(1) Display the email without sending to the recipient.
+It only works for HTML email reports and ignored when `textOnly=TRUE`</p></td>
+    </tr>
+    <tr>
+      <th>emailTemplate</th>
+      <td><p>character(1) The path to the email template. The default
+path lies in the 'inst' package folder.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>a <code>data.frame</code></p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
     </ul>
 
   </div>

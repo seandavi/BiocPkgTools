@@ -8,21 +8,25 @@
 
 <title>get bioconductor download stats — biocDownloadStats • BiocPkgTools</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,10 +34,11 @@
 
 
 
-<meta property="og:title" content="get bioconductor download stats — biocDownloadStats" />
 
+<meta property="og:title" content="get bioconductor download stats — biocDownloadStats" />
 <meta property="og:description" content="get bioconductor download stats" />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -57,6 +62,7 @@
   gtag('config', 'UA-93043521-1');
 </script>
 
+
   </head>
 
   <body>
@@ -73,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BiocPkgTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.4</span>
       </span>
     </div>
 
@@ -81,7 +87,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -92,7 +98,6 @@
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/seandavi/BiocPkgTools">
@@ -108,6 +113,7 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -119,54 +125,49 @@
     </div>
 
     <div class="ref-description">
-    
     <p>get bioconductor download stats</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>biocDownloadStats</span>()</pre>
-        
+
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>a <code>data.frame</code> of download stats for
 all bioconductor packages, in tidy format</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Note that bioconductor package download
 stats are not version-specific.</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>biocDownloadStats</span>()</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 418,288 x 6</span><span>
-#&gt;    Package  Year Month Nb_of_distinct_IPs Nb_of_downloads repo    
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>              </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> ABarray  </span><span style='text-decoration: underline;'>2</span><span>019 Jan                  104             210 Software
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> ABarray  </span><span style='text-decoration: underline;'>2</span><span>019 Feb                   80             164 Software
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> ABarray  </span><span style='text-decoration: underline;'>2</span><span>019 Mar                   96             122 Software
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> ABarray  </span><span style='text-decoration: underline;'>2</span><span>019 Apr                    0               0 Software
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> ABarray  </span><span style='text-decoration: underline;'>2</span><span>019 May                    0               0 Software
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> ABarray  </span><span style='text-decoration: underline;'>2</span><span>019 Jun                    0               0 Software
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> ABarray  </span><span style='text-decoration: underline;'>2</span><span>019 Jul                    0               0 Software
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> ABarray  </span><span style='text-decoration: underline;'>2</span><span>019 Aug                    0               0 Software
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> ABarray  </span><span style='text-decoration: underline;'>2</span><span>019 Sep                    0               0 Software
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> ABarray  </span><span style='text-decoration: underline;'>2</span><span>019 Oct                    0               0 Software
-#&gt; </span><span style='color: #949494;'># … with 418,278 more rows</span><span></div><div class='input'>
+    <pre class="examples"><div class='input'><span class='fu'>biocDownloadStats</span>()</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 464,633 x 7</span><span>
+#&gt;    Package  Year Month Nb_of_distinct_IPs Nb_of_downloads repo     Date      
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span>    
+#&gt; </span><span style='color: #555555;'> 1</span><span> ABarray  </span><span style='text-decoration: underline;'>2</span><span>020 Jan                   56             117 Software 2020-01-01
+#&gt; </span><span style='color: #555555;'> 2</span><span> ABarray  </span><span style='text-decoration: underline;'>2</span><span>020 Feb                   52             126 Software 2020-02-01
+#&gt; </span><span style='color: #555555;'> 3</span><span> ABarray  </span><span style='text-decoration: underline;'>2</span><span>020 Mar                   23              42 Software 2020-03-01
+#&gt; </span><span style='color: #555555;'> 4</span><span> ABarray  </span><span style='text-decoration: underline;'>2</span><span>020 Apr                    0               0 Software 2020-04-01
+#&gt; </span><span style='color: #555555;'> 5</span><span> ABarray  </span><span style='text-decoration: underline;'>2</span><span>020 May                    0               0 Software 2020-05-01
+#&gt; </span><span style='color: #555555;'> 6</span><span> ABarray  </span><span style='text-decoration: underline;'>2</span><span>020 Jun                    0               0 Software 2020-06-01
+#&gt; </span><span style='color: #555555;'> 7</span><span> ABarray  </span><span style='text-decoration: underline;'>2</span><span>020 Jul                    0               0 Software 2020-07-01
+#&gt; </span><span style='color: #555555;'> 8</span><span> ABarray  </span><span style='text-decoration: underline;'>2</span><span>020 Aug                    0               0 Software 2020-08-01
+#&gt; </span><span style='color: #555555;'> 9</span><span> ABarray  </span><span style='text-decoration: underline;'>2</span><span>020 Sep                    0               0 Software 2020-09-01
+#&gt; </span><span style='color: #555555;'>10</span><span> ABarray  </span><span style='text-decoration: underline;'>2</span><span>020 Oct                    0               0 Software 2020-10-01
+#&gt; </span><span style='color: #555555;'># … with 464,623 more rows</span><span></div><div class='input'>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -174,13 +175,16 @@ stats are not version-specific.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

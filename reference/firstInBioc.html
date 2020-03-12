@@ -6,8 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Generate needed information to create DOI from a package
-directory. — getPackageInfo • BiocPkgTools</title>
+<title>When did a package enter Bioconductor? — firstInBioc • BiocPkgTools</title>
 
 
 <!-- jquery -->
@@ -36,10 +35,11 @@ directory. — getPackageInfo • BiocPkgTools</title>
 
 
 
-<meta property="og:title" content="Generate needed information to create DOI from a package
-directory. — getPackageInfo" />
-<meta property="og:description" content="Generate needed information to create DOI from a package
-directory." />
+<meta property="og:title" content="When did a package enter Bioconductor? — firstInBioc" />
+<meta property="og:description" content="This function uses the biocDownloadStats
+data to *approximate* when a package entered
+Bioconductor. Note that the download stats
+go back only to 2009." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -122,38 +122,50 @@ directory." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Generate needed information to create DOI from a package
-directory.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/seandavi/BiocPkgTools/blob/master/R/getPackageInfo.R'><code>R/getPackageInfo.R</code></a></small>
-    <div class="hidden name"><code>getPackageInfo.Rd</code></div>
+    <h1>When did a package enter Bioconductor?</h1>
+    <small class="dont-index">Source: <a href='https://github.com/seandavi/BiocPkgTools/blob/master/R/biocDownloadStats.R'><code>R/biocDownloadStats.R</code></a></small>
+    <div class="hidden name"><code>firstInBioc.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Generate needed information to create DOI from a package
-directory.</p>
+    <p>This function uses the biocDownloadStats
+data to *approximate* when a package entered
+Bioconductor. Note that the download stats
+go back only to 2009.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>getPackageInfo</span>(<span class='no'>dir</span>)</pre>
+    <pre class="usage"><span class='fu'>firstInBioc</span>(<span class='no'>download_stats</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>dir</th>
-      <td><p>character(1) Path to package</p></td>
+      <th>download_stats</th>
+      <td><p>a data.frame from <code><a href='biocDownloadStats.html'>biocDownloadStats</a></code></p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a <code>data.frame</code></p>
-
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>
+<span class='no'>dls</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='biocDownloadStats.html'>biocDownloadStats</a></span>()
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>tail</a></span>(<span class='fu'>firstInBioc</span>(<span class='no'>dls</span>))</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 6 x 7</span><span>
+#&gt; </span><span style='color: #555555;'># Groups:   Package [6]</span><span>
+#&gt;   Package       Year Month Nb_of_distinct_I… Nb_of_downloads repo     Date      
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>             </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span>    
+#&gt; </span><span style='color: #555555;'>1</span><span> oct4          </span><span style='text-decoration: underline;'>2</span><span>019 Jan                   0               0 Experim… 2019-01-01
+#&gt; </span><span style='color: #555555;'>2</span><span> pwrEWAS.data  </span><span style='text-decoration: underline;'>2</span><span>019 Jan                   0               0 Experim… 2019-01-01
+#&gt; </span><span style='color: #555555;'>3</span><span> signatureSe…  </span><span style='text-decoration: underline;'>2</span><span>019 Jan                   0               0 Experim… 2019-01-01
+#&gt; </span><span style='color: #555555;'>4</span><span> tartare       </span><span style='text-decoration: underline;'>2</span><span>019 Jan                   0               0 Experim… 2019-01-01
+#&gt; </span><span style='color: #555555;'>5</span><span> WGSmapp       </span><span style='text-decoration: underline;'>2</span><span>020 Jan                   0               0 Experim… 2020-01-01
+#&gt; </span><span style='color: #555555;'>6</span><span> curatedAdip…  </span><span style='text-decoration: underline;'>2</span><span>020 Jan                   0               0 Experim… 2020-01-01</div><div class='input'>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

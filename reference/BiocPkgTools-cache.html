@@ -6,8 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Generate needed information to create DOI from a package
-directory. — getPackageInfo • BiocPkgTools</title>
+<title>Manage cache for BiocPkgTools — BiocPkgTools-cache • BiocPkgTools</title>
 
 
 <!-- jquery -->
@@ -36,10 +35,9 @@ directory. — getPackageInfo • BiocPkgTools</title>
 
 
 
-<meta property="og:title" content="Generate needed information to create DOI from a package
-directory. — getPackageInfo" />
-<meta property="og:description" content="Generate needed information to create DOI from a package
-directory." />
+<meta property="og:title" content="Manage cache for BiocPkgTools — BiocPkgTools-cache" />
+<meta property="og:description" content="Managing user data is important to allow use of email functions
+such as `biocBuildEmail` and made easy with `BiocFileCache`." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -122,38 +120,82 @@ directory." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Generate needed information to create DOI from a package
-directory.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/seandavi/BiocPkgTools/blob/master/R/getPackageInfo.R'><code>R/getPackageInfo.R</code></a></small>
-    <div class="hidden name"><code>getPackageInfo.Rd</code></div>
+    <h1>Manage cache for BiocPkgTools</h1>
+    <small class="dont-index">Source: <a href='https://github.com/seandavi/BiocPkgTools/blob/master/R/cache.R'><code>R/cache.R</code></a></small>
+    <div class="hidden name"><code>BiocPkgTools-cache.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Generate needed information to create DOI from a package
-directory.</p>
+    <p>Managing user data is important to allow use of email functions
+such as `biocBuildEmail` and made easy with `BiocFileCache`.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>getPackageInfo</span>(<span class='no'>dir</span>)</pre>
+    <pre class="usage"><span class='fu'>setCache</span>(
+  <span class='kw'>directory</span> <span class='kw'>=</span> <span class='kw pkg'>rappdirs</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/rappdirs/man/user_cache_dir.html'>user_cache_dir</a></span>(<span class='st'>"BiocPkgTools"</span>),
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>ask</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()
+)
+
+<span class='fu'>pkgToolsCache</span>(<span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>dir</th>
-      <td><p>character(1) Path to package</p></td>
+      <th>directory</th>
+      <td><p>The file location where the cache is located. Once set
+future downloads will go to this folder.</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>Whether to print descriptive messages</p></td>
+    </tr>
+    <tr>
+      <th>ask</th>
+      <td><p>logical (default TRUE when interactive session) Confirm the file
+location of the cache directory</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>For `cbioCache`, arguments passed to `setCache`</p></td>
+    </tr>
+    <tr>
+      <th>cancer_study_id</th>
+      <td><p>A single string from `studiesTable` associated
+with a study tarball</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="pkgtoolscache"><a class="anchor" href="#pkgtoolscache"></a>pkgToolsCache</h2>
 
-    <p>a <code>data.frame</code></p>
+    
+
+<p>Get the directory location of the cache. It will prompt the user to create
+a cache if not already created. A specific directory can be used via
+<code>setCache</code>.</p>
+    <h2 class="hasAnchor" id="setcache"><a class="anchor" href="#setcache"></a>setCache</h2>
+
+    
+
+<p>Specify the directory location of the data cache. By default, it will
+got to the user's home/.cache and "appname" directory as specified by
+user_cache_dir. (default appname: cBioPortalData)</p>
+    <h2 class="hasAnchor" id="removecache"><a class="anchor" href="#removecache"></a>removeCache</h2>
+
+    
+
+<p>Some files may become corrupt when downloading, this function allows
+the user to delete the tarball associated with a `cancer_study_id` in the
+cache.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
+      <li><a href="#pkgtoolscache">pkgToolsCache</a></li>
+      <li><a href="#setcache">setCache</a></li>
+      <li><a href="#removecache">removeCache</a></li>
     </ul>
 
   </div>

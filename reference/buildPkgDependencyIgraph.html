@@ -8,21 +8,25 @@
 
 <title>Work with package dependencies as a graph — buildPkgDependencyIgraph • BiocPkgTools</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,8 +34,8 @@
 
 
 
-<meta property="og:title" content="Work with package dependencies as a graph — buildPkgDependencyIgraph" />
 
+<meta property="og:title" content="Work with package dependencies as a graph — buildPkgDependencyIgraph" />
 <meta property="og:description" content="Package dependencies represent a directed
 graph (though Bioconductor dependencies are
 not an acyclic graph). This function simply
@@ -42,6 +46,7 @@ any tidy data frame with rows of (Package, dependency)
 pairs. Additional columns are added as igraph edge
 attributes (see graph_from_data_frame)." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -65,6 +70,7 @@ attributes (see graph_from_data_frame)." />
   gtag('config', 'UA-93043521-1');
 </script>
 
+
   </head>
 
   <body>
@@ -81,7 +87,7 @@ attributes (see graph_from_data_frame)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BiocPkgTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.4</span>
       </span>
     </div>
 
@@ -89,7 +95,7 @@ attributes (see graph_from_data_frame)." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -100,7 +106,6 @@ attributes (see graph_from_data_frame)." />
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/seandavi/BiocPkgTools">
@@ -116,6 +121,7 @@ attributes (see graph_from_data_frame)." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -127,7 +133,6 @@ attributes (see graph_from_data_frame)." />
     </div>
 
     <div class="ref-description">
-    
     <p>Package dependencies represent a directed
 graph (though Bioconductor dependencies are
 not an acyclic graph). This function simply
@@ -136,12 +141,11 @@ dependency data frame from a call to
 <code><a href='buildPkgDependencyDataFrame.html'>buildPkgDependencyDataFrame</a></code> or
 any tidy data frame with rows of (Package, dependency)
 pairs. Additional columns are added as igraph edge
-attributes (see <code><a href='https://www.rdocumentation.org/packages/igraph/topics/graph_from_data_frame'>graph_from_data_frame</a></code>).</p>
-    
+attributes (see <code><a href='https://rdrr.io/pkg/igraph/man/graph_from_data_frame.html'>graph_from_data_frame</a></code>).</p>
     </div>
 
     <pre class="usage"><span class='fu'>buildPkgDependencyIgraph</span>(<span class='no'>pkgDepDF</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -151,60 +155,74 @@ attributes (see <code><a href='https://www.rdocumentation.org/packages/igraph/to
 details.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>an igraph directed graph. See the igraph
 package for details of what can be done.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>See <code><a href='buildPkgDependencyDataFrame.html'>buildPkgDependencyDataFrame</a></code>,
-<code><a href='https://www.rdocumentation.org/packages/igraph/topics/graph_from_data_frame'>graph_from_data_frame</a></code>,
+<code><a href='https://rdrr.io/pkg/igraph/man/graph_from_data_frame.html'>graph_from_data_frame</a></code>,
 <code><a href='inducedSubgraphByPkgs.html'>inducedSubgraphByPkgs</a></code>, <code><a href='subgraphByDegree.html'>subgraphByDegree</a></code>,
-<code><a href='https://www.rdocumentation.org/packages/igraph/topics/igraph-es-indexing'>igraph-es-indexing</a></code>,
-<code><a href='https://www.rdocumentation.org/packages/igraph/topics/igraph-vs-indexing'>igraph-vs-indexing</a></code></p></div>
-    
+<code><a href='https://rdrr.io/pkg/igraph/man/igraph-es-indexing.html'>igraph-es-indexing</a></code>,
+<code><a href='https://rdrr.io/pkg/igraph/man/igraph-vs-indexing.html'>igraph-vs-indexing</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>igraph</span>)</div><div class='output co'>#&gt; <span class='message'></span>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>igraph</span>)</div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Attaching package: ‘igraph’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:dplyr’:</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    as_data_frame, groups, union</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:testthat’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    compare</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:stats’:</span>
+#&gt; <span class='message'>    as_data_frame, groups, union</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:stats’:</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    decompose, spectrum</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:base’:</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    union</span></div><div class='input'>
-<span class='no'>pkg_dep_df</span> <span class='kw'>=</span> <span class='fu'><a href='buildPkgDependencyDataFrame.html'>buildPkgDependencyDataFrame</a></span>()</div><div class='output co'>#&gt; <span class='warning'>Warning: data set ‘biocViewsVocab’ not found</span></div><div class='output co'>#&gt; <span class='error'>Error in nodes(g): object 'biocViewsVocab' not found</span></div><div class='input'>
+<span class='no'>pkg_dep_df</span> <span class='kw'>=</span> <span class='fu'><a href='buildPkgDependencyDataFrame.html'>buildPkgDependencyDataFrame</a></span>()
+
 <span class='co'># at this point, filter or join to manipulate</span>
 <span class='co'># dependency data frame as you see fit.</span>
 
-<span class='no'>g</span> <span class='kw'>=</span> <span class='fu'>buildPkgDependencyIgraph</span>(<span class='no'>pkg_dep_df</span>)</div><div class='output co'>#&gt; <span class='error'>Error in as.data.frame(d): object 'pkg_dep_df' not found</span></div><div class='input'><span class='no'>g</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'g' not found</span></div><div class='input'>
+<span class='no'>g</span> <span class='kw'>=</span> <span class='fu'>buildPkgDependencyIgraph</span>(<span class='no'>pkg_dep_df</span>)
+<span class='no'>g</span></div><div class='output co'>#&gt; IGRAPH e9cd3db DN-- 3292 28484 -- 
+#&gt; + attr: name (v/c), edgetype (e/c)
+#&gt; + edges from e9cd3db (vertex names):
+#&gt;  [1] a4       -&gt;a4Base        a4       -&gt;a4Preproc     a4       -&gt;a4Classif    
+#&gt;  [4] a4       -&gt;a4Core        a4       -&gt;a4Reporting   a4Base   -&gt;methods      
+#&gt;  [7] a4Base   -&gt;graphics      a4Base   -&gt;grid          a4Base   -&gt;Biobase      
+#&gt; [10] a4Base   -&gt;AnnotationDbi a4Base   -&gt;annaffy       a4Base   -&gt;mpm          
+#&gt; [13] a4Base   -&gt;genefilter    a4Base   -&gt;limma         a4Base   -&gt;multtest     
+#&gt; [16] a4Base   -&gt;glmnet        a4Base   -&gt;a4Preproc     a4Base   -&gt;a4Core       
+#&gt; [19] a4Base   -&gt;gplots        a4Classif-&gt;methods       a4Classif-&gt;a4Core       
+#&gt; [22] a4Classif-&gt;a4Preproc     a4Classif-&gt;MLInterfaces  a4Classif-&gt;ROCR         
+#&gt; + ... omitted several edges</div><div class='input'>
 <span class='co'># Look at nodes and edges</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/head'>head</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/igraph/topics/V'>V</a></span>(<span class='no'>g</span>)) <span class='co'># vertices</span></div><div class='output co'>#&gt; <span class='error'>Error in "igraph" %in% class(graph): object 'g' not found</span></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/head'>head</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/igraph/topics/E'>E</a></span>(<span class='no'>g</span>)) <span class='co'># edges</span></div><div class='output co'>#&gt; <span class='error'>Error in "igraph" %in% class(graph): object 'g' not found</span></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/igraph/man/V.html'>V</a></span>(<span class='no'>g</span>)) <span class='co'># vertices</span></div><div class='output co'>#&gt; + 6/3292 vertices, named, from e9cd3db:
+#&gt; [1] a4          a4Base      a4Classif   a4Core      a4Preproc   a4Reporting</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/igraph/man/E.html'>E</a></span>(<span class='no'>g</span>)) <span class='co'># edges</span></div><div class='output co'>#&gt; + 6/28484 edges from e9cd3db (vertex names):
+#&gt; [1] a4    -&gt;a4Base      a4    -&gt;a4Preproc   a4    -&gt;a4Classif  
+#&gt; [4] a4    -&gt;a4Core      a4    -&gt;a4Reporting a4Base-&gt;methods    </div><div class='input'>
 <span class='co'># subset graph by attributes</span>
 
 
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/head'>head</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sort'>sort</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/igraph/topics/degree'>degree</a></span>(<span class='no'>g</span>, <span class='kw'>mode</span><span class='kw'>=</span><span class='st'>'in'</span>), <span class='kw'>decreasing</span><span class='kw'>=</span><span class='fl'>TRUE</span>))</div><div class='output co'>#&gt; <span class='error'>Error in "igraph" %in% class(graph): object 'g' not found</span></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/head'>head</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/sort'>sort</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/igraph/topics/degree'>degree</a></span>(<span class='no'>g</span>, <span class='kw'>mode</span><span class='kw'>=</span><span class='st'>'out'</span>), <span class='kw'>decreasing</span><span class='kw'>=</span><span class='fl'>TRUE</span>))</div><div class='output co'>#&gt; <span class='error'>Error in "igraph" %in% class(graph): object 'g' not found</span></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/sort.html'>sort</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/igraph/man/degree.html'>degree</a></span>(<span class='no'>g</span>, <span class='kw'>mode</span><span class='kw'>=</span><span class='st'>'in'</span>), <span class='kw'>decreasing</span><span class='kw'>=</span><span class='fl'>TRUE</span>))</div><div class='output co'>#&gt;         R   methods     knitr     stats     utils BiocStyle 
+#&gt;      1437      1213      1045       939       782       700 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/sort.html'>sort</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/igraph/man/degree.html'>degree</a></span>(<span class='no'>g</span>, <span class='kw'>mode</span><span class='kw'>=</span><span class='st'>'out'</span>), <span class='kw'>decreasing</span><span class='kw'>=</span><span class='fl'>TRUE</span>))</div><div class='output co'>#&gt;    TCGAbiolinks         RnBeads           ELMER          pRoloc BiocCaseStudies 
+#&gt;              70              59              55              55              52 
+#&gt;    ChIPpeakAnno 
+#&gt;              52 </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -212,13 +230,16 @@ package for details of what can be done.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

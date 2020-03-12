@@ -6,8 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Generate needed information to create DOI from a package
-directory. — getPackageInfo • BiocPkgTools</title>
+<title>Report package dependency burden — pkgDepMetrics • BiocPkgTools</title>
 
 
 <!-- jquery -->
@@ -36,10 +35,8 @@ directory. — getPackageInfo • BiocPkgTools</title>
 
 
 
-<meta property="og:title" content="Generate needed information to create DOI from a package
-directory. — getPackageInfo" />
-<meta property="og:description" content="Generate needed information to create DOI from a package
-directory." />
+<meta property="og:title" content="Report package dependency burden — pkgDepMetrics" />
+<meta property="og:description" content="Elaborate a report on the dependency burden of a given package." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -122,31 +119,36 @@ directory." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Generate needed information to create DOI from a package
-directory.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/seandavi/BiocPkgTools/blob/master/R/getPackageInfo.R'><code>R/getPackageInfo.R</code></a></small>
-    <div class="hidden name"><code>getPackageInfo.Rd</code></div>
+    <h1>Report package dependency burden</h1>
+    <small class="dont-index">Source: <a href='https://github.com/seandavi/BiocPkgTools/blob/master/R/pkgDependencyMetrics.R'><code>R/pkgDependencyMetrics.R</code></a></small>
+    <div class="hidden name"><code>pkgDepMetrics.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Generate needed information to create DOI from a package
-directory.</p>
+    <p>Elaborate a report on the dependency burden of a given package.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>getPackageInfo</span>(<span class='no'>dir</span>)</pre>
+    <pre class="usage"><span class='fu'>pkgDepMetrics</span>(<span class='no'>pkg</span>, <span class='no'>depdf</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>dir</th>
-      <td><p>character(1) Path to package</p></td>
+      <th>pkg</th>
+      <td><p>character() name of the packge for which we want
+to obtain metrics on its dependency burden.</p></td>
+    </tr>
+    <tr>
+      <th>depdf</th>
+      <td><p>a tidy data frame with package dependency information
+obtained through the function <code><a href='buildPkgDependencyDataFrame.html'>buildPkgDependencyDataFrame</a></code></p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a <code>data.frame</code></p>
+    <p>a tidy data frame with different metrics on the
+package dependency burden.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

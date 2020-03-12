@@ -8,21 +8,25 @@
 
 <title>Get full bioc software package listing, with details — biocPkgList • BiocPkgTools</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,8 +34,8 @@
 
 
 
-<meta property="og:title" content="Get full bioc software package listing, with details — biocPkgList" />
 
+<meta property="og:title" content="Get full bioc software package listing, with details — biocPkgList" />
 <meta property="og:description" content="The BiocViews-generated VIEWS file is available
 for bioconductor release and devel repositories. It
 contains quite a bit more information from the
@@ -39,6 +43,7 @@ package DESCRIPTION files than the PACKAGES
 file. In particular, it contains biocViews annotations
 and URLs for vignettes and developer URLs." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -62,6 +67,7 @@ and URLs for vignettes and developer URLs." />
   gtag('config', 'UA-93043521-1');
 </script>
 
+
   </head>
 
   <body>
@@ -78,7 +84,7 @@ and URLs for vignettes and developer URLs." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BiocPkgTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.4</span>
       </span>
     </div>
 
@@ -86,7 +92,7 @@ and URLs for vignettes and developer URLs." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -97,7 +103,6 @@ and URLs for vignettes and developer URLs." />
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/seandavi/BiocPkgTools">
@@ -113,6 +118,7 @@ and URLs for vignettes and developer URLs." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -124,26 +130,27 @@ and URLs for vignettes and developer URLs." />
     </div>
 
     <div class="ref-description">
-    
     <p>The BiocViews-generated <code>VIEWS</code> file is available
 for bioconductor release and devel repositories. It
 contains quite a bit more information from the
 package <code>DESCRIPTION</code> files than the <code>PACKAGES</code>
 file. In particular, it contains <code>biocViews</code> annotations
 and URLs for vignettes and developer URLs.</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>biocPkgList</span>(<span class='kw'>version</span> <span class='kw'>=</span> <span class='kw pkg'>BiocManager</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/BiocManager/topics/version'>version</a></span>(), <span class='kw'>repo</span> <span class='kw'>=</span> <span class='st'>"BioCsoft"</span>,
-  <span class='kw'>addBiocViewParents</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
-    
+    <pre class="usage"><span class='fu'>biocPkgList</span>(
+  <span class='kw'>version</span> <span class='kw'>=</span> <span class='kw pkg'>BiocManager</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/BiocManager/man/version.html'>version</a></span>(),
+  <span class='kw'>repo</span> <span class='kw'>=</span> <span class='st'>"BioCsoft"</span>,
+  <span class='kw'>addBiocViewParents</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>version</th>
       <td><p>The requested bioconductor version. Will
-default to use the BiocManager defaults (ie., <code><a href='https://www.rdocumentation.org/packages/base/topics/Version'>version()</a></code>).</p></td>
+default to use the BiocManager defaults (ie., <code><a href='https://rdrr.io/r/base/Version.html'>version()</a></code>).</p></td>
     </tr>
     <tr>
       <th>repo</th>
@@ -159,11 +166,10 @@ versions (but who would use those, right?).</p></td>
 parents to biocViews annotations.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>an object of class <code>tbl_df</code>.</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Since packages are annotated with the most specific 
@@ -172,38 +178,63 @@ for all views for each package. For example, in the bioCsoft
 repository, all packages will have at least "Software" added
 to their biocViews. If one wants to stick to only the most
 specific terms, set <code>addBiocViewParents</code> to <code>FALSE</code>.</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>bpkgl</span> <span class='kw'>=</span> <span class='fu'>biocPkgList</span>()</div><div class='output co'>#&gt; <span class='warning'>Warning: data set ‘biocViewsVocab’ not found</span></div><div class='output co'>#&gt; <span class='error'>Error in nodes(g): object 'biocViewsVocab' not found</span></div><div class='input'><span class='no'>bpkgl</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'bpkgl' not found</span></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/unlist'>unlist</a></span>(<span class='no'>bpkgl</span>[<span class='fl'>1</span>,<span class='st'>'Depends'</span>])</div><div class='output co'>#&gt; <span class='error'>Error in unlist(bpkgl[1, "Depends"]): object 'bpkgl' not found</span></div><div class='input'>
+    <pre class="examples"><div class='input'><span class='no'>bpkgl</span> <span class='kw'>=</span> <span class='fu'>biocPkgList</span>()
+<span class='no'>bpkgl</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1,838 x 46</span><span>
+#&gt;    Package Version Depends Suggests License MD5sum NeedsCompilation Title
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span> a4      1.35.0  </span><span style='color: #555555;'>&lt;chr [</span><span>… </span><span style='color: #555555;'>&lt;chr [4</span><span>… GPL-3   5d200… no               </span><span style='color: #555555;'>"</span><span>Aut…
+#&gt; </span><span style='color: #555555;'> 2</span><span> a4Base  1.35.0  </span><span style='color: #555555;'>&lt;chr [</span><span>… </span><span style='color: #555555;'>&lt;chr [2</span><span>… GPL-3   b8ce9… no               </span><span style='color: #555555;'>"</span><span>Aut…
+#&gt; </span><span style='color: #555555;'> 3</span><span> a4Clas… 1.35.0  </span><span style='color: #555555;'>&lt;chr [</span><span>… </span><span style='color: #555555;'>&lt;chr [1</span><span>… GPL-3   652e9… no               </span><span style='color: #555555;'>"</span><span>Aut…
+#&gt; </span><span style='color: #555555;'> 4</span><span> a4Core  1.35.0  </span><span style='color: #555555;'>&lt;chr [</span><span>… </span><span style='color: #555555;'>&lt;chr [1</span><span>… GPL-3   9543f… no               </span><span style='color: #555555;'>"</span><span>Aut…
+#&gt; </span><span style='color: #555555;'> 5</span><span> a4Prep… 1.35.0  </span><span style='color: #555555;'>&lt;chr [</span><span>… </span><span style='color: #555555;'>&lt;chr [2</span><span>… GPL-3   412f4… no               </span><span style='color: #555555;'>"</span><span>Aut…
+#&gt; </span><span style='color: #555555;'> 6</span><span> a4Repo… 1.35.0  </span><span style='color: #555555;'>&lt;chr [</span><span>… </span><span style='color: #555555;'>&lt;chr [1</span><span>… GPL-3   6382c… no               </span><span style='color: #555555;'>"</span><span>Aut…
+#&gt; </span><span style='color: #555555;'> 7</span><span> ABAEnr… 1.17.0  </span><span style='color: #555555;'>&lt;chr [</span><span>… </span><span style='color: #555555;'>&lt;chr [3</span><span>… GPL (&gt;… 1f587… yes              </span><span style='color: #555555;'>"</span><span>Gen…
+#&gt; </span><span style='color: #555555;'> 8</span><span> ABarray 1.55.0  </span><span style='color: #555555;'>&lt;chr [</span><span>… </span><span style='color: #555555;'>&lt;chr [2</span><span>… GPL     d23ec… no               </span><span style='color: #555555;'>"</span><span>Mic…
+#&gt; </span><span style='color: #555555;'> 9</span><span> abseqR  1.5.0   </span><span style='color: #555555;'>&lt;chr [</span><span>… </span><span style='color: #555555;'>&lt;chr [1</span><span>… GPL-3 … 17238… no               </span><span style='color: #555555;'>"</span><span>Rep…
+#&gt; </span><span style='color: #555555;'>10</span><span> ABSSeq  1.41.0  </span><span style='color: #555555;'>&lt;chr [</span><span>… </span><span style='color: #555555;'>&lt;chr [1</span><span>… GPL (&gt;… 2f772… no               </span><span style='color: #555555;'>"</span><span>ABS…
+#&gt; </span><span style='color: #555555;'># … with 1,828 more rows, and 38 more variables: Description </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
+#&gt; #   biocViews </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span style='color: #555555;'>, Author </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span style='color: #555555;'>, Maintainer </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span style='color: #555555;'>, git_url </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
+#&gt; #   git_branch </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, git_last_commit </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, git_last_commit_date </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
+#&gt; #   `Date/Publication` </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, source.ver </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, win.binary.ver </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
+#&gt; #   `mac.binary.el-capitan.ver` </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, vignettes </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span style='color: #555555;'>, vignetteTitles </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span style='color: #555555;'>,
+#&gt; #   hasREADME </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, hasNEWS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, hasINSTALL </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, hasLICENSE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
+#&gt; #   Rfiles </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span style='color: #555555;'>, dependencyCount </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, Enhances </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span style='color: #555555;'>, dependsOnMe </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span style='color: #555555;'>,
+#&gt; #   Imports </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span style='color: #555555;'>, importsMe </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span style='color: #555555;'>, suggestsMe </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span style='color: #555555;'>, LinkingTo </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span style='color: #555555;'>,
+#&gt; #   Archs </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span style='color: #555555;'>, VignetteBuilder </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, URL </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SystemRequirements </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
+#&gt; #   BugReports </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, Video </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, linksToMe </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span style='color: #555555;'>, OS_type </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
+#&gt; #   PackageStatus </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, License_restricts_use </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, License_is_FOSS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
+#&gt; #   organism </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/unlist.html'>unlist</a></span>(<span class='no'>bpkgl</span>[<span class='fl'>1</span>,<span class='st'>'Depends'</span>])</div><div class='output co'>#&gt;      Depends1      Depends2      Depends3      Depends4      Depends5 
+#&gt;      "a4Base"   "a4Preproc"   "a4Classif"      "a4Core" "a4Reporting" </div><div class='input'>
 <span class='co'># Get a list of all packages that</span>
 <span class='co'># import "GEOquery"</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>dplyr</span>)</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: ‘dplyr’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:testthat’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    matches</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:stats’:</span>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>dplyr</span>)</div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: ‘dplyr’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:stats’:</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    filter, lag</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:base’:</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    intersect, setdiff, setequal, union</span></div><div class='input'><span class='no'>bpkgl</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>Package</span><span class='kw'>==</span><span class='st'>'GEOquery'</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/pull.html'>pull</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>'importsMe'</span>))</div><div class='output co'>#&gt; <span class='error'>Error in eval(lhs, parent, parent): object 'bpkgl' not found</span></div><div class='input'>
-</div></pre>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/pull.html'>pull</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'importsMe'</span>))</div><div class='output co'>#&gt; [[1]]
+#&gt;  [1] "bigmelon"   "ChIPXpress" "coexnet"    "crossmeta"  "EGAD"      
+#&gt;  [6] "GAPGOM"     "MACPET"     "minfi"      "MoonlightR" "phantasus" 
+#&gt; [11] "recount"    "SRAdb"     
+#&gt; </div><div class='input'>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -211,13 +242,16 @@ specific terms, set <code>addBiocViewParents</code> to <code>FALSE</code>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

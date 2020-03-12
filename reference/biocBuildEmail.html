@@ -6,8 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Generate needed information to create DOI from a package
-directory. — getPackageInfo • BiocPkgTools</title>
+<title>Create and copy e-mail package notification template to clipboard — biocBuildEmail • BiocPkgTools</title>
 
 
 <!-- jquery -->
@@ -36,10 +35,11 @@ directory. — getPackageInfo • BiocPkgTools</title>
 
 
 
-<meta property="og:title" content="Generate needed information to create DOI from a package
-directory. — getPackageInfo" />
-<meta property="og:description" content="Generate needed information to create DOI from a package
-directory." />
+<meta property="og:title" content="Create and copy e-mail package notification template to clipboard — biocBuildEmail" />
+<meta property="og:description" content="The biocBuildEmail function provides a template for notifying
+maintainers of errors in the Bioconductor Build System (BBS). This
+convenience function returns the body of the email from a template
+within the package and provides a copy in the clipboard." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -122,31 +122,92 @@ directory." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Generate needed information to create DOI from a package
-directory.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/seandavi/BiocPkgTools/blob/master/R/getPackageInfo.R'><code>R/getPackageInfo.R</code></a></small>
-    <div class="hidden name"><code>getPackageInfo.Rd</code></div>
+    <h1>Create and copy e-mail package notification template to clipboard</h1>
+    <small class="dont-index">Source: <a href='https://github.com/seandavi/BiocPkgTools/blob/master/R/biocBuildEmail.R'><code>R/biocBuildEmail.R</code></a></small>
+    <div class="hidden name"><code>biocBuildEmail.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Generate needed information to create DOI from a package
-directory.</p>
+    <p>The <code>biocBuildEmail</code> function provides a template for notifying
+maintainers of errors in the Bioconductor Build System (BBS). This
+convenience function returns the body of the email from a template
+within the package and provides a copy in the clipboard.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>getPackageInfo</span>(<span class='no'>dir</span>)</pre>
+    <pre class="usage"><span class='fu'>biocBuildEmail</span>(
+  <span class='no'>pkg</span>,
+  <span class='kw'>version</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"release"</span>, <span class='st'>"devel"</span>),
+  <span class='kw'>PS</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>(<span class='fl'>1L</span>),
+  <span class='kw'>emailTemplate</span> <span class='kw'>=</span> <span class='fu'>.getTemplatePath</span>(),
+  <span class='kw'>core.name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>core.email</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>core.id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>textOnly</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>dry.run</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>resend</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)
+
+<span class='fu'>sentHistory</span>()</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>dir</th>
-      <td><p>character(1) Path to package</p></td>
+      <th>pkg</th>
+      <td><p>character(1) The name of the package in trouble</p></td>
+    </tr>
+    <tr>
+      <th>version</th>
+      <td><p>character() A vector indicating which version of Bioconductor
+the package is failing in (either 'release' or 'devel'; defaults to both)</p></td>
+    </tr>
+    <tr>
+      <th>PS</th>
+      <td><p>character(1) Postscript, an additional note to the recipient of
+the email (i.e., the package maintainer)</p></td>
+    </tr>
+    <tr>
+      <th>emailTemplate</th>
+      <td><p>character(1) The path to the email template. The default
+path lies in the 'inst' package folder.</p></td>
+    </tr>
+    <tr>
+      <th>core.name</th>
+      <td><p>character(1) The full name of the core team member</p></td>
+    </tr>
+    <tr>
+      <th>core.email</th>
+      <td><p>character(1) The Roswell Park email of the core team
+member</p></td>
+    </tr>
+    <tr>
+      <th>core.id</th>
+      <td><p>character(1) The internal identifier for the Roswell employee.
+This ID usually matches `^[A-Z]2[0-9]5` for more recent identifiers.</p></td>
+    </tr>
+    <tr>
+      <th>textOnly</th>
+      <td><p>logical(1) Whether to return the text of the email only.
+This avoids the use of the 'blastula' package and adds the text to the
+system clipboard if the `clipr` package is installed (default: FALSE)</p></td>
+    </tr>
+    <tr>
+      <th>dry.run</th>
+      <td><p>logical(1) Display the email without sending to the recipient.
+It only works for HTML email reports and ignored when `textOnly=TRUE`</p></td>
+    </tr>
+    <tr>
+      <th>resend</th>
+      <td><p>logical(1) Whether to force a resend of the email</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a <code>data.frame</code></p>
+    <p>a character string of the email</p>
+    <h2 class="hasAnchor" id="senthistory"><a class="anchor" href="#senthistory"></a>sentHistory</h2>
+
+    <p>Check the history of emails sent</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -154,6 +215,7 @@ directory.</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#senthistory">sentHistory</a></li>
     </ul>
 
   </div>

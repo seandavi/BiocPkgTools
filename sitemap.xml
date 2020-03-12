@@ -4,7 +4,16 @@
     <loc>http://seandavi.github.io/BiocPkgTools/index.html</loc>
   </url>
   <url>
+    <loc>http://seandavi.github.io/BiocPkgTools/reference/BiocPkgTools-cache.html</loc>
+  </url>
+  <url>
     <loc>http://seandavi.github.io/BiocPkgTools/reference/BiocPkgTools.html</loc>
+  </url>
+  <url>
+    <loc>http://seandavi.github.io/BiocPkgTools/reference/CRANstatus.html</loc>
+  </url>
+  <url>
+    <loc>http://seandavi.github.io/BiocPkgTools/reference/biocBuildEmail.html</loc>
   </url>
   <url>
     <loc>http://seandavi.github.io/BiocPkgTools/reference/biocBuildReport.html</loc>
@@ -28,6 +37,9 @@
     <loc>http://seandavi.github.io/BiocPkgTools/reference/dataciteXMLGenerate.html</loc>
   </url>
   <url>
+    <loc>http://seandavi.github.io/BiocPkgTools/reference/firstInBioc.html</loc>
+  </url>
+  <url>
     <loc>http://seandavi.github.io/BiocPkgTools/reference/generateBiocPkgDOI.html</loc>
   </url>
   <url>
@@ -47,6 +59,12 @@
   </url>
   <url>
     <loc>http://seandavi.github.io/BiocPkgTools/reference/inducedSubgraphByPkgs.html</loc>
+  </url>
+  <url>
+    <loc>http://seandavi.github.io/BiocPkgTools/reference/pkgDepImports.html</loc>
+  </url>
+  <url>
+    <loc>http://seandavi.github.io/BiocPkgTools/reference/pkgDepMetrics.html</loc>
   </url>
   <url>
     <loc>http://seandavi.github.io/BiocPkgTools/reference/problemPage.html</loc>

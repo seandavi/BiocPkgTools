@@ -275,7 +275,7 @@ function drawBubblePlot(el, width, height, data, top, reformat_data) {
         fillSection("install", "Install", 
             `if (!requireNamespace("BiocManager", quietly = TRUE))<br />` +
             `&nbsp;&nbsp;&nbsp;&nbsp;install.packages("BiocManager")<br />` +
-            `BiocManager::install("${name}", version = "3.8")`
+            `BiocManager::install("${name}", version = "devel")`
         );
     
         d3.select("div.info-box")
