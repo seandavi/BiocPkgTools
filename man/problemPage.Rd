@@ -4,8 +4,7 @@
 \alias{problemPage}
 \title{generate hyperlinked HTML for build reports for Bioc packages}
 \usage{
-problemPage(authorPattern = "V.*Carey", ver = "devel",
-  includeOK = FALSE)
+problemPage(authorPattern = "V.*Carey", ver = "devel", includeOK = FALSE)
 }
 \arguments{
 \item{authorPattern}{character(1) regexp used with grep() to filter author field of package DESCRIPTION for listing}

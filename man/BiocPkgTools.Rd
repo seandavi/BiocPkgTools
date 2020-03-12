@@ -3,7 +3,6 @@
 \docType{package}
 \name{BiocPkgTools}
 \alias{BiocPkgTools}
-\alias{BiocPkgTools-package}
 \title{BiocPkgTools: Examine and analyze Bioconductor package metadata}
 \description{
 Bioconductor has a rich ecosystem of metadata around

@@ -4,8 +4,11 @@
 \alias{biocPkgList}
 \title{Get full bioc software package listing, with details}
 \usage{
-biocPkgList(version = BiocManager::version(), repo = "BioCsoft",
-  addBiocViewParents = TRUE)
+biocPkgList(
+  version = BiocManager::version(),
+  repo = "BioCsoft",
+  addBiocViewParents = TRUE
+)
 }
 \arguments{
 \item{version}{The requested bioconductor version. Will

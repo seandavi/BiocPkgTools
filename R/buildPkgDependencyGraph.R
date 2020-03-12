@@ -1,11 +1,12 @@
-#' @importFrom dplyr select rename_ mutate filter one_of
+#' @importFrom dplyr select rename mutate filter one_of
 #' @importFrom tidyr unnest
+#' @importFrom tidyselect all_of
 .processPkgListForDependencyGraph = function(pkglist, dependency) {
     select_list = c("Package", dependency)
     dep = dependency
     y = pkglist %>%
         select(one_of(select_list)) %>%
-        rename_(dependency = dependency) %>%
+        rename(dependency = all_of(dependency)) %>%
         tidyr::unnest(dependency)  %>%
         mutate(dependency = stripVersionString(dependency)) %>%
         filter(!is.na(dependency)) %>%
@@ -68,8 +69,10 @@
 #'   left_join(largest_importers) %>% arrange(desc(n)) %>%
 #'   head()
 #' @export
-buildPkgDependencyDataFrame = function(dependencies = c('Depends','Imports', 'Suggests'), ...) {
-    dependencies <- match.arg(dependencies)
+buildPkgDependencyDataFrame = function(dependencies = c('Depends','Imports','Suggests'), ...) {
+    dependencies <- match.arg(dependencies,
+                              choices=c('Depends','Imports', 'Suggests'),
+                              several.ok=TRUE)
     x = biocPkgList(...)
     df = list()
     for(i in dependencies) {
