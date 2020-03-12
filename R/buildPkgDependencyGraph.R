@@ -37,7 +37,7 @@
 #'
 #' @note This function requires network access.
 #'
-#' @return a \code{data.frame} (also a \code{tbl_df}) of
+#' @return A \code{data.frame} (also a \code{tbl_df}) of
 #' S3 class "biocDepDF" including columns "Package", "dependency",
 #' and "edgetype".
 #'
@@ -106,7 +106,7 @@ buildPkgDependencyDataFrame = function(dependencies = c('Depends','Imports','Sug
 #' \code{\link[igraph]{igraph-es-indexing}},
 #' \code{\link[igraph]{igraph-vs-indexing}}
 #'
-#' @return an igraph directed graph. See the igraph
+#' @return An igraph directed graph. See the igraph
 #' package for details of what can be done.
 #'
 #' @examples
@@ -159,7 +159,7 @@ buildPkgDependencyIgraph = function(pkgDepDF) {
 #' connecting paths will be colored as the igraph default.
 #'
 #' @importFrom igraph induced_subgraph V
-#' 
+#'
 #' @examples
 #' library(igraph)
 #' g = buildPkgDependencyIgraph(buildPkgDependencyDataFrame())
@@ -200,7 +200,7 @@ inducedSubgraphByPkgs = function(g, pkgs, pkg_color='red') {
 #'
 #' @importFrom igraph distances induced_subgraph V is.igraph
 #'
-#' @return an igraph graph, with only nodes and their
+#' @return An igraph graph, with only nodes and their
 #' edges within degree of the named package
 #'
 #' @examples

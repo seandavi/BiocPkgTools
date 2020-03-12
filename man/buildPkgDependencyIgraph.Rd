@@ -11,7 +11,7 @@ buildPkgDependencyIgraph(pkgDepDF)
 details.}
 }
 \value{
-an igraph directed graph. See the igraph
+An igraph directed graph. See the igraph
 package for details of what can be done.
 }
 \description{

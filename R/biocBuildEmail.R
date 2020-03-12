@@ -142,7 +142,7 @@
 #'
 #' @param resend logical(1) Whether to force a resend of the email
 #'
-#' @return a character string of the email
+#' @return A character string of the email
 #'
 #' @export
 biocBuildEmail <-

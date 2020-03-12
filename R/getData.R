@@ -1,6 +1,6 @@
-#' Get data from bioconductor
+#' Get data from Bioconductor
 #'
-#' @return json string containing bioconductor package details
+#' @return A JSON string containing Bioconductor package details
 #'
 #' @importFrom jsonlite toJSON
 #'
@@ -38,7 +38,7 @@ process_data <- function(pkg_list, raw_dl_stats) {
         vapply(
             pkg,
             function(x) {
-                stringr::str_interp("http://bioconductor.org/packages/release/bioc/html/${x}.html")
+                stringr::str_interp("https://bioconductor.org/packages/release/bioc/html/${x}.html")
             },
             character(1)
         )

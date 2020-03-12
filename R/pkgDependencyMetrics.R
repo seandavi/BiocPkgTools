@@ -1,6 +1,6 @@
 ## private function from itdepends/R/utils.R
 .flat_map_lst <- function(x, f, ...) {
-  if (length(x) == 0) {
+  if (!length(x)) {
     NULL
   } else {
     if (typeof(x) == "closure" && !inherits(x, "function")) {
@@ -70,7 +70,7 @@
 #' @param pkg character() name of the packge for which we want
 #' to obtain metrics on its dependency burden.
 #'
-#' @return a tidy data frame with different metrics on the
+#' @return A tidy data frame with different metrics on the
 #' package dependency burden.
 #'
 #' @export
@@ -161,7 +161,7 @@ pkgDepImports <- function(pkg) {
 #' @param depdf a tidy data frame with package dependency information
 #' obtained through the function \code{\link{buildPkgDependencyDataFrame}}
 #'
-#' @return a tidy data frame with different metrics on the
+#' @return A tidy data frame with different metrics on the
 #' package dependency burden.
 #'
 #' @export

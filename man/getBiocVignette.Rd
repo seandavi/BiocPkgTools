@@ -18,7 +18,7 @@ getBiocVignette(
 \item{version}{chacter(1) such as "3.7", defaults to user version}
 }
 \value{
-character(1) the filename of the downloaded vignette
+character(1) The filename of the downloaded vignette
 }
 \description{
 The actual vignette path is available using

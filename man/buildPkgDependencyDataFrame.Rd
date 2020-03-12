@@ -17,7 +17,7 @@ include all possibilities.}
 \item{...}{parameters passed along to \code{\link{biocPkgList}}}
 }
 \value{
-a \code{data.frame} (also a \code{tbl_df}) of
+A \code{data.frame} (also a \code{tbl_df}) of
 S3 class "biocDepDF" including columns "Package", "dependency",
 and "edgetype".
 }

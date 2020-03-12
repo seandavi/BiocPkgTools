@@ -9,13 +9,13 @@
 #'
 #' @importFrom utils download.file
 #'
-#' @return character(1) the filename of the downloaded vignette
-#' 
+#' @return character(1) The filename of the downloaded vignette
+#'
 #' @examples
 #' x = biocPkgList()
 #' tmp = getBiocVignette(x$vignettes[[1]][1])
 #' tmp
-#' 
+#'
 #' \dontrun{
 #' library(pdftools)
 #' y = pdf_text(tmp)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/biocPkgList.R
 \name{biocPkgList}
 \alias{biocPkgList}
-\title{Get full bioc software package listing, with details}
+\title{Get full Bioconductor software package listing, with details}
 \usage{
 biocPkgList(
   version = BiocManager::version(),
@@ -11,7 +11,7 @@ biocPkgList(
 )
 }
 \arguments{
-\item{version}{The requested bioconductor version. Will
+\item{version}{The requested Bioconductor version. Will
 default to use the BiocManager defaults (ie., \code{version()}).}
 
 \item{repo}{The requested biooconductor repository. The default will be the
@@ -24,18 +24,18 @@ versions (but who would use those, right?).}
 parents to biocViews annotations.}
 }
 \value{
-an object of class \code{tbl_df}.
+An object of class \code{tbl_df}.
 }
 \description{
 The BiocViews-generated \code{VIEWS} file is available
-for bioconductor release and devel repositories. It
+for Bioconductor release and devel repositories. It
 contains quite a bit more information from the
 package \code{DESCRIPTION} files than the \code{PACKAGES}
 file. In particular, it contains \code{biocViews} annotations
 and URLs for vignettes and developer URLs.
 }
 \details{
-Since packages are annotated with the most specific 
+Since packages are annotated with the most specific
 views, the default functionality here is to add parent terms
 for all views for each package. For example, in the bioCsoft
 repository, all packages will have at least "Software" added
