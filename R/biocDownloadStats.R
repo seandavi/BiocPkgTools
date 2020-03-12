@@ -1,3 +1,5 @@
+utils::globalVariables(c(".data", "biocViewsVocab"))
+
 #' get bioconductor download stats
 #'
 #' @details Note that bioconductor package download
