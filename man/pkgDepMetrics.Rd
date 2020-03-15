@@ -7,7 +7,7 @@
 pkgDepMetrics(pkg, depdf)
 }
 \arguments{
-\item{pkg}{character() name of the packge for which we want
+\item{pkg}{character() name of the package for which we want
 to obtain metrics on its dependency burden.}
 
 \item{depdf}{a tidy data frame with package dependency information
