@@ -26,8 +26,8 @@ Calculate dependency gain achieved by excluding combinations of packages
 }
 \examples{
 depdf <- buildPkgDependencyDataFrame(
-  dependencies = c("Depends", "Imports"), 
-  repo = names(BiocManager::repositories())
+  dependencies=c("Depends", "Imports"), 
+  repo=c("BioCsoft", "CRAN")
 )
 pcd <- pkgCombDependencyGain('GEOquery', depdf, maxNbr = 3L)
 head(pcd[order(pcd$DepGain, decreasing = TRUE), ])
