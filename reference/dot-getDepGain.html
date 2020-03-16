@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Report package imported functionality — pkgDepImports • BiocPkgTools</title>
+<title>Calculate the 'dependency gain' from excluding one or more direct 
+dependencies — .getDepGain • BiocPkgTools</title>
 
 
 <!-- jquery -->
@@ -35,8 +36,11 @@
 
 
 
-<meta property="og:title" content="Report package imported functionality — pkgDepImports" />
-<meta property="og:description" content="Function adapted from 'itdepends::dep_usage_pkg' at https://github.com/r-lib/itdepends" />
+<meta property="og:title" content="Calculate the 'dependency gain' from excluding one or more direct 
+dependencies — .getDepGain" />
+<meta property="og:description" content="Calculate the difference between the total number of dependencies of a 
+package and the number of dependencies that would remain if one or more 
+of the direct dependencies were removed." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -119,31 +123,42 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Report package imported functionality</h1>
+    <h1>Calculate the 'dependency gain' from excluding one or more direct 
+dependencies</h1>
     <small class="dont-index">Source: <a href='https://github.com/seandavi/BiocPkgTools/blob/master/R/pkgDependencyMetrics.R'><code>R/pkgDependencyMetrics.R</code></a></small>
-    <div class="hidden name"><code>pkgDepImports.Rd</code></div>
+    <div class="hidden name"><code>dot-getDepGain.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Function adapted from 'itdepends::dep_usage_pkg' at https://github.com/r-lib/itdepends</p>
+    <p>Calculate the difference between the total number of dependencies of a 
+package and the number of dependencies that would remain if one or more 
+of the direct dependencies were removed.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>pkgDepImports</span>(<span class='no'>pkg</span>)</pre>
+    <pre class="usage"><span class='fu'>.getDepGain</span>(<span class='no'>g</span>, <span class='no'>pkg</span>, <span class='no'>depsToRemove</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>g</th>
+      <td><p>Package dependency graph</p></td>
+    </tr>
+    <tr>
       <th>pkg</th>
-      <td><p>character() name of the packge for which we want
-to obtain metrics on its dependency burden.</p></td>
+      <td><p>Character string representing the package of interest</p></td>
+    </tr>
+    <tr>
+      <th>depsToRemove</th>
+      <td><p>Character vector representing the dependencies 
+to remove</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A tidy data frame with different metrics on the
-package dependency burden.</p>
+    <p>The 'dependency gain' that would be achieved by excluding the 
+  indicated direct dependencies</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -153,6 +168,8 @@ package dependency burden.</p>
       <li><a href="#value">Value</a></li>
     </ul>
 
+    <h2>Author</h2>
+    <p>Charlotte Soneson</p>
   </div>
 </div>
 

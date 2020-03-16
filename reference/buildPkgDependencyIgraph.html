@@ -87,7 +87,7 @@ attributes (see graph_from_data_frame)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BiocPkgTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.6</span>
       </span>
     </div>
 
@@ -158,7 +158,7 @@ details.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>an igraph directed graph. See the igraph
+    <p>An igraph directed graph. See the igraph
 package for details of what can be done.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -184,9 +184,9 @@ package for details of what can be done.</p>
 <span class='co'># dependency data frame as you see fit.</span>
 
 <span class='no'>g</span> <span class='kw'>=</span> <span class='fu'>buildPkgDependencyIgraph</span>(<span class='no'>pkg_dep_df</span>)
-<span class='no'>g</span></div><div class='output co'>#&gt; IGRAPH e9cd3db DN-- 3292 28484 -- 
+<span class='no'>g</span></div><div class='output co'>#&gt; IGRAPH 39743d0 DN-- 3292 28490 -- 
 #&gt; + attr: name (v/c), edgetype (e/c)
-#&gt; + edges from e9cd3db (vertex names):
+#&gt; + edges from 39743d0 (vertex names):
 #&gt;  [1] a4       -&gt;a4Base        a4       -&gt;a4Preproc     a4       -&gt;a4Classif    
 #&gt;  [4] a4       -&gt;a4Core        a4       -&gt;a4Reporting   a4Base   -&gt;methods      
 #&gt;  [7] a4Base   -&gt;graphics      a4Base   -&gt;grid          a4Base   -&gt;Biobase      
@@ -197,17 +197,17 @@ package for details of what can be done.</p>
 #&gt; [22] a4Classif-&gt;a4Preproc     a4Classif-&gt;MLInterfaces  a4Classif-&gt;ROCR         
 #&gt; + ... omitted several edges</div><div class='input'>
 <span class='co'># Look at nodes and edges</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/igraph/man/V.html'>V</a></span>(<span class='no'>g</span>)) <span class='co'># vertices</span></div><div class='output co'>#&gt; + 6/3292 vertices, named, from e9cd3db:
-#&gt; [1] a4          a4Base      a4Classif   a4Core      a4Preproc   a4Reporting</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/igraph/man/E.html'>E</a></span>(<span class='no'>g</span>)) <span class='co'># edges</span></div><div class='output co'>#&gt; + 6/28484 edges from e9cd3db (vertex names):
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/igraph/man/V.html'>V</a></span>(<span class='no'>g</span>)) <span class='co'># vertices</span></div><div class='output co'>#&gt; + 6/3292 vertices, named, from 39743d0:
+#&gt; [1] a4          a4Base      a4Classif   a4Core      a4Preproc   a4Reporting</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/igraph/man/E.html'>E</a></span>(<span class='no'>g</span>)) <span class='co'># edges</span></div><div class='output co'>#&gt; + 6/28490 edges from 39743d0 (vertex names):
 #&gt; [1] a4    -&gt;a4Base      a4    -&gt;a4Preproc   a4    -&gt;a4Classif  
 #&gt; [4] a4    -&gt;a4Core      a4    -&gt;a4Reporting a4Base-&gt;methods    </div><div class='input'>
 <span class='co'># subset graph by attributes</span>
 
 
 <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/sort.html'>sort</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/igraph/man/degree.html'>degree</a></span>(<span class='no'>g</span>, <span class='kw'>mode</span><span class='kw'>=</span><span class='st'>'in'</span>), <span class='kw'>decreasing</span><span class='kw'>=</span><span class='fl'>TRUE</span>))</div><div class='output co'>#&gt;         R   methods     knitr     stats     utils BiocStyle 
-#&gt;      1437      1213      1045       939       782       700 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/sort.html'>sort</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/igraph/man/degree.html'>degree</a></span>(<span class='no'>g</span>, <span class='kw'>mode</span><span class='kw'>=</span><span class='st'>'out'</span>), <span class='kw'>decreasing</span><span class='kw'>=</span><span class='fl'>TRUE</span>))</div><div class='output co'>#&gt;    TCGAbiolinks         RnBeads           ELMER          pRoloc BiocCaseStudies 
-#&gt;              70              59              55              55              52 
-#&gt;    ChIPpeakAnno 
+#&gt;      1437      1214      1045       939       782       700 </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/sort.html'>sort</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/igraph/man/degree.html'>degree</a></span>(<span class='no'>g</span>, <span class='kw'>mode</span><span class='kw'>=</span><span class='st'>'out'</span>), <span class='kw'>decreasing</span><span class='kw'>=</span><span class='fl'>TRUE</span>))</div><div class='output co'>#&gt;    TCGAbiolinks         RnBeads           ELMER          pRoloc    ChIPpeakAnno 
+#&gt;              70              59              55              55              54 
+#&gt; BiocCaseStudies 
 #&gt;              52 </div><div class='input'>
 </div></pre>
   </div>

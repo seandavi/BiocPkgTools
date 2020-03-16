@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Generate a DOI for a bioconductor package — generateBiocPkgDOI • BiocPkgTools</title>
+<title>Generate a DOI for a Bioconductor package — generateBiocPkgDOI • BiocPkgTools</title>
 
 
 <!-- jquery -->
@@ -35,10 +35,10 @@
 
 
 
-<meta property="og:title" content="Generate a DOI for a bioconductor package — generateBiocPkgDOI" />
+<meta property="og:title" content="Generate a DOI for a Bioconductor package — generateBiocPkgDOI" />
 <meta property="og:description" content="This function makes calls out to the EZID API (v2) described
-here: https://ezid.lib.purdue.edu/doc/apidoc.2.html. The 
-function creates a new DOI for a bioc package (cannot already 
+here: https://ezid.lib.purdue.edu/doc/apidoc.2.html. The
+function creates a new DOI for a Bioconductor package (cannot already
 exist). The target URL for the DOI is the short Bioconductor
 package URL." />
 <meta name="twitter:card" content="summary" />
@@ -83,7 +83,7 @@ package URL." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BiocPkgTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.6</span>
       </span>
     </div>
 
@@ -123,15 +123,15 @@ package URL." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Generate a DOI for a bioconductor package</h1>
+    <h1>Generate a DOI for a Bioconductor package</h1>
     <small class="dont-index">Source: <a href='https://github.com/seandavi/BiocPkgTools/blob/master/R/newBiocPkgDOI.R'><code>R/newBiocPkgDOI.R</code></a></small>
     <div class="hidden name"><code>generateBiocPkgDOI.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>This function makes calls out to the EZID API (v2) described
-here: <a href='https://ezid.lib.purdue.edu/doc/apidoc.2.html'>https://ezid.lib.purdue.edu/doc/apidoc.2.html</a>. The 
-function creates a new DOI for a bioc package (cannot already 
+here: <a href='https://ezid.lib.purdue.edu/doc/apidoc.2.html'>https://ezid.lib.purdue.edu/doc/apidoc.2.html</a>. The
+function creates a new DOI for a Bioconductor package (cannot already
 exist). The target URL for the DOI is the short Bioconductor
 package URL.</p>
     </div>
@@ -156,7 +156,7 @@ package URL.</p>
     <tr>
       <th>testing</th>
       <td><p>logical(1) If true, will use the apitest
-user with the password apitest. These DOIs will expire. 
+user with the password apitest. These DOIs will expire.
 The same apitest:apitest combination can be used to
 login to the EZID website for doing things using the
 web interface. If false, the Bioconductor-specific
@@ -170,7 +170,7 @@ variables</p></td>
     <p>The DOI as a character(1) vector.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The login information for the "real" Bioconductor account 
+    <p>The login information for the "real" Bioconductor account
 should be stored in the environment variables "EZID_USERNAME"
 and "EZID_PASSWORD".</p>
 <p>The GUI is available here: <a href='https://doi.datacite.org/'>https://doi.datacite.org/</a>.</p>

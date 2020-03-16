@@ -84,7 +84,7 @@ package named." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BiocPkgTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.6</span>
       </span>
     </div>
 
@@ -166,16 +166,16 @@ adjacent vertices to this degree.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>an igraph graph, with only nodes and their
+    <p>An igraph graph, with only nodes and their
 edges within degree of the named package</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='no'>g</span> <span class='kw'>=</span> <span class='fu'><a href='buildPkgDependencyIgraph.html'>buildPkgDependencyIgraph</a></span>(<span class='fu'><a href='buildPkgDependencyDataFrame.html'>buildPkgDependencyDataFrame</a></span>())
 <span class='no'>g2</span> <span class='kw'>=</span> <span class='fu'>subgraphByDegree</span>(<span class='no'>g</span>, <span class='st'>'GEOquery'</span>)
-<span class='no'>g2</span></div><div class='output co'>#&gt; IGRAPH 744f6fd DN-- 55 213 -- 
+<span class='no'>g2</span></div><div class='output co'>#&gt; IGRAPH 2d873c7 DN-- 55 213 -- 
 #&gt; + attr: name (v/c), edgetype (e/c)
-#&gt; + edges from 744f6fd (vertex names):
+#&gt; + edges from 2d873c7 (vertex names):
 #&gt;  [1] bigmelon    -&gt;Biobase      bigmelon    -&gt;BiocGenerics
 #&gt;  [3] bigmelon    -&gt;BiocGenerics bigmelon    -&gt;GEOquery    
 #&gt;  [5] bigmelon    -&gt;minfi        bigmelon    -&gt;methods     

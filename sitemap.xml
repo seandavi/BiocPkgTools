@@ -37,6 +37,9 @@
     <loc>http://seandavi.github.io/BiocPkgTools/reference/dataciteXMLGenerate.html</loc>
   </url>
   <url>
+    <loc>http://seandavi.github.io/BiocPkgTools/reference/dot-getDepGain.html</loc>
+  </url>
+  <url>
     <loc>http://seandavi.github.io/BiocPkgTools/reference/firstInBioc.html</loc>
   </url>
   <url>
@@ -59,6 +62,9 @@
   </url>
   <url>
     <loc>http://seandavi.github.io/BiocPkgTools/reference/inducedSubgraphByPkgs.html</loc>
+  </url>
+  <url>
+    <loc>http://seandavi.github.io/BiocPkgTools/reference/pkgCombDependencyGain.html</loc>
   </url>
   <url>
     <loc>http://seandavi.github.io/BiocPkgTools/reference/pkgDepImports.html</loc>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Report package imported functionality — pkgDepImports • BiocPkgTools</title>
+<title>Calculate dependency gain achieved by excluding combinations of packages — pkgCombDependencyGain • BiocPkgTools</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Report package imported functionality — pkgDepImports" />
-<meta property="og:description" content="Function adapted from 'itdepends::dep_usage_pkg' at https://github.com/r-lib/itdepends" />
+<meta property="og:title" content="Calculate dependency gain achieved by excluding combinations of packages — pkgCombDependencyGain" />
+<meta property="og:description" content="Calculate dependency gain achieved by excluding combinations of packages" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -119,40 +119,68 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Report package imported functionality</h1>
+    <h1>Calculate dependency gain achieved by excluding combinations of packages</h1>
     <small class="dont-index">Source: <a href='https://github.com/seandavi/BiocPkgTools/blob/master/R/pkgDependencyMetrics.R'><code>R/pkgDependencyMetrics.R</code></a></small>
-    <div class="hidden name"><code>pkgDepImports.Rd</code></div>
+    <div class="hidden name"><code>pkgCombDependencyGain.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Function adapted from 'itdepends::dep_usage_pkg' at https://github.com/r-lib/itdepends</p>
+    <p>Calculate dependency gain achieved by excluding combinations of packages</p>
     </div>
 
-    <pre class="usage"><span class='fu'>pkgDepImports</span>(<span class='no'>pkg</span>)</pre>
+    <pre class="usage"><span class='fu'>pkgCombDependencyGain</span>(<span class='no'>pkg</span>, <span class='no'>depdf</span>, <span class='kw'>maxNbr</span> <span class='kw'>=</span> <span class='fl'>3L</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>pkg</th>
-      <td><p>character() name of the packge for which we want
-to obtain metrics on its dependency burden.</p></td>
+      <td><p>character, the name of the package for which we want
+to estimate the dependency gain</p></td>
+    </tr>
+    <tr>
+      <th>depdf</th>
+      <td><p>a tidy data frame with package dependency information
+obtained through the function <code><a href='buildPkgDependencyDataFrame.html'>buildPkgDependencyDataFrame</a></code></p></td>
+    </tr>
+    <tr>
+      <th>maxNbr</th>
+      <td><p>numeric, the maximal number of direct dependencies to leave 
+out simultaneously</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A tidy data frame with different metrics on the
-package dependency burden.</p>
+    <p>A data frame with three columns: ExclPackages (the excluded direct 
+  dependencies), NbrExcl (the number of excluded direct dependencies),
+  DepGain (the dependency gain from excluding these direct dependencies)</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>depdf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='buildPkgDependencyDataFrame.html'>buildPkgDependencyDataFrame</a></span>(
+  <span class='kw'>dependencies</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Depends"</span>, <span class='st'>"Imports"</span>),
+  <span class='kw'>repo</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"BioCsoft"</span>, <span class='st'>"CRAN"</span>)
+)
+<span class='no'>pcd</span> <span class='kw'>&lt;-</span> <span class='fu'>pkgCombDependencyGain</span>(<span class='st'>'GEOquery'</span>, <span class='no'>depdf</span>, <span class='kw'>maxNbr</span> <span class='kw'>=</span> <span class='fl'>3L</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>pcd</span>[<span class='fu'><a href='https://rdrr.io/r/base/order.html'>order</a></span>(<span class='no'>pcd</span>$<span class='no'>DepGain</span>, <span class='kw'>decreasing</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>), ])</div><div class='output co'>#&gt;                Packages NbrExcl DepGain
+#&gt; 77  dplyr, readr, tidyr       3      22
+#&gt; 48 Biobase, httr, readr       3      13
+#&gt; 49 Biobase, httr, tidyr       3      13
+#&gt; 74   dplyr, httr, tidyr       3      13
+#&gt; 83   httr, readr, tidyr       3      13
+#&gt; 38 Biobase, limma, httr       3      12</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
+    <h2>Author</h2>
+    <p>Charlotte Soneson</p>
   </div>
 </div>
 

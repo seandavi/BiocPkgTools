@@ -84,7 +84,7 @@ and their intervening dependencies." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BiocPkgTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.6</span>
       </span>
     </div>
 
@@ -168,12 +168,12 @@ connecting paths will be colored as the igraph default.</p></td>
 <span class='no'>g</span> <span class='kw'>=</span> <span class='fu'><a href='buildPkgDependencyIgraph.html'>buildPkgDependencyIgraph</a></span>(<span class='fu'><a href='buildPkgDependencyDataFrame.html'>buildPkgDependencyDataFrame</a></span>())
 <span class='no'>g2</span> <span class='kw'>=</span> <span class='fu'>inducedSubgraphByPkgs</span>(<span class='no'>g</span>, <span class='kw'>pkgs</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'GenomicFeatures'</span>,
 <span class='st'>'TCGAbiolinksGUI'</span>, <span class='st'>'BiocGenerics'</span>, <span class='st'>'org.Hs.eg.db'</span>, <span class='st'>'minfi'</span>, <span class='st'>'limma'</span>))
-<span class='no'>g2</span></div><div class='output co'>#&gt; IGRAPH 80e7ea4 DN-- 6 5 -- 
+<span class='no'>g2</span></div><div class='output co'>#&gt; IGRAPH 5fb70f1 DN-- 6 5 -- 
 #&gt; + attr: name (v/c), color (v/c), edgetype (e/c)
-#&gt; + edges from 80e7ea4 (vertex names):
+#&gt; + edges from 5fb70f1 (vertex names):
 #&gt; [1] GenomicFeatures-&gt;BiocGenerics GenomicFeatures-&gt;org.Hs.eg.db
 #&gt; [3] limma          -&gt;org.Hs.eg.db minfi          -&gt;BiocGenerics
-#&gt; [5] minfi          -&gt;limma       </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/igraph/man/V.html'>V</a></span>(<span class='no'>g2</span>)</div><div class='output co'>#&gt; + 6/6 vertices, named, from 80e7ea4:
+#&gt; [5] minfi          -&gt;limma       </div><div class='input'><span class='fu'><a href='https://rdrr.io/pkg/igraph/man/V.html'>V</a></span>(<span class='no'>g2</span>)</div><div class='output co'>#&gt; + 6/6 vertices, named, from 5fb70f1:
 #&gt; [1] BiocGenerics    GenomicFeatures limma           minfi          
 #&gt; [5] TCGAbiolinksGUI org.Hs.eg.db   </div><div class='input'>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>g2</span>)</div><div class='img'><img src='inducedSubgraphByPkgs-1.png' alt='' width='700' height='433' /></div><div class='input'>
