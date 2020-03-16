@@ -302,6 +302,9 @@ the following information:
     goes between 0 and 1, where 0 indicates that no dependency is shared, while
     1 indicates that the given package and the corresponding dependency depend
     on an identical subset of packages.
+  * `DepGainIfExcluded`: The 'dependency gain' (decrease in the total number 
+    of dependencies) that would be obtained if this package was excluded 
+    from the list of direct dependencies. 
 
 The reported information is ordered by the `Usage` column to facilitate the
 identification of dependencies for which the analyzed package is using a small
