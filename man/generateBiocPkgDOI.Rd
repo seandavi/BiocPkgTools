@@ -2,7 +2,7 @@
 % Please edit documentation in R/newBiocPkgDOI.R
 \name{generateBiocPkgDOI}
 \alias{generateBiocPkgDOI}
-\title{Generate a DOI for a bioconductor package}
+\title{Generate a DOI for a Bioconductor package}
 \usage{
 generateBiocPkgDOI(pkg, authors, pubyear, testing = TRUE)
 }
@@ -14,7 +14,7 @@ generateBiocPkgDOI(pkg, authors, pubyear, testing = TRUE)
 \item{pubyear}{integer(1) publication year}
 
 \item{testing}{logical(1) If true, will use the apitest
-user with the password apitest. These DOIs will expire. 
+user with the password apitest. These DOIs will expire.
 The same apitest:apitest combination can be used to
 login to the EZID website for doing things using the
 web interface. If false, the Bioconductor-specific
@@ -26,13 +26,13 @@ The DOI as a character(1) vector.
 }
 \description{
 This function makes calls out to the EZID API (v2) described
-here: \url{https://ezid.lib.purdue.edu/doc/apidoc.2.html}. The 
-function creates a new DOI for a bioc package (cannot already 
+here: \url{https://ezid.lib.purdue.edu/doc/apidoc.2.html}. The
+function creates a new DOI for a Bioconductor package (cannot already
 exist). The target URL for the DOI is the short Bioconductor
 package URL.
 }
 \details{
-The login information for the "real" Bioconductor account 
+The login information for the "real" Bioconductor account
 should be stored in the environment variables "EZID_USERNAME"
 and "EZID_PASSWORD".
 

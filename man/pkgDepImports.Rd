@@ -11,7 +11,7 @@ pkgDepImports(pkg)
 to obtain metrics on its dependency burden.}
 }
 \value{
-a tidy data frame with different metrics on the
+A tidy data frame with different metrics on the
 package dependency burden.
 }
 \description{

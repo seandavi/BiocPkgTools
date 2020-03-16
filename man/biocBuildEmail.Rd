@@ -50,7 +50,7 @@ It only works for HTML email reports and ignored when `textOnly=TRUE`}
 \item{resend}{logical(1) Whether to force a resend of the email}
 }
 \value{
-a character string of the email
+A character string of the email
 }
 \description{
 The \code{biocBuildEmail} function provides a template for notifying

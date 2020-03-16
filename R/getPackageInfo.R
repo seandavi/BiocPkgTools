@@ -5,11 +5,11 @@
 #'
 #' @import utils
 #' @import tools
-#' 
-#' @return a \code{data.frame}
+#'
+#' @return A \code{data.frame}
 #'
 #' @keywords Internal
-#' 
+#'
 #' @export
 getPackageInfo <- function(dir){
     if(!dir.exists(file.path(dir)))

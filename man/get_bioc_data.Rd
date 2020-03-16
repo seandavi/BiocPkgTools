@@ -2,15 +2,15 @@
 % Please edit documentation in R/getData.R
 \name{get_bioc_data}
 \alias{get_bioc_data}
-\title{Get data from bioconductor}
+\title{Get data from Bioconductor}
 \usage{
 get_bioc_data()
 }
 \value{
-json string containing bioconductor package details
+A JSON string containing Bioconductor package details
 }
 \description{
-Get data from bioconductor
+Get data from Bioconductor
 }
 \examples{
 bioc_data <- get_bioc_data()

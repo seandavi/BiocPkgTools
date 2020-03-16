@@ -33,21 +33,15 @@
 #' @section setCache:
 #' Specify the directory location of the data cache. By default, it will
 #' got to the user's home/.cache and "appname" directory as specified by
-#' \link{user_cache_dir}. (default appname: cBioPortalData)
-#'
-#' @section removeCache:
-#' Some files may become corrupt when downloading, this function allows
-#' the user to delete the tarball associated with a `cancer_study_id` in the
-#' cache.
+#' \link[rappdirs]{user_cache_dir}. (default appname: pkgToolsCache)
 #'
 #' @param directory The file location where the cache is located. Once set
 #' future downloads will go to this folder.
 #' @param verbose Whether to print descriptive messages
 #' @param ask logical (default TRUE when interactive session) Confirm the file
 #' location of the cache directory
-#' @param cancer_study_id A single string from `studiesTable` associated
-#' with a study tarball
-#' @param ... For `cbioCache`, arguments passed to `setCache`
+#'
+#' @param ... For \code{pkgToolsCache}, arguments are passed to \code{setCache}
 #'
 #' @export
 setCache <-
