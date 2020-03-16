@@ -4,7 +4,7 @@
 \alias{biocExplore}
 \title{Explore Bioconductor packages interactively}
 \usage{
-biocExplore(top = 500, ...)
+biocExplore(top = 500L, ...)
 }
 \arguments{
 \item{top}{maximum number of packages displayed in any biocView}
@@ -12,7 +12,7 @@ biocExplore(top = 500, ...)
 \item{...}{parameters passed to \code{htmlwidgets::createWidget()}}
 }
 \value{
-bubble plot of Bioconductor packages
+A bubble plot of Bioconductor packages
 }
 \description{
 Explore Bioconductor packages through an interactive bubble plot. Click on bubbles to bring up additional information about the package. Size and proximity to center of a bubble is based on the downloads the package has in the past month.

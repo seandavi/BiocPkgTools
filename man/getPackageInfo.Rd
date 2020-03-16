@@ -11,7 +11,7 @@ getPackageInfo(dir)
 \item{dir}{character(1) Path to package}
 }
 \value{
-a \code{data.frame}
+A \code{data.frame}
 }
 \description{
 Generate needed information to create DOI from a package

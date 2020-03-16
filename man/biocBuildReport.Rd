@@ -8,13 +8,13 @@ biocBuildReport(version = as.character(BiocManager::version()))
 }
 \arguments{
 \item{version}{character(1) the version number
-as used to access the online build report. For 
+as used to access the online build report. For
 example, "3.6". The default is the "current version"
 as specified in \code{BiocManager::version}. Note
 that this is a character() variable, not a number.}
 }
 \value{
-a \code{tbl_df} object with columns pkg, version,
+A \code{tbl_df} object with columns pkg, version,
 author, commit, date, node, stage, and result.
 }
 \description{
@@ -27,7 +27,7 @@ a tidy data frame version of the build report.
 }
 \examples{
 
-# Set the stage--what version of Bioc am 
+# Set the stage--what version of Bioc am
 # I using?
 BiocManager::version()
 

@@ -4,9 +4,15 @@
 \alias{CRANstatus}
 \title{Check the CRAN build report page and email a notification}
 \usage{
-CRANstatus(pkg, core.name = NULL, core.email = NULL, core.id = NULL,
-  to.mail = "maintainer@bioconductor.org", dry.run = TRUE,
-  emailTemplate = .getTemplatePath("cranreport"))
+CRANstatus(
+  pkg,
+  core.name = NULL,
+  core.email = NULL,
+  core.id = NULL,
+  to.mail = "maintainer@bioconductor.org",
+  dry.run = TRUE,
+  emailTemplate = .getTemplatePath("cranreport")
+)
 }
 \arguments{
 \item{pkg}{character(1) The name of the package in trouble}

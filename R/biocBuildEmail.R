@@ -142,7 +142,7 @@
 #'
 #' @param resend logical(1) Whether to force a resend of the email
 #'
-#' @return a character string of the email
+#' @return A character string of the email
 #'
 #' @export
 biocBuildEmail <-
@@ -182,10 +182,11 @@ biocBuildEmail <-
     if (textOnly && !requireNamespace("clipr", quietly = TRUE))
         stop(paste0("Install the 'clipr' package to use the 'textOnly = TRUE'"))
 
-    listall <- biocPkgList()
-    pkgMeta <- listall[listall[["Package"]] == pkg, ]
-    if (!nrow(pkgMeta))
-        stop("Package not found in Bioconductor repository")
+    listall <- biocPkgList(version = version)
+    pkgMeta <- listall[listall[["Package"]] %in% pkg, ]
+    if(nrow(pkgMeta) == 0L) stop("No pkg '",pkg,"' found on Bioconductor for ",
+                                 "version '",version,"'")
+
     mainInfo <- pkgMeta[["Maintainer"]][[1L]]
 
     mainName <- unname(vapply(mainInfo, .nameCut, character(1L)))
@@ -267,6 +268,6 @@ sentHistory <- function() {
         stop("No log available. Send some emails.")
 
     minienv <- new.env(parent = emptyenv())
-    load(BiocFileCache::bfcrpath(bfc, rids = rid), env = minienv)
+    load(BiocFileCache::bfcrpath(bfc, rids = rid), envir = minienv)
     minienv[["metainfo"]]
 }

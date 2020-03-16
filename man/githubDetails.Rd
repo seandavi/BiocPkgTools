@@ -7,20 +7,20 @@
 githubDetails(pkgs, sleep = 0)
 }
 \arguments{
-\item{pkgs}{a character() vector of username/repo 
-for one or more github repos, such as `seandavi/GEOquery`.}
+\item{pkgs}{a character() vector of username/repo
+for one or more GitHub repos, such as `seandavi/GEOquery`.}
 
 \item{sleep}{numeric() denoting the number of seconds to
 sleep between GitHub API calls. Since GitHub rate limits
 its APIs, it might be necessary to either use small
 chunks of packages iteratively or to supply a non-zero
-argument here. See the `details` section for a better 
+argument here. See the `details` section for a better
 solution using GitHub tokens.}
 }
 \description{
-For packages that live on github, we can mine
+For packages that live on GitHub, we can mine
 further details. This function returns the
-github details for the listed packages.
+GitHub details for the listed packages.
 }
 \details{
 The \code{\link[gh]{gh}} function is used to

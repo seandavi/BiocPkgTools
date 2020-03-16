@@ -2,28 +2,28 @@
 % Please edit documentation in R/githubUtils.R
 \name{githubURLParts}
 \alias{githubURLParts}
-\title{Extract github user and repo name from github URL}
+\title{Extract GitHub user and repo name from GitHub URL}
 \usage{
 githubURLParts(urls)
 }
 \arguments{
-\item{urls}{a \code{character()} vector of urls.}
+\item{urls}{A \code{character()} vector of URLs}
 }
 \value{
-a \code{data.frame} with four columns:
+A \code{data.frame} with four columns:
   \itemize{
-    \item{url}{The original github URL}
-    \item{user_repo}{The github "username/repo", combined}
-    \item{user}{The github username}
-    \item{repo}{The github repo name}
+    \item{url}{The original GitHub URL}
+    \item{user_repo}{The GitHub "username/repo", combined}
+    \item{user}{The GitHub username}
+    \item{repo}{The GitHub repo name}
   }
 }
 \description{
-Extract github user and repo name from github URL
+Extract GitHub user and repo name from GitHub URL
 }
 \examples{
-# find github URL details for
-# Bioc packages
+# find GitHub URL details for
+# Bioconductor packages
 bpkgl = biocPkgList()
 urldetails = githubURLParts(bpkgl$URL)
 urldetails = urldetails[!is.na(urldetails$url),]

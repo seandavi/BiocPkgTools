@@ -19,7 +19,7 @@ adjacent vertices to this degree.}
 \item{...}{passed on to \code{\link[igraph]{distances}}}
 }
 \value{
-an igraph graph, with only nodes and their
+An igraph graph, with only nodes and their
 edges within degree of the named package
 }
 \description{

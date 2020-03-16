@@ -6,8 +6,11 @@
 \alias{pkgToolsCache}
 \title{Manage cache for BiocPkgTools}
 \usage{
-setCache(directory = rappdirs::user_cache_dir("BiocPkgTools"),
-  verbose = TRUE, ask = interactive())
+setCache(
+  directory = rappdirs::user_cache_dir("BiocPkgTools"),
+  verbose = TRUE,
+  ask = interactive()
+)
 
 pkgToolsCache(...)
 }
@@ -20,10 +23,7 @@ future downloads will go to this folder.}
 \item{ask}{logical (default TRUE when interactive session) Confirm the file
 location of the cache directory}
 
-\item{...}{For `cbioCache`, arguments passed to `setCache`}
-
-\item{cancer_study_id}{A single string from `studiesTable` associated
-with a study tarball}
+\item{...}{For \code{pkgToolsCache}, arguments are passed to \code{setCache}}
 }
 \description{
 Managing user data is important to allow use of email functions
@@ -40,13 +40,6 @@ a cache if not already created. A specific directory can be used via
 
 Specify the directory location of the data cache. By default, it will
 got to the user's home/.cache and "appname" directory as specified by
-\link{user_cache_dir}. (default appname: cBioPortalData)
-}
-
-\section{removeCache}{
-
-Some files may become corrupt when downloading, this function allows
-the user to delete the tarball associated with a `cancer_study_id` in the
-cache.
+\link[rappdirs]{user_cache_dir}. (default appname: pkgToolsCache)
 }
 

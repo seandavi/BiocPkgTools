@@ -2,16 +2,16 @@
 % Please edit documentation in R/xml.R
 \name{dataciteXMLGenerate}
 \alias{dataciteXMLGenerate}
-\title{Bioc datacite xml generator}
+\title{Bioc datacite XML generator}
 \usage{
 dataciteXMLGenerate(pkg)
 }
 \arguments{
-\item{pkg}{name of bioc package}
+\item{pkg}{The name of a Bioconductor package}
 }
 \value{
-an xml element
+An XML element
 }
 \description{
-Bioc datacite xml generator
+Bioc datacite XML generator
 }

@@ -2,19 +2,19 @@
 % Please edit documentation in R/biocDownloadStats.R
 \name{biocDownloadStats}
 \alias{biocDownloadStats}
-\title{get bioconductor download stats}
+\title{Get Bioconductor download statistics}
 \usage{
 biocDownloadStats()
 }
 \value{
-a \code{data.frame} of download stats for
-all bioconductor packages, in tidy format
+A \code{data.frame} of download statistics for
+all Bioconductor packages, in tidy format
 }
 \description{
-get bioconductor download stats
+Get Bioconductor download statistics
 }
 \details{
-Note that bioconductor package download
+Note that Bioconductor package download
 stats are not version-specific.
 }
 \examples{

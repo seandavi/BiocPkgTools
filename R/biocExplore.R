@@ -5,10 +5,13 @@
 #'
 #' @importFrom htmlwidgets createWidget
 #'
-#' @return bubble plot of Bioconductor packages
+#' @return A bubble plot of Bioconductor packages
 #'
 #' @export
-biocExplore <- function(top = 500, ...) {
+biocExplore <- function(top = 500L, ...) {
+    if(!is.numeric(top) || top < 1){
+        stop("top must be >= 1")
+    }
     # instruction messages
     message("- Hover over bubbles to see full name and lifetime downloads")
     message("- Click on bubbles to see more information about package")

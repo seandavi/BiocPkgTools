@@ -1,6 +1,6 @@
-#' Get data from bioconductor
+#' Get data from Bioconductor
 #'
-#' @return json string containing bioconductor package details
+#' @return A JSON string containing Bioconductor package details
 #'
 #' @importFrom jsonlite toJSON
 #'
@@ -20,7 +20,7 @@ get_bioc_data <- function() {
     )
 
     full_data <- full_data %>%
-        dplyr::filter(!is.na(tags))
+        dplyr::filter(!is.na(.data$tags))
 
     message("Package data download complete")
 
@@ -38,7 +38,7 @@ process_data <- function(pkg_list, raw_dl_stats) {
         vapply(
             pkg,
             function(x) {
-                stringr::str_interp("http://bioconductor.org/packages/release/bioc/html/${x}.html")
+                stringr::str_interp("https://bioconductor.org/packages/release/bioc/html/${x}.html")
             },
             character(1)
         )
@@ -50,23 +50,23 @@ process_data <- function(pkg_list, raw_dl_stats) {
 
     full_data <- dplyr::inner_join(pkg_list, dl_stats, by = "Package") %>%
         dplyr::select(
-            Author,
-            Package,
-            License,
-            biocViews,
-            Description,
-            downloads_month,
-            downloads_total
+            .data$Author,
+            .data$Package,
+            .data$License,
+            .data$biocViews,
+            .data$Description,
+            .data$downloads_month,
+            .data$downloads_total
         ) %>%
         dplyr::mutate(
-            page = pkg_link(Package)
+            page = pkg_link(.data$Package)
         ) %>%
         dplyr::rename(
-            authors = Author,
-            name = Package,
-            license = License,
-            tags = biocViews,
-            description = Description
+            authors = .data$Author,
+            name = .data$Package,
+            license = .data$License,
+            tags = .data$biocViews,
+            description = .data$Description
         )
 
     full_data$authors <- author_list_to_string(full_data$authors)
@@ -77,10 +77,10 @@ process_data <- function(pkg_list, raw_dl_stats) {
 # summarise download stats into monthly and total lifetime downloads
 summarise_dl_stats <- function(dl_stats) {
     dl_stats %>%
-        dplyr::group_by(Package) %>%
+        dplyr::group_by(.data$Package) %>%
         dplyr::summarise(
-            downloads_month = dplyr::first(Nb_of_downloads),
-            downloads_total = sum(Nb_of_downloads)
+            downloads_month = dplyr::first(.data$Nb_of_downloads),
+            downloads_total = sum(.data$Nb_of_downloads)
         )
 }
 

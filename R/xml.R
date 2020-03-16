@@ -1,11 +1,11 @@
-#' Bioc datacite xml generator
-#' 
-#' @param pkg name of bioc package
-#' 
+#' Bioc datacite XML generator
+#'
+#' @param pkg The name of a Bioconductor package
+#'
 #' @import xml2
 #'
-#' @return an xml element
-#' 
+#' @return An XML element
+#'
 dataciteXMLGenerate = function(pkg) {
   bioc_shoulder = "doi:10.5072/FK2"
   bioc_doi_namespace = ".bioc."
