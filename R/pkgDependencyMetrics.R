@@ -60,6 +60,19 @@
   }
 }
 
+## Private function to check arguments for pkgDep* functions
+.pkgDepCheckArgs <- function(pkg, depdf) {
+  if (!is.data.frame(depdf) ||
+      any(!c("Package", "dependency", "edgetype") %in%
+           colnames(depdf)))
+    stop("argument 'depdf' must be a 'data.frame' with columns ",
+         "'Package', 'dependency' and 'edgetype'.")
+
+  if (!pkg %in% depdf$Package)
+    stop(sprintf("Package %s not in the package dependency 'data.frame'.",
+                 pkg))
+}
+
 #' Calculate the 'dependency gain' from excluding one or more direct 
 #' dependencies
 #' 
@@ -116,17 +129,32 @@
 #' Report package imported functionality
 #'
 #' Function adapted from 'itdepends::dep_usage_pkg' at https://github.com/r-lib/itdepends
+#' to obtain the functionality imported and used by a given package.
 #'
 #' @importFrom tibble tibble
 #' @importFrom stats setNames
 #'
-#' @param pkg character() name of the packge for which we want
-#' to obtain metrics on its dependency burden.
+#' @param pkg character() name of the package for which we want
+#' to obtain the functionality calls imported from its dependencies
+#' and used within the package.
 #'
-#' @return A tidy data frame with different metrics on the
-#' package dependency burden.
+#' @details
+#' Certain imported elements, such as built-in constants, will not
+#' be identified as imported functionality by this function.
 #'
+#' @return A tidy data frame with two columns:
+#'   * `pkg`: name of the package dependency.
+#'   * `fun`: name of the functionality call imported from the
+#'            the dependency in the column `pkg` and used within
+#'            the analyzed package.
+#'
+#' @author Robert Castelo
+#' 
+#' @examples
+#' pkgDepImports('BiocPkgTools')
+#' 
 #' @export
+#' @md
 pkgDepImports <- function(pkg) {
 
   ## fetch all imported functionality
@@ -231,6 +259,9 @@ pkgDepImports <- function(pkg) {
 #' 
 pkgCombDependencyGain <- function(pkg, depdf, maxNbr = 3L) {
   
+  ## check arguments
+  .pkgDepCheckArgs(pkg, depdf)
+
   ## fetch dependency graph
   g <- buildPkgDependencyIgraph(depdf)
   
@@ -273,13 +304,56 @@ pkgCombDependencyGain <- function(pkg, depdf, maxNbr = 3L) {
 #' to obtain metrics on its dependency burden.
 #'
 #' @param depdf a tidy data frame with package dependency information
-#' obtained through the function \code{\link{buildPkgDependencyDataFrame}}
+#' obtained through the function \code{\link{buildPkgDependencyDataFrame}}.
 #'
 #' @return A tidy data frame with different metrics on the
-#' package dependency burden.
+#'         package dependency burden. More concretely, the following columns:
+#'  * `ImportedAndUsed`: number of functionality calls imported and used in
+#'    the package.
+#'  * `Exported`: number of functionality calls exported by the dependency.
+#'  * `Usage`: (`ImportedAndUsed`x 100) / `Exported`. This value provides an
+#'    estimate of what fraction of the functionality of the dependency is
+#'    actually used in the given package.
+#'  * `DepOverlap`: Similarity between the dependency graph structure of the
+#'    given package and the one of the dependency in the corresponding row,
+#'    estimated as the [Jaccard index](https://en.wikipedia.org/wiki/Jaccard_index)
+#'    between the two sets of vertices of the corresponding graphs. Its values
+#'    goes between 0 and 1, where 0 indicates that no dependency is shared, while
+#'    1 indicates that the given package and the corresponding dependency depend
+#'    on an identical subset of packages.
+#'  * `DepGainIfExcluded`: The 'dependency gain' (decrease in the total number
+#'    of dependencies) that would be obtained if this package was excluded
+#'    from the list of direct dependencies.
 #'
+#'  The reported information is ordered by the `Usage` column to facilitate the
+#'  identification of dependencies for which the analyzed package is using a small
+#'  fraction of their functionality and therefore, it could be easier remove them.
+#'  To aid in that decision, the column `DepOverlap` reports the overlap of the
+#'  dependency graph of each dependency with the one of the analyzed package. Here
+#'  a value above, e.g., 0.5, could, albeit not necessarily, imply that removing
+#'  that dependency could substantially lighten the dependency burden of the analyzed
+#'  package.
+#'  
+#'  An `NA` value in the `ImportedAndUsed` column indicates that the function
+#'  `pkgDepMetrics()` could not identify what functionality calls in the analyzed
+#'  package are made to the dependency.
+#'
+#' @author Robert Castelo
+#' @author Charlotte Soneson
+#'
+#' @examples
+#' depdf <- buildPkgDependencyDataFrame(
+#'   dependencies=c("Depends", "Imports"), 
+#'   repo=c("BioCsoft", "CRAN")
+#' )
+#' pkgDepMetrics('BiocPkgTools', depdf)
+#' 
 #' @export
+#' @md
 pkgDepMetrics <- function(pkg, depdf) {
+
+  ## check arguments
+  .pkgDepCheckArgs(pkg, depdf)
 
   ## fetch dependency graph
   g <- buildPkgDependencyIgraph(depdf)

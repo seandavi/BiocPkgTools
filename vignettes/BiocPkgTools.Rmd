@@ -319,8 +319,8 @@ An `NA` value in the `ImportedAndUsed` column indicates that the function
 `pkgDepMetrics()` could not identify what functionality calls in the analyzed
 package are made to the dependency. This may happen because `pkgDepMetrics()`
 has failed to identify the corresponding calls, as it happens with imported
-constants such as `DNA_BASES` from `Biostrings`, or that although the given
-package is importing that dependency, none of its functionality is actually
+built-in constants such as `DNA_BASES` from `Biostrings`, or that although the
+given package is importing that dependency, none of its functionality is actually
 being used. In such a case, this dependency could be safely removed without
 any further change in the analyzed package.
 
