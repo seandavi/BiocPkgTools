@@ -7,13 +7,31 @@
 pkgDepImports(pkg)
 }
 \arguments{
-\item{pkg}{character() name of the packge for which we want
-to obtain metrics on its dependency burden.}
+\item{pkg}{character() name of the package for which we want
+to obtain the functionality calls imported from its dependencies
+and used within the package.}
 }
 \value{
-A tidy data frame with different metrics on the
-package dependency burden.
+A tidy data frame with two columns:
+\itemize{
+\item \code{pkg}: name of the package dependency.
+\item \code{fun}: name of the functionality call imported from the
+the dependency in the column \code{pkg} and used within
+the analyzed package.
+}
 }
 \description{
 Function adapted from 'itdepends::dep_usage_pkg' at https://github.com/r-lib/itdepends
+to obtain the functionality imported and used by a given package.
+}
+\details{
+Certain imported elements, such as built-in constants, will not
+be identified as imported functionality by this function.
+}
+\examples{
+pkgDepImports('BiocPkgTools')
+
+}
+\author{
+Robert Castelo
 }

@@ -76,9 +76,7 @@ biocPkgList = function(version = BiocManager::version(), repo='BioCsoft',
     repos <- BiocManager:::.repositories(site_repository=NA, version = version)
     mask <- !repo %in% names(repos)
     if (any(mask))
-      warning(sprintf("repo %s not found in known repositories. Valid values",
-                      "for repo can be shown by running",
-                      "names(BiocManager::repositories()).",
+      warning(sprintf("repo %s not found in known repositories. Valid values for repo can be shown by running names(BiocManager::repositories()).",
                       paste(repo[mask], collapse=", ")))
     if (all(mask))
       stop("No repo was found in known repositories.")

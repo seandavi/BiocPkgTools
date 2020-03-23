@@ -11,12 +11,56 @@ pkgDepMetrics(pkg, depdf)
 to obtain metrics on its dependency burden.}
 
 \item{depdf}{a tidy data frame with package dependency information
-obtained through the function \code{\link{buildPkgDependencyDataFrame}}}
+obtained through the function \code{\link{buildPkgDependencyDataFrame}}.}
 }
 \value{
 A tidy data frame with different metrics on the
-package dependency burden.
+package dependency burden. More concretely, the following columns:
+\itemize{
+\item \code{ImportedAndUsed}: number of functionality calls imported and used in
+the package.
+\item \code{Exported}: number of functionality calls exported by the dependency.
+\item \code{Usage}: (\code{ImportedAndUsed}x 100) / \code{Exported}. This value provides an
+estimate of what fraction of the functionality of the dependency is
+actually used in the given package.
+\item \code{DepOverlap}: Similarity between the dependency graph structure of the
+given package and the one of the dependency in the corresponding row,
+estimated as the \href{https://en.wikipedia.org/wiki/Jaccard_index}{Jaccard index}
+between the two sets of vertices of the corresponding graphs. Its values
+goes between 0 and 1, where 0 indicates that no dependency is shared, while
+1 indicates that the given package and the corresponding dependency depend
+on an identical subset of packages.
+\item \code{DepGainIfExcluded}: The 'dependency gain' (decrease in the total number
+of dependencies) that would be obtained if this package was excluded
+from the list of direct dependencies.
+}
+
+The reported information is ordered by the \code{Usage} column to facilitate the
+identification of dependencies for which the analyzed package is using a small
+fraction of their functionality and therefore, it could be easier remove them.
+To aid in that decision, the column \code{DepOverlap} reports the overlap of the
+dependency graph of each dependency with the one of the analyzed package. Here
+a value above, e.g., 0.5, could, albeit not necessarily, imply that removing
+that dependency could substantially lighten the dependency burden of the analyzed
+package.
+
+An \code{NA} value in the \code{ImportedAndUsed} column indicates that the function
+\code{pkgDepMetrics()} could not identify what functionality calls in the analyzed
+package are made to the dependency.
 }
 \description{
 Elaborate a report on the dependency burden of a given package.
+}
+\examples{
+depdf <- buildPkgDependencyDataFrame(
+  dependencies=c("Depends", "Imports"), 
+  repo=c("BioCsoft", "CRAN")
+)
+pkgDepMetrics('BiocPkgTools', depdf)
+
+}
+\author{
+Robert Castelo
+
+Charlotte Soneson
 }
