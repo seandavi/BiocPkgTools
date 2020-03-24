@@ -247,8 +247,9 @@ biocBuildEmail <-
                 credentials =
                     blastula::creds(
                         user = paste0(core.id, "@roswellpark.org"),
-                        provider = "office365",
-                        use_ssl = FALSE
+                        host = "smtp.office365.com",
+                        port = 587,
+                        use_ssl = TRUE
                     ), verbose = verbose
             )
             .addEntry(logfile, mainName, mainEmail, pkg, maildate, sendagain)
