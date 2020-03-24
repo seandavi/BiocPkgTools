@@ -245,7 +245,6 @@ biocBuildEmail <-
                     blastula::creds(
                         user = paste0(core.id, "@roswellpark.org"),
                         provider = "office365",
-                        sender_name = core.name,
                         use_ssl = FALSE
                     )
             )
