@@ -15,7 +15,8 @@ biocBuildEmail(
   core.id = NULL,
   textOnly = FALSE,
   dry.run = TRUE,
-  resend = FALSE
+  resend = FALSE,
+  verbose = FALSE
 )
 
 sentHistory()
@@ -48,6 +49,9 @@ system clipboard if the `clipr` package is installed (default: FALSE)}
 It only works for HTML email reports and ignored when `textOnly=TRUE`}
 
 \item{resend}{logical(1) Whether to force a resend of the email}
+
+\item{verbose}{logical(1) Whether to output full email information from
+'smtp_send' (when `dry.run` is `FALSE` and 'blastula' is installed)}
 }
 \value{
 A character string of the email

@@ -142,6 +142,9 @@
 #'
 #' @param resend logical(1) Whether to force a resend of the email
 #'
+#' @param verbose logical(1) Whether to output full email information from
+#'     'smtp_send' (when `dry.run` is `FALSE` and 'blastula' is installed)
+#'
 #' @return A character string of the email
 #'
 #' @export
@@ -149,7 +152,7 @@ biocBuildEmail <-
     function(pkg, version = c("release", "devel"), PS = character(1L),
         emailTemplate = .getTemplatePath(), core.name = NULL,
         core.email = NULL, core.id = NULL, textOnly = FALSE,
-        dry.run = TRUE, resend = FALSE)
+        dry.run = TRUE, resend = FALSE, verbose = FALSE)
 {
     stopifnot(
         is.character(pkg), identical(length(pkg), 1L),
@@ -246,7 +249,7 @@ biocBuildEmail <-
                         user = paste0(core.id, "@roswellpark.org"),
                         provider = "office365",
                         use_ssl = FALSE
-                    )
+                    ), verbose = verbose
             )
             .addEntry(logfile, mainName, mainEmail, pkg, maildate, sendagain)
         }
