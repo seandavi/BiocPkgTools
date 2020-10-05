@@ -27,10 +27,7 @@ getPackageInfo <- function(dir){
         # the next line avoids warnings about unexported
         # functions. see: https://github.com/rstudio/learnr/commit/8cf2ad60993108079f38123300b23d96ef58bd4c
         aut <- asNamespace('utils')$.read_authors_at_R_field(aar)
-        vl <- lapply(aut, FUN=function(name){
-            tmp = strsplit(as.character(name), split="\\s+")[[1]]
-            paste(tmp[1], tmp[2])
-        })
+        vl <- format(aut, include = c("given", "family"))
         Author <- paste(unlist(vl), collapse=", ")
     }
     cbind(Package, Author)
