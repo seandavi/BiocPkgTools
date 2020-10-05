@@ -254,7 +254,7 @@ biocBuildEmail <-
                 from = core.email, to = mainEmail, subject = title,
                 credentials =
                     if (file.exists(credFile)) {
-                        creds_file(credFile)
+                        blastula::creds_file(credFile)
                     } else {
                         blastula::creds(
                             user = paste0(core.id, "@roswellpark.org"),
