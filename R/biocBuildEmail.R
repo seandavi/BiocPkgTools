@@ -125,8 +125,6 @@
 #' @param dry.run logical(1) Display the email without sending to the recipient.
 #'     It only works for HTML email reports and ignored when `textOnly=TRUE`
 #'
-#' @param mainIndex numeric()
-#'
 #' @param emailTemplate character(1) The path to the email template. The default
 #'     path lies in the 'inst' package folder.
 #'
@@ -156,7 +154,7 @@
 #' @export
 biocBuildEmail <-
     function(pkg, version = c("release", "devel"), PS = character(1L),
-        dry.run = TRUE, mainIndex = NULL, emailTemplate = .getTemplatePath(),
+        dry.run = TRUE, emailTemplate = .getTemplatePath(),
         core.name = NULL, core.email = NULL, core.id = NULL,
         textOnly = FALSE, resend = FALSE, verbose = FALSE,
         credFile = "~/.blastula_creds")
