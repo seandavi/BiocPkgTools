@@ -46,8 +46,7 @@ Imports:
     gh,
     RBGL,
     graph,
-    magrittr,
-    data.tree
+    magrittr
 VignetteBuilder: knitr
 Suggests: BiocStyle, knitr, rmarkdown,
     testthat, tm, SnowballC,

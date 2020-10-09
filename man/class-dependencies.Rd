@@ -2,15 +2,25 @@
 % Please edit documentation in R/classDependencies.R
 \name{class-dependencies}
 \alias{class-dependencies}
-\alias{classDepTree}
-\alias{classDepData}
+\alias{buildClassDepGraph}
+\alias{buildClassDepData}
+\alias{plotClassDep}
+\alias{plotClassDepData}
+\alias{plotClassDepGraph}
+\alias{buildClassDepFromPackage}
 \title{Retrieve Class relationships}
 \usage{
-classDepTree(class, includeUnions = FALSE)
+buildClassDepGraph(class, includeUnions = FALSE)
 
-classDepData(class, includeUnions = FALSE)
+buildClassDepData(class, includeUnions = FALSE)
 
-classDepData(class, includeUnions = FALSE)
+plotClassDep(class, includeUnions = FALSE)
+
+plotClassDepData(data)
+
+plotClassDepGraph(g)
+
+buildClassDepFromPackage(pkg)
 }
 \arguments{
 \item{class}{a single \code{character} value defining a \sQuote{S4} class
@@ -23,6 +33,8 @@ included in the result? (default: \code{FALSE})}
 As the title says it should do something with class relationships
 }
 \examples{
-depData <- classDepData("RangedSummarizedExperiment")
-classDepData("RangedSummarizedExperiment")
+depData <- buildClassDepData("RangedSummarizedExperiment")
+depData
+g <- buildClassDepGraph("RangedSummarizedExperiment")
+plotClassDepGraph(g)
 }

@@ -11,14 +11,16 @@
 #' @name class-dependencies
 #'
 #' @importFrom methods getClass is
-#' @importFrom data.tree as.Node
+#' @importFrom igraph graph_from_data_frame
 #'
 #' @export
 #'
 #' @examples
-#' depData <- classDepData("RangedSummarizedExperiment")
-#' classDepData("RangedSummarizedExperiment")
-classDepTree <- function(class, includeUnions = FALSE) {
+#' depData <- buildClassDepData("RangedSummarizedExperiment")
+#' depData
+#' g <- buildClassDepGraph("RangedSummarizedExperiment")
+#' plotClassDepGraph(g)
+buildClassDepGraph <- function(class, includeUnions = FALSE) {
     # input check
     if(!is.logical(includeUnions) && length(includeUnions) != 1L &&
        !is.na(includeUnions)){
@@ -29,15 +31,15 @@ classDepTree <- function(class, includeUnions = FALSE) {
         stop("'class' must be a single character value.", call. = FALSE)
     }
     #
-    data <- classDepData(class = class, includeUnions = includeUnions)
-    dt <- as.Node(data, mode="network")
-    dt
+    data <- buildClassDepData(class = class, includeUnions = includeUnions)
+    g <- igraph::graph_from_data_frame(data)
+    g
 }
 
 #' @rdname class-dependencies
 #'
 #' @export
-classDepData <- function(class, includeUnions = FALSE) {
+buildClassDepData <- function(class, includeUnions = FALSE) {
     # input check
     if(!is.logical(includeUnions) && length(includeUnions) != 1L &&
        !is.na(includeUnions)){
@@ -52,7 +54,7 @@ classDepData <- function(class, includeUnions = FALSE) {
     slotClassData <- .get_s_slot_class_data(class)
     data <- rbind(classData,slotClassData)
     if(!includeUnions){
-        data <- data[data$childUnion != FALSE,]
+        data <- data[data$childUnion == FALSE,]
     }
     data
 }
@@ -169,40 +171,81 @@ classDepData <- function(class, includeUnions = FALSE) {
 }
 
 #' @rdname class-dependencies
+#' @export
+plotClassDep <- function(class, includeUnions = FALSE) {
+    plotClassDepGraph(buildClassDepGraph(class, includeUnions = includeUnions))
+}
+#' @rdname class-dependencies
 #'
-#' @importFrom data.tree GetDefaultTooltip SetGraphStyle SetNodeStyle Traverse
+#' @importFrom igraph graph_from_data_frame
 #'
 #' @export
-classDepData <- function(class, includeUnions = FALSE) {
+plotClassDepData <- function(data) {
+    plotClassDepGraph(igraph::graph_from_data_frame(data))
+}
+#' @rdname class-dependencies
+#'
+#' @importFrom igraph E V degree layout_with_kk
+#' @importFrom graphics strheight strwidth
+#'
+#' @export
+plotClassDepGraph <- function(g) {
     # input check
-    if(!is.logical(includeUnions) && length(includeUnions) != 1L &&
-       !is.na(includeUnions)){
-        stop("'includeUnions' must be TRUE or FALSE.", call. = FALSE)
+    if(!all(require_edge_attr %in% names(edge_attr(g)))){
+        stop("'g' must have the following edge attributes: '",
+             paste(require_edge_attr, collapse = "', '"),"'")
     }
-    if(!is.character(class) && length(class) != 1L &&
-       !is.na(class)){
-        stop("'class' must be a single character value.", call. = FALSE)
-    }
-    #
-    dt <- classDepTree(class = class, includeUnions = includeUnions)
-    # basic styles
-    SetGraphStyle(dt,
-                  rankdir = "TB")
-    SetNodeStyle(dt,
-                 style = "filled,rounded",
-                 shape = "box",
-                 fillcolor = "#87B13F",
-                 tooltip = GetDefaultTooltip)
-    # color
-    FUN_node_blue <- function(node){
-        SetNodeStyle(node, fillcolor = "#1A81C2", inherit = FALSE)
-    }
-    Do(Traverse(dt,
-                filterFun = function(x) {
-                    ans <- x$Get("type")
-                    !is.na(ans) & ans %in% "slot"
-                }),
-       FUN_node_blue)
-    #
-    plot(dt)
+    # common
+    V(g)$size <- nchar(names(V(g)))
+    V(g)$label.family <- "sans"
+    V(g)$label <- V(g)$name
+    # set vertex color
+    color <- vapply(names(V(g)),
+                    function(name){
+                        virtual <- unique(E(g)[from(name)]$parentVirtual)
+                        if(length(virtual) == 0 || virtual) {
+                            "#1a81c2"
+                        } else {
+                            "#87b13f"
+                        }
+                    },
+                    character(1))
+    V(g)$color <- color
+    label.color <- color
+    label.color[label.color == "#1a81c2"] <- "white"
+    label.color[label.color == "#87b13f"] <- "black"
+    V(g)$label.color <- label.color
+    # set edge color
+    color <- E(g)$type
+    color[color == "object"] <- "orange"
+    color[color == "slot"] <- "gray"
+    E(g)$color <- color
+    # set edge type
+    lty <- E(g)$type
+    lty[lty == "object"] <- "solid"
+    lty[lty == "slot"] <- "dotted"
+    E(g)$lty <- lty
+    # other edge settings
+    E(g)$width <- 2
+    # root
+    root <- which(degree(g, v = V(g), mode = "in")==0, useNames = T)
+    V(g)[from(root)]$color <- "red"
+    # plot
+    co <- layout_with_kk(g)
+    plot(0, type="n", ann=FALSE, axes=FALSE, xlim = extendrange(co[,1]),
+         ylim=extendrange(co[,2]))
+    plot(g, layout = co, rescale=FALSE, add=TRUE,
+         vertex.shape="rectangle",
+         vertex.size = (strwidth(V(g)$label) + strwidth("oo")) * 100,
+         vertex.size2 = strheight("I") * 2 * 100)
+}
+
+require_edge_attr <- c("type",
+                      "parentVirtual", "parentUnion",
+                      "childVirtual", "childUnion")
+
+#' @rdname class-dependencies
+#' @export
+buildClassDepFromPackage <- function(pkg){
+
 }
