@@ -7,6 +7,11 @@
 #'   name
 #' @param includeUnions \code{TRUE} or \code{FALSE}: Should union definitions
 #'   included in the result? (default: \code{FALSE})
+#' @param data a \code{data.frame} with compatible columns. See output of
+#'   \code{buildClassDepData}
+#' @param g an \code{igraph} object with compatible edge attributes. See output
+#'   of \code{buildClassDepGraph}
+#' @param pkg a single \code{character} value defining a package name
 #'
 #' @name class-dependencies
 #'
@@ -16,6 +21,7 @@
 #' @export
 #'
 #' @examples
+#' library("SummarizedExperiment")
 #' depData <- buildClassDepData("RangedSummarizedExperiment")
 #' depData
 #' g <- buildClassDepGraph("RangedSummarizedExperiment")
@@ -88,9 +94,15 @@ buildClassDepData <- function(class, includeUnions = FALSE) {
     unionSlotClassDefs <- lapply(classDef@slots[isUnion], FUN)
     slotClassDefs <- c(notUnionSlotClassDefs,
                        do.call(c,unionSlotClassDefs))
+    if(length(slotClassDefs) == 0L){
+        return(NULL)
+    }
     # create class -> slot link
     child <- vapply(slotClassDefs,
                     function(scd){
+                        if(length(scd) == 0L){
+                            return(NA_character_)
+                        }
                         scd[[1L]]@subClass
                     }, character(1))
     childVirtual <- .is_s_virtual(child)
@@ -132,6 +144,9 @@ buildClassDepData <- function(class, includeUnions = FALSE) {
 .is_s_virtual <- function(x){
     unname(vapply(x,
                   function(e){
+                      if(is.na(e)){
+                          return(FALSE)
+                      }
                       getClass(e)@virtual
                   },logical(1)))
 }
@@ -172,6 +187,17 @@ buildClassDepData <- function(class, includeUnions = FALSE) {
 
 #' @rdname class-dependencies
 #' @export
+buildClassDepFromPackage <- function(pkg, includeUnions = FALSE){
+    exports <- getNamespaceExports(pkg)
+    classNames <- exports[grepl(".__C__",exports)]
+    classNames <- gsub(".__C__","",classNames)
+    data <- lapply(classNames, buildClassDepData, includeUnions = includeUnions)
+    names(data) <- classNames
+    data
+}
+
+#' @rdname class-dependencies
+#' @export
 plotClassDep <- function(class, includeUnions = FALSE) {
     plotClassDepGraph(buildClassDepGraph(class, includeUnions = includeUnions))
 }
@@ -185,8 +211,9 @@ plotClassDepData <- function(data) {
 }
 #' @rdname class-dependencies
 #'
-#' @importFrom igraph E V degree layout_with_kk
+#' @importFrom igraph E V degree layout_with_kk edge_attr V<- E<- 
 #' @importFrom graphics strheight strwidth
+#' @importFrom grDevices extendrange
 #'
 #' @export
 plotClassDepGraph <- function(g) {
@@ -200,6 +227,7 @@ plotClassDepGraph <- function(g) {
     V(g)$label.family <- "sans"
     V(g)$label <- V(g)$name
     # set vertex color
+    from <- function(){}
     color <- vapply(names(V(g)),
                     function(name){
                         virtual <- unique(E(g)[from(name)]$parentVirtual)
@@ -229,7 +257,7 @@ plotClassDepGraph <- function(g) {
     E(g)$width <- 2
     # root
     root <- which(degree(g, v = V(g), mode = "in")==0, useNames = T)
-    V(g)[from(root)]$color <- "red"
+    V(g)[root]$color <- "red"
     # plot
     co <- layout_with_kk(g)
     plot(0, type="n", ann=FALSE, axes=FALSE, xlim = extendrange(co[,1]),
@@ -243,9 +271,3 @@ plotClassDepGraph <- function(g) {
 require_edge_attr <- c("type",
                       "parentVirtual", "parentUnion",
                       "childVirtual", "childUnion")
-
-#' @rdname class-dependencies
-#' @export
-buildClassDepFromPackage <- function(pkg){
-
-}

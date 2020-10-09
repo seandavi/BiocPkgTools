@@ -45,8 +45,7 @@ Imports:
     jsonlite,
     gh,
     RBGL,
-    graph,
-    magrittr
+    graph
 VignetteBuilder: knitr
 Suggests: BiocStyle, knitr, rmarkdown,
     testthat, tm, SnowballC,
