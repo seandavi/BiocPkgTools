@@ -5,8 +5,7 @@ utils::globalVariables(c(".data", "biocViewsVocab"))
 #' @details Note that Bioconductor package download
 #' stats are not version-specific.
 #'
-#' @importFrom dplyr mutate
-#' @importFrom magrittr %>%
+#' @importFrom dplyr mutate %>%
 #' @importFrom utils read.table
 #' @importFrom tibble as_tibble
 #'
