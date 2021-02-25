@@ -4,10 +4,18 @@
 \alias{problemPage}
 \title{generate hyperlinked HTML for build reports for Bioc packages}
 \usage{
-problemPage(authorPattern = "V.*Carey", ver = "devel", includeOK = FALSE)
+problemPage(
+  authorPattern = "V.*Carey",
+  dependsOn,
+  ver = "devel",
+  includeOK = FALSE
+)
 }
 \arguments{
 \item{authorPattern}{character(1) regexp used with grep() to filter author field of package DESCRIPTION for listing}
+
+\item{dependsOn}{character(1) name of a Bioconductor package. The function will return the status of packages
+that directly depend on this package  Can only be used when 'authorPattern' is the empty string.}
 
 \item{ver}{character(1) version tag for Bioconductor}
 
@@ -19,13 +27,17 @@ are in WARNING or ERROR state.}
 DT::datatable call; if assigned to a variable, must evaluate to get the page to appear
 }
 \description{
-This is a quick way to get an HTML report of a developer's packages.
-The function is keyed to filter based on maintainer name.
+This is a quick way to get an HTML report of packages maintained by a specific developer
+or which depend directly on a specified package. The function is keyed to filter based on either 
+the maintainer name or by using the 'Depends', 'Suggests' and 'Imports' fields in package descriptions.
 }
 \examples{
-if (interactive()) problemPage()
+if (interactive()) {
+  problemPage()
+  problemPage(dependsOn = "limma")
+}
 
 }
 \author{
-Vince Carey
+Vince Carey, Mike L. Smith
 }

@@ -14,3 +14,12 @@ test_that("data is at least close to correct", {
   expect_gte(nrow(ppage$x$data), nrow(ppage2$x$data))
 })
 
+test_that("the 'dependsOn' argument can be used", {
+  expect_silent(problemPage(authorPattern = "", dependsOn = "limma")) %>%
+    expect_is('datatables')
+})
+
+test_that("'authorPattern' trumps 'dependsOn'", {
+  expect_warning(problemPage(authorPattern = "V.*Carey", dependsOn = "limma")) %>%
+    expect_equal(ppage2)
+})
