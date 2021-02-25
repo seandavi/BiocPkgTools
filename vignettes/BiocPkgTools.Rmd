@@ -61,11 +61,20 @@ head(biocBuildReport())
 
 Because developers may be interested in a quick view of their own
 packages, there is a simple function, `problemPage`, to produce an HTML report of
-the build status of packages matching a given author *regex*. The default is
-to report only "problem" build statuses (ERROR, WARNING).
+the build status of packages matching a given author *regex* supplied to the `authorPattern` argument. 
+The default is to report only "problem" build statuses (ERROR, WARNING).
 
 ```{r eval=FALSE}
-problemPage()
+problemPage(authorPattern = "V.*Carey")
+```
+
+In similar fashion, maintainers of packages that have many downstream packages that
+depend on them may wish to check that a change they introduced hasn't suddenly broken
+a large number of these.  You can use the `dependsOn` argument to produce the summary report
+of those packages that "depend on" the given package.
+
+```{r eval=FALSE}
+problemPage(dependsOn = "limma")
 ```
 
 When run in an interactive environment, the `problemPage` function 
@@ -86,6 +95,17 @@ head(biocDownloadStats())
 
 The download statistics reported are for ***all available versions*** of a package.
 There are no separate, publicly available statistics broken down by version.
+
+The majority of Bioconductor Software packages are also available through other channels
+such as Anaconda, who also provided download statistics for packages installed from 
+their repositories.  Access to these counts is provided by the `anacondaDownloadStats` function:
+
+```{r}
+head(anacondaDownloadStats())
+```
+
+Note that Anaconda do not provide counts for distinct IP addresses, but this column is included for
+compatibility with the Bioconductor count tables.
 
 # Package details
 
