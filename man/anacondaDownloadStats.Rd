@@ -12,7 +12,8 @@ A \code{data.frame} of download statistics for
 all Bioconductor packages distributed by Anaconda, in tidy format.
 Note: Anaconda do not provide counts for unique IP addresses.  This column
 is listed as \code{NA} for all packages to provide continuity with data from
-Bioconductor.org obtained by \code{\link{biocDownloadStats()}}
+Bioconductor.org obtained by \code{\link{biocDownloadStats}}.  The counts are
+updated monthly, so do not expect to see counts for the current month.
 }
 \description{
 Get download statistics for Bioconductor packages distributed via
@@ -20,12 +21,15 @@ Anaconda.
 }
 \details{
 Anaconda provide daily download counts for all software packages
-they distribute.  The are summarised into monthly tables of counts and made 
+they distribute.  These are summarised into monthly tables of counts and made 
 available from https://github.com/grimbough/anaconda-download-stats
 This function provides a mechanism to download these monthly counts for 
-Bioconductor packages distributed through Anaconda.#'
+Bioconductor packages distributed through Anaconda.
 }
 \examples{
 anacondaDownloadStats()
 
+}
+\author{
+Mike L. Smith
 }
