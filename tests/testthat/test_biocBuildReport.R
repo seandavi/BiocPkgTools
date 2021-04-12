@@ -9,9 +9,15 @@ test_that("catch non-character version parameter ", {
     expect_error(biocBuildReport(2.3))
 })
 
+test_that("biocBuildReport returns appropriate class", {
+    expect_true(tibble::is_tibble(bioc3.5_build))
+    expect_true(tibble::is_tibble(bioc3.12_build))
+})
+
 test_that("nrow is correct", {
   expect_equal(nrow(bioc3.5_build), 15003)
-  expect_equal(nrow(bioc3.12_build), 27466)
+  # This test fails when the build system changes
+  # expect_equal(nrow(bioc3.12_build), 27466)
 })
 
 test_that("ncol is correct", {
