@@ -7,7 +7,7 @@ Authors@R: c(
     person("Shian", "Su", role=c("aut", "ctb"), email = "su.s@wehi.edu.au"),
     person("Lori", "Shepherd", role="ctb", email = "Lori.Shepherd@roswellpark.org"),
     person("Marcel", "Ramos", role="ctb", email = "marcel.ramos@roswellpark.org"),
-    person("Felix", "Ernst", role="ctb"),
+    person("Felix G.M.", "Ernst", role="ctb", email = "felix.gm.ernst@outlook.com"),
     person("Charlotte", "Soneson", role="ctb", email = "charlottesoneson@gmail.com"),
     person("Martin", "Morgan", role="ctb", email = "martin.morgan@roswellpark.org"),
     person("Vince", "Carey", role="ctb", email="stvjc@channing.harvard.edu"),
@@ -49,8 +49,8 @@ Imports:
     magrittr
 VignetteBuilder: knitr
 Suggests: BiocStyle, knitr, rmarkdown,
-    testthat, tm, SnowballC,
-    visNetwork, clipr, blastula, kableExtra
+    testthat, tm, SnowballC, magrittr,
+    visNetwork, clipr, blastula, kableExtra, DiagrammeR, SummarizedExperiment
 License: MIT + file LICENSE
 BugReports: https://github.com/seandavi/BiocPkgTools/issues/new
 URL: https://github.com/seandavi/BiocPkgTools
