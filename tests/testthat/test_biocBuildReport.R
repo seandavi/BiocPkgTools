@@ -1,7 +1,8 @@
 context("biocBuildReport")
 library(BiocPkgTools)
 
-bioc3.5_build = biocBuildReport("3.5")
+# bioc3.5_build = biocBuildReport("3.5")
+bioc3.12_build = biocBuildReport("3.12")
 
 
 test_that("catch non-character version parameter ", {

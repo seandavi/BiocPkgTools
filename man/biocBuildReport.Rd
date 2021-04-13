@@ -4,7 +4,7 @@
 \alias{biocBuildReport}
 \title{Tidy Bioconductor build report results}
 \usage{
-biocBuildReport(version = as.character(BiocManager::version()))
+biocBuildReport(version = BiocManager::version())
 }
 \arguments{
 \item{version}{character(1) the version number
@@ -27,11 +27,10 @@ a tidy data frame version of the build report.
 }
 \examples{
 
-# Set the stage--what version of Bioc am
-# I using?
+# Set the stage--what version of Bioc am I using?
 BiocManager::version()
 
-latest_build = biocBuildReport()
+latest_build <- biocBuildReport()
 head(latest_build)
 
 }
