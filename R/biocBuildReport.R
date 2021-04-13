@@ -18,7 +18,7 @@
 #'
 #' @importFrom readr read_lines
 #' @importFrom tibble as_tibble
-#' @importFrom rvest html_text html_nodes
+#' @importFrom rvest html_text html_text2 html_nodes
 #' @importFrom xml2 read_html
 #' @import rex
 #' @importFrom dplyr left_join
@@ -26,22 +26,18 @@
 #'
 #' @examples
 #'
-#' # Set the stage--what version of Bioc am
-#' # I using?
+#' # Set the stage--what version of Bioc am I using?
 #' BiocManager::version()
 #'
-#' latest_build = biocBuildReport()
+#' latest_build <- biocBuildReport()
 #' head(latest_build)
 #'
 #' @export
-biocBuildReport <- function(version=as.character(BiocManager::version())) {
+biocBuildReport <- function(version=BiocManager::version()) {
   requireNamespace("rex")
-    if(!is.character(version)) {
-        stop('version should be a character string representing the Bioconductor version, such as "3.6"')
-    }
-  url = sprintf('https://bioconductor.org/checkResults/%s/bioc-LATEST/STATUS_DB.txt',version)
-  dat = readr::read_lines(url)
-  z = re_matches(dat,rex(
+  url <- sprintf('https://bioconductor.org/checkResults/%s/bioc-LATEST/STATUS_DB.txt',version)
+  dat <- readr::read_lines(url)
+  z <- re_matches(dat,rex(
     start,
     capture(except_any_of('#'),name='pkg'),
     '#',
@@ -53,47 +49,55 @@ biocBuildReport <- function(version=as.character(BiocManager::version())) {
   ))
 
 
-  dat = xml2::read_html(sprintf('https://bioconductor.org/checkResults/%s/bioc-LATEST/',version))
+  dat <- xml2::read_html(sprintf('https://bioconductor.org/checkResults/%s/bioc-LATEST/',version))
 
-  rowspan = length(html_text(html_nodes(dat,xpath='/html/body/table[@class="node_specs"]/tr[@class!=""]')))
+  rowspan <- length(html_text(html_nodes(dat,xpath='/html/body/table[@class="node_specs"]/tr[@class!=""]')))
   if(rowspan > 5L || rowspan < 2L){
     warning("Detected an unusual number of builders == ",rowspan," ... ")
   }
-  
-  ## the format of the build report page changed for BioC 3.12
-  ## might be better to check version with BiocManager:::.version_validate()
-  if(version %in% c("release", "devel") || numeric_version(version) > 3.11) {
-    pkgnames = html_text(html_nodes(dat,xpath=sprintf('/html/body/table[@id="THE_BIG_GCARD_LIST"]/tbody[contains(@class, "gcard")]/tr/td[@rowspan="%s"]', rowspan)))
-  } else { 
-    pkgnames = html_text(html_nodes(dat,xpath=sprintf('/html/body/table[@class="mainrep"]/tr/td[@rowspan="%s"]',rowspan)))
-  }
+  res <- html_nodes(dat,
+    xpath = '/html/body/table[@id="THE_BIG_GCARD_LIST"]') %>%
+    html_nodes("tr") %>% html_nodes("td") %>% html_nodes("b") %>%
+    html_nodes("a")
+  pkgnames <- html_text(res)
+  versions <- html_nodes(dat,
+    xpath = '/html/body/table[@id="THE_BIG_GCARD_LIST"]') %>%
+    html_nodes(xpath = "//td[@rowspan=3]") %>% html_nodes("b") %>% html_text2()
+  versions <- vapply(strsplit(versions, "\\s"), `[`, character(1L), 2L)
+  # scRepertoire has a malformed DESCRIPTION file (breaking this code)
+  maints <- html_nodes(dat,
+    xpath = '//*[@id="THE_BIG_GCARD_LIST"]/tbody/tr/td[@rowspan=3]/text()') %>%
+    html_text2()
+  # temporary until fixed
+  maints <- Filter(function(x) nchar(x) > 1, maints)
+  maints <- append(maints, NA, which(pkgnames == "scRepertoire"))
+  # maints <- maints[c(FALSE, TRUE)]
 
-  y = re_matches(pkgnames,
-                 rex(
-                   start,
-                   # matches .standard_regexps()$valid_package_name
-                   capture(alpha,any_of(alnum,"."),alnum, name = "pkg"),
-                   maybe(blank_pcre_utf8),
-                   # matches .standard_regexps()$valid_package_version
-                   capture(between(group(digits,character_class(".-")),1,""),digits, name = "version"),
-                   maybe(blank_pcre_utf8),
-                   capture(anything,name='author'),
-                   "Last",anything,"Commit:",
-                   capture(anything,name="commit"),
-                   "Last",anything,'Changed',anything,"Date:",any_non_alnums,
-                   capture(any_of(list(digit,'-',blank_pcre_utf8,':')),name='last_changed_date')
-                 ))
-  y = y[!is.na(y$pkg),]
+  meta <- html_nodes(dat,
+    xpath = '//*[@id="THE_BIG_GCARD_LIST"]/tbody/tr/td[@rowspan=3]')
+  values <- meta %>% html_nodes("table") %>% html_text2()
+  values <- trimws(gsub("Last.Commit:|.Last.Changed.Date", "", values))
+  commitdate <- unlist(strsplit(values, ": "))
+  commits <- commitdate[c(TRUE, FALSE)]
+  dates <- commitdate[!c(TRUE, FALSE)]
 
-  df = suppressMessages(y %>% left_join(z)) # just suppress "Joining by...."
-  df = as_tibble(df)
-  if(nrow(df) == 0){
+  y <- data.frame(
+    pkg = pkgnames,
+    author = maints,
+    version = versions,
+    last_commit = commits,
+    last_changed_date = as.POSIXct(dates)
+  )
+  y <- y[!is.na(y$pkg),]
+
+  df <- suppressMessages(left_join(y, z)) # just suppress "Joining by...."
+  df <- as_tibble(df)
+  if (!nrow(df)) {
     warning("No Bioconductor build report found.")
     return(df)
   }
-  df[['bioc_version']]=version
-  df[['last_changed_date']] = as.POSIXct(df[['last_changed_date']])
-  attr(df,'last_changed_date') = as.POSIXct(df[['last_changed_date']][1])
+  df[['bioc_version']] <- as.character(version)
+  attr(df,'last_changed_date') <- as.POSIXct(df[['last_changed_date']][1])
   attr(df,'class') = c('biocBuildReport',class(df))
   df
 }
