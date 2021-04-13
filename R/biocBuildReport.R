@@ -23,6 +23,7 @@
 #' @import rex
 #' @importFrom dplyr left_join
 #' @importFrom BiocManager version
+#' @importFrom magrittr %>%
 #'
 #' @examples
 #'

@@ -43,8 +43,6 @@
 #'
 #' @param ... For \code{pkgToolsCache}, arguments are passed to \code{setCache}
 #'
-#' @importFrom rappdirs user_cache_dir
-#'
 #' @export
 setCache <-
     function(directory = tools::R_user_dir("BiocPkgTools", "cache"),
