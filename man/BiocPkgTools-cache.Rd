@@ -7,7 +7,7 @@
 \title{Manage cache for BiocPkgTools}
 \usage{
 setCache(
-  directory = rappdirs::user_cache_dir("BiocPkgTools"),
+  directory = tools::R_user_dir("BiocPkgTools", "cache"),
   verbose = TRUE,
   ask = interactive()
 )
@@ -39,7 +39,7 @@ a cache if not already created. A specific directory can be used via
 \section{setCache}{
 
 Specify the directory location of the data cache. By default, it will
-got to the user's home/.cache and "appname" directory as specified by
-\link[rappdirs]{user_cache_dir}. (default appname: pkgToolsCache)
+got to the user's home/.cache/R and "appname" directory as specified by
+\code{tools::R_user_dir} (with package="BiocPkgTools" and which="cache").
 }
 

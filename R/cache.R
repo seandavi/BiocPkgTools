@@ -32,8 +32,8 @@
 #'
 #' @section setCache:
 #' Specify the directory location of the data cache. By default, it will
-#' got to the user's home/.cache and "appname" directory as specified by
-#' \link[rappdirs]{user_cache_dir}. (default appname: pkgToolsCache)
+#' got to the user's home/.cache/R and "appname" directory as specified by
+#' \code{tools::R_user_dir} (with package="BiocPkgTools" and which="cache").
 #'
 #' @param directory The file location where the cache is located. Once set
 #' future downloads will go to this folder.
@@ -45,7 +45,7 @@
 #'
 #' @export
 setCache <-
-    function(directory = rappdirs::user_cache_dir("BiocPkgTools"),
+    function(directory = tools::R_user_dir("BiocPkgTools", "cache"),
         verbose = TRUE,
         ask = interactive())
 {
