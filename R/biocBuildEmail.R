@@ -231,6 +231,7 @@ biocBuildEmail <-
 
     if (textOnly) {
         send <- strsplit(send, "---")[[1L]][[4L]]
+        send <- paste(mainEmail, title, send, sep = "\n")
         if (clipr::clipr_available()) {
             clipr::write_clip(send)
             message("Message copied to clipboard")
@@ -241,7 +242,7 @@ biocBuildEmail <-
         tfile <- tempfile(fileext = ".Rmd")
         writeLines(send, tfile)
         biocmail <- blastula::render_email(tfile)
-        if (!dry.run && !sent_status) {
+        if (!dry.run && (!sent_status || sendagain)) {
             blastula::smtp_send(email = biocmail,
                 from = core.email, to = mainEmail, subject = title,
                 credentials =
