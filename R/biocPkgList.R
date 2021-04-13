@@ -1,7 +1,7 @@
 #' @import biocViews
 #' @importFrom RBGL transitive.closure
 .computeBiocViewsTransitiveClosure = function() {
-  data("biocViewsVocab", package = "biocViews")
+  data("biocViewsVocab", package = "biocViews", envir = environment())
   return(RBGL::transitive.closure(biocViewsVocab))
 }
 

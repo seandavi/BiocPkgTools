@@ -59,7 +59,14 @@ biocBuildReport <- function(version=as.character(BiocManager::version())) {
   if(rowspan > 5L || rowspan < 2L){
     warning("Detected an unusual number of builders == ",rowspan," ... ")
   }
-  pkgnames = html_text(html_nodes(dat,xpath=sprintf('/html/body/table[@class="mainrep"]/tr/td[@rowspan="%s"]',rowspan)))
+  
+  ## the format of the build report page changed for BioC 3.12
+  ## might be better to check version with BiocManager:::.version_validate()
+  if(version %in% c("release", "devel") || numeric_version(version) > 3.11) {
+    pkgnames = html_text(html_nodes(dat,xpath=sprintf('/html/body/table[@id="THE_BIG_GCARD_LIST"]/tbody[contains(@class, "gcard")]/tr/td[@rowspan="%s"]', rowspan)))
+  } else { 
+    pkgnames = html_text(html_nodes(dat,xpath=sprintf('/html/body/table[@class="mainrep"]/tr/td[@rowspan="%s"]',rowspan)))
+  }
 
   y = re_matches(pkgnames,
                  rex(
