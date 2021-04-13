@@ -48,7 +48,7 @@ Imports:
     graph
 VignetteBuilder: knitr
 Suggests: BiocStyle, knitr, rmarkdown,
-    testthat, tm, SnowballC,
+    testthat, tm, SnowballC, magrittr,
     visNetwork, clipr, blastula, kableExtra, DiagrammeR, SummarizedExperiment
 License: MIT + file LICENSE
 BugReports: https://github.com/seandavi/BiocPkgTools/issues/new
