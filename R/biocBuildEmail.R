@@ -203,8 +203,6 @@ biocBuildEmail <-
 
     if (length(mainName) > 1L)
         mainName <- paste0(mainName, collapse = " & ")
-    if (length(mainEmail) > 1L)
-        mainEmail <- paste0(mainEmail, collapse = ", ")
 
     if (length(version) == 2L)
         vers <- paste(version, collapse = " and ")
