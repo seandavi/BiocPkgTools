@@ -192,8 +192,9 @@ biocBuildEmail <-
 
     listall <- biocPkgList(version = version)
     pkgMeta <- listall[listall[["Package"]] %in% pkg, ]
-    if(nrow(pkgMeta) == 0L) stop("No pkg '",pkg,"' found on Bioconductor for ",
-                                 "version '",version,"'")
+    if (!nrow(pkgMeta))
+        stop("No pkg '",pkg,"' found on Bioconductor for ",
+            "version '",version,"'")
 
     mainInfo <- pkgMeta[["Maintainer"]][[1L]]
 
@@ -217,7 +218,7 @@ biocBuildEmail <-
     repolink <- paste0(repolink, collapse = "\n")
 
     if (nchar(PS))
-        PS <- paste0("P.S. ", PS)
+        PS <- paste0("**P.S.** ", PS)
 
     firstname <- vapply(strsplit(core.name, "\\s"), `[`, character(1L), 1L)
     mail <- paste0(readLines(emailTemplate), collapse = "\n")

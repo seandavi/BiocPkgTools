@@ -1,5 +1,5 @@
 ---
-title: "%s Bioconductor Package Report"
+title: "%s Bioconductor Package Notification"
 author:
 - name: "%s"
   affiliation:
@@ -16,15 +16,15 @@ output:
 ---
 
 
-Dear %s,
+Hi %s,
 
 I am contacting you concerning the `%s` package, on the %s
 branch of Bioconductor, for which you are listed as the maintainer.
 
 The latest build/check report shows that your package is failing on one or more
 platforms.
-Please resolve the issues for your package's continued inclusion in
-Bioconductor.
+Please resolve the issues before the next [Bioconductor release](https://www.bioconductor.org/developers/release-schedule/)
+for your package's continued inclusion in Bioconductor.
 
 %s
 
