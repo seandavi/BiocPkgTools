@@ -30,12 +30,12 @@ biocPkgRanges(
 Grab build report results from STATUS_DB for a particular package range
 }
 \examples{
-
+\dontrun{
 biocPkgRanges(
     start = "a4", end = "CMA",
     condition = "ERROR", version = "devel"
 )
-
+}
 }
 \author{
 Vincent J. Carey

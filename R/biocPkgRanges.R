@@ -1,27 +1,27 @@
 #' Grab build report results from STATUS_DB for a particular package range
-#' 
+#'
 #' @param start character(1) alphabetically first package name in range
-#' 
+#'
 #' @param end character(1) alphabetically last package name in range
-#' 
+#'
 #' @param condition character(1) condition string, typically 'ERROR' or
 #'     'WARNING'
-#' 
+#'
 #' @param phase character(1) string for phase of event:
 #'     'install', 'checksrc', or 'buildsrc' (default)
 #'
 #' @param version character(1) string indication Bioconductor version, either
 #'     'devel' (default) or 'release'
-#' 
+#'
 #' @author Vincent J. Carey
-#' 
+#'
 #' @examples
-#' 
+#' \dontrun{
 #' biocPkgRanges(
 #'     start = "a4", end = "CMA",
 #'     condition = "ERROR", version = "devel"
 #' )
-#' 
+#' }
 #' @export
 biocPkgRanges <-
     function(start, end, condition = c("ERROR", "WARNINGS"),
@@ -43,7 +43,7 @@ biocPkgRanges <-
                 BiocFileCache::bfcdownload(cache, rid, ask = FALSE)
             BiocFileCache::bfcrpath(cache, rids = rid)
         }
-    
+
     dat <- readLines(status_file)
     sdat <- strsplit(dat, "#")
     sdat <- data.frame(do.call(rbind, sdat), row.names=NULL)
