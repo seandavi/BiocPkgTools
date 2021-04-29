@@ -25,6 +25,7 @@ Imports:
     BiocManager,
     biocViews,
     tibble,
+    magrittr,
     methods,
     rlang,
     tidyselect,
@@ -47,7 +48,7 @@ Imports:
     graph
 VignetteBuilder: knitr
 Suggests: BiocStyle, knitr, rmarkdown,
-    testthat, tm, SnowballC, magrittr,
+    testthat, tm, SnowballC,
     visNetwork, clipr, blastula, kableExtra, DiagrammeR, SummarizedExperiment
 License: MIT + file LICENSE
 BugReports: https://github.com/seandavi/BiocPkgTools/issues/new
