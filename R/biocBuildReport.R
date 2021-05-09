@@ -69,9 +69,14 @@ biocBuildReport <- function(version=BiocManager::version()) {
   maints <- html_nodes(dat,
     xpath = '//*[@id="THE_BIG_GCARD_LIST"]/tbody/tr/td[@rowspan=3]/text()') %>%
     html_text2()
-  # temporary until fixed
   maints <- Filter(function(x) nchar(x) > 1, maints)
-  maints <- append(maints, NA, which(pkgnames == "scRepertoire"))
+  # temporary until fixed (problem still there in 3.12, fixed in 3.13)
+  if (length(maints) != length(pkgnames)) {
+    warning("Lengths of maintainer and pkgnames vectors differ. ",
+            "Fixing scRepertoire (problem in 3.12). If the issue persists, ",
+            "please locate the problematic package.")
+    maints <- append(maints, NA, which(pkgnames == "scRepertoire"))
+  }
   # maints <- maints[c(FALSE, TRUE)]
 
   meta <- html_nodes(dat,
