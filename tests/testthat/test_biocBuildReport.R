@@ -2,12 +2,7 @@ context("biocBuildReport")
 library(BiocPkgTools)
 
 # test release build report
-bioc3.12_build = biocBuildReport("3.12")
-
-
-test_that("catch non-character version parameter ", {
-    expect_error(biocBuildReport(2.3))
-})
+bioc3.12_build <- biocBuildReport("3.12")
 
 test_that("biocBuildReport returns appropriate class", {
     expect_true(tibble::is_tibble(bioc3.12_build))
