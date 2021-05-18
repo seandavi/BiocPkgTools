@@ -1,21 +1,49 @@
-BiocPkgTools v1.2
-=================
+CHANGES IN VERSION 1.10.0
+-------------------------
 
-* Add HTML Package Report template as RStudio rmarkdown
-  template to quickly generate overviews of package stats
-  for grants, etc.
-* Add parent terms to biocViews to support better
-  search and browse by term
+NEW FEATURES
 
-Bug fixes
----------
-* Fix small css bug that caused paragraph tag
-  mis-rendering in vignettes when biocExplore()
-  used.
-* Completed list column extraction for all list
-  columns in biocPkgList
+    o `biocPkgRanges` allows for easy identification of package statuses from
+      the build report for a specified range of packages (ordered
+      alphabetically)
+    o `biocBuildEmail` provides core-team functionality for sending email
+      notifications to package maintainers
 
-BiocPkgTools v1.0.0 (Release date: 2018-10-31)
-==============
+SIGNIFICANT USER-VISIBLE CHANGES
 
-* Bioc release
+    o `biocBuildEmail` allows for saving a credentials file for email
+      authentication via the `credFile` argument
+    o `setCache` uses `tools::R_user_dir("BiocPkgTools", "cache")` instead of
+      `rappdirs::user_cache_dir`
+
+BUG FIXES
+
+    o `biocBuildReport` accounts for some packages whose `DESCRIPTION` file is
+      malformed
+    o `biocBuildReport` updated to changes in the build report format
+
+CHANGES IN VERSION 1.2.0
+-------------------------
+
+NEW FEATURES
+
+    o Add HTML Package Report template as RStudio rmarkdown
+      template to quickly generate overviews of package stats
+      for grants, etc.
+    o Add parent terms to biocViews to support better
+      search and browse by term
+
+BUG FIXES
+
+    o Fix small css bug that caused paragraph tag
+      mis-rendering in vignettes when biocExplore()
+      used.
+    o Completed list column extraction for all list
+      columns in biocPkgList
+
+CHANGES IN VERSION 1.0.0 
+-------------------------
+
+NEW FEATURES
+
+    o Bioc release date: 2018-10-31
