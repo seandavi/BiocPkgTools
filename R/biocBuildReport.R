@@ -36,7 +36,7 @@
 #' @export
 biocBuildReport <- function(version=BiocManager::version()) {
   requireNamespace("rex")
-  url <- sprintf('https://bioconductor.org/checkResults/%s/bioc-LATEST/STATUS_DB.txt',version)
+  url <- get_build_status_db_url(version)
   dat <- readr::read_lines(url)
   z <- re_matches(dat,rex(
     start,
@@ -106,6 +106,15 @@ biocBuildReport <- function(version=BiocManager::version()) {
   attr(df,'last_changed_date') <- as.POSIXct(df[['last_changed_date']][1])
   attr(df,'class') = c('biocBuildReport',class(df))
   df
+}
+
+get_build_status_db_url <- function(version=BiocManager::version()) {
+  if (numeric_version(version) >= numeric_version("3.13")) {
+    status_db_file <- "BUILD_STATUS_DB.txt"
+  } else {
+    status_db_file <- "STATUS_DB.txt"
+  }
+  sprintf('https://bioconductor.org/checkResults/%s/bioc-LATEST/%s',version,status_db_file)
 }
 
 blank_pcre_utf8 <- rex:::character_class("\\p{Zs}")
