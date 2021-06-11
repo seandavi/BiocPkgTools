@@ -29,7 +29,7 @@ biocPkgRanges <-
 {
     condition <- match.arg(condition)
     version <- match.arg(version)
-    status_db <- get_build_status_db_url(version)
+    build_status_db <- get_build_status_db_url(version)
     cache <- .get_cache()
     rid <- BiocFileCache::bfcquery(cache, build_status_db, exact = TRUE)[["rid"]]
     status_file <-

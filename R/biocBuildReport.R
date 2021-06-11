@@ -109,7 +109,7 @@ biocBuildReport <- function(version=BiocManager::version()) {
 }
 
 get_build_status_db_url <- function(version) {
-  if (package_version(version) >= '3.13') "BUILD_" else ""
+  db_prefix <- if (package_version(version) >= '3.13') "BUILD_" else ""
   db_file <- paste0(db_prefix, "STATUS_DB.txt")
   sprintf('https://bioconductor.org/checkResults/%s/bioc-LATEST/%s',version, db_file)
 }
