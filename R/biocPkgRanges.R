@@ -29,9 +29,12 @@ biocPkgRanges <-
 {
     condition <- match.arg(condition)
     version <- match.arg(version)
+    # remove after next release
+    db_prefix <- if (identical("devel", version)) "BUILD_" else ""
+    db_file <- paste0(db_prefix, "STATUS_DB.txt")
     build_status_db <- sprintf(
-        "https://bioconductor.org/checkResults/%s/bioc-LATEST/BUILD_STATUS_DB.txt",
-        version
+        "https://bioconductor.org/checkResults/%s/bioc-LATEST/%s",
+        version, db_file
     )
     cache <- .get_cache()
     rid <- BiocFileCache::bfcquery(cache, build_status_db, exact = TRUE)[["rid"]]
