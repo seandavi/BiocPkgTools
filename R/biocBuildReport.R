@@ -36,7 +36,9 @@
 #' @export
 biocBuildReport <- function(version=BiocManager::version()) {
   requireNamespace("rex")
-  url <- sprintf('https://bioconductor.org/checkResults/%s/bioc-LATEST/BUILD_STATUS_DB.txt',version)
+  db_prefix <- if (version >= '3.14') "BUILD_" else ""
+  db_file <- paste0(db_prefix, "STATUS_DB.txt")
+  url <- sprintf('https://bioconductor.org/checkResults/%s/bioc-LATEST/%s',version, db_file)
   dat <- readr::read_lines(url)
   z <- re_matches(dat,rex(
     start,
