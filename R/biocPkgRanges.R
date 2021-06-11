@@ -1,4 +1,4 @@
-#' Grab build report results from STATUS_DB for a particular package range
+#' Grab build report results from BUILD_STATUS_DB for a particular package range
 #'
 #' @param start character(1) alphabetically first package name in range
 #'
@@ -29,15 +29,15 @@ biocPkgRanges <-
 {
     condition <- match.arg(condition)
     version <- match.arg(version)
-    status_db <- sprintf(
-        "https://bioconductor.org/checkResults/%s/bioc-LATEST/STATUS_DB.txt",
+    build_status_db <- sprintf(
+        "https://bioconductor.org/checkResults/%s/bioc-LATEST/BUILD_STATUS_DB.txt",
         version
     )
     cache <- .get_cache()
-    rid <- BiocFileCache::bfcquery(cache, status_db, exact = TRUE)[["rid"]]
+    rid <- BiocFileCache::bfcquery(cache, build_status_db, exact = TRUE)[["rid"]]
     status_file <-
         if (!length(rid)) {
-            BiocFileCache::bfcadd(cache, status_db)
+            BiocFileCache::bfcadd(cache, build_status_db)
         } else {
             if (BiocFileCache::bfcneedsupdate(cache, rid))
                 BiocFileCache::bfcdownload(cache, rid, ask = FALSE)

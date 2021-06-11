@@ -2,7 +2,7 @@
 % Please edit documentation in R/biocPkgRanges.R
 \name{biocPkgRanges}
 \alias{biocPkgRanges}
-\title{Grab build report results from STATUS_DB for a particular package range}
+\title{Grab build report results from BUILD_STATUS_DB for a particular package range}
 \usage{
 biocPkgRanges(
   start,
@@ -27,7 +27,7 @@ biocPkgRanges(
 'devel' (default) or 'release'}
 }
 \description{
-Grab build report results from STATUS_DB for a particular package range
+Grab build report results from BUILD_STATUS_DB for a particular package range
 }
 \examples{
 \dontrun{
