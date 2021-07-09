@@ -4,7 +4,13 @@
 \alias{biocDownloadStats}
 \title{Get Bioconductor download statistics}
 \usage{
-biocDownloadStats()
+biocDownloadStats(
+  pkgType = c("all", "software", "data-experiment", "workflows", "data-annotation")
+)
+}
+\arguments{
+\item{pkgType}{character(1) Either one of 'software', 'data-experiment',
+'workflows', or 'data-annotation' (defaults to 'all' or 'software')}
 }
 \value{
 A \code{data.frame} of download statistics for

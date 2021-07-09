@@ -5,6 +5,9 @@ utils::globalVariables(c(".data", "biocViewsVocab"))
 #' @details Note that Bioconductor package download
 #' stats are not version-specific.
 #'
+#' @param pkgType character(1) Either one of 'software', 'data-experiment',
+#'     'workflows', or 'data-annotation' (defaults to 'all' or 'software')
+#'
 #' @importFrom dplyr mutate %>%
 #' @importFrom utils read.table
 #' @importFrom tibble as_tibble
@@ -16,22 +19,97 @@ utils::globalVariables(c(".data", "biocViewsVocab"))
 #' biocDownloadStats()
 #'
 #' @export
-biocDownloadStats = function() {
-  tmp = read.table('https://bioconductor.org/packages/stats/bioc/bioc_pkg_stats.tab',
-                   sep="\t", header = TRUE, stringsAsFactors = FALSE)
-  tmp$repo = 'Software'
-  tmp2 = read.table('https://bioconductor.org/packages/stats/data-annotation/annotation_pkg_stats.tab',
-                    sep="\t", header = TRUE, stringsAsFactors = FALSE)
-  tmp2$repo = 'AnnotationData'
-  tmp3 = read.table('https://bioconductor.org/packages/stats/data-experiment/experiment_pkg_stats.tab',
-                    sep="\t", header = TRUE, stringsAsFactors = FALSE)
-  tmp3$repo = 'ExperimentData'
-  tmp = rbind(tmp,tmp2,tmp3)
-  tmp = as_tibble(tmp) %>%
-    dplyr::mutate(Date = as.Date(paste(.data$Year, .data$Month, '01'),
-                                 '%Y %b %d'))
-  class(tmp) = c('bioc_downloads', class(tmp))
-  tmp
+biocDownloadStats <-
+    function(
+        pkgType = c(
+            "all", "software", "data-experiment",
+            "workflows", "data-annotation"
+        )
+    )
+{
+
+    formal.args <- eval(formals()[["pkgType"]])
+    pkgType <- match.arg(pkgType)
+    pkgType <- switch(pkgType, all = tail(formal.args, -1), pkgType)
+    linkPkg <- gsub("software", "bioc", pkgType)
+    fnameType <- gsub("data-", "", linkPkg)
+
+    base_url <- "http://bioconductor.org/packages/stats/%s/%s_pkg_stats.tab"
+
+    stats_urls <- sprintf(base_url,
+        linkPkg, fnameType
+    )
+
+    tlist <- lapply(stats_urls, read.table, header = TRUE)
+    tbl <- as_tibble(
+        cbind(
+            pkgType = rep(pkgType, vapply(tlist, nrow, numeric(1L))),
+            dplyr::bind_rows(tlist)
+        )
+    )
+
+    tbl <- filter(tbl, .data$Month != "all") %>%
+        dplyr::mutate(
+            Date = as.Date(
+                paste(.data$Year, .data$Month, '01'), '%Y %b %d'
+            )
+        )
+
+    class(tbl) <- c('bioc_downloads', class(tbl))
+    tbl
+
+}
+
+.try.read.table <- function(...) {
+    tryCatch({
+        read.table(...)
+    }, error = function(err) {
+        data.frame(
+            Year = integer(0L), Month = character(0L),
+            Nb_of_distinct_IPs = integer(0L), Nb_of_downloads = integer(0L)
+        )
+    })
+}
+
+#' Get Bioconductor download statistics for a package
+#'
+#' @param pkg character(1) The name of a Bioconductor package
+#'
+#' @param years numeric(), character() A vector of years from which to
+#'     obtain download statistics (defaults to current year)
+#'
+#' @inheritParams biocDownloadStats
+#'
+#' @return A \code{tibble} of download statistics
+#'
+#' @examples
+#'
+#' pkgDownloadStats("GenomicRanges")
+#'
+#' @export
+pkgDownloadStats <-
+    function(
+        pkg,
+        pkgType = c(
+            "software", "data-experiment", "workflows", "data-annotation"
+        ),
+        years = format(Sys.time(), "%Y")
+    )
+{
+
+    pkgType <- match.arg(pkgType)
+    pkgType <- switch(pkgType, software = "bioc", pkgType)
+
+    base_url <- "http://bioconductor.org/packages/stats/%s/%s/%s_%s_stats.tab"
+
+    stats_urls <- sprintf(base_url,
+        pkgType, pkg, pkg, years
+    )
+
+    tlist <- lapply(stats_urls, .try.read.table, header = TRUE)
+    tbl <- as_tibble(dplyr::bind_rows(tlist))
+    filter(tbl, .data$Month != "all")
+
 }
 
 #' When did a package enter Bioconductor?
