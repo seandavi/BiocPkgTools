@@ -54,34 +54,33 @@ biocBuildReport <- function(version=BiocManager::version()) {
     xpath = '/html/body/table[@id="THE_BIG_GCARD_LIST"]') %>%
     html_nodes(xpath = "//td[@rowspan=3]") %>% html_nodes("b") %>% html_text2()
   versions <- vapply(strsplit(versions, "\\s"), `[`, character(1L), 2L)
-  # scRepertoire has a malformed DESCRIPTION file (breaking this code)
   maints <- html_nodes(dat,
     xpath = '//*[@id="THE_BIG_GCARD_LIST"]/tbody/tr/td[@rowspan=3]/text()') %>%
     html_text2()
-  maints <- Filter(function(x) nchar(x) > 1, maints)
-  # temporary until fixed (problem still there in 3.12, fixed in 3.13)
-  if (length(maints) != length(pkgnames)) {
-    warning("Lengths of maintainer and pkgnames vectors differ. ",
-            "Fixing scRepertoire (problem in 3.12). If the issue persists, ",
-            "please locate the problematic package.")
-    maints <- append(maints, NA, which(pkgnames == "scRepertoire"))
+  # Account for packages with malformed maintainer fields in page
+  idx <- which(rle(maints)$lengths > 1)
+  off_set <- seq(0, length(idx) - 1)
+  idx <- idx + off_set
+  for (i in off_set) {
+    maints <- append(maints, values = " ", after = idx[i+1] + 1)
   }
-  # maints <- maints[c(FALSE, TRUE)]
+  maints <- maints[c(FALSE, TRUE)]
+  stopifnot(identical(length(pkgnames), length(maints)))
 
   meta <- html_nodes(dat,
     xpath = '//*[@id="THE_BIG_GCARD_LIST"]/tbody/tr/td[@rowspan=3]')
   values <- meta %>% html_nodes("table") %>% html_text2()
   values <- trimws(gsub("Last.Commit:|.Last.Changed.Date", "", values))
-  commitdate <- unlist(strsplit(values, ": "))
-  commits <- commitdate[c(TRUE, FALSE)]
-  dates <- commitdate[!c(TRUE, FALSE)]
+  commitdate <- do.call(rbind.data.frame, strsplit(values, ": "))
+  names(commitdate) <- c("last_commit", "last_changed_date")
+  commitdate[["last_changed_date"]] <-
+      as.POSIXct(commitdate[["last_changed_date"]])
 
   y <- data.frame(
     pkg = pkgnames,
     author = maints,
     version = versions,
-    last_commit = commits,
-    last_changed_date = as.POSIXct(dates)
+    commitdate
   )
   y <- y[!is.na(y$pkg),]
 
