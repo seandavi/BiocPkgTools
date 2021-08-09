@@ -39,8 +39,7 @@ biocBuildReport <- function(version=BiocManager::version()) {
   z <- do.call(rbind.data.frame, strsplit(dat, "#|: "))
   names(z) <- c("pkg", "node", "stage", "result")
 
-
-  dat <- xml2::read_html(sprintf('https://bioconductor.org/checkResults/%s/bioc-LATEST/',version))
+  dat <- xml2::read_html(dirname(url))
 
   rowspan <- length(html_text(html_nodes(dat,xpath='/html/body/table[@class="node_specs"]/tr[@class!=""]')))
   if(rowspan > 5L || rowspan < 2L){
