@@ -31,7 +31,6 @@ Imports:
     tidyselect,
     stringr,
     rvest,
-    rex,
     dplyr,
     xml2,
     readr,

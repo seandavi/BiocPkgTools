@@ -20,7 +20,6 @@
 #' @importFrom tibble as_tibble
 #' @importFrom rvest html_text html_text2 html_nodes
 #' @importFrom xml2 read_html
-#' @import rex
 #' @importFrom dplyr left_join
 #' @importFrom BiocManager version
 #' @importFrom magrittr %>%
@@ -35,19 +34,10 @@
 #'
 #' @export
 biocBuildReport <- function(version=BiocManager::version()) {
-  requireNamespace("rex")
   url <- get_build_status_db_url(version)
-  dat <- readr::read_lines(url)
-  z <- re_matches(dat,rex(
-    start,
-    capture(except_any_of('#'),name='pkg'),
-    '#',
-    capture(except_any_of('#'),name='node'),
-    '#',
-    capture(except_any_of(blank_pcre_utf8,':'),name='stage'),
-    ':',blank_pcre_utf8,
-    capture(anything,name='result')
-  ))
+  dat <- readLines(url)
+  z <- do.call(rbind.data.frame, strsplit(dat, "#|: "))
+  names(z) <- c("pkg", "node", "stage", "result")
 
 
   dat <- xml2::read_html(sprintf('https://bioconductor.org/checkResults/%s/bioc-LATEST/',version))
@@ -114,4 +104,3 @@ get_build_status_db_url <- function(version) {
   sprintf('https://bioconductor.org/checkResults/%s/bioc-LATEST/%s',version, db_file)
 }
 
-blank_pcre_utf8 <- rex:::character_class("\\p{Zs}")
