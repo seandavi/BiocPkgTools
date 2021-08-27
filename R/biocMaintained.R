@@ -25,7 +25,7 @@ biocMaintained <-
     biocmaint <- vapply(
         pkgs$Maintainer,
         function(x)
-            any(grepl("maintainer@bioconductor\\.org", x)),
+            any(grepl(main, x)),
         logical(1L)
     )
     pkgs[biocmaint, ]
