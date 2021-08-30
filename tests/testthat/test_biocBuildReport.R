@@ -3,6 +3,8 @@ library(BiocPkgTools)
 
 # test release build report
 bioc3.12_build <- biocBuildReport("3.12")
+bioc3.13_build <- biocBuildReport("3.13")
+biocdevel_build <- biocBuildReport("3.14")
 
 test_that("biocBuildReport returns appropriate class", {
     expect_true(tibble::is_tibble(bioc3.12_build))

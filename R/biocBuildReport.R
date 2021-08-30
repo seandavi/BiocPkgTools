@@ -1,3 +1,7 @@
+.isBiocVersion <- function(version, keyword) {
+    identical(version, BiocManager:::.version_bioc(keyword))
+}
+
 #' Tidy Bioconductor build report results
 #'
 #' The online Bioconoductor build reports
@@ -39,7 +43,7 @@ biocBuildReport <- function(version=BiocManager::version()) {
   z <- do.call(rbind.data.frame, strsplit(dat, "#|: "))
   names(z) <- c("pkg", "node", "stage", "result")
 
-  if (BiocManager:::isDevel()) {
+  if (.isBiocVersion(version, "devel")) {
     tfile <- paste(dirname(url), "report.tgz", sep = "/")
     download.file(tfile, treport <- tempfile(fileext = ".tgz"))
     report_files <- untar(treport, list = TRUE)
@@ -85,17 +89,25 @@ biocBuildReport <- function(version=BiocManager::version()) {
   meta <- html_nodes(dat,
     xpath = '//*[@id="THE_BIG_GCARD_LIST"]/tbody/tr/td[@rowspan=3]')
   values <- meta %>% html_nodes("table") %>% html_text2()
-  values <- trimws(gsub("Last.Commit:|.Last.Changed.Date", "", values))
-  commitdate <- do.call(rbind.data.frame, strsplit(values, ": "))
-  names(commitdate) <- c("last_commit", "last_changed_date")
-  commitdate[["last_changed_date"]] <-
-      as.POSIXct(commitdate[["last_changed_date"]])
+
+  if (.isBiocVersion(version, "release")) {
+    values <- trimws(gsub("[\n]*git_last_commit[_date]*:", "", values))
+    splitter <- "\\s"
+  } else {
+    values <- trimws(gsub("Last.Commit:|.Last.Changed.Date", "", values))
+    splitter <- ": "
+  }
+
+  commitdate <- do.call(rbind.data.frame, strsplit(values, splitter))
+  names(commitdate)[1:2] <- c("git_last_commit", "git_last_commit_date")
+  commitdate[["git_last_commit_date"]] <-
+      as.POSIXct(commitdate[["git_last_commit_date"]])
 
   y <- data.frame(
     pkg = pkgnames,
     author = maints,
     version = versions,
-    commitdate
+    commitdate[, 1:2]
   )
   y <- y[!is.na(y$pkg),]
   }
@@ -107,7 +119,7 @@ biocBuildReport <- function(version=BiocManager::version()) {
     return(df)
   }
   df[['bioc_version']] <- as.character(version)
-  attr(df,'last_changed_date') <- as.POSIXct(df[['last_changed_date']][1])
+  attr(df,'last_commit_date') <- as.POSIXct(df[['last_commit_date']][1])
   attr(df,'class') = c('biocBuildReport',class(df))
   df
 }
