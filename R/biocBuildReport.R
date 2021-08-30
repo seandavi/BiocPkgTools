@@ -39,6 +39,21 @@ biocBuildReport <- function(version=BiocManager::version()) {
   z <- do.call(rbind.data.frame, strsplit(dat, "#|: "))
   names(z) <- c("pkg", "node", "stage", "result")
 
+  if (BiocManager:::isDevel()) {
+    tfile <- paste(dirname(url), "report.tgz", sep = "/")
+    download.file(tfile, treport <- tempfile(fileext = ".tgz"))
+    report_files <- untar(treport, list = TRUE)
+    dcffiles <- grep("info\\.dcf$", report_files, value = TRUE)
+    dcfs <- untar(treport, files = dcffiles, exdir = dcf_folder <- tempfile())
+    full_dcfs <- list.files(dcf_folder, recursive = TRUE, full.names = TRUE)
+    meta <- do.call(rbind.data.frame, lapply(full_dcfs, read.dcf))
+    y <- meta[,
+        c("Package", "Maintainer", "Version",
+        "git_last_commit", "git_last_commit_date")
+    ]
+    names(y) <- gsub("git_", "", names(meta))
+    names(y)[1:3] <- c("pkg", "author", "version")
+  } else {
   dat <- xml2::read_html(dirname(url))
 
   rowspan <- length(html_text(html_nodes(dat,xpath='/html/body/table[@class="node_specs"]/tr[@class!=""]')))
@@ -83,6 +98,7 @@ biocBuildReport <- function(version=BiocManager::version()) {
     commitdate
   )
   y <- y[!is.na(y$pkg),]
+  }
 
   df <- suppressMessages(left_join(y, z)) # just suppress "Joining by...."
   df <- as_tibble(df)
