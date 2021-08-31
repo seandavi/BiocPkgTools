@@ -9,6 +9,8 @@ NEW FEATURES
 BUG FIXES
 
     o `biocDownloadStats` now includes all types of Bioconductor packages 
+    o `biocBuildReport` improved to work on old-rel, release, and devel
+      Bioconductor versions
 
 CHANGES IN VERSION 1.10.0
 -------------------------
