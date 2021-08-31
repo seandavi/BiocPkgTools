@@ -1,5 +1,5 @@
 .isBiocVersion <- function(version, keyword) {
-    identical(version, BiocManager:::.version_bioc(keyword))
+    identical(package_version(version), BiocManager:::.version_bioc(keyword))
 }
 
 #' Tidy Bioconductor build report results
@@ -55,7 +55,8 @@ biocBuildReport <- function(version=BiocManager::version()) {
         c("Package", "Maintainer", "Version",
         "git_last_commit", "git_last_commit_date")
     ]
-    names(y) <- gsub("git_", "", names(meta))
+    y[["git_last_commit_date"]] <-
+        as.POSIXct(gsub("^(.*)\\s\\(.*", "\\1", y[["git_last_commit_date"]]))
     names(y)[1:3] <- c("pkg", "author", "version")
   } else {
   dat <- xml2::read_html(dirname(url))
@@ -90,7 +91,7 @@ biocBuildReport <- function(version=BiocManager::version()) {
     xpath = '//*[@id="THE_BIG_GCARD_LIST"]/tbody/tr/td[@rowspan=3]')
   values <- meta %>% html_nodes("table") %>% html_text2()
 
-  if (.isBiocVersion(version, "release")) {
+  if (.isBiocVersion(version, "devel")) {
     values <- trimws(gsub("[\n]*git_last_commit[_date]*:", "", values))
     splitter <- "\\s"
   } else {
@@ -119,7 +120,7 @@ biocBuildReport <- function(version=BiocManager::version()) {
     return(df)
   }
   df[['bioc_version']] <- as.character(version)
-  attr(df,'last_commit_date') <- as.POSIXct(df[['last_commit_date']][1])
+  attr(df,'git_last_commit_date') <- as.POSIXct(df[['git_last_commit_date']][1])
   attr(df,'class') = c('biocBuildReport',class(df))
   df
 }
