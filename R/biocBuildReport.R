@@ -46,11 +46,10 @@ biocBuildReport <- function(version=BiocManager::version()) {
   if (.isBiocVersion(version, "devel")) {
     tfile <- paste(dirname(url), "report.tgz", sep = "/")
     download.file(tfile, treport <- tempfile(fileext = ".tgz"))
-    report_files <- untar(treport, list = TRUE)
-    dcffiles <- grep("info\\.dcf$", report_files, value = TRUE)
-    dcfs <- untar(treport, files = dcffiles, exdir = dcf_folder <- tempfile())
-    full_dcfs <- list.files(dcf_folder, recursive = TRUE, full.names = TRUE)
-    meta <- do.call(rbind.data.frame, lapply(full_dcfs, read.dcf))
+    untar(treport, exdir = dcf_folder <- tempfile())
+    dcffiles <- list.files(path = dcf_folder, pattern = "info\\.dcf$",
+        full.names = TRUE, recursive = TRUE)
+    meta <- do.call(rbind.data.frame, lapply(dcffiles, read.dcf))
     y <- meta[,
         c("Package", "Maintainer", "Version",
         "git_last_commit", "git_last_commit_date")
