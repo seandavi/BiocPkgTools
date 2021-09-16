@@ -1,4 +1,4 @@
-.isBiocVersion <- function(version, keyword) {
+.isBioc <- function(version, keyword) {
     identical(package_version(version), BiocManager:::.version_bioc(keyword))
 }
 
@@ -43,7 +43,7 @@ biocBuildReport <- function(version=BiocManager::version()) {
   z <- do.call(rbind.data.frame, strsplit(dat, "#|: "))
   names(z) <- c("pkg", "node", "stage", "result")
 
-  if (.isBiocVersion(version, "devel")) {
+  if (.isBioc(version, "devel")) {
     tfile <- paste(dirname(url), "report.tgz", sep = "/")
     download.file(tfile, treport <- tempfile(fileext = ".tgz"))
     untar(treport, exdir = dcf_folder <- tempfile())
@@ -93,7 +93,7 @@ biocBuildReport <- function(version=BiocManager::version()) {
       xpath = '//*[@id="THE_BIG_GCARD_LIST"]/tbody/tr/td[@rowspan=3]')
     values <- meta %>% html_nodes("table") %>% html_text2()
 
-    if (.isBiocVersion(version, "devel")) {
+    if (.isBioc(version, "devel") || .isBioc(version, "release")) {
       values <- trimws(gsub("[\n]*git_last_commit[_date]*:", "", values))
       splitter <- "\\s"
     } else {

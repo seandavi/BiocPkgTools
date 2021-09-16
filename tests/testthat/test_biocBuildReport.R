@@ -1,5 +1,4 @@
 context("biocBuildReport")
-library(BiocPkgTools)
 
 # test release build report
 test_that("columns are consistent in report output", {
