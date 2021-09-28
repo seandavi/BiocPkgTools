@@ -3,7 +3,7 @@ context("biocBuildReport")
 # test release build report
 test_that("columns are consistent in report output", {
     columnames <- c("pkg", "author", "version", "git_last_commit",
-        "git_last_commit_date", "node", "stage")
+        "git_last_commit_date", "node", "stage", "PackageStatus")
 
     bioc3.12_build <- biocBuildReport("3.12")
     expect_true(all(columnames %in% colnames(bioc3.12_build)))

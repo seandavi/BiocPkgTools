@@ -114,6 +114,14 @@ biocBuildReport <- function(version=BiocManager::version()) {
     )
     y <- y[!is.na(y$pkg),]
   }
+  
+  statusIndexFile <- file(paste(dirname(url), "meat-index.dcf", sep = "/"))
+  pkg_status <- read.dcf(statusIndexFile)
+  close.connection(statusIndexFile)
+  PackageStatus <- pkg_status[
+      match(y$pkg, pkg_status[, "Package"]), "PackageStatus"
+  ]
+  y <- cbind(y, PackageStatus)
 
   df <- suppressMessages(left_join(y, z)) # just suppress "Joining by...."
   df <- as_tibble(df)
