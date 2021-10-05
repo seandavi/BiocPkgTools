@@ -3,14 +3,17 @@ CHANGES IN VERSION 1.12.0
 
 NEW FEATURES
 
-    o `PackageStatus` now indicates whether a package is slated for
+    o `biocBuildEmail` allows deprecation notices using the template in the
+      `inst` folder. Use `templatePath()` to see available templates by their
+      location.
+    o `PackageStatus` indicates whether a package is slated for
       'Deprecation' by checking the `meat-index.dcf` file.
     o `pkgDownloadStats` provides the download statistics table for a
       particular package.
 
 BUG FIXES
 
-    o `biocDownloadStats` now includes all types of Bioconductor packages 
+    o `biocDownloadStats` includes all types of Bioconductor packages
     o `biocBuildReport` improved to work on old-rel, release, and devel
       Bioconductor versions
 

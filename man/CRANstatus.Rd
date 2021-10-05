@@ -11,7 +11,7 @@ CRANstatus(
   core.id = NULL,
   to.mail = "maintainer@bioconductor.org",
   dry.run = TRUE,
-  emailTemplate = .getTemplatePath("cranreport")
+  emailTemplate = templatePath("cranreport")
 )
 }
 \arguments{
@@ -30,8 +30,9 @@ This ID usually matches `^[A-Z]{2}[0-9]{5}` for more recent identifiers.}
 \item{dry.run}{logical(1) Display the email without sending to the recipient.
 It only works for HTML email reports and ignored when `textOnly=TRUE`}
 
-\item{emailTemplate}{character(1) The path to the email template. The default
-path lies in the 'inst' package folder.}
+\item{emailTemplate}{character(1) The path to the email template Rmd file as
+obtained by `templatePath()`. A custom template can be provided as file
+path.}
 }
 \description{
 The \code{CRANstatus} function allows users to check the status of a package

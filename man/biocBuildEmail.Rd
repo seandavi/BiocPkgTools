@@ -10,7 +10,7 @@ biocBuildEmail(
   version = c("release", "devel"),
   PS = character(1L),
   dry.run = TRUE,
-  emailTemplate = .getTemplatePath(),
+  emailTemplate = templatePath(),
   core.name = NULL,
   core.email = NULL,
   core.id = NULL,
@@ -34,8 +34,9 @@ the email (i.e., the package maintainer)}
 \item{dry.run}{logical(1) Display the email without sending to the recipient.
 It only works for HTML email reports and ignored when `textOnly=TRUE`}
 
-\item{emailTemplate}{character(1) The path to the email template. The default
-path lies in the 'inst' package folder.}
+\item{emailTemplate}{character(1) The path to the email template Rmd file as
+obtained by `templatePath()`. A custom template can be provided as file
+path.}
 
 \item{core.name}{character(1) The full name of the core team member}
 

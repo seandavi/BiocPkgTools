@@ -11,7 +11,18 @@
     )
 }
 
-.getTemplatePath <- function(type = c("buildemail", "cranreport", "deprecation")) {
+#' Obtain the location of available email templates
+#'
+#' These templates are used with `biocBuildEmail` to notify maintainers
+#' regarding package errors and final deprecation warning.
+#'
+#' @param type character(1) Either one of 'buildemail', 'cranreport', or
+#'     'deprecation'
+#'
+#' @export
+templatePath <-
+    function(type = c("buildemail", "deprecation", "cranreport"))
+{
     type <- match.arg(type)
     type <- switch(
         type,
@@ -126,8 +137,9 @@
 #' @param dry.run logical(1) Display the email without sending to the recipient.
 #'     It only works for HTML email reports and ignored when `textOnly=TRUE`
 #'
-#' @param emailTemplate character(1) The path to the email template. The default
-#'     path lies in the 'inst' package folder.
+#' @param emailTemplate character(1) The path to the email template Rmd file as
+#'     obtained by `templatePath()`. A custom template can be provided as file
+#'     path.
 #'
 #' @param core.name character(1) The full name of the core team member
 #'
@@ -155,7 +167,7 @@
 #' @export
 biocBuildEmail <-
     function(pkg, version = c("release", "devel"), PS = character(1L),
-        dry.run = TRUE, emailTemplate = .getTemplatePath(),
+        dry.run = TRUE, emailTemplate = templatePath(),
         core.name = NULL, core.email = NULL, core.id = NULL,
         textOnly = FALSE, resend = FALSE, verbose = FALSE,
         credFile = "~/.blastula_creds")
@@ -163,9 +175,10 @@ biocBuildEmail <-
     stopifnot(
         is.character(pkg), identical(length(pkg), 1L),
         is.character(PS), identical(length(PS), 1L),
-        !is.na(pkg), !is.na(PS),
-        file.exists(emailTemplate)
+        !is.na(pkg), !is.na(PS)
     )
+    if (!file.exists(emailTemplate))
+        stop("'emailTemplate' file not found.")
 
     if (!textOnly) {
         if (!requireNamespace("blastula"))

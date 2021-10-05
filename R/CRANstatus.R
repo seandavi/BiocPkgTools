@@ -11,7 +11,7 @@
 CRANstatus <-
     function(pkg, core.name = NULL, core.email = NULL, core.id = NULL,
         to.mail = "maintainer@bioconductor.org", dry.run = TRUE,
-        emailTemplate = .getTemplatePath("cranreport")) {
+        emailTemplate = templatePath("cranreport")) {
 
     stopifnot(is.character(pkg), identical(length(pkg), 1L), !is.na(pkg))
 
