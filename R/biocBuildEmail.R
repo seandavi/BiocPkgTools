@@ -11,12 +11,13 @@
     )
 }
 
-.getTemplatePath <- function(type = c("buildemail", "cranreport")) {
+.getTemplatePath <- function(type = c("buildemail", "cranreport", "deprecation")) {
     type <- match.arg(type)
     type <- switch(
         type,
         buildemail = "BiocBuildEmail_Template.Rmd",
-        cranreport = "CRANReport_Template.Rmd"
+        cranreport = "CRANReport_Template.Rmd",
+        deprecation = "Deprecation_Template.Rmd"
     )
     system.file(
         package = "BiocPkgTools", "resources", type,

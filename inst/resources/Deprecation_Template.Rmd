@@ -1,0 +1,58 @@
+---
+title: "%s Bioconductor Package Deprecation"
+author:
+- name: "%s"
+  affiliation:
+  - Roswell Park Comprehensive Cancer Center, Buffalo, NY, USA
+date: "%s"
+output:
+  BiocStyle::html_document:
+    toc: false
+    number_sections: false
+---
+
+## Package: %s
+
+---
+
+
+Hi %s,
+
+We are contacting you regarding the `%s` package in Bioconductor
+%s, for which you are listed as the maintainer.
+
+We have attempted to reach you multiple times with deprecation warnings.
+Unfortunately, we have decided to proceed with the deprecation of your package.
+
+The package will be marked deprecated until the package is fixed so that
+install, build, and check all pass on the Bioconductor Build System **AND**
+that you formally request undeprecation by sending an email to
+bioc-devel@bioconductor.org.
+
+If the package remains marked for deprecation by the
+[next release of Bioconductor](https://www.bioconductor.org/developers/release-schedule/),
+the package will be removed from Bioconductor and it will have to be
+resubmitted and undergo review to be reinstated.
+
+%s
+
+If you have any questions, feel free to contact contact us on the bioc-devel
+mailing list.
+
+%s
+
+Best regards,
+
+%s
+
+
+---
+
+<footer>
+<p>Bioconductor Core Team
+<br>Roswell Park Comprehensive Cancer Center
+<br>Dept. of Biostatistics & Bioinformatics
+<br>Elm & Carlton Streets
+<br>Buffalo, New York 14263
+</p>
+</footer>
