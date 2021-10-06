@@ -39,12 +39,12 @@ resubmitted and undergo review to be reinstated.
 If you have any questions, feel free to contact contact us on the bioc-devel
 mailing list.
 
-%s
-
 Best regards,
 
 %s
 
+
+%s
 
 ---
 

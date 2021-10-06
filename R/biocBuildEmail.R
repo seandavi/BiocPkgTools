@@ -236,7 +236,7 @@ biocBuildEmail <-
     mail <- paste0(readLines(emailTemplate), collapse = "\n")
     maildate <- format(Sys.time(), "%B %d, %Y")
     send <- sprintf(mail, pkg, core.name, maildate, pkg, mainName, pkg,
-        vers, repolink, PS, firstname)
+        vers, repolink, firstname, PS)
 
     title <- sprintf("%s Bioconductor package", pkg)
     logfile <- .getMailLog()
