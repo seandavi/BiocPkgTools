@@ -11,6 +11,6 @@ templatePath(type = c("buildemail", "deprecation", "cranreport"))
 'deprecation'}
 }
 \description{
-These templates are used with biocBuildEmail to notify maintainers
+These templates are used with `biocBuildEmail` to notify maintainers
 regarding package errors and final deprecation warning.
 }
