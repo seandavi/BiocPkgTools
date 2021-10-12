@@ -233,8 +233,9 @@ biocBuildEmail <-
 
     title <- sprintf("%s Bioconductor package", pkg)
     logfile <- .getMailLog()
-    sent_status <- .checkEntry(logfile, mainName, mainEmail, pkg, maildate,
-        dry.run)
+    sent_status <- .checkEntry(
+        logfile, mainName, mainEmail, pkg, maildate, dry.run
+    )
     sendagain <- (sent_status && resend)
 
     if (dry.run)
@@ -249,13 +250,12 @@ biocBuildEmail <-
             clipr::write_clip(send)
             message("Message copied to clipboard")
         }
-        return(send)
     } else {
         tfile <- tempfile(fileext = ".Rmd")
         writeLines(send, tfile)
-        biocmail <- blastula::render_email(tfile)
+        send <- blastula::render_email(tfile)
         if (!dry.run && (!sent_status || sendagain)) {
-            blastula::smtp_send(email = biocmail,
+            blastula::smtp_send(email = send,
                 from = core.email, to = mainEmail, subject = title,
                 credentials =
                     if (file.exists(credFile)) {
@@ -271,8 +271,8 @@ biocBuildEmail <-
             )
             .addEntry(logfile, mainName, mainEmail, pkg, maildate, sendagain)
         }
-        return(biocmail)
     }
+    send
 }
 
 #' @name biocBuildEmail

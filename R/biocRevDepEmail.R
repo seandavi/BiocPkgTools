@@ -23,10 +23,10 @@
 #'
 #' @inheritParams biocBuildEmail
 #'
-#' @examples 
-#' 
+#' @examples
+#'
 #' biocRevDepEmail("FindMyFriends", dry.run = TRUE)
-#' 
+#'
 #' @export
 biocRevDepEmail <-
     function(pkg, PS = character(1L),
@@ -88,13 +88,12 @@ biocRevDepEmail <-
             clipr::write_clip(send)
             message("Message copied to clipboard")
         }
-        return(send)
     } else {
         tfile <- tempfile(fileext = ".Rmd")
         writeLines(send, tfile)
-        biocmail <- blastula::render_email(tfile)
-        if (!dry.run && (!sent_status || sendagain)) {
-            blastula::smtp_send(email = biocmail,
+        send <- blastula::render_email(tfile)
+        if (!dry.run) {
+            blastula::smtp_send(email = send,
                 from = core.email, to = core.email, bcc = mainEmails,
                 subject = title,
                 credentials =
@@ -109,9 +108,8 @@ biocRevDepEmail <-
                         )
                     }, verbose = verbose
             )
-            .addEntry(logfile, mainName, mainEmail, pkg, maildate, sendagain)
         }
-        return(biocmail)
     }
+    send
 }
 
