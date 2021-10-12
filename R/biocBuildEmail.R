@@ -192,13 +192,11 @@ biocBuildEmail <-
     core.id <- core.list[["core.id"]]
 
     stopifnot(
-        is.character(core.name), is.character(core.email), is.character(core.id),
+        is.character(core.name), is.character(core.email),
+        is.character(core.id),
         !is.na(core.name), !is.na(core.email), !is.na(core.id),
         nchar(core.name) > 4, nchar(core.email) != 0, nchar(core.id) > 6
     )
-
-    if (textOnly && !requireNamespace("clipr", quietly = TRUE))
-        stop(paste0("Install the 'clipr' package to use the 'textOnly = TRUE'"))
 
     listall <- biocPkgList(version = version)
     pkgMeta <- listall[listall[["Package"]] %in% pkg, ]
@@ -246,11 +244,12 @@ biocBuildEmail <-
     if (textOnly) {
         send <- strsplit(send, "---")[[1L]][[4L]]
         send <- paste(mainEmail, title, send, sep = "\n")
-        if (clipr::clipr_available()) {
+        if (requireNamespace("clipr", quietly=TRUE) &&
+            clipr::clipr_available())
+        {
             clipr::write_clip(send)
             message("Message copied to clipboard")
-        } else
-            message("Unable to put result on the clipboard")
+        }
         return(send)
     } else {
         tfile <- tempfile(fileext = ".Rmd")
