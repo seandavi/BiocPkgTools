@@ -23,6 +23,10 @@
 #'
 #' @inheritParams biocBuildEmail
 #'
+#' @examples 
+#' 
+#' biocRevDepEmail("FindMyFriends", dry.run = TRUE)
+#' 
 #' @export
 biocRevDepEmail <-
     function(pkg, PS = character(1L),
@@ -38,12 +42,6 @@ biocRevDepEmail <-
     if (!file.exists(emailTemplate))
         stop("'emailTemplate' file not found.")
 
-    if (!textOnly) {
-        if (!requireNamespace("blastula"))
-            stop("Install the 'blastula' package to send HTML emails or use\n",
-                "  'textOnly=TRUE'")
-    }
-
     core.list <- .getUserInfo(core.name, core.email, core.id)
     core.name <- core.list[["core.name"]]
     core.email <- core.list[["core.email"]]
@@ -52,15 +50,8 @@ biocRevDepEmail <-
     stopifnot(
         is.character(core.name), is.character(core.email), is.character(core.id),
         !is.na(core.name), !is.na(core.email), !is.na(core.id),
-        nchar(core.name) > 4, nchar(core.email) != 0, nchar(core.id) > 6
+        nchar(core.name) > 4, nchar(core.email) != 0
     )
-
-    coredomain <- grepl("@roswellpark.org$", ignore.case = TRUE, x = core.email)
-    if (!coredomain)
-        stop("Provide only a core team email address")
-
-    if (textOnly && !requireNamespace("clipr", quietly = TRUE))
-        stop(paste0("Install the 'clipr' package to use the 'textOnly = TRUE'"))
 
     db <- available.packages(repos = BiocManager::repositories())
     revdeps <-
@@ -96,11 +87,12 @@ biocRevDepEmail <-
     if (textOnly) {
         send <- strsplit(send, "---")[[1L]][[4L]]
         send <- paste(mainEmail, title, send, sep = "\n")
-        if (clipr::clipr_available()) {
+        if (requireNamespace("clipr", quietly=TRUE) &&
+            clipr::clipr_available())
+        {
             clipr::write_clip(send)
             message("Message copied to clipboard")
-        } else
-            message("Unable to put result on the clipboard")
+        }
         return(send)
     } else {
         tfile <- tempfile(fileext = ".Rmd")
