@@ -195,7 +195,7 @@ biocBuildEmail <-
         is.character(core.name), is.character(core.email),
         is.character(core.id),
         !is.na(core.name), !is.na(core.email), !is.na(core.id),
-        nchar(core.name) > 4, nchar(core.email) != 0, nchar(core.id) > 6
+        nchar(core.name) > 4, nchar(core.email) != 0
     )
 
     listall <- biocPkgList(version = version)
