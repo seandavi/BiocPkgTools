@@ -4,11 +4,11 @@
 \alias{templatePath}
 \title{Obtain the location of available email templates}
 \usage{
-templatePath(type = c("buildemail", "deprecation", "cranreport"))
+templatePath(type = c("buildemail", "deprecation", "cranreport", "revdepnote"))
 }
 \arguments{
-\item{type}{character(1) Either one of 'buildemail', 'cranreport', or
-'deprecation'}
+\item{type}{character(1) Either one of 'buildemail', 'cranreport',
+'deprecation', or 'revdepnote'}
 }
 \description{
 These templates are used with `biocBuildEmail` to notify maintainers

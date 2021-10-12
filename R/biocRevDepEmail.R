@@ -25,7 +25,7 @@
 #'
 #' @examples
 #'
-#' biocRevDepEmail("FindMyFriends", dry.run = TRUE)
+#' biocRevDepEmail("FindMyFriends", dry.run = TRUE, textOnly = TRUE)
 #'
 #' @export
 biocRevDepEmail <-
@@ -38,7 +38,7 @@ biocRevDepEmail <-
         is.character(pkg), identical(length(pkg), 1L),
         is.character(PS), identical(length(PS), 1L),
         !is.na(pkg), !is.na(PS), !is.na(core.name), !is.na(core.email),
-        !is.na(code.id)
+        !is.na(core.id)
     )
     if (!file.exists(emailTemplate))
         stop("'emailTemplate' file not found.")
@@ -81,7 +81,8 @@ biocRevDepEmail <-
 
     if (textOnly) {
         send <- strsplit(send, "---")[[1L]][[4L]]
-        send <- paste(mainEmail, title, send, sep = "\n")
+        mainEmails <- paste(mainEmails, collapse = ", ")
+        send <- paste(mainEmails, title, send, sep = "\n")
         if (requireNamespace("clipr", quietly=TRUE) &&
             clipr::clipr_available())
         {
