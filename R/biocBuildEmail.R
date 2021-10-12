@@ -50,8 +50,8 @@ templatePath <-
         if (is.null(core.email))
             core.email <- readline("What is your core-team email? ")
         if (is.null(core.id))
-            core.id <- readline(paste0("What is your Roswell Park employee ID",
-                " (matches ^[A-Z]{2}[0-9]{5})?  "))
+            core.id <- readline(paste("What is your employee ID",
+                "(e.g., AB12345, leave blank if N/A)? "))
 
         writeLines(c(core.name, core.email, core.id), con = userfile)
         message("Saved data to: ", pkgToolsCache())
@@ -196,10 +196,6 @@ biocBuildEmail <-
         !is.na(core.name), !is.na(core.email), !is.na(core.id),
         nchar(core.name) > 4, nchar(core.email) != 0, nchar(core.id) > 6
     )
-
-    coredomain <- grepl("@roswellpark.org$", ignore.case = TRUE, x = core.email)
-    if (!coredomain)
-        stop("Provide only a core team email address")
 
     if (textOnly && !requireNamespace("clipr", quietly = TRUE))
         stop(paste0("Install the 'clipr' package to use the 'textOnly = TRUE'"))
