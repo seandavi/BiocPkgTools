@@ -1,0 +1,51 @@
+---
+title: "%s Bioconductor Package Deprecation Notification"
+author:
+- name: "%s"
+  affiliation:
+  - Roswell Park Comprehensive Cancer Center, Buffalo, NY, USA
+date: "%s"
+output:
+  BiocStyle::html_document:
+    toc: false
+    number_sections: false
+---
+
+## Deprecated Package: %s
+
+---
+
+
+Hi Maintainers,
+
+Unfortunately, due to the deprecation of the `%s` package in Bioconductor,
+your package has been affected. Please remove the facilities of the deprecated
+package from your package. This includes the removal of imported functions and
+the package from your `DESCRIPTION` file.
+
+Here is the full list of affected packages:
+
+%s
+
+We apologize for this inconvenience and if you have any questions please
+direct them to the mailing list at bioc-devel@bioconductor.org.
+
+%s
+
+Best regards,
+
+%s
+
+
+%s
+
+---
+
+<footer>
+<p>Bioconductor Core Team
+<br>Roswell Park Comprehensive Cancer Center
+<br>Dept. of Biostatistics & Bioinformatics
+<br>Elm & Carlton Streets
+<br>Buffalo, New York 14263
+</p>
+</footer>

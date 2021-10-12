@@ -1,0 +1,130 @@
+.createBiocPkgLink <- function(pkg, version = "devel", md = TRUE) {
+    buildrepURL <- paste0(
+        "https://bioconductor.org/checkResults/", version, "/bioc-LATEST/", pkg
+    )
+    if (md)
+        paste0("[", pkg, "]", "(", buildrepURL, ")")
+    else
+        buildrepURL
+}
+
+#' @rdname biocRevDepEmail
+#'
+#' @title Notify downstream maintainers of changes in upstream package
+#'
+#' @description
+#'     The `biocRevDepEmail` function collects all the emails of the reverse
+#' dependencies and sends a notification that an upstream package has been
+#' deprecated or removed. It uses a template found in `inst/resources` with
+#' the `templatePath()` function.
+#'
+#' @param pkg character(1) The name of the package for whose reverse
+#'     dependencies are to be checked and notified.
+#'
+#' @inheritParams biocBuildEmail
+#'
+#' @export
+biocRevDepEmail <-
+    function(pkg, PS = character(1L),
+        dry.run = TRUE, emailTemplate = templatePath("revdepnote"),
+        core.name = NULL, core.email = NULL, core.id = NULL,
+        textOnly = FALSE, verbose = FALSE, credFile = "~/.blastula_creds")
+{
+    stopifnot(
+        is.character(pkg), identical(length(pkg), 1L),
+        is.character(PS), identical(length(PS), 1L),
+        !is.na(pkg), !is.na(PS)
+    )
+    if (!file.exists(emailTemplate))
+        stop("'emailTemplate' file not found.")
+
+    if (!textOnly) {
+        if (!requireNamespace("blastula"))
+            stop("Install the 'blastula' package to send HTML emails or use\n",
+                "  'textOnly=TRUE'")
+    }
+
+    core.list <- .getUserInfo(core.name, core.email, core.id)
+    core.name <- core.list[["core.name"]]
+    core.email <- core.list[["core.email"]]
+    core.id <- core.list[["core.id"]]
+
+    stopifnot(
+        is.character(core.name), is.character(core.email), is.character(core.id),
+        !is.na(core.name), !is.na(core.email), !is.na(core.id),
+        nchar(core.name) > 4, nchar(core.email) != 0, nchar(core.id) > 6
+    )
+
+    coredomain <- grepl("@roswellpark.org$", ignore.case = TRUE, x = core.email)
+    if (!coredomain)
+        stop("Provide only a core team email address")
+
+    if (textOnly && !requireNamespace("clipr", quietly = TRUE))
+        stop(paste0("Install the 'clipr' package to use the 'textOnly = TRUE'"))
+
+    db <- available.packages(repos = BiocManager::repositories())
+    revdeps <-
+        tools::package_dependencies(pkg, db, reverse = TRUE)[[1]]
+
+    if (!length(revdeps))
+        stop("No reverse dependencies on ", pkg)
+
+    listall <- biocPkgList(version = "devel")
+    pkgMeta <- listall[listall[["Package"]] %in% revdeps, "Maintainer"]
+    mainInfo <- vapply(
+        unlist(pkgMeta, use.names = FALSE), .emailCut, character(1L)
+    )
+
+    mainEmails <- unname(vapply(mainInfo, .emailCut, character(1L)))
+
+    repolink <- .createBiocPkgLink(pkg, "devel", FALSE)
+
+    if (nchar(PS))
+        PS <- paste0("**P.S.** ", PS)
+
+    revdeps <- paste(.createBiocPkgLink(revdeps), collapse = "\n")
+    mail <- paste0(readLines(emailTemplate), collapse = "\n")
+    maildate <- format(Sys.time(), "%B %d, %Y")
+    firstname <- vapply(strsplit(core.name, "\\s"), `[`, character(1L), 1L)
+    send <- sprintf(mail, pkg, core.name, maildate, pkg, pkg, revdeps,
+        repolink, firstname, PS)
+    title <- sprintf("Bioconductor Package %s Deprecation Notification", pkg)
+
+    if (dry.run)
+        message("Message not sent: Set 'dry.run=FALSE'")
+
+    if (textOnly) {
+        send <- strsplit(send, "---")[[1L]][[4L]]
+        send <- paste(mainEmail, title, send, sep = "\n")
+        if (clipr::clipr_available()) {
+            clipr::write_clip(send)
+            message("Message copied to clipboard")
+        } else
+            message("Unable to put result on the clipboard")
+        return(send)
+    } else {
+        tfile <- tempfile(fileext = ".Rmd")
+        writeLines(send, tfile)
+        biocmail <- blastula::render_email(tfile)
+        if (!dry.run && (!sent_status || sendagain)) {
+            blastula::smtp_send(email = biocmail,
+                from = core.email, to = core.email, bcc = mainEmails,
+                subject = title,
+                credentials =
+                    if (file.exists(credFile)) {
+                        blastula::creds_file(credFile)
+                    } else {
+                        blastula::creds(
+                            user = paste0(core.id, "@roswellpark.org"),
+                            host = "smtp.office365.com",
+                            port = 587,
+                            use_ssl = TRUE
+                        )
+                    }, verbose = verbose
+            )
+            .addEntry(logfile, mainName, mainEmail, pkg, maildate, sendagain)
+        }
+        return(biocmail)
+    }
+}
+
