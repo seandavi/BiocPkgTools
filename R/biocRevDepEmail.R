@@ -48,9 +48,10 @@ biocRevDepEmail <-
     core.email <- core.list[["core.email"]]
     core.id <- core.list[["core.id"]]
 
-    db <- available.packages(repos = BiocManager::repositories())
-    revdeps <-
-        tools::package_dependencies(pkg, db, reverse = TRUE)[[1]]
+    db <- available.packages(
+        repos = BiocManager:::.repositories_bioc(BiocManager::version())[1]
+    )
+    revdeps <- tools::package_dependencies(pkg, db, reverse = TRUE)[[1]]
 
     if (!length(revdeps))
         stop("No reverse dependencies on ", pkg)
