@@ -37,7 +37,8 @@ biocRevDepEmail <-
     stopifnot(
         is.character(pkg), identical(length(pkg), 1L),
         is.character(PS), identical(length(PS), 1L),
-        !is.na(pkg), !is.na(PS)
+        !is.na(pkg), !is.na(PS), !is.na(core.name), !is.na(core.email),
+        !is.na(code.id)
     )
     if (!file.exists(emailTemplate))
         stop("'emailTemplate' file not found.")
@@ -46,12 +47,6 @@ biocRevDepEmail <-
     core.name <- core.list[["core.name"]]
     core.email <- core.list[["core.email"]]
     core.id <- core.list[["core.id"]]
-
-    stopifnot(
-        is.character(core.name), is.character(core.email), is.character(core.id),
-        !is.na(core.name), !is.na(core.email), !is.na(core.id),
-        nchar(core.name) > 4, nchar(core.email) != 0
-    )
 
     db <- available.packages(repos = BiocManager::repositories())
     revdeps <-
