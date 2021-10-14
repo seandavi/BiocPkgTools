@@ -3,6 +3,8 @@ CHANGES IN VERSION 1.12.0
 
 NEW FEATURES
 
+    o `biocRevDepEmail` sends an email to several downstream maintainers to
+      notify them of a deprecated package.
     o `biocBuildEmail` allows deprecation notices using the template in the
       `inst` folder. Use `templatePath()` to see available templates by their
       location.
