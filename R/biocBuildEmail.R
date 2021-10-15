@@ -181,7 +181,7 @@ biocBuildEmail <-
         is.character(pkg), identical(length(pkg), 1L),
         is.character(PS), identical(length(PS), 1L),
         !is.na(pkg), !is.na(PS), !is.na(core.name), !is.na(core.email),
-        !is.na(core.id),
+        !is.na(core.id)
     )
     if (!file.exists(emailTemplate))
         stop("'emailTemplate' file not found.")
