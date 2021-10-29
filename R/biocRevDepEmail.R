@@ -29,8 +29,8 @@
 #'
 #' @export
 biocRevDepEmail <-
-    function(pkg, PS = character(1L),
-        dry.run = TRUE, emailTemplate = templatePath("revdepnote"),
+    function(pkg, PS = character(1L), version = BiocManager::version(),
+        dry.run = TRUE,  cc = NULL, emailTemplate = templatePath("revdepnote"),
         core.name = NULL, core.email = NULL, core.id = NULL,
         textOnly = FALSE, verbose = FALSE, credFile = "~/.blastula_creds")
 {
@@ -49,14 +49,14 @@ biocRevDepEmail <-
     core.id <- core.list[["core.id"]]
 
     db <- available.packages(
-        repos = BiocManager:::.repositories_bioc(BiocManager::version())[1]
+        repos = BiocManager:::.repositories_bioc(version)[1]
     )
     revdeps <- tools::package_dependencies(pkg, db, reverse = TRUE)[[1]]
 
     if (!length(revdeps))
         stop("No reverse dependencies on ", pkg)
 
-    listall <- biocPkgList(version = "devel")
+    listall <- biocPkgList(version = version)
     pkgMeta <- listall[listall[["Package"]] %in% revdeps, "Maintainer"]
     mainInfo <- vapply(
         unlist(pkgMeta, use.names = FALSE), .emailCut, character(1L)
@@ -64,12 +64,12 @@ biocRevDepEmail <-
 
     mainEmails <- unname(vapply(mainInfo, .emailCut, character(1L)))
 
-    repolink <- .createBiocPkgLink(pkg, "devel", FALSE)
+    repolink <- .createBiocPkgLink(pkg, version, FALSE)
 
     if (nchar(PS))
         PS <- paste0("**P.S.** ", PS)
 
-    revdeps <- paste(.createBiocPkgLink(revdeps), collapse = "\n")
+    revdeps <- paste(.createBiocPkgLink(revdeps, version), collapse = "\n\n")
     mail <- paste0(readLines(emailTemplate), collapse = "\n")
     maildate <- format(Sys.time(), "%B %d, %Y")
     firstname <- vapply(strsplit(core.name, "\\s"), `[`, character(1L), 1L)

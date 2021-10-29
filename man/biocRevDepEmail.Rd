@@ -7,6 +7,7 @@
 biocRevDepEmail(
   pkg,
   PS = character(1L),
+  version = BiocManager::version(),
   dry.run = TRUE,
   emailTemplate = templatePath("revdepnote"),
   core.name = NULL,
@@ -23,6 +24,9 @@ dependencies are to be checked and notified.}
 
 \item{PS}{character(1) Postscript, an additional note to the recipient of
 the email (i.e., the package maintainer)}
+
+\item{version}{character() A vector indicating which version of Bioconductor
+the package is failing in (either 'release' or 'devel'; defaults to both)}
 
 \item{dry.run}{logical(1) Display the email without sending to the recipient.
 It only works for HTML email reports and ignored when `textOnly=TRUE`}
