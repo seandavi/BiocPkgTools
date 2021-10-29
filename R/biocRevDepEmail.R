@@ -25,7 +25,9 @@
 #'
 #' @examples
 #'
-#' biocRevDepEmail("FindMyFriends", dry.run = TRUE, textOnly = TRUE)
+#' biocRevDepEmail(
+#'     "FindMyFriends", version = "3.13", dry.run = TRUE, textOnly = TRUE
+#' )
 #'
 #' @export
 biocRevDepEmail <-
