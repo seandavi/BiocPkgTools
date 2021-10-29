@@ -9,6 +9,7 @@ biocRevDepEmail(
   PS = character(1L),
   version = BiocManager::version(),
   dry.run = TRUE,
+  cc = NULL,
   emailTemplate = templatePath("revdepnote"),
   core.name = NULL,
   core.email = NULL,
@@ -30,6 +31,9 @@ the package is failing in (either 'release' or 'devel'; defaults to both)}
 
 \item{dry.run}{logical(1) Display the email without sending to the recipient.
 It only works for HTML email reports and ignored when `textOnly=TRUE`}
+
+\item{cc}{character() Email addresses for sending the message as a carbon
+copy}
 
 \item{emailTemplate}{character(1) The path to the email template Rmd file as
 obtained by `templatePath()`. A custom template can be provided as file

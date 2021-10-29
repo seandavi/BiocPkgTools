@@ -142,6 +142,9 @@ templatePath <-
 #' @param dry.run logical(1) Display the email without sending to the recipient.
 #'     It only works for HTML email reports and ignored when `textOnly=TRUE`
 #'
+#' @param cc character() Email addresses for sending the message as a carbon
+#'     copy
+#'
 #' @param emailTemplate character(1) The path to the email template Rmd file as
 #'     obtained by `templatePath()`. A custom template can be provided as file
 #'     path.
@@ -172,7 +175,7 @@ templatePath <-
 #' @export
 biocBuildEmail <-
     function(pkg, version = c("release", "devel"), PS = character(1L),
-        dry.run = TRUE, emailTemplate = templatePath(),
+        dry.run = TRUE, cc = NULL, emailTemplate = templatePath(),
         core.name = NULL, core.email = NULL, core.id = NULL,
         textOnly = FALSE, resend = FALSE, verbose = FALSE,
         credFile = "~/.blastula_creds")
@@ -256,7 +259,7 @@ biocBuildEmail <-
         send <- blastula::render_email(tfile)
         if (!dry.run && (!sent_status || sendagain)) {
             blastula::smtp_send(email = send,
-                from = core.email, to = mainEmail, subject = title,
+                from = core.email, to = mainEmail, cc = cc, subject = title,
                 credentials =
                     if (file.exists(credFile)) {
                         blastula::creds_file(credFile)

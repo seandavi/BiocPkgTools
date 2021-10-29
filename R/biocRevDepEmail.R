@@ -96,7 +96,7 @@ biocRevDepEmail <-
         send <- blastula::render_email(tfile)
         if (!dry.run) {
             blastula::smtp_send(email = send,
-                from = core.email, to = core.email, bcc = mainEmails,
+                from = core.email, to = core.email, bcc = mainEmails, cc = cc,
                 subject = title,
                 credentials =
                     if (file.exists(credFile)) {
