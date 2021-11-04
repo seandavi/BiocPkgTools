@@ -1,7 +1,3 @@
-.isBioc <- function(version, keyword) {
-    identical(package_version(version), BiocManager:::.version_bioc(keyword))
-}
-
 #' Tidy Bioconductor build report results
 #'
 #' The online Bioconoductor build reports
@@ -11,11 +7,11 @@
 #' from the build report online pages to generate
 #' a tidy data frame version of the build report.
 #'
-#' @param version character(1) the version number
+#' @param version character(1) the character version number
 #' as used to access the online build report. For
-#' example, "3.6". The default is the "current version"
-#' as specified in \code{BiocManager::version}. Note
-#' that this is a character() variable, not a number.
+#' example, "3.14". The default is the "current version"
+#' as given by \code{BiocManager::version()}. Note
+#' that this is a character vector of length one and not a number.
 #'
 #' @return A \code{tbl_df} object with columns pkg, version,
 #' author, commit, date, node, stage, and result.
@@ -38,12 +34,15 @@
 #'
 #' @export
 biocBuildReport <- function(version=BiocManager::version()) {
+  if (version %in% c("release", "devel"))
+    version <- BiocManager:::.version_bioc(keyword)
+
   url <- get_build_status_db_url(version)
   dat <- readLines(url)
   z <- do.call(rbind.data.frame, strsplit(dat, "#|: "))
   names(z) <- c("pkg", "node", "stage", "result")
 
-  if (.isBioc(version, "devel")) {
+  if (version >= package_version("3.14")) {
     tfile <- paste(dirname(url), "report.tgz", sep = "/")
     download.file(tfile, treport <- tempfile(fileext = ".tgz"))
     untar(treport, exdir = dcf_folder <- tempfile())
@@ -81,10 +80,12 @@ biocBuildReport <- function(version=BiocManager::version()) {
     ) %>% html_text2()
     # Account for packages with malformed maintainer fields in page
     idx <- which(rle(maints)$lengths > 1)
-    off_set <- seq(0, length(idx) - 1)
-    idx <- idx + off_set
-    for (i in off_set) {
-      maints <- append(maints, values = " ", after = idx[i+1] + 1)
+    if (length(idx)) {
+        off_set <- seq(0, length(idx) - 1)
+        idx <- idx + off_set
+        for (i in off_set) {
+          maints <- append(maints, values = " ", after = idx[i+1] + 1)
+        }
     }
     maints <- maints[c(FALSE, TRUE)]
     stopifnot(identical(length(pkgnames), length(maints)))
@@ -93,7 +94,7 @@ biocBuildReport <- function(version=BiocManager::version()) {
       xpath = '//*[@id="THE_BIG_GCARD_LIST"]/tbody/tr/td[@rowspan=3]')
     values <- meta %>% html_nodes("table") %>% html_text2()
 
-    if (.isBioc(version, "devel") || .isBioc(version, "release")) {
+    if (version >= package_version(3.13)) {
       values <- trimws(gsub("[\n]*git_last_commit[_date]*:", "", values))
       splitter <- "\\s"
     } else {
