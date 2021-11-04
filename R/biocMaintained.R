@@ -21,7 +21,7 @@ biocMaintained <-
         main = "maintainer@bioconductor\\.org"
     )
 {
-    pkgs <- BiocPkgTools::biocPkgList()
+    pkgs <- BiocPkgTools::biocPkgList(version = version)
     biocmaint <- vapply(
         pkgs$Maintainer,
         function(x)
