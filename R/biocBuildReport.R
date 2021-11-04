@@ -35,7 +35,7 @@
 #' @export
 biocBuildReport <- function(version=BiocManager::version()) {
   if (version %in% c("release", "devel"))
-    version <- BiocManager:::.version_bioc(keyword)
+    version <- BiocManager:::.version_bioc(version)
 
   url <- get_build_status_db_url(version)
   dat <- readLines(url)
