@@ -1,13 +1,14 @@
 Package: BiocPkgTools
 Type: Package
 Title: Collection of simple tools for learning about Bioc Packages
-Version: 1.13.3
-Date: 2021-05-22
+Version: 1.13.4
+Date: 2022-01-06
 Authors@R: c( 
     person("Shian", "Su", role=c("aut", "ctb"), email = "su.s@wehi.edu.au"),
     person("Lori", "Shepherd", role="ctb", email = "Lori.Shepherd@roswellpark.org"),
     person("Marcel", "Ramos", role="ctb", email = "marcel.ramos@roswellpark.org"),
     person("Felix G.M.", "Ernst", role="ctb", email = "felix.gm.ernst@outlook.com"),
+    person("Jennifer","Wokaty", role="ctb", email="jennifer.wokaty@gmail.com"),
     person("Charlotte", "Soneson", role="ctb", email = "charlottesoneson@gmail.com"),
     person("Martin", "Morgan", role="ctb", email = "martin.morgan@roswellpark.org"),
     person("Vince", "Carey", role="ctb", email="stvjc@channing.harvard.edu"),
