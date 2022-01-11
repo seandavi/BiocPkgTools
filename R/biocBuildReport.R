@@ -116,18 +116,12 @@ biocBuildReport <- function(version=BiocManager::version()) {
     y <- y[!is.na(y$pkg),]
   }
 
-  statusIndexFile <- file(get_deprecated_status_db_url(version))
-  pkg_status <- try(read.dcf(statusIndexFile))
-  close.connection(statusIndexFile)
-  if (!inherits(pkg_status, "try-error")) {
-    depdf <- cbind.data.frame(
-        Package = pkg_status[, "Package"],
-        Deprecated = pkg_status[, "PackageStatus"] == "Deprecated" &
-            !is.na(pkg_status[, "PackageStatus"]),
-        PackageStatus = pkg_status[, "PackageStatus"]
-    )
-    y <- merge(y, depdf, by.x = "pkg", by.y = "Package")
-  }
+  depdf <- get_deprecated_status_df(version)
+  isEmpty <- all(
+      vapply(depdf, function(x) identical(length(x), 0L), logical(1L))
+  )
+  if (!isEmpty)
+      y <- merge(y, depdf, by.x = "pkg", by.y = "Package")
 
   df <- suppressMessages(left_join(y, z)) # just suppress "Joining by...."
   df <- as_tibble(df)
@@ -154,4 +148,25 @@ get_deprecated_status_db_url <- function(version) {
     "https://bioconductor.org/checkResults/%s/bioc-LATEST/meat-index.dcf",
     version
   )
+}
+
+get_deprecated_status_df <- function(version) {
+    statusIndexFile <- file(get_deprecated_status_db_url(version))
+    pkg_status <- try(read.dcf(statusIndexFile))
+    close(statusIndexFile)
+    if (!inherits(pkg_status, "try-error")) {
+        depdf <- cbind.data.frame(
+            Package = pkg_status[, "Package"],
+            Deprecated = pkg_status[, "PackageStatus"] == "Deprecated" &
+                !is.na(pkg_status[, "PackageStatus"]),
+            PackageStatus = pkg_status[, "PackageStatus"]
+        )
+    } else {
+        depdf <- data.frame(
+            Package = character(0L),
+            Deprecated = logical(0L),
+            PackageStatus = character(0L)
+        )
+    }
+    depdf
 }
