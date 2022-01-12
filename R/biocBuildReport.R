@@ -13,6 +13,10 @@
 #' as given by \code{BiocManager::version()}. Note
 #' that this is a character vector of length one and not a number.
 #'
+#' @param stage.timings logical(1) Whether to include the start, end, and
+#' elapsed time for each build, check, install stage from each building in
+#' the result (default: FALSE)
+#'
 #' @return A \code{tbl_df} object with columns pkg, version,
 #' author, commit, date, node, stage, and result.
 #'
@@ -33,7 +37,7 @@
 #' head(latest_build)
 #'
 #' @export
-biocBuildReport <- function(version=BiocManager::version()) {
+biocBuildReport <- function(version=BiocManager::version(), stage.timings = FALSE) {
   if (version %in% c("release", "devel"))
     version <- BiocManager:::.version_bioc(version)
 
@@ -44,18 +48,15 @@ biocBuildReport <- function(version=BiocManager::version()) {
 
   if (version >= package_version("3.14")) {
     tfile <- paste(dirname(url), "report.tgz", sep = "/")
-    download.file(tfile, treport <- tempfile(fileext = ".tgz"))
+    treport <- .cached_report_location(tfile)
     untar(treport, exdir = dcf_folder <- tempfile())
-    dcffiles <- list.files(path = dcf_folder, pattern = "info\\.dcf$",
-        full.names = TRUE, recursive = TRUE)
-    meta <- do.call(rbind.data.frame, lapply(dcffiles, read.dcf))
-    y <- meta[,
-        c("Package", "Maintainer", "Version",
-        "git_last_commit", "git_last_commit_date")
-    ]
-    y[["git_last_commit_date"]] <-
-        as.POSIXct(gsub("^(.*)\\s\\(.*", "\\1", y[["git_last_commit_date"]]))
-    names(y)[1:3] <- c("pkg", "author", "version")
+    y <- .read_info_dcfs(dcf_folder)
+
+    if (stage.timings)
+      z <- merge(z, .read_summary_dcfs(dcf_folder),
+          by.x = c("pkg", "node", "stage"),
+          by.y = c("Package", "node", "stage")
+      )
   } else {
     dat <- xml2::read_html(dirname(url))
 
@@ -169,4 +170,47 @@ get_deprecated_status_df <- function(version) {
         )
     }
     depdf
+}
+
+.read_summary_dcfs <- function(dcf_location) {
+    summary_dcfs <- list.files(dcf_location, pattern="-summary\\.dcf$",
+        full.names = TRUE, recursive = TRUE)
+    fields <- c("Package", "StartedAt", "EndedAt", "EllapsedTime")
+    summaries <- lapply(summary_dcfs, .import_dcf_stage_node, fields = fields)
+    do.call(rbind, summaries)
+}
+
+.import_dcf_stage_node <- function(filepath, fields) {
+    stage <- head(strsplit(basename(filepath), "-", fixed = TRUE)[[1L]], 1L)
+    node <- basename(dirname(filepath))
+    dcf_pkg <- read.dcf(filepath, fields = fields)
+    dcf_chr <- structure(as.character(dcf_pkg), .Names = fields)
+    append(dcf_chr, c(node = node, stage = stage), after = 1L)
+}
+
+.read_info_dcfs <- function(info_files_location) {
+    dcffiles <- list.files(path = info_files_location,
+        pattern = "info\\.dcf$", full.names = TRUE, recursive = TRUE)
+    meta <- do.call(rbind.data.frame, lapply(dcffiles, read.dcf))
+    y <- meta[,
+        c("Package", "Maintainer", "Version",
+        "git_last_commit", "git_last_commit_date")
+    ]
+    y[["git_last_commit_date"]] <-
+        as.POSIXct(gsub("^(.*)\\s\\(.*", "\\1", y[["git_last_commit_date"]]))
+    names(y)[1:3] <- c("pkg", "author", "version")
+    y
+}
+
+.cached_report_location <- function(report_url) {
+    bfc <- BiocFileCache::BiocFileCache()
+    res <- BiocFileCache::bfcquery(bfc, report_url, exact = TRUE)
+    if (!length(res[["rpath"]])) {
+        BiocFileCache::bfcadd(
+            bfc, rname = report_url, fpath = report_url
+        )
+    } else if (BiocFileCache::bfcneedsupdate(bfc, res[["rid"]])) {
+        BiocFileCache::bfcupdate(bfc, res[["rid"]])
+    }
+    BiocFileCache::bfcrpath(bfc, report_url, exact = TRUE)
 }
