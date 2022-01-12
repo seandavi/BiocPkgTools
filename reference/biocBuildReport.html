@@ -22,7 +22,7 @@ a tidy data frame version of the build report."><!-- mathjax --><script src="htt
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BiocPkgTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.13.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.13.5</span>
       </span>
     </div>
 
@@ -63,7 +63,7 @@ a tidy data frame version of the build report.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">biocBuildReport</span><span class="op">(</span>version <span class="op">=</span> <span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/version.html" class="external-link">version</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">biocBuildReport</span><span class="op">(</span>version <span class="op">=</span> <span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/version.html" class="external-link">version</a></span><span class="op">(</span><span class="op">)</span>, stage.timings <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -74,6 +74,10 @@ as used to access the online build report. For
 example, "3.14". The default is the "current version"
 as given by <code><a href="https://rdrr.io/pkg/BiocManager/man/version.html" class="external-link">BiocManager::version()</a></code>. Note
 that this is a character vector of length one and not a number.</p></dd>
+<dt>stage.timings</dt>
+<dd><p>logical(1) Whether to include the start, end, and
+elapsed time for each build, check, install stage from each building in
+the result (default: FALSE)</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>

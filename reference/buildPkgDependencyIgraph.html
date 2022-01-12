@@ -25,7 +25,7 @@ attributes (see graph_from_data_frame)."><!-- mathjax --><script src="https://cd
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BiocPkgTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.13.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.13.5</span>
       </span>
     </div>
 
@@ -120,9 +120,9 @@ package for details of what can be done.</p>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">g</span> <span class="op">=</span> <span class="fu">buildPkgDependencyIgraph</span><span class="op">(</span><span class="va">pkg_dep_df</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">g</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 1bd5fe6 DN-- 3752 36433 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH aa8809a DN-- 3752 36433 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (v/c), edgetype (e/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 1bd5fe6 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from aa8809a (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] a4           -&gt;a4Base      a4           -&gt;a4Preproc  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [3] a4           -&gt;a4Classif   a4           -&gt;a4Core     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [5] a4           -&gt;a4Reporting a4Base       -&gt;a4Preproc  </span>
@@ -135,11 +135,11 @@ package for details of what can be done.</p>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Look at nodes and edges</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html" class="external-link">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">)</span> <span class="co"># vertices</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 6/3752 vertices, named, from 1bd5fe6:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 6/3752 vertices, named, from aa8809a:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] a4            a4Base        a4Classif     ABAEnrichment abseqR       </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [6] ABSSeq       </span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/E.html" class="external-link">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">)</span> <span class="co"># edges</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 6/36433 edges from 1bd5fe6 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 6/36433 edges from aa8809a (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] a4    -&gt;a4Base      a4    -&gt;a4Preproc   a4    -&gt;a4Classif  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [4] a4    -&gt;a4Core      a4    -&gt;a4Reporting a4Base-&gt;a4Preproc  </span>
 <span class="r-in"></span>
