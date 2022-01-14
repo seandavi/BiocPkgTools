@@ -28,8 +28,8 @@
 #'
 #' @return The DOI as a character(1) vector.
 #'
-#' @importFrom httr VERB content_type content add_headers
-#' @importFrom jsonlite toJSON
+#' @importFrom httr VERB content_type content add_headers message_for_status
+#' @importFrom jsonlite toJSON fromJSON
 #' @importFrom stringr str_to_upper
 #'
 #' @keywords Internal
@@ -84,5 +84,11 @@ generateBiocPkgDOI <- function(pkg, authors, pubyear, event = "publish", testing
                          httr::content_type("application/vnd.api+json"),
                          encode = encode)
 
-  httr::content(response, "text")
+  if (response$status_code >= 200 && response$status_code < 300) {
+    response_text <- httr::content(response, "text")
+    response_json <- jsonlite::fromJSON(response_text)
+    return(response_json$data$id)
+  } else {
+    httr::message_for_status(response)
+  }
 }
