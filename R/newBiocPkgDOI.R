@@ -55,7 +55,7 @@ generateBiocPkgDOI <- function(pkg, authors, pubyear, event = "publish", testing
     base_url <- "https://api.datacite.org/dois"
   }
 
-  bioc_doi_namespace <- "bioc"
+  bioc_doi_namespace <- "B9.bioc"
   pkg_doi <- paste0(bioc_prefix, "/", bioc_doi_namespace, ".", pkg)
   encode <- "raw"
   payload <- list("data" = list("id" = paste0("https://doi.org/", pkg_doi),
