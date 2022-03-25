@@ -20,7 +20,7 @@ the `templatePath()` function."><!-- mathjax --><script src="https://cdnjs.cloud
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BiocPkgTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.13.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.13.9</span>
       </span>
     </div>
 
@@ -61,6 +61,7 @@ the `templatePath()` function.</p>
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">biocRevDepEmail</span><span class="op">(</span>
   <span class="va">pkg</span>,
+  which <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"strong"</span>, <span class="st">"most"</span>, <span class="st">"all"</span><span class="op">)</span>,
   PS <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="fl">1L</span><span class="op">)</span>,
   version <span class="op">=</span> <span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/version.html" class="external-link">version</a></span><span class="op">(</span><span class="op">)</span>,
   dry.run <span class="op">=</span> <span class="cn">TRUE</span>,
@@ -80,6 +81,15 @@ the `templatePath()` function.</p>
     <dl><dt>pkg</dt>
 <dd><p>character(1) The name of the package for whose reverse
 dependencies are to be checked and notified.</p></dd>
+<dt>which</dt>
+<dd><p>a character vector listing the types of
+    dependencies, a subset of
+    <code>c("Depends", "Imports", "LinkingTo", "Suggests", "Enhances")</code>.
+    Character string <code>"all"</code> is shorthand for that vector,
+    character string <code>"most"</code> for the same vector without
+    <code>"Enhances"</code>,
+    character string <code>"strong"</code> (default) for the first three
+    elements of that vector.</p></dd>
 <dt>PS</dt>
 <dd><p>character(1) Postscript, an additional note to the recipient of
 the email (i.e., the package maintainer)</p></dd>
