@@ -22,6 +22,7 @@
 #'     dependencies are to be checked and notified.
 #'
 #' @inheritParams biocBuildEmail
+#' @inheritParams tools::package_dependencies
 #'
 #' @examples
 #'
@@ -31,7 +32,8 @@
 #'
 #' @export
 biocRevDepEmail <-
-    function(pkg, PS = character(1L), version = BiocManager::version(),
+    function(pkg, which = c("strong", "most", "all"),
+        PS = character(1L), version = BiocManager::version(),
         dry.run = TRUE,  cc = NULL, emailTemplate = templatePath("revdepnote"),
         core.name = NULL, core.email = NULL, core.id = NULL,
         textOnly = FALSE, verbose = FALSE, credFile = "~/.blastula_creds")
@@ -44,6 +46,7 @@ biocRevDepEmail <-
     )
     if (!file.exists(emailTemplate))
         stop("'emailTemplate' file not found.")
+    which <- match.arg(which)
 
     core.list <- .getUserInfo(core.name, core.email, core.id)
     core.name <- core.list[["core.name"]]
@@ -53,7 +56,9 @@ biocRevDepEmail <-
     db <- available.packages(
         repos = BiocManager:::.repositories_bioc(version)[1]
     )
-    revdeps <- tools::package_dependencies(pkg, db, reverse = TRUE)[[1]]
+    revdeps <- tools::package_dependencies(
+        pkg, db, reverse = TRUE, which = which
+    )[[pkg]]
 
     if (!length(revdeps))
         stop("No reverse dependencies on ", pkg)

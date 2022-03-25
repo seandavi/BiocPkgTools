@@ -6,6 +6,7 @@
 \usage{
 biocRevDepEmail(
   pkg,
+  which = c("strong", "most", "all"),
   PS = character(1L),
   version = BiocManager::version(),
   dry.run = TRUE,
@@ -22,6 +23,16 @@ biocRevDepEmail(
 \arguments{
 \item{pkg}{character(1) The name of the package for whose reverse
 dependencies are to be checked and notified.}
+
+\item{which}{a character vector listing the types of
+    dependencies, a subset of
+    \code{c("Depends", "Imports", "LinkingTo", "Suggests", "Enhances")}.
+    Character string \code{"all"} is shorthand for that vector,
+    character string \code{"most"} for the same vector without
+    \code{"Enhances"},
+    character string \code{"strong"} (default) for the first three
+    elements of that vector.
+  }
 
 \item{PS}{character(1) Postscript, an additional note to the recipient of
 the email (i.e., the package maintainer)}
