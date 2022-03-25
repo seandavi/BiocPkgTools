@@ -1,5 +1,9 @@
 # BiocPkgTools
 
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/seandavi/BiocPkgTools/workflows/R-CMD-check/badge.svg)](https://github.com/seandavi/BiocPkgTools/actions)
+<!-- badges: end -->
+
 Bioconductor has a rich ecosystem of metadata around packages, usage, and build status. 
 This package is a simple collection of functions to access that metadata from R in a tidy data format. 
 The goal is to expose metadata for data mining and value-added functionality such as package searching, text mining, and analytics on packages. 

@@ -4,14 +4,18 @@
 \alias{biocBuildReport}
 \title{Tidy Bioconductor build report results}
 \usage{
-biocBuildReport(version = BiocManager::version())
+biocBuildReport(version = BiocManager::version(), stage.timings = FALSE)
 }
 \arguments{
-\item{version}{character(1) the version number
+\item{version}{character(1) the character version number
 as used to access the online build report. For
-example, "3.6". The default is the "current version"
-as specified in \code{BiocManager::version}. Note
-that this is a character() variable, not a number.}
+example, "3.14". The default is the "current version"
+as given by \code{BiocManager::version()}. Note
+that this is a character vector of length one and not a number.}
+
+\item{stage.timings}{logical(1) Whether to include the start, end, and
+elapsed time for each build, check, install stage from each building in
+the result (default: FALSE)}
 }
 \value{
 A \code{tbl_df} object with columns pkg, version,

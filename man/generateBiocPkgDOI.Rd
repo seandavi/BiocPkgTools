@@ -4,7 +4,7 @@
 \alias{generateBiocPkgDOI}
 \title{Generate a DOI for a Bioconductor package}
 \usage{
-generateBiocPkgDOI(pkg, authors, pubyear, testing = TRUE)
+generateBiocPkgDOI(pkg, authors, pubyear, event = "publish", testing = TRUE)
 }
 \arguments{
 \item{pkg}{character(1) package name}
@@ -13,10 +13,13 @@ generateBiocPkgDOI(pkg, authors, pubyear, testing = TRUE)
 
 \item{pubyear}{integer(1) publication year}
 
+\item{event}{Either "hide", "register", or publish". Typically, we use
+"publish" to make the DOI findable.}
+
 \item{testing}{logical(1) If true, will use the apitest
 user with the password apitest. These DOIs will expire.
 The same apitest:apitest combination can be used to
-login to the EZID website for doing things using the
+login to the website for doing things using the
 web interface. If false, the Bioconductor-specific
 user credentials should be in the correct environment
 variables}
@@ -25,16 +28,16 @@ variables}
 The DOI as a character(1) vector.
 }
 \description{
-This function makes calls out to the EZID API (v2) described
-here: \url{https://ezid.lib.purdue.edu/doc/apidoc.2.html}. The
+This function makes calls out to the DataCite REST API described
+here: \url{https://support.datacite.org/docs/api-create-dois}. The
 function creates a new DOI for a Bioconductor package (cannot already
 exist). The target URL for the DOI is the short Bioconductor
 package URL.
 }
 \details{
 The login information for the "real" Bioconductor account
-should be stored in the environment variables "EZID_USERNAME"
-and "EZID_PASSWORD".
+should be stored in the environment variables "DATACITE_USERNAME"
+and "DATACITE_PASSWORD
 
 The GUI is available here: \url{https://doi.datacite.org/}.
 }
