@@ -216,7 +216,9 @@ biocBuildEmail <-
     core.email <- core.list[["core.email"]]
     core.id <- core.list[["core.id"]]
 
-    listall <- biocPkgList(version = version)
+    info_version <- tail(version, 1L)
+    info_version <- BiocManager:::.version_bioc(info_version)
+    listall <- biocPkgList(version = info_version)
     pkgMeta <- listall[listall[["Package"]] %in% pkg, ]
     if (!nrow(pkgMeta))
         stop("No pkg '",pkg,"' found on Bioconductor for ",
