@@ -30,18 +30,9 @@ biocPkgRanges <-
     condition <- match.arg(condition)
     version <- match.arg(version)
     version <- BiocManager:::.version_bioc(version)
-    build_status_db <- get_build_status_db_url(version)
-    cache <- .get_cache()
-    rid <- BiocFileCache::bfcquery(cache, build_status_db, exact = TRUE)[["rid"]]
-    status_file <-
-        if (!length(rid)) {
-            BiocFileCache::bfcadd(cache, build_status_db)
-        } else {
-            if (BiocFileCache::bfcneedsupdate(cache, rid))
-                BiocFileCache::bfcdownload(cache, rid, ask = FALSE)
-            BiocFileCache::bfcrpath(cache, rids = rid)
-        }
 
+    build_status_db <- get_build_status_db_url(version)
+    status_file <- .cache_url_file(build_status_db)
     dat <- readLines(status_file)
     sdat <- strsplit(dat, "#")
     sdat <- data.frame(do.call(rbind, sdat), row.names=NULL)

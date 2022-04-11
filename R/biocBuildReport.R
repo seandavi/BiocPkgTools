@@ -48,7 +48,7 @@ biocBuildReport <- function(version=BiocManager::version(), stage.timings = FALS
 
   if (version >= package_version("3.14")) {
     tfile <- paste(dirname(url), "report.tgz", sep = "/")
-    treport <- .cached_report_location(tfile)
+    treport <- .cache_url_file(tfile)
     untar(treport, exdir = dcf_folder <- tempfile())
     y <- .read_info_dcfs(dcf_folder)
 
@@ -202,15 +202,13 @@ get_deprecated_status_df <- function(version) {
     y
 }
 
-.cached_report_location <- function(report_url) {
-    bfc <- BiocFileCache::BiocFileCache()
-    res <- BiocFileCache::bfcquery(bfc, report_url, exact = TRUE)
-    if (!length(res[["rpath"]])) {
-        BiocFileCache::bfcadd(
-            bfc, rname = report_url, fpath = report_url
-        )
-    } else if (BiocFileCache::bfcneedsupdate(bfc, res[["rid"]])) {
-        BiocFileCache::bfcupdate(bfc, res[["rid"]])
-    }
-    BiocFileCache::bfcrpath(bfc, report_url, exact = TRUE)
+.cache_url_file <- function(url) {
+    bfc <- BiocFileCache()
+    bquery <- bfcquery(bfc, url, "rname", exact = TRUE)
+    if (identical(nrow(bquery), 1L) && bfcneedsupdate(bfc, bquery[["rid"]]))
+        bfcupdate(bfc, bquery[["rid"]], url)
+
+    bfcrpath(
+        bfc, rnames = url, exact = TRUE, download = TRUE, rtype = "web"
+    )
 }

@@ -31,20 +31,7 @@ CRANstatus <-
     URL <- paste0("https://cran.r-project.org/web/checks/check_results_",
         pkg, ".html")
 
-    bfc <- .get_cache()
-    rnameid <- paste0(pkg, "CheckResults")
-    rid <- BiocFileCache::bfcquery(bfc, rnameid, "rname", exact = TRUE)$rid
-    if (!length(rid))
-        htmlfile <- BiocFileCache::bfcadd(bfc, rname = rnameid, rtype = "web",
-            fpath = URL)
-    else
-        htmlfile <- BiocFileCache::bfcrpath(bfc, rids = rid)
-
-    updater <- BiocFileCache::bfcneedsupdate(bfc, names(htmlfile))
-
-    if (updater)
-        BiocFileCache::bfcdownload(bfc, names(htmlfile), ask = FALSE)
-
+    htmlfile <- .cache_url_file(URL)
     html <- xml2::read_html(htmlfile)
     cran_results <- rvest::html_table(html)[[1L]]
 

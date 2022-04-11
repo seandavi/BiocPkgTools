@@ -1,5 +1,10 @@
 utils::globalVariables(c(".data", "biocViewsVocab"))
 
+.cacheRead <- function(uri) {
+    ufile <- .cache_url_file(uri)
+    read.table(ufile, header = TRUE)
+}
+
 #' Get Bioconductor download statistics
 #'
 #' @details Note that Bioconductor package download
@@ -8,9 +13,11 @@ utils::globalVariables(c(".data", "biocViewsVocab"))
 #' @param pkgType character(1) Either one of 'software', 'data-experiment',
 #'     'workflows', or 'data-annotation' (defaults to 'all' or 'software')
 #'
-#' @importFrom dplyr mutate %>%
+#' @importFrom dplyr mutate
 #' @importFrom utils read.table
 #' @importFrom tibble as_tibble
+#' @importFrom BiocFileCache BiocFileCache bfcupdate bfcneedsupdate bfcrpath
+#'     bfcquery bfcnew
 #'
 #' @return A \code{data.frame} of download statistics for
 #' all Bioconductor packages, in tidy format
@@ -40,7 +47,7 @@ biocDownloadStats <-
         linkPkg, fnameType
     )
 
-    tlist <- lapply(stats_urls, read.table, header = TRUE)
+    tlist <- lapply(stats_urls, .cacheRead)
     tbl <- as_tibble(
         cbind(
             pkgType = rep(pkgType, vapply(tlist, nrow, numeric(1L))),
@@ -48,7 +55,7 @@ biocDownloadStats <-
         )
     )
 
-    tbl <- filter(tbl, .data$Month != "all") %>%
+    tbl <- filter(tbl, .data$Month != "all") |>
         dplyr::mutate(
             Date = as.Date(
                 paste(.data$Year, .data$Month, '01'), '%Y %b %d'
@@ -57,7 +64,6 @@ biocDownloadStats <-
 
     class(tbl) <- c('bioc_downloads', class(tbl))
     tbl
-
 }
 
 .try.read.table <- function(...) {
