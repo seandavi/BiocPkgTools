@@ -13,13 +13,13 @@ to estimate the dependency gain}
 \item{depdf}{a tidy data frame with package dependency information
 obtained through the function \code{\link{buildPkgDependencyDataFrame}}}
 
-\item{maxNbr}{numeric, the maximal number of direct dependencies to leave 
+\item{maxNbr}{numeric, the maximal number of direct dependencies to leave
 out simultaneously}
 }
 \value{
-A data frame with three columns: ExclPackages (the excluded direct 
-  dependencies), NbrExcl (the number of excluded direct dependencies),
-  DepGain (the dependency gain from excluding these direct dependencies)
+A data frame with three columns: ExclPackages (the excluded direct
+dependencies), NbrExcl (the number of excluded direct dependencies),
+DepGain (the dependency gain from excluding these direct dependencies)
 }
 \description{
 Calculate dependency gain achieved by excluding combinations of packages

@@ -16,7 +16,7 @@ A bubble plot of Bioconductor packages
 }
 \description{
 Explore Bioconductor packages through an interactive bubble
-    plot. Click on bubbles to bring up additional information about the
-    package. Size and proximity to center of a bubble is based on the
-    downloads the package has in the past month.
+plot. Click on bubbles to bring up additional information about the
+package. Size and proximity to center of a bubble is based on the
+downloads the package has in the past month.
 }

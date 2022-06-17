@@ -11,12 +11,12 @@ githubURLParts(urls)
 }
 \value{
 A \code{data.frame} with four columns:
-  \itemize{
-    \item{url}{The original GitHub URL}
-    \item{user_repo}{The GitHub "username/repo", combined}
-    \item{user}{The GitHub username}
-    \item{repo}{The GitHub repo name}
-  }
+\itemize{
+\item{url}{The original GitHub URL}
+\item{user_repo}{The GitHub "username/repo", combined}
+\item{user}{The GitHub username}
+\item{repo}{The GitHub repo name}
+}
 }
 \description{
 Extract GitHub user and repo name from GitHub URL

@@ -21,9 +21,9 @@ Anaconda.
 }
 \details{
 Anaconda provide daily download counts for all software packages
-they distribute.  These are summarised into monthly tables of counts and made 
+they distribute.  These are summarised into monthly tables of counts and made
 available from https://github.com/grimbough/anaconda-download-stats
-This function provides a mechanism to download these monthly counts for 
+This function provides a mechanism to download these monthly counts for
 Bioconductor packages distributed through Anaconda.
 }
 \examples{
