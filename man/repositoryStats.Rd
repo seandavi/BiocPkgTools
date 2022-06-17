@@ -3,18 +3,23 @@
 \name{repositoryStats}
 \alias{repositoryStats}
 \alias{print.repositoryStats}
-\title{Get the status of the Bioconductor binary repository}
+\title{Bioconductor Binary Repository Statistics}
 \usage{
 repositoryStats(version = BiocManager::version())
 
 \method{print}{repositoryStats}(x, ...)
 }
 \arguments{
-\item{x}{the object returned by `repositoryStats()`.}
+\item{version}{(Optional) \code{character(1)} or \code{package_version}
+indicating the \emph{Bioconductor} version (e.g., "3.8") for which
+repositories are required.}
+
+\item{x}{the object returned by \code{repositoryStats()}.}
+
+\item{...}{further arguments passed to or from other methods (not used).}
 }
 \value{
-`repositoryStats()` returns a list of class
-    `repositoryStats` with the following fields:
+a list of class \code{repositoryStats} with the following fields:
 \itemize{
 
 \item{container: }{character(1) container label, e.g.,
@@ -56,8 +61,8 @@ build system.}
 }
 }
 \description{
-`repositoryStats():` summarize binary packages
-    compatible with the Bioconductor or Terra container in use.
+Summarize binary packages compatible with the Bioconductor or
+Terra container in use.
 }
 \section{Methods (by generic)}{
 \itemize{

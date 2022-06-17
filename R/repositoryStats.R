@@ -1,12 +1,17 @@
-#' Get the status of the Bioconductor binary repository
+#' Bioconductor Binary Repository Statistics
 #'
 #' @aliases print.repositoryStats
 #'
-#' @description `repositoryStats():` summarize binary packages
-#'     compatible with the Bioconductor or Terra container in use.
+#' @description Summarize binary packages compatible with the Bioconductor or
+#'   Terra container in use.
 #'
-#' @return `repositoryStats()` returns a list of class
-#'     `repositoryStats` with the following fields:
+#' @param version (Optional) `character(1)` or `package_version`
+#'   indicating the _Bioconductor_ version (e.g., "3.8") for which
+#'   repositories are required.
+#'
+#' @param ... further arguments passed to or from other methods (not used).
+#'
+#' @return a list of class `repositoryStats` with the following fields:
 #' \itemize{
 #'
 #' \item{container: }{character(1) container label, e.g.,
