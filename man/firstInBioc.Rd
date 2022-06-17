@@ -11,7 +11,7 @@ firstInBioc(download_stats)
 }
 \description{
 This function uses the biocDownloadStats
-data to *approximate* when a package entered
+data to \emph{approximate} when a package entered
 Bioconductor. Note that the download stats
 go back only to 2009.
 }
