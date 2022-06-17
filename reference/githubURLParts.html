@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BiocPkgTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.13.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.15.0</span>
       </span>
     </div>
 
@@ -60,10 +60,15 @@
     <h2>Arguments</h2>
     <dl><dt>urls</dt>
 <dd><p>A <code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code> vector of URLs</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A <code>data.frame</code> with four columns:</p><ul><li><p>urlThe original GitHub URL</p></li>
+    
+
+<p>A <code>data.frame</code> with four columns:</p>
+<p></p>
+<ul><li><p>urlThe original GitHub URL</p></li>
 <li><p>user_repoThe GitHub "username/repo", combined</p></li>
 <li><p>userThe GitHub username</p></li>
 <li><p>repoThe GitHub repo name</p></li>
@@ -83,19 +88,19 @@
 <span class="r-in"><span class="va">urldetails</span> <span class="op">=</span> <span class="va">urldetails</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">urldetails</span><span class="op">$</span><span class="va">url</span><span class="op">)</span>,<span class="op">]</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">urldetails</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                              url                  user_repo</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9          https://github.com/malhamdoosh/abseqR         malhamdoosh/abseqR</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12              https://github.com/tgac-vumc/ACE              tgac-vumc/ACE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15            https://github.com/rdiaz02/adacgh2            rdiaz02/adacgh2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22 https://github.com/HenrikBengtsson/affxparser HenrikBengtsson/affxparser</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 29           https://github.com/bmbolstad/affyio           bmbolstad/affyio</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 31          https://github.com/bmbolstad/affyPLM          bmbolstad/affyPLM</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8          https://github.com/malhamdoosh/abseqR         malhamdoosh/abseqR</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11              https://github.com/tgac-vumc/ACE              tgac-vumc/ACE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14            https://github.com/rdiaz02/adacgh2            rdiaz02/adacgh2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21 https://github.com/HenrikBengtsson/affxparser HenrikBengtsson/affxparser</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28           https://github.com/bmbolstad/affyio           bmbolstad/affyio</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30          https://github.com/bmbolstad/affyPLM          bmbolstad/affyPLM</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               user       repo</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9      malhamdoosh     abseqR</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12       tgac-vumc        ACE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15         rdiaz02    adacgh2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22 HenrikBengtsson affxparser</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 29       bmbolstad     affyio</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 31       bmbolstad    affyPLM</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8      malhamdoosh     abseqR</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11       tgac-vumc        ACE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14         rdiaz02    adacgh2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21 HenrikBengtsson affxparser</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28       bmbolstad     affyio</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30       bmbolstad    affyPLM</span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>
@@ -111,7 +116,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>

@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BiocPkgTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.13.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.15.0</span>
       </span>
     </div>
 
@@ -71,17 +71,26 @@
     <dl><dt>class</dt>
 <dd><p>a single <code>character</code> value defining a ‘S4’ class
 name</p></dd>
+
+
 <dt>includeUnions</dt>
 <dd><p><code>TRUE</code> or <code>FALSE</code>: Should union definitions
 included in the result? (default: <code>FALSE</code>)</p></dd>
+
+
 <dt>pkg</dt>
 <dd><p>a single <code>character</code> value defining a package name</p></dd>
+
+
 <dt>data</dt>
 <dd><p>a <code>data.frame</code> with compatible columns. See output of
 <code>buildClassDepData</code></p></dd>
+
+
 <dt>g</dt>
 <dd><p>an <code>igraph</code> object with compatible edge attributes. See output
 of <code>buildClassDepGraph</code></p></dd>
+
 </dl></div>
 
     <div id="ref-examples">
@@ -178,61 +187,57 @@ of <code>buildClassDepGraph</code></p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 9  RangedSummarizedExperiment          GRangesList   slot         FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 10 RangedSummarizedExperiment               Assays   slot         FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 11 RangedSummarizedExperiment            character   slot         FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12                  DataFrame      RectangularData   slot         FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13                  DataFrame           SimpleList   slot         FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15                 SimpleList                 List   slot         FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16                       List               Vector   slot          TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18                     Vector            Annotated   slot          TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20                  DataFrame      RectangularData   slot         FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21                  DataFrame           SimpleList   slot         FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23                 SimpleList                 List   slot         FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 24                       List               Vector   slot          TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 26                     Vector            Annotated   slot          TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 28                       list               vector   slot         FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 33              GenomicRanges               Ranges   slot          TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 37                     Ranges                 List   slot          TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 38                       List               Vector   slot          TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 40                     Vector            Annotated   slot          TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 42                GRangesList    GenomicRangesList   slot          TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 44          GenomicRangesList           RangesList   slot          TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 46                 RangesList                 List   slot          TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 47                       List               Vector   slot          TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 49                     Vector            Annotated   slot          TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 51                     Assays      RectangularData   slot          TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 53                  character               vector   slot         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12                  DataFrame      RectangularData   slot          TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13                  DataFrame                 List   slot          TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15                       List               Vector   slot          TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17                     Vector            Annotated   slot          TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19                  DataFrame      RectangularData   slot          TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20                  DataFrame                 List   slot          TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22                       List               Vector   slot          TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24                     Vector            Annotated   slot          TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26                       list               vector   slot         FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31              GenomicRanges               Ranges   slot          TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35                     Ranges                 List   slot          TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36                       List               Vector   slot          TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38                     Vector            Annotated   slot          TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40                GRangesList    GenomicRangesList   slot          TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42          GenomicRangesList           RangesList   slot          TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44                 RangesList                 List   slot          TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45                       List               Vector   slot          TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47                     Vector            Annotated   slot          TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 49                     Assays      RectangularData   slot          TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 51                  character               vector   slot         FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    parentUnion childVirtual childUnion</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1        FALSE        FALSE      FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2        FALSE         TRUE      FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3        FALSE         TRUE      FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4        FALSE         TRUE      FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6        FALSE        FALSE      FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6        FALSE         TRUE      FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 7        FALSE        FALSE      FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 8        FALSE         TRUE      FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 9        FALSE         TRUE      FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 10       FALSE         TRUE      FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 11       FALSE        FALSE      FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 12       FALSE         TRUE      FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13       FALSE        FALSE      FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13       FALSE         TRUE      FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 15       FALSE         TRUE      FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16       FALSE         TRUE      FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18       FALSE         TRUE      FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17       FALSE         TRUE      FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19       FALSE         TRUE      FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 20       FALSE         TRUE      FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21       FALSE        FALSE      FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23       FALSE         TRUE      FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22       FALSE         TRUE      FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 24       FALSE         TRUE      FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 26       FALSE         TRUE      FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 28       FALSE         TRUE      FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 33       FALSE         TRUE      FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 37       FALSE         TRUE      FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31       FALSE         TRUE      FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35       FALSE         TRUE      FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36       FALSE         TRUE      FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 38       FALSE         TRUE      FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 40       FALSE         TRUE      FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 42       FALSE         TRUE      FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 44       FALSE         TRUE      FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 46       FALSE         TRUE      FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45       FALSE         TRUE      FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 47       FALSE         TRUE      FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 49       FALSE         TRUE      FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 51       FALSE         TRUE      FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 53       FALSE         TRUE      FALSE</span>
 <span class="r-in"><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu">buildClassDepGraph</span><span class="op">(</span><span class="st">"RangedSummarizedExperiment"</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu">plotClassDepGraph</span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span>
 <span class="r-plt img"><img src="class-dependencies-1.png" alt="" width="700" height="433"></span>
@@ -250,7 +255,7 @@ of <code>buildClassDepGraph</code></p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>

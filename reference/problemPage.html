@@ -19,7 +19,7 @@ the maintainer name or by using the 'Depends', 'Suggests' and 'Imports' fields i
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BiocPkgTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.13.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.15.0</span>
       </span>
     </div>
 
@@ -69,19 +69,28 @@ the maintainer name or by using the 'Depends', 'Suggests' and 'Imports' fields i
     <h2>Arguments</h2>
     <dl><dt>authorPattern</dt>
 <dd><p>character(1) regexp used with grep() to filter author field of package DESCRIPTION for listing</p></dd>
+
+
 <dt>dependsOn</dt>
 <dd><p>character(1) name of a Bioconductor package. The function will return the status of packages
 that directly depend on this package  Can only be used when 'authorPattern' is the empty string.</p></dd>
+
+
 <dt>ver</dt>
 <dd><p>character(1) version tag for Bioconductor</p></dd>
+
+
 <dt>includeOK</dt>
 <dd><p>logical(1) include entries from the build report that are listed
 as "OK". Default FALSE will result in only those entries that
 are in WARNING or ERROR state.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>DT::datatable call; if assigned to a variable, must evaluate to get the page to appear</p>
+    
+
+<p>DT::datatable call; if assigned to a variable, must evaluate to get the page to appear</p>
     </div>
     <div id="author">
     <h2>Author</h2>
@@ -109,7 +118,7 @@ are in WARNING or ERROR state.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>

@@ -22,7 +22,7 @@ package named."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/l
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BiocPkgTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.13.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.15.0</span>
       </span>
     </div>
 
@@ -71,18 +71,27 @@ package named.</p>
     <dl><dt>g</dt>
 <dd><p>an igraph graph, typically created by
 <code><a href="buildPkgDependencyIgraph.html">buildPkgDependencyIgraph</a></code></p></dd>
+
+
 <dt>pkg</dt>
 <dd><p>character(1) package name from which to
 measure degree.</p></dd>
+
+
 <dt>degree</dt>
 <dd><p>integer(1) degree, limit search for
 adjacent vertices to this degree.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>passed on to <code><a href="https://rdrr.io/pkg/igraph/man/distances.html" class="external-link">distances</a></code></p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>An igraph graph, with only nodes and their
+    
+
+<p>An igraph graph, with only nodes and their
 edges within degree of the named package</p>
     </div>
 
@@ -97,9 +106,9 @@ edges within degree of the named package</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     CRAN: https://cloud.r-project.org</span>
 <span class="r-in"><span class="va">g2</span> <span class="op">=</span> <span class="fu">subgraphByDegree</span><span class="op">(</span><span class="va">g</span>, <span class="st">'GEOquery'</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">g2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 6970e88 DN-- 63 286 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH e2c4e23 DN-- 63 288 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (v/c), edgetype (e/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 6970e88 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from e2c4e23 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] autonomics  -&gt;BiocGenerics autonomics  -&gt;GEOquery    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [3] autonomics  -&gt;limma        autonomics  -&gt;methods     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [5] autonomics  -&gt;magrittr     autonomics  -&gt;data.table  </span>
@@ -124,7 +133,7 @@ edges within degree of the named package</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>

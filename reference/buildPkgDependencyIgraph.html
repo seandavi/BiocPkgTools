@@ -25,7 +25,7 @@ attributes (see graph_from_data_frame)."><!-- mathjax --><script src="https://cd
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BiocPkgTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.13.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.15.0</span>
       </span>
     </div>
 
@@ -77,10 +77,13 @@ attributes (see <code><a href="https://rdrr.io/pkg/igraph/man/graph_from_data_fr
     <dl><dt>pkgDepDF</dt>
 <dd><p>a tidy data frame. See description for
 details.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>An igraph directed graph. See the igraph
+    
+
+<p>An igraph directed graph. See the igraph
 package for details of what can be done.</p>
     </div>
     <div id="see-also">
@@ -120,26 +123,25 @@ package for details of what can be done.</p>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">g</span> <span class="op">=</span> <span class="fu">buildPkgDependencyIgraph</span><span class="op">(</span><span class="va">pkg_dep_df</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">g</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 272d6ce DN-- 3754 36468 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 35fd332 DN-- 3848 38292 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (v/c), edgetype (e/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 272d6ce (vertex names):</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] a4           -&gt;a4Base      a4           -&gt;a4Preproc  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3] a4           -&gt;a4Classif   a4           -&gt;a4Core     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5] a4           -&gt;a4Reporting a4Base       -&gt;a4Preproc  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] a4Base       -&gt;a4Core      a4Classif    -&gt;a4Core     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9] a4Classif    -&gt;a4Preproc   ABAEnrichment-&gt;R          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] abseqR       -&gt;R           ABSSeq       -&gt;R          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13] ABSSeq       -&gt;methods     acde         -&gt;R          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [15] acde         -&gt;boot        ACE          -&gt;R          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 35fd332 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] a4       -&gt;a4Base       a4       -&gt;a4Preproc    a4       -&gt;a4Classif   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4] a4       -&gt;a4Core       a4       -&gt;a4Reporting  a4Base   -&gt;a4Preproc   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] a4Base   -&gt;a4Core       a4Classif-&gt;a4Core       a4Classif-&gt;a4Preproc   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10] abseqR   -&gt;R            ABSSeq   -&gt;R            ABSSeq   -&gt;methods     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13] acde     -&gt;R            acde     -&gt;boot         ACE      -&gt;R           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [16] aCGH     -&gt;R            aCGH     -&gt;cluster      aCGH     -&gt;survival    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [19] aCGH     -&gt;multtest     ACME     -&gt;R            ACME     -&gt;Biobase     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [22] ACME     -&gt;methods      ACME     -&gt;BiocGenerics ADaCGH2  -&gt;R           </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + ... omitted several edges</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Look at nodes and edges</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html" class="external-link">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">)</span> <span class="co"># vertices</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 6/3754 vertices, named, from 272d6ce:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] a4            a4Base        a4Classif     ABAEnrichment abseqR       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [6] ABSSeq       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 6/3848 vertices, named, from 35fd332:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] a4        a4Base    a4Classif abseqR    ABSSeq    acde     </span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/E.html" class="external-link">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">)</span> <span class="co"># edges</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 6/36468 edges from 272d6ce (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 6/38292 edges from 35fd332 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] a4    -&gt;a4Base      a4    -&gt;a4Preproc   a4    -&gt;a4Classif  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [4] a4    -&gt;a4Core      a4    -&gt;a4Reporting a4Base-&gt;a4Preproc  </span>
 <span class="r-in"></span>
@@ -148,10 +150,12 @@ package for details of what can be done.</p>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/degree.html" class="external-link">degree</a></span><span class="op">(</span><span class="va">g</span>, mode<span class="op">=</span><span class="st">'in'</span><span class="op">)</span>, decreasing<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         R     knitr   methods rmarkdown     stats     utils </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      1654      1421      1408      1230      1185       982 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      1731      1488      1458      1301      1235      1024 </span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/degree.html" class="external-link">degree</a></span><span class="op">(</span><span class="va">g</span>, mode<span class="op">=</span><span class="st">'out'</span><span class="op">)</span>, decreasing<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> singleCellTK     musicatk TCGAbiolinks   ChromSCape ChIPpeakAnno    metaseqR2 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           94           64           64           62           61           61 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   singleCellTK         GRaNIE     ChromSCape   TCGAbiolinks       musicatk </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            100             68             67             67             64 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> spatialHeatmap </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             64 </span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>
@@ -167,7 +171,7 @@ package for details of what can be done.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>

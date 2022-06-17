@@ -22,7 +22,7 @@ and their intervening dependencies."><!-- mathjax --><script src="https://cdnjs.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BiocPkgTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.13.11</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.15.0</span>
       </span>
     </div>
 
@@ -71,14 +71,19 @@ and their intervening dependencies.</p>
     <dl><dt>g</dt>
 <dd><p>an igraph graph, typically created by
 <code><a href="buildPkgDependencyIgraph.html">buildPkgDependencyIgraph</a></code></p></dd>
+
+
 <dt>pkgs</dt>
 <dd><p>character() vector of packages to
 include. Package names not included in
 the graph are ignored.</p></dd>
+
+
 <dt>pkg_color</dt>
 <dd><p>character(1) giving color of named
 packages. Other packages in the graph that fall in
 connecting paths will be colored as the igraph default.</p></dd>
+
 </dl></div>
 
     <div id="ref-examples">
@@ -93,14 +98,14 @@ connecting paths will be colored as the igraph default.</p></dd>
 <span class="r-in"><span class="va">g2</span> <span class="op">=</span> <span class="fu">inducedSubgraphByPkgs</span><span class="op">(</span><span class="va">g</span>, pkgs<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'GenomicFeatures'</span>,</span>
 <span class="r-in"><span class="st">'TCGAbiolinksGUI'</span>, <span class="st">'BiocGenerics'</span>, <span class="st">'org.Hs.eg.db'</span>, <span class="st">'minfi'</span>, <span class="st">'limma'</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">g2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 4abd398 DN-- 6 5 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH c26cf47 DN-- 6 5 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (v/c), color (v/c), edgetype (e/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 4abd398 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from c26cf47 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] GenomicFeatures-&gt;BiocGenerics GenomicFeatures-&gt;org.Hs.eg.db</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [3] limma          -&gt;org.Hs.eg.db minfi          -&gt;BiocGenerics</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [5] minfi          -&gt;limma       </span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html" class="external-link">V</a></span><span class="op">(</span><span class="va">g2</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 6/6 vertices, named, from 4abd398:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 6/6 vertices, named, from c26cf47:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] BiocGenerics    GenomicFeatures limma           minfi          </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [5] TCGAbiolinksGUI org.Hs.eg.db   </span>
 <span class="r-in"></span>
@@ -121,7 +126,7 @@ connecting paths will be colored as the igraph default.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>
