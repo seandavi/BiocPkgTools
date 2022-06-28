@@ -23,15 +23,15 @@ CRANstatus(
 member}
 
 \item{core.id}{character(1) The internal identifier for the Roswell employee.
-This ID usually matches `^[A-Z]{2}[0-9]{5}` for more recent identifiers.}
+This ID usually matches \verb{^[A-Z]\{2\}[0-9]\{5\}} for more recent identifiers.}
 
 \item{to.mail}{The email of the CRAN report recipient}
 
 \item{dry.run}{logical(1) Display the email without sending to the recipient.
-It only works for HTML email reports and ignored when `textOnly=TRUE`}
+It only works for HTML email reports and ignored when \code{textOnly=TRUE}}
 
 \item{emailTemplate}{character(1) The path to the email template Rmd file as
-obtained by `templatePath()`. A custom template can be provided as file
+obtained by \code{templatePath()}. A custom template can be provided as file
 path.}
 }
 \description{

@@ -27,7 +27,7 @@ location of the cache directory}
 }
 \description{
 Managing user data is important to allow use of email functions
-such as `biocBuildEmail` and made easy with `BiocFileCache`.
+such as \code{biocBuildEmail} and made easy with \code{BiocFileCache}.
 }
 \section{pkgToolsCache}{
 

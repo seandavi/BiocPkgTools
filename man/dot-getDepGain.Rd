@@ -2,7 +2,7 @@
 % Please edit documentation in R/pkgDependencyMetrics.R
 \name{.getDepGain}
 \alias{.getDepGain}
-\title{Calculate the 'dependency gain' from excluding one or more direct 
+\title{Calculate the 'dependency gain' from excluding one or more direct
 dependencies}
 \usage{
 .getDepGain(g, pkg, depsToRemove)
@@ -12,16 +12,16 @@ dependencies}
 
 \item{pkg}{Character string representing the package of interest}
 
-\item{depsToRemove}{Character vector representing the dependencies 
+\item{depsToRemove}{Character vector representing the dependencies
 to remove}
 }
 \value{
-The 'dependency gain' that would be achieved by excluding the 
-  indicated direct dependencies
+The 'dependency gain' that would be achieved by excluding the
+indicated direct dependencies
 }
 \description{
-Calculate the difference between the total number of dependencies of a 
-package and the number of dependencies that would remain if one or more 
+Calculate the difference between the total number of dependencies of a
+package and the number of dependencies that would remain if one or more
 of the direct dependencies were removed.
 }
 \author{

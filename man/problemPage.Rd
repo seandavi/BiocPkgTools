@@ -28,7 +28,7 @@ DT::datatable call; if assigned to a variable, must evaluate to get the page to 
 }
 \description{
 This is a quick way to get an HTML report of packages maintained by a specific developer
-or which depend directly on a specified package. The function is keyed to filter based on either 
+or which depend directly on a specified package. The function is keyed to filter based on either
 the maintainer name or by using the 'Depends', 'Suggests' and 'Imports' fields in package descriptions.
 }
 \examples{
