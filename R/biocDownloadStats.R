@@ -246,7 +246,7 @@ latestPkgStats <-
     csince <- NA_integer_
     if (!missing(local_repo))
         csince <- nrow(commitsSince(local_repo, Date))
-    stattab |>
+    stattab[afterDate, ] |>
       dplyr::summarize(
           avg_mo_distict_IPs = mean(Nb_of_distinct_IPs),
           avg_mo_downloads = mean(Nb_of_downloads)
