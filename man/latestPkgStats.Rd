@@ -31,6 +31,6 @@ generate a table of relevant statistics for a given package.
 }
 \examples{
 
-latestPkgStats("Bioconductor/S4Vectors", "2021-05-05")
+latestPkgStats("Bioconductor/BiocGenerics", "2021-05-05")
 
 }
