@@ -147,12 +147,12 @@ pkgDownloadStats <-
 #' tail(firstInBioc(dls))
 #'
 #' @export
-firstInBioc = function(download_stats) {
-  download_stats %>%
-    dplyr::filter(.data$Month!='all') %>%
-    dplyr::group_by(.data$Package) %>%
+firstInBioc <- function(download_stats) {
+  download_stats |>
+    dplyr::filter(.data$Month!='all') |>
+    dplyr::group_by(.data$Package) |>
     # thanks: https://stackoverflow.com/questions/43832434/arrange-within-a-group-with-dplyr
-    dplyr::top_n(1, dplyr::desc(.data$Date)) %>%
+    dplyr::top_n(1, dplyr::desc(.data$Date)) |>
     dplyr::collect()
 }
 
