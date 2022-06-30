@@ -19,8 +19,7 @@ utils::globalVariables(c(".data", "biocViewsVocab"))
 #' @importFrom BiocFileCache BiocFileCache bfcupdate bfcneedsupdate bfcrpath
 #'     bfcquery bfcnew
 #'
-#' @return A \code{data.frame} of download statistics for
-#' all Bioconductor packages, in tidy format
+#' @return A \code{tibble} of download statistics for all Bioconductor packages
 #'
 #' @examples
 #' biocDownloadStats()

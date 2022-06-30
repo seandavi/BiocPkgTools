@@ -13,8 +13,7 @@ biocDownloadStats(
 'workflows', or 'data-annotation' (defaults to 'all' or 'software')}
 }
 \value{
-A \code{data.frame} of download statistics for
-all Bioconductor packages, in tidy format
+A \code{tibble} of download statistics for all Bioconductor packages
 }
 \description{
 Get Bioconductor download statistics
