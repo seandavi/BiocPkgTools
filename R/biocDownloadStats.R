@@ -5,6 +5,19 @@ utils::globalVariables(c(".data", "biocViewsVocab"))
     read.table(ufile, header = TRUE)
 }
 
+repo_short_names <- data.frame(
+  repository =
+    c("software", "data-experiment", "workflows", "data-annotation", "books"),
+  stat.url =
+    c("bioc", "data-experiment", "workflows", "data-annotation", NA_character_),
+  stat.file =
+    c("bioc", "experiment", "workflows", "annotation", NA_character_),
+  json.file =
+    c("bioc", "data/experiment", "workflows", "data/annotation", NA_character_),
+  repo.name =
+    c("BioCsoft", "BioCexp", "BioCworkflows", "BioCann", "BioCbooks")
+)
+
 #' Get Bioconductor download statistics
 #'
 #' @details Note that Bioconductor package download
