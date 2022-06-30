@@ -1,4 +1,6 @@
-utils::globalVariables(c(".data", "biocViewsVocab"))
+utils::globalVariables(
+    c(".data", "biocViewsVocab", "Nb_of_distinct_IPs", "Nb_of_downloads")
+)
 
 .cacheRead <- function(uri) {
     ufile <- .cache_url_file(uri)
@@ -126,7 +128,10 @@ pkgDownloadStats <-
 
     tlist <- lapply(stats_urls, .try.read.table, header = TRUE)
     tbl <- as_tibble(dplyr::bind_rows(tlist))
-    filter(tbl, .data$Month != "all")
+    filter(tbl,
+        .data$Month != "all" &
+            (Nb_of_distinct_IPs != 0 & Nb_of_downloads != 0)
+    )
 
 }
 
