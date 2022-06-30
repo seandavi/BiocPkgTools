@@ -302,7 +302,7 @@ issuesSince <- function(
         state = status, .accept = accept)
     issuedf <- dplyr::bind_rows(
         lapply(issues, function(issue) {
-            issue[c("created_at", "number", "title")]
+            issue[issue_metadata]
         })
     )
     issuedf[lubridate::ymd_hms(issuedf[["created_at"]]) >= Date, ]
