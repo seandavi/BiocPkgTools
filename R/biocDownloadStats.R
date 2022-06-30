@@ -50,8 +50,8 @@ biocDownloadStats <-
     formal.args <- eval(formals()[["pkgType"]])
     pkgType <- match.arg(pkgType)
     pkgType <- switch(pkgType, all = tail(formal.args, -1), pkgType)
-    linkPkg <- gsub("software", "bioc", pkgType)
-    fnameType <- gsub("data-", "", linkPkg)
+    linkPkg <- .matchGetShortName(pkgType, "stat.url")
+    fnameType <- .matchGetShortName(pkgType, "stat.file")
 
     base_url <- "http://bioconductor.org/packages/stats/%s/%s_pkg_stats.tab"
 
@@ -116,7 +116,7 @@ pkgDownloadStats <-
 {
 
     pkgType <- match.arg(pkgType)
-    pkgType <- switch(pkgType, software = "bioc", pkgType)
+    pkgType <- .matchGetShortName(pkgType, "stat.url")
 
     base_url <- "http://bioconductor.org/packages/stats/%s/%s/%s_%s_stats.tab"
 
@@ -155,3 +155,8 @@ firstInBioc = function(download_stats) {
     dplyr::top_n(1, dplyr::desc(.data$Date)) %>%
     dplyr::collect()
 }
+
+.matchGetShortName <- function(pkgType, colName) {
+    repo_short_names[match(pkgType, repo_short_names[["repository"]]), colName]
+}
+
