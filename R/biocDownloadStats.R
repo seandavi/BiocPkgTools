@@ -165,3 +165,182 @@ firstInBioc <- function(download_stats) {
     repo_short_names[match(pkgType, repo_short_names[["repository"]]), colName]
 }
 
+#' What is a package's download rank?
+#'
+#' This function uses `available.packages` to calculate the download rank
+#' _percentile_ of a given package. It approximates what is observed
+#' in the Bioconductor landing page.
+#'
+#' @inheritParams pkgDownloadStats
+#' @inheritParams repositoryStats
+#'
+#' @return The package's percentile rank, in terms of download statistics, and
+#'   proportion in the name
+#'
+#' @examples
+#'
+#' ## Percentile rank for BiocGenerics (top 1%)
+#' pkgDownloadRank("BiocGenerics", "software")
+#'
+#' @export
+pkgDownloadRank <-
+    function(
+        pkg,
+        pkgType = c(
+            "software", "data-experiment", "workflows", "data-annotation"
+        ),
+        version = BiocManager::version()
+    )
+{
+    pkgType <- match.arg(pkgType)
+    jsonPath <- .matchGetShortName(pkgType, "json.file")
+    rankURL <-
+        "https://www.bioconductor.org/packages/json/%s/%s/packages.json"
+    ufile <- .cache_url_file(sprintf(rankURL, version, jsonPath))
+
+    pkgs <- jsonlite::fromJSON(ufile)
+    rank <- pkgs[[pkg]]$Rank
+
+    repoType <- .matchGetShortName(pkgType, "repo.name")
+    repos <- BiocManager:::.repositories_bioc(version)[repoType]
+    db <- available.packages(repos = repos)
+    pct <- round(rank*100 / nrow(db), 2)
+    names(pct) <- paste(rank, nrow(db), sep = "/")
+    pct
+}
+
+#' Summary of the latest package statistics
+#'
+#' The `latestPkgStats` function combines outputs from several functions to
+#' generate a table of relevant statistics for a given package.
+#'
+#' @inheritParams pkgDownloadRank
+#' @inheritParams issuesSince
+#' @inheritParams commitsSince
+#'
+#' @examples
+#'
+#' latestPkgStats("Bioconductor/S4Vectors", "2021-05-05")
+#'
+#' @export
+latestPkgStats <-
+    function(
+        gh_repo,
+        Date,
+        pkgType = c(
+            "software", "data-experiment", "workflows", "data-annotation"
+        ),
+        local_repo
+    )
+{
+    if (!requireNamespace("lubridate", quietly = TRUE))
+        stop("Install the 'lubridate' package to work with dates")
+    y1 <- lubridate::year(Date)
+    y2 <- lubridate::year(Sys.Date())
+    m1 <- lubridate::month(Date, label = TRUE, abbr = TRUE)
+
+    pkg <- strsplit(gh_repo, "/", fixed = TRUE)[[1]][[2]]
+    stattab <- pkgDownloadStats(pkg, years = y1:y2)
+    afterDate <- seq_len(nrow(stattab)) >=
+      with(stattab, which(Year == y1 & Month == m1))
+    csince <- NA_integer_
+    if (!missing(local_repo))
+        csince <- nrow(commitsSince(local_repo, Date))
+    stattab |>
+      dplyr::summarize(
+          avg_mo_distict_IPs = mean(Nb_of_distinct_IPs),
+          avg_mo_downloads = mean(Nb_of_downloads)
+      ) |>
+      dplyr::mutate(Package = pkg, .before = 1, Date = Date) |>
+      dplyr::mutate(
+          downloadRank = pkgDownloadRank(pkg, pkgType),
+          issuesClosedSince = nrow(issuesSince(gh_repo, Date)),
+          commitsSince = csince
+      )
+}
+
+#' What are the issues created since a date?
+#'
+#' This function uses the `gh` package to get a list of issues since the
+#' specified date for a particular GitHub repository. The repository must
+#' have both the username / organization and the name, e.g.,
+#' "Bioconductor/S4Vectors".
+#'
+#' @param gh_repo character(1) The GitHub repository location including the
+#'   username / organization and the repository name, e.g.,
+#'   "Bioconductor/S4Vectors"
+#'
+#' @param Date character(1) The date cutoff from which to analyze closed issues
+#'   in the year-month-day format.
+#'
+#' @param status character(1) One of 'closed', 'open', or 'all' corresponding to
+#'   the issue state desired from the GitHub API (Default: "closed")
+#'
+#' @param issue_metadata character() The metadata labels to extract from the
+#'   `gh::gh` response. See `?gh::gh` for more details. Defaults to
+#'   'created_at', 'number', and 'title'.
+#'
+#' @return A `tibble` with three columns corresponding to issue metadata (i.e.,
+#'   "created_at", "number", "title")
+#'
+#' @examples
+#'
+#' issuesSince("Bioconductor/S4Vectors", "2021-05-01", "closed")
+#'
+#' @export
+issuesSince <- function(
+    gh_repo,
+    Date,
+    status = c("closed", "open", "all"),
+    issue_metadata = c("created_at", "number", "title")
+) {
+    status <- match.arg(status)
+    if (!requireNamespace("lubridate", quietly = TRUE))
+        stop("Install the 'lubridate' package to work with dates")
+    accept <- "application/vnd.github.v3+json"
+    issues <- gh("/repos/:repo/issues", repo = gh_repo, .limit = Inf,
+        state = status, .accept = accept)
+    issuedf <- dplyr::bind_rows(
+        lapply(issues, function(issue) {
+            issue[c("created_at", "number", "title")]
+        })
+    )
+    issuedf[lubridate::ymd_hms(issuedf[["created_at"]]) >= Date, ]
+}
+
+#' How many commits have created since a date?
+#'
+#' The `commitsSince` function allows maintainers to count the number of commits
+#' since a given date using the `git log` command.
+#'
+#' @details The `tibble` given by the function has 5 columns, 'datetime',
+#'   'commit', 'parents', 'author', and 'subject'. The 'parents' column refers
+#'   to the parent commit.
+#'
+#' @param local_repo character(1) The path to a local git repository for which
+#'   to review the commit history
+#'
+#' @param exclude_author character() A vector of author names to exclude from
+#'   the results
+#'
+#' @inheritParams issuesSince
+#'
+#' @return A `tibble` with commit history from the `git log` command
+#'
+#' @examples
+#' if (interactive()) {
+#'     commitsSince("~/bioc/S4Vectors", "2021-05-05")
+#' }
+#'
+#' @export
+commitsSince <- function(local_repo, Date, exclude_author) {
+    git_cmd <- paste("git -C", local_repo, "log",
+        "--pretty=format:'%cd\t%h\t%p\t%an\t%s'",
+        "--date=format:'%Y-%m-%d'",
+        paste0("--after=", shQuote(Date))
+    )
+    reslog <- system(git_cmd, intern = TRUE)
+    restab <- read.delim(text = paste0(reslog, collapse = "\n"), sep = "\t")
+    names(restab) <- c("datetime","commit", "parents", "author", "subject")
+    tibble::as_tibble(restab)
+}
