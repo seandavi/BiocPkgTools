@@ -8,9 +8,7 @@
         buildrepURL
 }
 
-#' @rdname biocRevDepEmail
-#'
-#' @title Notify downstream maintainers of changes in upstream package
+#' Notify downstream maintainers of changes in upstream package
 #'
 #' @description
 #'     The `biocRevDepEmail` function collects all the emails of the reverse
