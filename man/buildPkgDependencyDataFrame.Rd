@@ -36,29 +36,29 @@ This function requires network access.
 \examples{
 # performs a network call, so must be online.
 library(BiocPkgTools)
-depdf = buildPkgDependencyDataFrame()
+depdf <- buildPkgDependencyDataFrame()
 head(depdf)
 library(dplyr)
 # filter to include only "Imports" type
 # dependencies
-imports_only = depdf \%>\% filter(edgetype=='Imports')
+imports_only <- depdf |> filter(edgetype=='Imports')
 
 # top ten most imported packages
-imports_only \%>\% select(dependency) \%>\%
-  group_by(dependency) \%>\% tally() \%>\%
+imports_only |> select(dependency) |>
+  group_by(dependency) |> tally() |>
   arrange(desc(n))
 
-# Bioconductor packages doing the largest
-# amount of importing
-largest_importers = imports_only \%>\%
-  select(Package) \%>\%
-  group_by(Package) \%>\% tally() \%>\%
+# The Bioconductor packages with the
+# largest number of imports
+largest_importers <- imports_only |>
+  select(Package) |>
+  group_by(Package) |> tally() |>
   arrange(desc(n))
 
 # not sure what these packages do. Join
 # to their descriptions
-biocPkgList() \%>\% select(Package, Description) \%>\%
-  left_join(largest_importers) \%>\% arrange(desc(n)) \%>\%
+biocPkgList() |> select(Package, Description) |>
+  left_join(largest_importers) |> arrange(desc(n)) |>
   head()
 }
 \seealso{
