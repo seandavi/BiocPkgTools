@@ -4,15 +4,14 @@
 \alias{buildPkgDependencyDataFrame}
 \title{Work with Bioconductor package dependencies}
 \usage{
-buildPkgDependencyDataFrame(
-  dependencies = c("Depends", "Imports", "Suggests"),
-  ...
-)
+buildPkgDependencyDataFrame(dependencies = c("strong", "most", "all"), ...)
 }
 \arguments{
-\item{dependencies}{character() vector including one or more
-of "Depends", "Imports", or "Suggests". Default is to
-include all possibilities.}
+\item{dependencies}{character() a vector listing the types of dependencies, a
+subset of c("Depends", "Imports", "LinkingTo", "Suggests", "Enhances").
+Character string "all" is shorthand for that vector, character string
+"most" for the same vector without "Enhances", character string "strong"
+(default) for the first three elements of that vector.}
 
 \item{...}{parameters passed along to \code{\link{biocPkgList}}}
 }

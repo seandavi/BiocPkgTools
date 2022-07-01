@@ -1,19 +1,3 @@
-#' @importFrom dplyr select rename mutate filter one_of
-#' @importFrom tidyr unnest
-#' @importFrom tidyselect all_of
-.processPkgListForDependencyGraph = function(pkglist, dependency) {
-    select_list = c("Package", dependency)
-    dep = dependency
-    y = pkglist %>%
-        select(one_of(select_list)) %>%
-        rename(dependency = all_of(dependency)) %>%
-        tidyr::unnest(dependency)  %>%
-        mutate(dependency = stripVersionString(dependency)) %>%
-        filter(!is.na(dependency)) %>%
-        mutate(edgetype = dep)
-    y
-}
-
 #' Work with Bioconductor package dependencies
 #'
 #' Bioconductor is built using an extensive set of
@@ -25,9 +9,11 @@
 #' \code{data.frame} that can be used for analysis
 #' and to build graph structures of package dependencies.
 #'
-#' @param dependencies character() vector including one or more
-#' of "Depends", "Imports", or "Suggests". Default is to
-#' include all possibilities.
+#' @param dependencies character() a vector listing the types of dependencies, a
+#'   subset of c("Depends", "Imports", "LinkingTo", "Suggests", "Enhances").
+#'   Character string "all" is shorthand for that vector, character string
+#'   "most" for the same vector without "Enhances", character string "strong"
+#'   (default) for the first three elements of that vector.
 #'
 #' @param ... parameters passed along to \code{\link{biocPkgList}}
 #'
@@ -69,17 +55,39 @@
 #'   left_join(largest_importers) %>% arrange(desc(n)) %>%
 #'   head()
 #' @export
-buildPkgDependencyDataFrame = function(dependencies = c('Depends','Imports','Suggests'), ...) {
-    dependencies <- match.arg(dependencies,
-                              choices=c('Depends','Imports', 'Suggests'),
-                              several.ok=TRUE)
-    x = biocPkgList(...)
-    df = list()
-    for(i in dependencies) {
-        df[[i]] = .processPkgListForDependencyGraph(x, i)
-    }
-    df = bind_rows(df)
-    class(df) = c('biocDepDF',class(df))
+buildPkgDependencyDataFrame <-
+    function(
+        dependencies = c("strong", "most", "all"),
+        ...
+    )
+{
+    dadeps <- c("Depends", "Imports", "LinkingTo", "Suggests", "Enhances")
+    if (missing(dependencies))
+        dependencies <- match.arg(dependencies)
+    if (identical(length(dependencies), 1L))
+        dependencies <- switch(
+            dependencies,
+            strong = dadeps[1:3], most = dadeps[1:4], all = dadeps[1:5],
+            dependencies
+        )
+    else
+        dependencies <- match.arg(
+            dependencies, choices = dadeps, several.ok = TRUE
+        )
+    x <- biocPkgList(...)
+    reslist <- lapply(dependencies, function(dep) {
+        resframe <- cbind.data.frame(
+            Package = rep(x[["Package"]], lengths(x[[dep]])),
+            dependency = stripVersionString(unlist(x[[dep]])),
+            edgetype = dep
+        )
+        noNAorR <- with(
+            resframe, !is.na(dependency) & !dependency %in% c("", "R")
+        )
+        resframe[noNAorR, ]
+    })
+    df <- dplyr::bind_rows(reslist)
+    class(df) <- c('biocDepDF', class(df))
     df
 }
 
