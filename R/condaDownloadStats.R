@@ -36,7 +36,7 @@ anacondaDownloadStats = function() {
   tmp$Nb_of_distinct_IPs = NA_integer_
   
   tmp = as_tibble(tmp) %>%
-    mutate(Date = as.Date(paste(.data$Year, .data$Month, '01'),
+    dplyr::mutate(Date = as.Date(paste(.data$Year, .data$Month, '01'),
                           '%Y %b %d')) %>%
     select('Package', 'Year', 'Month', 'Nb_of_distinct_IPs', 'Nb_of_downloads', 'repo', 'Date') %>%
     ## put this into the same order as the BioC table
