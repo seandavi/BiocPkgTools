@@ -1,3 +1,15 @@
+CHANGES IN VERSION 1.16.0
+-------------------------
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o The argument defaults for `buildPkgDependencyDataFrame` have changed to
+      match that of `tools::package_dependencies` which is more appropriate for
+      identifying "strong" dependencies (@vjcitn, #55).
+    o `latestPkgStats`, `issuesSince`, `commitsSince`, and `pkgDownloadRank`
+      are designed to pull package statistics from either GitHub or the Git
+      commit history. They are esp. useful for reporting to funding agencies.
+
 CHANGES IN VERSION 1.12.0
 -------------------------
 
@@ -64,7 +76,7 @@ BUG FIXES
     o Completed list column extraction for all list
       columns in biocPkgList
 
-CHANGES IN VERSION 1.0.0 
+CHANGES IN VERSION 1.0.0
 -------------------------
 
 NEW FEATURES
