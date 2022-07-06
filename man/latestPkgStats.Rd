@@ -7,8 +7,7 @@
 latestPkgStats(
   gh_repo,
   Date,
-  pkgType = c("software", "data-experiment", "workflows", "data-annotation"),
-  local_repo
+  pkgType = c("software", "data-experiment", "workflows", "data-annotation")
 )
 }
 \arguments{
@@ -17,13 +16,10 @@ username / organization and the repository name, e.g.,
 "Bioconductor/S4Vectors"}
 
 \item{Date}{character(1) The date cutoff from which to analyze closed issues
-in the year-month-day format.}
+in the YYYY-MM-DD or YYYY-MM-DDTHH:MM:SSZ format (ISO 8601).}
 
 \item{pkgType}{character(1) Either one of 'software', 'data-experiment',
 'workflows', or 'data-annotation' (defaults to 'all' or 'software')}
-
-\item{local_repo}{character(1) The path to a local git repository for which
-to review the commit history}
 }
 \description{
 The \code{latestPkgStats} function combines outputs from several functions to

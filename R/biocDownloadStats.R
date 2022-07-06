@@ -215,8 +215,7 @@ pkgDownloadRank <-
 #' generate a table of relevant statistics for a given package.
 #'
 #' @inheritParams pkgDownloadRank
-#' @inheritParams issuesSince
-#' @inheritParams commitsSince
+#' @inheritParams activitySince
 #'
 #' @examples
 #'
@@ -229,8 +228,7 @@ latestPkgStats <-
         Date,
         pkgType = c(
             "software", "data-experiment", "workflows", "data-annotation"
-        ),
-        local_repo
+        )
     )
 {
     if (!requireNamespace("lubridate", quietly = TRUE))
@@ -243,9 +241,7 @@ latestPkgStats <-
     stattab <- pkgDownloadStats(pkg, years = y1:y2)
     afterDate <- seq_len(nrow(stattab)) >=
       with(stattab, which(Year == y1 & Month == m1))
-    csince <- NA_integer_
-    if (!missing(local_repo))
-        csince <- nrow(commitsSince(local_repo, Date))
+    csince <- nrow(activitySince(gh_repo, "commits", Date))
     stattab[afterDate, ] |>
       dplyr::summarize(
           avg_mo_distict_IPs = mean(Nb_of_distinct_IPs),
@@ -254,93 +250,111 @@ latestPkgStats <-
       dplyr::mutate(Package = pkg, .before = 1, Date = Date) |>
       dplyr::mutate(
           downloadRank = pkgDownloadRank(pkg, pkgType),
-          issuesClosedSince = nrow(issuesSince(gh_repo, Date)),
+          issuesClosedSince =
+              nrow(activitySince(gh_repo, "issues", "closed", Date)),
           commitsSince = csince
       )
 }
 
-#' What are the issues created since a date?
+.commit_table <- function(jsonlist) {
+    parents <- jsonlist[["parents"]][["sha"]]
+    if (is.null(parents)) parents <- NA_character_
+    cdata <- jsonlist[["commit"]]
+    author <- cdata[["author"]][["name"]]
+    commit <- cdata[["tree"]][["sha"]]
+    committer_date <- cdata[["committer"]][["date"]]
+    message <- cdata[["message"]]
+    tibble::tibble(committer_date, commit, parents, author, message)
+}
+
+.gh_data_process <- function(x, fields, commits = FALSE) {
+    if (commits)
+      .commit_table(x)
+    else
+      x[fields]
+}
+
+#' What are the issues, pulls, commits created since a date?
 #'
-#' This function uses the `gh` package to get a list of issues since the
-#' specified date for a particular GitHub repository. The repository must
-#' have both the username / organization and the name, e.g.,
-#' "Bioconductor/S4Vectors".
+#' This function uses the `gh` package to get a list of either issues, pull
+#' requests, or GitHub commits since the specified date for a particular GitHub
+#' repository. The repository must have both the username / organization and the
+#' name, e.g., "Bioconductor/S4Vectors".
+#'
+#' @details The `tibble` returned by the commits activity report contains five
+#'   columns:
+#'   * 'committer_date'
+#'   * 'commit' - hash
+#'   * 'parents' - hash of parent for merge commits
+#'   * 'author'
+#'   * 'message'
+#'
+#'   For information on other columns, refer to the GitHub API under repository
+#'   issues or pulls (e.g., `/repos/:repo/issues`).
 #'
 #' @param gh_repo character(1) The GitHub repository location including the
 #'   username / organization and the repository name, e.g.,
 #'   "Bioconductor/S4Vectors"
 #'
+#' @param activity character(1) The type of repository activity to pull from the
+#'   GitHub API. It can be one of "issues" (default), "pulls", or "commits".
+#'
 #' @param Date character(1) The date cutoff from which to analyze closed issues
-#'   in the year-month-day format.
+#'   in the YYYY-MM-DD or YYYY-MM-DDTHH:MM:SSZ format (ISO 8601).
 #'
 #' @param status character(1) One of 'closed', 'open', or 'all' corresponding to
-#'   the issue state desired from the GitHub API (Default: "closed")
+#'   the issue state desired from the GitHub API (Default: "closed"). This
+#'   argument is ignored for the "commits" activity report.
 #'
 #' @param issue_metadata character() The metadata labels to extract from the
 #'   `gh::gh` response. See `?gh::gh` for more details. Defaults to
-#'   'created_at', 'number', and 'title'.
+#'   'created_at', 'number', and 'title'. This argument is ignored for the
+#'   "commits" activity report.
+#'
+#' @param token character(1) For big requests, e.g., commit history, you may be
+#'   prompted to use a GitHub Personal Access Token. Enter the token as plain
+#'   text.
 #'
 #' @return A `tibble` with three columns corresponding to issue metadata (i.e.,
 #'   "created_at", "number", "title")
 #'
 #' @examples
 #'
-#' issuesSince("Bioconductor/S4Vectors", "2021-05-01", "closed")
+#' activitySince("Bioconductor/S4Vectors", "issues", "closed", "2021-05-01")
+#'
+#' activitySince("Bioconductor/S4Vectors", "issues", "open", "2022-05-01")
+#'
+#' activitySince("Bioconductor/S4Vectors", "commits", Date = "2022-05-01")
 #'
 #' @export
-issuesSince <- function(
+activitySince <- function(
     gh_repo,
-    Date,
+    activity = c("issues", "pulls", "commits"),
     status = c("closed", "open", "all"),
-    issue_metadata = c("created_at", "number", "title")
+    Date,
+    issue_metadata = c("created_at", "number", "title"),
+    token = NULL
 ) {
-    status <- match.arg(status)
+    activity <- match.arg(activity)
+    isCommits <- identical(activity, "commits")
+    if (!isCommits)
+      status <- match.arg(status)
+    else
+      status <- NULL
     if (!requireNamespace("lubridate", quietly = TRUE))
         stop("Install the 'lubridate' package to work with dates")
     accept <- "application/vnd.github.v3+json"
-    issues <- gh("/repos/:repo/issues", repo = gh_repo, .limit = Inf,
-        state = status, .accept = accept)
-    issuedf <- dplyr::bind_rows(
-        lapply(issues, function(issue) {
-            issue[issue_metadata]
-        })
+    act_report <- gh(
+        endpoint = paste0("/repos/:repo/", activity),
+        .token = token,
+        repo = gh_repo,
+        .limit = Inf,
+        state = status,
+        since = Date,
+        .accept = accept
     )
-    issuedf[lubridate::ymd_hms(issuedf[["created_at"]]) >= Date, ]
-}
-
-#' How many commits have created since a date?
-#'
-#' The `commitsSince` function allows maintainers to count the number of commits
-#' since a given date using the `git log` command.
-#'
-#' @details The `tibble` given by the function has 5 columns, 'datetime',
-#'   'commit', 'parents', 'author', and 'subject'. The 'parents' column refers
-#'   to the parent commit.
-#'
-#' @param local_repo character(1) The path to a local git repository for which
-#'   to review the commit history
-#'
-#' @param exclude_author character() A vector of author names to exclude from
-#'   the results
-#'
-#' @inheritParams issuesSince
-#'
-#' @return A `tibble` with commit history from the `git log` command
-#'
-#' @examples
-#' if (interactive()) {
-#'     commitsSince("~/bioc/S4Vectors", "2021-05-05")
-#' }
-#'
-#' @export
-commitsSince <- function(local_repo, Date, exclude_author) {
-    git_cmd <- paste("git -C", local_repo, "log",
-        "--pretty=format:'%cd\t%h\t%p\t%an\t%s'",
-        "--date=format:'%Y-%m-%d'",
-        paste0("--after=", shQuote(Date))
+    dplyr::bind_rows(
+        lapply(act_report, .gh_data_process,
+            fields = issue_metadata, commits = isCommits)
     )
-    reslog <- system(git_cmd, intern = TRUE)
-    restab <- read.delim(text = paste0(reslog, collapse = "\n"), sep = "\t")
-    names(restab) <- c("datetime","commit", "parents", "author", "subject")
-    tibble::as_tibble(restab)
 }
