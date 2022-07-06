@@ -7,8 +7,8 @@ SIGNIFICANT USER-VISIBLE CHANGES
       match that of `tools::package_dependencies` which is more appropriate for
       identifying "strong" dependencies (@vjcitn, #55).
     o `latestPkgStats`, `activitySince`, and `pkgDownloadRank` are designed to
-    pull package statistics from the GitHub API using `gh` packages or from Bioconductor. They are
-    esp. useful for reporting to funding agencies.
+    pull package statistics from the GitHub API using `gh` packages or from
+    Bioconductor. They are esp. useful for reporting to funding agencies.
 
 CHANGES IN VERSION 1.12.0
 -------------------------
