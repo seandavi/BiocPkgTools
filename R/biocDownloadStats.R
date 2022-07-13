@@ -241,7 +241,7 @@ latestPkgStats <-
     stattab <- pkgDownloadStats(pkg, years = y1:y2)
     afterDate <- seq_len(nrow(stattab)) >=
       with(stattab, which(Year == y1 & Month == m1))
-    csince <- nrow(activitySince(gh_repo, "commits", Date))
+    csince <- nrow(activitySince(gh_repo, "commits", Date = Date))
     stattab[afterDate, ] |>
       dplyr::summarize(
           avg_mo_distict_IPs = mean(Nb_of_distinct_IPs),
