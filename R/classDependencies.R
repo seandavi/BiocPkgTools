@@ -1,3 +1,4 @@
+utils::globalVariables(".from")
 
 #' Retrieve Class relationships
 #'
@@ -211,7 +212,7 @@ plotClassDepData <- function(data) {
 }
 #' @rdname class-dependencies
 #'
-#' @importFrom igraph E V degree layout_with_kk edge_attr V<- E<- 
+#' @importFrom igraph E V degree layout_with_kk edge_attr V<- E<-
 #' @importFrom graphics strheight strwidth
 #' @importFrom grDevices extendrange
 #'
