@@ -111,8 +111,8 @@ compatibility with the Bioconductor count tables.
 
 The R `DESCRIPTION` file contains a plethora of information regarding package
 authors, dependencies, versions, etc. In a repository such as Bioconductor, these
-details are available in bulk for all inclucded packages. The `biocPkgList` returns
-a data.frame with a row for each package. Tons of information are avaiable, as 
+details are available in bulk for all included packages. The `biocPkgList` returns
+a data.frame with a row for each package. Tons of information are available, as 
 evidenced by the column names of the results.
 
 ```{r}

@@ -22,7 +22,7 @@ A \code{tbl_df} object with columns pkg, version,
 author, commit, date, node, stage, and result.
 }
 \description{
-The online Bioconoductor build reports
+The online Bioconductor build reports
 are great for humans to look at, but
 they are not easily computable. This function
 scrapes HTML and text files available

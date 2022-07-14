@@ -1,6 +1,6 @@
 #' Tidy Bioconductor build report results
 #'
-#' The online Bioconoductor build reports
+#' The online Bioconductor build reports
 #' are great for humans to look at, but
 #' they are not easily computable. This function
 #' scrapes HTML and text files available

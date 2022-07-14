@@ -34,8 +34,8 @@
 #' specific terms, set \code{addBiocViewParents} to \code{FALSE}.
 #'
 #' @param version The requested Bioconductor version. Will
-#'     default to use the BiocManager defaults (ie., \code{version()}).
-#' @param repo The requested biooconductor repository. The default will be the
+#'     default to use the BiocManager defaults (i.e., \code{version()}).
+#' @param repo The requested Bioconductor repository. The default will be the
 #'    Bioconductor software repository: BioCsoft. Available repos include:
 #'    "BioCsoft", "BioCann", "BioCexp", "BioCworkflows", and "CRAN". Note
 #'    that not all repos are available for all versions, particularly older
