@@ -230,7 +230,7 @@ plotClassDepGraph <- function(g) {
     from <- function(){}
     color <- vapply(names(V(g)),
                     function(name){
-                        virtual <- unique(E(g)[from(name)]$parentVirtual)
+                        virtual <- unique(E(g)[ .from(name) ]$parentVirtual)
                         if(length(virtual) == 0 || virtual) {
                             "#1a81c2"
                         } else {
