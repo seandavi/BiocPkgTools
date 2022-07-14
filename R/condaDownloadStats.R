@@ -29,7 +29,7 @@ utils::globalVariables(c("Package", "Year", "Date"))
 anacondaDownloadStats = function() {
   temp_file = tempfile()
   url = 'https://github.com/grimbough/anaconda-download-stats/raw/master/rdata/bioc_counts.rds'
-  download.file(url, destfile = temp_file, quiet = TRUE)
+  download.file(url, destfile = temp_file, quiet = TRUE, mode = "wb")
 
   tmp = readRDS(temp_file)
   tmp$repo = 'Anaconda'

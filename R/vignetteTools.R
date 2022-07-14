@@ -39,6 +39,6 @@ getBiocVignette <- function(vignettePath,
                         version = BiocManager::version()) {
     stopifnot(is.character(vignettePath) & length(vignettePath)==1)
     p = sprintf('https://bioconductor.org/packages/%s/bioc/%s',version,vignettePath)
-    download.file(p,destfile)
+    download.file(p, destfile, mode = "wb")
     destfile
 }
