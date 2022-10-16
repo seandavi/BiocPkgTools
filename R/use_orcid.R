@@ -63,3 +63,28 @@ orcid_table = function(orcids) {
  ans = lapply(orcids, .get_orcid_rec)
  do.call(rbind, ans)
 }
+
+#' get the ORCID id from cre field of Authors@R in packageDescription result
+#' @param pkgname character(1)
+.get_cre_orcid = function(pkgname) {
+  stopifnot(length(pkgname)==1)
+  de = packageDescription(pkgname)
+  nde = names(de)
+  if (!("Authors@R" %in% nde)) return(NA_character_)
+  au = de[["Authors@R"]]
+  vec = eval(parse(text=au))
+  cre = grep("\\[.*cre.*\\]", vec, value=TRUE)
+  hasorc = grep("orcid.org", cre)
+  if (length(hasorc)==0) return(NA_character_)
+  gsub(".*orcid.org/(.*)>.*", "\\1", cre)
+}
+
+#' get ORCID ids from cre fields of Authors@R in packageDescription results
+#' @param pkgnames character() must be installed
+#' @note returns NA if no ORCID provided in Authors@R for package description
+#' @examples
+#' get_cre_orcids(c("BiocPkgTools", "utils"))
+#' @export
+get_cre_orcids = function(pkgnames) {
+ vapply(pkgnames, .get_cre_orcid, character(1))
+}
