@@ -66,10 +66,10 @@ Terra container in use.
 }
 \section{Methods (by generic)}{
 \itemize{
-\item \code{print}: Print a summary of package
+\item \code{print(repositoryStats)}: Print a summary of package
 availability in binary repositories.
-}}
 
+}}
 \examples{
 stats <- repositoryStats() # obtain statistics
 stats                       # display a summary

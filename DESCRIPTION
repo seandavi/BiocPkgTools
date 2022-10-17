@@ -1,8 +1,8 @@
 Package: BiocPkgTools
 Type: Package
 Title: Collection of simple tools for learning about Bioconductor Packages
-Version: 1.15.9
-Date: 2022-07-14
+Version: 1.15.10
+Date: 2022-10-16
 Authors@R: c( 
     person("Shian", "Su", role=c("aut", "ctb"), email = "su.s@wehi.edu.au"),
     person("Lori", "Shepherd", role="ctb", email = "Lori.Shepherd@roswellpark.org"),
@@ -43,7 +43,8 @@ Imports:
     jsonlite,
     gh,
     RBGL,
-    graph
+    graph,
+    rorcid
 VignetteBuilder: knitr
 Suggests: BiocStyle, knitr, rmarkdown,
     testthat, tm, lubridate,
@@ -52,7 +53,7 @@ License: MIT + file LICENSE
 BugReports: https://github.com/seandavi/BiocPkgTools/issues/new
 URL: https://github.com/seandavi/BiocPkgTools
 Encoding: UTF-8
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.1
 Roxygen: list(markdown = TRUE)
 SystemRequirements: mailsend-go
 biocViews: Software, Infrastructure

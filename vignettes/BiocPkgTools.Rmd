@@ -295,7 +295,8 @@ library(BiocPkgTools)
 
 depdf <- buildPkgDependencyDataFrame(repo=c("BioCsoft", "CRAN"),
                                      dependencies=c("Depends", "Imports"))
-depdf
+dim(depdf)
+head(depdf)  # too big to show all
 ```
 
 Finally, we call the function `pkgDepMetrics()` to obtain different metrics
@@ -349,6 +350,65 @@ We can find out what actually functionality calls are we importing as follows:
 ```{r}
 imp <- pkgDepImports("BiocPkgTools")
 imp %>% filter(pkg == "DT")
+```
+
+# Identities of maintainers
+
+It is important to be able to identify the maintainer of a package in
+a reliable way.  The DESCRIPTION file for a package can include an `Authors@R`
+field.  This field can capture metadata about maintainers and contributors
+in a programmatically accessible way.  Each element of the role
+field of a `person` (see `?person`) in the `Authors@R` field comes
+from a subset of the 
+[relations vocabulary of the Library of Congress](https://www.loc.gov/marc/relators/relaterm.html).  
+
+Metadata about maintainers can be extracted from DESCRIPTION in various ways.
+As of October 2022, we focus on the use of the ORCID field which is
+an optional `comment` component in a `person` element.  For example,
+in the DESCRIPTION for the AnVIL package we have
+```
+Authors@R:
+    c(person(
+        "Martin", "Morgan", role = c("aut", "cre"),
+        email = "mtmorgan.bioc@gmail.com",
+        comment = c(ORCID = "0000-0002-5874-8148")
+     ),
+```
+This convention is used for a fair number of Bioconductor and CRAN packages.
+
+We'll demonstrate the use of `get_cre_orcids` with some packages.
+```{r demoorc}
+inst = rownames(installed.packages())
+cands = c("devtools", "evaluate", "ggplot2", "GEOquery", "gert", "utils")
+totry = intersect(cands, inst)
+oids = get_cre_orcids(totry)
+oids
+```
+
+We use the ORCID API to tabulate metadata about the holders of these IDs.
+We'll avoid evaluating this because a token must be refreshed for the query
+to succeed.
+
+```{r lktab,eval=FALSE}
+orcid_table(oids)
+```
+In October 2022 the result is
+```
+> orcid_table(.Last.value)
+                        name                                            org
+devtools      Jennifer Bryan                                        RStudio
+evaluate           Yihui Xie                                  RStudio, Inc.
+ggplot2  Thomas Lin Pedersen                                        RStudio
+GEOquery          Sean Davis University of Colorado Anschutz Medical Campus
+gert             Jeroen Ooms            Berkeley Institute for Data Science
+utils                   <NA>                                           <NA>
+               city   region country               orcid
+devtools     Boston       MA      US 0000-0002-6983-2759
+evaluate    Elkhorn       NE      US 0000-0003-0645-5666
+ggplot2  Copenhagen     <NA>      DK 0000-0002-5147-4711
+GEOquery     Aurora Colorado      US 0000-0002-8991-6458
+gert       Berkeley       CA      US 0000-0002-4035-0289
+utils          <NA>     <NA>    <NA>                <NA>
 ```
 
 # Provenance
