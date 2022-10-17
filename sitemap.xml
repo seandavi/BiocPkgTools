@@ -31,6 +31,9 @@
     <loc>/reference/CRANstatus.html</loc>
   </url>
   <url>
+    <loc>/reference/activitySince.html</loc>
+  </url>
+  <url>
     <loc>/reference/anacondaDownloadStats.html</loc>
   </url>
   <url>
@@ -73,6 +76,12 @@
     <loc>/reference/dot-getDepGain.html</loc>
   </url>
   <url>
+    <loc>/reference/dot-get_cre_orcid.html</loc>
+  </url>
+  <url>
+    <loc>/reference/dot-get_orcid_rec.html</loc>
+  </url>
+  <url>
     <loc>/reference/firstInBioc.html</loc>
   </url>
   <url>
@@ -88,6 +97,9 @@
     <loc>/reference/get_bioc_data.html</loc>
   </url>
   <url>
+    <loc>/reference/get_cre_orcids.html</loc>
+  </url>
+  <url>
     <loc>/reference/githubDetails.html</loc>
   </url>
   <url>
@@ -100,6 +112,12 @@
     <loc>/reference/inducedSubgraphByPkgs.html</loc>
   </url>
   <url>
+    <loc>/reference/latestPkgStats.html</loc>
+  </url>
+  <url>
+    <loc>/reference/orcid_table.html</loc>
+  </url>
+  <url>
     <loc>/reference/pkgCombDependencyGain.html</loc>
   </url>
   <url>
@@ -109,10 +127,16 @@
     <loc>/reference/pkgDepMetrics.html</loc>
   </url>
   <url>
+    <loc>/reference/pkgDownloadRank.html</loc>
+  </url>
+  <url>
     <loc>/reference/pkgDownloadStats.html</loc>
   </url>
   <url>
     <loc>/reference/problemPage.html</loc>
+  </url>
+  <url>
+    <loc>/reference/repositoryStats.html</loc>
   </url>
   <url>
     <loc>/reference/subgraphByDegree.html</loc>

@@ -18,7 +18,7 @@ and send an email report of any failures."><!-- mathjax --><script src="https://
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BiocPkgTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.15.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.15.10</span>
       </span>
     </div>
 
@@ -55,15 +55,15 @@ and send an email report of any failures.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">CRANstatus</span><span class="op">(</span>
-  <span class="va">pkg</span>,
-  core.name <span class="op">=</span> <span class="cn">NULL</span>,
-  core.email <span class="op">=</span> <span class="cn">NULL</span>,
-  core.id <span class="op">=</span> <span class="cn">NULL</span>,
-  to.mail <span class="op">=</span> <span class="st">"maintainer@bioconductor.org"</span>,
-  dry.run <span class="op">=</span> <span class="cn">TRUE</span>,
-  emailTemplate <span class="op">=</span> <span class="fu"><a href="templatePath.html">templatePath</a></span><span class="op">(</span><span class="st">"cranreport"</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">CRANstatus</span><span class="op">(</span></span>
+<span>  <span class="va">pkg</span>,</span>
+<span>  core.name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  core.email <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  core.id <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  to.mail <span class="op">=</span> <span class="st">"maintainer@bioconductor.org"</span>,</span>
+<span>  dry.run <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  emailTemplate <span class="op">=</span> <span class="fu"><a href="templatePath.html">templatePath</a></span><span class="op">(</span><span class="st">"cranreport"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -83,7 +83,7 @@ member</p></dd>
 
 <dt>core.id</dt>
 <dd><p>character(1) The internal identifier for the Roswell employee.
-This ID usually matches `^[A-Z]2[0-9]5` for more recent identifiers.</p></dd>
+This ID usually matches <code>^[A-Z]{2}[0-9]{5}</code> for more recent identifiers.</p></dd>
 
 
 <dt>to.mail</dt>
@@ -92,12 +92,12 @@ This ID usually matches `^[A-Z]2[0-9]5` for more recent identifiers.</p></dd>
 
 <dt>dry.run</dt>
 <dd><p>logical(1) Display the email without sending to the recipient.
-It only works for HTML email reports and ignored when `textOnly=TRUE`</p></dd>
+It only works for HTML email reports and ignored when <code>textOnly=TRUE</code></p></dd>
 
 
 <dt>emailTemplate</dt>
 <dd><p>character(1) The path to the email template Rmd file as
-obtained by `templatePath()`. A custom template can be provided as file
+obtained by <code><a href="templatePath.html">templatePath()</a></code>. A custom template can be provided as file
 path.</p></dd>
 
 </dl></div>
@@ -114,7 +114,7 @@ path.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

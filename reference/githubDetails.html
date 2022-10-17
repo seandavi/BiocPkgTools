@@ -19,7 +19,7 @@ GitHub details for the listed packages."><!-- mathjax --><script src="https://cd
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BiocPkgTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.15.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.15.10</span>
       </span>
     </div>
 
@@ -57,14 +57,14 @@ GitHub details for the listed packages.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">githubDetails</span><span class="op">(</span><span class="va">pkgs</span>, sleep <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">githubDetails</span><span class="op">(</span><span class="va">pkgs</span>, sleep <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>pkgs</dt>
 <dd><p>a character() vector of username/repo
-for one or more GitHub repos, such as `seandavi/GEOquery`.</p></dd>
+for one or more GitHub repos, such as <code>seandavi/GEOquery</code>.</p></dd>
 
 
 <dt>sleep</dt>
@@ -72,7 +72,7 @@ for one or more GitHub repos, such as `seandavi/GEOquery`.</p></dd>
 sleep between GitHub API calls. Since GitHub rate limits
 its APIs, it might be necessary to either use small
 chunks of packages iteratively or to supply a non-zero
-argument here. See the `details` section for a better
+argument here. See the <code>details</code> section for a better
 solution using GitHub tokens.</p></dd>
 
 </dl></div>
@@ -93,32 +93,32 @@ package for details.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">pkglist</span> <span class="op">=</span> <span class="fu"><a href="biocPkgList.html">biocPkgList</a></span><span class="op">(</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">pkglist</span> <span class="op">=</span> <span class="fu"><a href="biocPkgList.html">biocPkgList</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 'getOption("repos")' replaces Bioconductor standard repositories, see</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> '?repositories' for details</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> replacement repositories:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     CRAN: https://cloud.r-project.org</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># example of "pkgs" format.</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">pkglist</span><span class="op">$</span><span class="va">URL</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># example of "pkgs" format.</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">pkglist</span><span class="op">$</span><span class="va">URL</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA NA NA NA NA NA</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">gh_list</span> <span class="op">=</span> <span class="fu"><a href="githubURLParts.html">githubURLParts</a></span><span class="op">(</span><span class="va">pkglist</span><span class="op">$</span><span class="va">URL</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">gh_list</span> <span class="op">=</span> <span class="va">gh_list</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">gh_list</span><span class="op">$</span><span class="va">user_repo</span><span class="op">)</span>,<span class="op">]</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">gh_list</span><span class="op">$</span><span class="va">user_repo</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">gh_list</span> <span class="op">=</span> <span class="fu"><a href="githubURLParts.html">githubURLParts</a></span><span class="op">(</span><span class="va">pkglist</span><span class="op">$</span><span class="va">URL</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">gh_list</span> <span class="op">=</span> <span class="va">gh_list</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">gh_list</span><span class="op">$</span><span class="va">user_repo</span><span class="op">)</span>,<span class="op">]</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">gh_list</span><span class="op">$</span><span class="va">user_repo</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA NA NA NA NA NA</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">ghd</span> <span class="op">=</span> <span class="fu">githubDetails</span><span class="op">(</span><span class="va">gh_list</span><span class="op">$</span><span class="va">user_repo</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">ghd</span> <span class="op">=</span> <span class="fu">githubDetails</span><span class="op">(</span><span class="va">gh_list</span><span class="op">$</span><span class="va">user_repo</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>package NA not found</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>package NA not found</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>package NA not found</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>package NA not found</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>package NA not found</span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">ghd</span>, <span class="st">'[['</span>, <span class="st">"stargazers"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">ghd</span>, <span class="st">'[['</span>, <span class="st">"stargazers"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> named list()</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -133,7 +133,7 @@ package for details.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

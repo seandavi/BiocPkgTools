@@ -22,7 +22,7 @@ and URLs for vignettes and developer URLs."><!-- mathjax --><script src="https:/
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BiocPkgTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.15.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.15.10</span>
       </span>
     </div>
 
@@ -63,22 +63,22 @@ and URLs for vignettes and developer URLs.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">biocPkgList</span><span class="op">(</span>
-  version <span class="op">=</span> <span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/version.html" class="external-link">version</a></span><span class="op">(</span><span class="op">)</span>,
-  repo <span class="op">=</span> <span class="st">"BioCsoft"</span>,
-  addBiocViewParents <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">biocPkgList</span><span class="op">(</span></span>
+<span>  version <span class="op">=</span> <span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/version.html" class="external-link">version</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  repo <span class="op">=</span> <span class="st">"BioCsoft"</span>,</span>
+<span>  addBiocViewParents <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>version</dt>
 <dd><p>The requested Bioconductor version. Will
-default to use the BiocManager defaults (ie., <code><a href="https://rdrr.io/r/base/Version.html" class="external-link">version()</a></code>).</p></dd>
+default to use the BiocManager defaults (i.e., <code><a href="https://rdrr.io/r/base/Version.html" class="external-link">version()</a></code>).</p></dd>
 
 
 <dt>repo</dt>
-<dd><p>The requested biooconductor repository. The default will be the
+<dd><p>The requested Bioconductor repository. The default will be the
 Bioconductor software repository: BioCsoft. Available repos include:
 "BioCsoft", "BioCann", "BioCexp", "BioCworkflows", and "CRAN". Note
 that not all repos are available for all versions, particularly older
@@ -108,40 +108,40 @@ specific terms, set <code>addBiocViewParents</code> to <code>FALSE</code>.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">bpkgl</span> <span class="op">=</span> <span class="fu">biocPkgList</span><span class="op">(</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">bpkgl</span> <span class="op">=</span> <span class="fu">biocPkgList</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 'getOption("repos")' replaces Bioconductor standard repositories, see</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> '?repositories' for details</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> replacement repositories:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     CRAN: https://cloud.r-project.org</span>
-<span class="r-in"><span class="va">bpkgl</span></span>
+<span class="r-in"><span><span class="va">bpkgl</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2,140 × 46</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Package     Version Depends   Suggests  License MD5sum NeedsCompilation Title</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> a4          1.44.0  <span style="color: #949494;">&lt;chr [5]&gt;</span> <span style="color: #949494;">&lt;chr [6]&gt;</span> GPL-3   cc696… no               <span style="color: #949494;">"</span>Aut…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> a4Base      1.44.0  <span style="color: #949494;">&lt;chr [2]&gt;</span> <span style="color: #949494;">&lt;chr [4]&gt;</span> GPL-3   094c0… no               <span style="color: #949494;">"</span>Aut…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> a4Classif   1.44.0  <span style="color: #949494;">&lt;chr [2]&gt;</span> <span style="color: #949494;">&lt;chr [4]&gt;</span> GPL-3   1f6e6… no               <span style="color: #949494;">"</span>Aut…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> a4Core      1.44.0  <span style="color: #949494;">&lt;chr [1]&gt;</span> <span style="color: #949494;">&lt;chr [2]&gt;</span> GPL-3   9413a… no               <span style="color: #949494;">"</span>Aut…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> a4Preproc   1.44.0  <span style="color: #949494;">&lt;chr [1]&gt;</span> <span style="color: #949494;">&lt;chr [4]&gt;</span> GPL-3   b5b29… no               <span style="color: #949494;">"</span>Aut…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> a4Reporting 1.44.0  <span style="color: #949494;">&lt;chr [1]&gt;</span> <span style="color: #949494;">&lt;chr [2]&gt;</span> GPL-3   6bd64… no               <span style="color: #949494;">"</span>Aut…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> ABarray     1.64.0  <span style="color: #949494;">&lt;chr [1]&gt;</span> <span style="color: #949494;">&lt;chr [2]&gt;</span> GPL     9100b… no               <span style="color: #949494;">"</span>Mic…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> abseqR      1.14.0  <span style="color: #949494;">&lt;chr [1]&gt;</span> <span style="color: #949494;">&lt;chr [1]&gt;</span> GPL-3 … ec8e9… no               <span style="color: #949494;">"</span>Rep…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> ABSSeq      1.50.0  <span style="color: #949494;">&lt;chr [2]&gt;</span> <span style="color: #949494;">&lt;chr [1]&gt;</span> GPL (&gt;… bee12… no               <span style="color: #949494;">"</span>ABS…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> acde        1.26.0  <span style="color: #949494;">&lt;chr [2]&gt;</span> <span style="color: #949494;">&lt;chr [2]&gt;</span> GPL-3   65cd7… no               <span style="color: #949494;">"</span>Art…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 2,130 more rows, and 38 more variables: Description &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   biocViews &lt;list&gt;, Author &lt;list&gt;, Maintainer &lt;list&gt;, git_url &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   git_branch &lt;chr&gt;, git_last_commit &lt;chr&gt;, git_last_commit_date &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   `Date/Publication` &lt;chr&gt;, source.ver &lt;chr&gt;, win.binary.ver &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   mac.binary.ver &lt;chr&gt;, vignettes &lt;list&gt;, vignetteTitles &lt;list&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   hasREADME &lt;chr&gt;, hasNEWS &lt;chr&gt;, hasINSTALL &lt;chr&gt;, hasLICENSE &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   Rfiles &lt;list&gt;, dependencyCount &lt;chr&gt;, Imports &lt;list&gt;, Enhances &lt;list&gt;, …</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">bpkgl</span><span class="op">[</span><span class="fl">1</span>,<span class="st">'Depends'</span><span class="op">]</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Package  Version Depends Sugge…¹ License MD5sum Needs…² Title Descr…³ biocV…⁴</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> a4       1.44.0  &lt;chr&gt;   &lt;chr&gt;   GPL-3   cc696… no      <span style="color: #949494;">"</span>Aut… <span style="color: #949494;">"</span>Umbre… &lt;chr&gt;  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> a4Base   1.44.0  &lt;chr&gt;   &lt;chr&gt;   GPL-3   094c0… no      <span style="color: #949494;">"</span>Aut… <span style="color: #949494;">"</span>Base … &lt;chr&gt;  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> a4Class… 1.44.0  &lt;chr&gt;   &lt;chr&gt;   GPL-3   1f6e6… no      <span style="color: #949494;">"</span>Aut… <span style="color: #949494;">"</span>Funct… &lt;chr&gt;  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> a4Core   1.44.0  &lt;chr&gt;   &lt;chr&gt;   GPL-3   9413a… no      <span style="color: #949494;">"</span>Aut… <span style="color: #949494;">"</span>Utili… &lt;chr&gt;  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> a4Prepr… 1.44.0  &lt;chr&gt;   &lt;chr&gt;   GPL-3   b5b29… no      <span style="color: #949494;">"</span>Aut… <span style="color: #949494;">"</span>Utili… &lt;chr&gt;  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> a4Repor… 1.44.0  &lt;chr&gt;   &lt;chr&gt;   GPL-3   6bd64… no      <span style="color: #949494;">"</span>Aut… <span style="color: #949494;">"</span>Utili… &lt;chr&gt;  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> ABarray  1.64.0  &lt;chr&gt;   &lt;chr&gt;   GPL     9100b… no      <span style="color: #949494;">"</span>Mic… <span style="color: #949494;">"</span>Autom… &lt;chr&gt;  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> abseqR   1.14.0  &lt;chr&gt;   &lt;chr&gt;   GPL-3 … ec8e9… no      <span style="color: #949494;">"</span>Rep… <span style="color: #949494;">"</span>AbSeq… &lt;chr&gt;  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> ABSSeq   1.50.0  &lt;chr&gt;   &lt;chr&gt;   GPL (&gt;… bee12… no      <span style="color: #949494;">"</span>ABS… <span style="color: #949494;">"</span>Infer… &lt;chr&gt;  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> acde     1.26.0  &lt;chr&gt;   &lt;chr&gt;   GPL-3   65cd7… no      <span style="color: #949494;">"</span>Art… <span style="color: #949494;">"</span>This … &lt;chr&gt;  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 2,130 more rows, 36 more variables: Author &lt;list&gt;, Maintainer &lt;list&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   git_url &lt;chr&gt;, git_branch &lt;chr&gt;, git_last_commit &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   git_last_commit_date &lt;chr&gt;, `Date/Publication` &lt;chr&gt;, source.ver &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   win.binary.ver &lt;chr&gt;, mac.binary.ver &lt;chr&gt;, vignettes &lt;list&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   vignetteTitles &lt;list&gt;, hasREADME &lt;chr&gt;, hasNEWS &lt;chr&gt;, hasINSTALL &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   hasLICENSE &lt;chr&gt;, Rfiles &lt;list&gt;, dependencyCount &lt;chr&gt;, Imports &lt;list&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   Enhances &lt;list&gt;, dependsOnMe &lt;list&gt;, suggestsMe &lt;list&gt;, …</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="va">bpkgl</span><span class="op">[</span><span class="fl">1</span>,<span class="st">'Depends'</span><span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      Depends1      Depends2      Depends3      Depends4      Depends5 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      "a4Base"   "a4Preproc"   "a4Classif"      "a4Core" "a4Reporting" </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Get a list of all packages that</span></span>
-<span class="r-in"><span class="co"># import "GEOquery"</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Get a list of all packages that</span></span></span>
+<span class="r-in"><span><span class="co"># import "GEOquery"</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Attaching package: ‘dplyr’</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The following objects are masked from ‘package:stats’:</span>
@@ -150,9 +150,9 @@ specific terms, set <code>addBiocViewParents</code> to <code>FALSE</code>.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> The following objects are masked from ‘package:base’:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     intersect, setdiff, setequal, union</span>
-<span class="r-in"><span class="va">bpkgl</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Package</span><span class="op">==</span><span class="st">'GEOquery'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'importsMe'</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="va">bpkgl</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Package</span><span class="op">==</span><span class="st">'GEOquery'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'importsMe'</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "bigmelon"                         "BioPlex"                         </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [3] "ChIPXpress"                       "conclus"                         </span>
@@ -164,9 +164,9 @@ specific terms, set <code>addBiocViewParents</code> to <code>FALSE</code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [15] "SRAdb"                            "BeadArrayUseCases"               </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [17] "GSE13015"                         "healthyControlsPresenceChecker"  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [19] "easyDifferentialGeneCoexpression" "geneExpressionFromGEO"           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [21] "MetaIntegrator"                  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [21] "MetaIntegrator"                   "seeker"                          </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -181,7 +181,7 @@ specific terms, set <code>addBiocViewParents</code> to <code>FALSE</code>.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

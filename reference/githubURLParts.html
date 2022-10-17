@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BiocPkgTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.15.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.15.10</span>
       </span>
     </div>
 
@@ -53,7 +53,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">githubURLParts</span><span class="op">(</span><span class="va">urls</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">githubURLParts</span><span class="op">(</span><span class="va">urls</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -66,9 +66,7 @@
     <h2>Value</h2>
     
 
-<p>A <code>data.frame</code> with four columns:</p>
-<p></p>
-<ul><li><p>urlThe original GitHub URL</p></li>
+<p>A <code>data.frame</code> with four columns:</p><ul><li><p>urlThe original GitHub URL</p></li>
 <li><p>user_repoThe GitHub "username/repo", combined</p></li>
 <li><p>userThe GitHub username</p></li>
 <li><p>repoThe GitHub repo name</p></li>
@@ -76,17 +74,17 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># find GitHub URL details for</span></span>
-<span class="r-in"><span class="co"># Bioconductor packages</span></span>
-<span class="r-in"><span class="va">bpkgl</span> <span class="op">=</span> <span class="fu"><a href="biocPkgList.html">biocPkgList</a></span><span class="op">(</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># find GitHub URL details for</span></span></span>
+<span class="r-in"><span><span class="co"># Bioconductor packages</span></span></span>
+<span class="r-in"><span><span class="va">bpkgl</span> <span class="op">=</span> <span class="fu"><a href="biocPkgList.html">biocPkgList</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 'getOption("repos")' replaces Bioconductor standard repositories, see</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> '?repositories' for details</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> replacement repositories:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     CRAN: https://cloud.r-project.org</span>
-<span class="r-in"><span class="va">urldetails</span> <span class="op">=</span> <span class="fu">githubURLParts</span><span class="op">(</span><span class="va">bpkgl</span><span class="op">$</span><span class="va">URL</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">urldetails</span> <span class="op">=</span> <span class="va">urldetails</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">urldetails</span><span class="op">$</span><span class="va">url</span><span class="op">)</span>,<span class="op">]</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">urldetails</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="va">urldetails</span> <span class="op">=</span> <span class="fu">githubURLParts</span><span class="op">(</span><span class="va">bpkgl</span><span class="op">$</span><span class="va">URL</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">urldetails</span> <span class="op">=</span> <span class="va">urldetails</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">urldetails</span><span class="op">$</span><span class="va">url</span><span class="op">)</span>,<span class="op">]</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">urldetails</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                              url                  user_repo</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 8          https://github.com/malhamdoosh/abseqR         malhamdoosh/abseqR</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 11              https://github.com/tgac-vumc/ACE              tgac-vumc/ACE</span>
@@ -101,7 +99,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> 21 HenrikBengtsson affxparser</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 28       bmbolstad     affyio</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 30       bmbolstad    affyPLM</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -116,7 +114,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>
