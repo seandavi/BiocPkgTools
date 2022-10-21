@@ -3,6 +3,10 @@ CHANGES IN VERSION 1.16.0
 
 SIGNIFICANT USER-VISIBLE CHANGES
 
+    o `biocBuildEmail` now allows a `to` maintainer email override along with
+    `cc` and `bcc` inputs.
+    o `biocLastBuildDate` gives the date of the last release build for a
+    particular release version as shown in the bioconductor.org website
     o The argument defaults for `buildPkgDependencyDataFrame` have changed to
       match that of `tools::package_dependencies` which is more appropriate for
       identifying "strong" dependencies (@vjcitn, #55).
