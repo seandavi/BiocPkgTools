@@ -19,6 +19,9 @@
 #' @param pkg character(1) The name of the package for whose reverse
 #'     dependencies are to be checked and notified.
 #'
+#' @param cc character() A vector of email addresses for sending the message
+#'   as a carbon copy.
+#'
 #' @inheritParams biocBuildEmail
 #' @inheritParams tools::package_dependencies
 #'

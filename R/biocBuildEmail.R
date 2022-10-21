@@ -142,8 +142,12 @@ templatePath <-
 #' @param dry.run logical(1) Display the email without sending to the recipient.
 #'     It only works for HTML email reports and ignored when `textOnly=TRUE`
 #'
-#' @param cc character() Email addresses for sending the message as a carbon
-#'     copy
+#' @param to character() A vector of email addresses serving as primary
+#'   recipients for the message. For secondary recipients, use the `cc` and
+#'   `bcc` arguments.
+#'
+#' @param cc,bcc character() A vector of email addresses for sending the message
+#'   as a carbon copy or blind carbon copy.
 #'
 #' @param emailTemplate character(1) The path to the email template Rmd file as
 #'     obtained by `templatePath()`. A custom template can be provided as file
@@ -191,7 +195,8 @@ templatePath <-
 #' @export
 biocBuildEmail <-
     function(pkg, version = c("release", "devel"), PS = character(1L),
-        dry.run = TRUE, cc = NULL, emailTemplate = templatePath(),
+        dry.run = TRUE, to = NULL, cc = NULL, bcc = NULL,
+        emailTemplate = templatePath(),
         core.name = NULL, core.email = NULL, core.id = NULL,
         textOnly = FALSE, resend = FALSE, verbose = FALSE,
         credFile = "~/.blastula_creds")
@@ -227,7 +232,8 @@ biocBuildEmail <-
     mainInfo <- pkgMeta[["Maintainer"]][[1L]]
 
     mainName <- unname(vapply(mainInfo, .nameCut, character(1L)))
-    mainEmail <- unname(vapply(mainInfo, .emailCut, character(1L)))
+    if (is.null(to))
+        to <- unname(vapply(mainInfo, .emailCut, character(1L)))
 
     if (length(mainName) > 1L)
         mainName <- paste0(mainName, collapse = " & ")
@@ -255,7 +261,7 @@ biocBuildEmail <-
     title <- sprintf("%s Bioconductor package", pkg)
     logfile <- .getMailLog()
     sent_status <- .checkEntry(
-        logfile, mainName, mainEmail, pkg, maildate, dry.run
+        logfile, mainName, to, pkg, maildate, dry.run
     )
     sendagain <- (sent_status && resend)
 
@@ -264,7 +270,7 @@ biocBuildEmail <-
 
     if (textOnly) {
         send <- strsplit(send, "---")[[1L]][[4L]]
-        send <- paste(mainEmail, title, send, sep = "\n")
+        send <- paste(to, title, send, sep = "\n")
         if (requireNamespace("clipr", quietly=TRUE) &&
             clipr::clipr_available())
         {
@@ -277,7 +283,7 @@ biocBuildEmail <-
         send <- blastula::render_email(tfile)
         if (!dry.run && (!sent_status || sendagain)) {
             blastula::smtp_send(email = send,
-                from = core.email, to = mainEmail, cc = cc, subject = title,
+                from = core.email, to = to, cc = cc, bcc = bcc, subject = title,
                 credentials =
                     if (file.exists(credFile)) {
                         blastula::creds_file(credFile)
@@ -290,7 +296,7 @@ biocBuildEmail <-
                         )
                     }, verbose = verbose
             )
-            .addEntry(logfile, mainName, mainEmail, pkg, maildate, sendagain)
+            .addEntry(logfile, mainName, to, pkg, maildate, sendagain)
         }
     }
     send

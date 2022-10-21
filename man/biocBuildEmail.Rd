@@ -10,7 +10,9 @@ biocBuildEmail(
   version = c("release", "devel"),
   PS = character(1L),
   dry.run = TRUE,
+  to = NULL,
   cc = NULL,
+  bcc = NULL,
   emailTemplate = templatePath(),
   core.name = NULL,
   core.email = NULL,
@@ -35,8 +37,12 @@ the email (i.e., the package maintainer)}
 \item{dry.run}{logical(1) Display the email without sending to the recipient.
 It only works for HTML email reports and ignored when \code{textOnly=TRUE}}
 
-\item{cc}{character() Email addresses for sending the message as a carbon
-copy}
+\item{to}{character() A vector of email addresses serving as primary
+recipients for the message. For secondary recipients, use the \code{cc} and
+\code{bcc} arguments.}
+
+\item{cc, bcc}{character() A vector of email addresses for sending the message
+as a carbon copy or blind carbon copy.}
 
 \item{emailTemplate}{character(1) The path to the email template Rmd file as
 obtained by \code{templatePath()}. A custom template can be provided as file
