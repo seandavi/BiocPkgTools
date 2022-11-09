@@ -48,7 +48,9 @@
 #'   package environment from a previous Bioconductor release.
 #'
 #' @examples
-#' biocConfigVersion("3.15", "RSPM")
+#' if (interactive()) {
+#'   biocConfigVersion("3.15", "RSPM", overwrite = TRUE)
+#' }
 #' @export
 biocConfigVersion <- function(
     version = "3.15",
@@ -68,16 +70,18 @@ biocConfigVersion <- function(
     yaml_file <- file.path(yamlDir, "config.yaml")
     if (!file.exists(yaml_file) || overwrite)
         download.file(.BIOC_CONFIG_YAML, yaml_file)
-    config <- yaml::read_yaml(yaml_file)
+    config <- readLines(yaml_file)
     if (!snapshot %in% c("RSPM", "MRAN"))
         stop("Unknown 'snapshot' option; use either 'RSPM' or 'MRAN'")
     mapname <- paste0(tolower(snapshot), "_ver_for_bioc_ver")
     mapelement <- structure(list(as.list(lastBuildDate)), .Names = mapname)
-    indx <- which(names(config) == "release_dates") - 1L
-    config <- append(config, mapelement, after = indx)
+    ymape <- yaml::as.yaml(mapelement)
+    mapelem <- capture.output(cat(ymape))
+    indx <- which(startsWith(config, "release_dates")) - 1L
+    config <- append(config, mapelem, after = indx)
     if (overwrite) {
         message("Updating 'config.yaml' at ", dirname(yaml_file))
-        yaml::write_yaml(config, file = yaml_file)
+        writeLines(config, yaml_file)
     }
 
     ## update Renviron with config.yaml location
