@@ -60,8 +60,6 @@ biocConfigVersion <- function(
     overwrite = FALSE,
     Renviron = file.path(Sys.getenv("HOME"), ".Renviron")
 ) {
-    if (!requireNamespace("yaml", quietly = TRUE))
-        stop("Install the 'yaml' package to use 'biocConfigVersion'")
     if (is.null(lastBuildDate))
         lastBuildDate <- biocLastBuildDate(version = version)
     if (!dir.exists(yamlDir))
@@ -74,11 +72,12 @@ biocConfigVersion <- function(
     if (!snapshot %in% c("RSPM", "MRAN"))
         stop("Unknown 'snapshot' option; use either 'RSPM' or 'MRAN'")
     mapname <- paste0(tolower(snapshot), "_ver_for_bioc_ver")
-    mapelement <- structure(list(as.list(lastBuildDate)), .Names = mapname)
-    ymape <- yaml::as.yaml(mapelement)
-    mapelem <- capture.output(cat(ymape))
+    mapelement <- c(
+        paste0(mapname, ":"),
+        paste0("  ", dQuote(names(lastBuildDate)), ": ", dQuote(lastBuildDate))
+    )
     indx <- which(startsWith(config, "release_dates")) - 1L
-    config <- append(config, mapelem, after = indx)
+    config <- append(config, mapelement, after = indx)
     if (overwrite) {
         message("Updating 'config.yaml' at ", dirname(yaml_file))
         writeLines(config, yaml_file)
