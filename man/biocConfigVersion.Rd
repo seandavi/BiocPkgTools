@@ -9,7 +9,6 @@ biocConfigVersion(
   lastBuildDate = NULL,
   snapshot = getOption("BiocManager.snapshot", "RSPM"),
   yamlDir = tools::R_user_dir("BiocPkgTools", which = "config"),
-  overwrite = FALSE,
   Renviron = file.path(Sys.getenv("HOME"), ".Renviron")
 )
 }
@@ -31,10 +30,6 @@ reproducibility. This defaults to the value of
 \item{yamlDir}{character(1) The folder location for the modified
 \code{config.yaml} file. By default, it is set to the value of
 \code{tools::R_user_dir("BiocPkgTools", which = "config")}.}
-
-\item{overwrite}{logical(1) Whether to overwrite the local \code{config.yaml}
-file. Set to \code{FALSE} by default. Set to \code{TRUE} in order to save the
-changes made to the configuration map.}
 
 \item{Renviron}{character(1) The file location of the \code{.Renviron} file to
 update with the \code{BIOCONDUCTOR_CONFIG_FILE} variable. Set to \code{NULL} to avoid
@@ -63,5 +58,7 @@ setting the \code{Renviron} argument to \code{NULL} if the \code{BIOCONDUCTOR_CO
 option is set.
 }
 \examples{
-biocConfigVersion("3.15", "RSPM")
+if (interactive()) {
+  biocConfigVersion("3.15", "RSPM", overwrite = TRUE)
+}
 }

@@ -34,10 +34,6 @@
 #'   `config.yaml` file. By default, it is set to the value of
 #'   `tools::R_user_dir("BiocPkgTools", which = "config")`.
 #'
-#' @param overwrite logical(1) Whether to overwrite the local `config.yaml`
-#'   file. Set to `FALSE` by default. Set to `TRUE` in order to save the
-#'   changes made to the configuration map.
-#'
 #' @param Renviron character(1) The file location of the `.Renviron` file to
 #'   update with the `BIOCONDUCTOR_CONFIG_FILE` variable. Set to `NULL` to avoid
 #'   writing in the `.Renviron`. The default directory location of the file is
@@ -57,7 +53,6 @@ biocConfigVersion <- function(
     lastBuildDate = NULL,
     snapshot = getOption("BiocManager.snapshot", "RSPM"),
     yamlDir = tools::R_user_dir("BiocPkgTools", which = "config"),
-    overwrite = FALSE,
     Renviron = file.path(Sys.getenv("HOME"), ".Renviron")
 ) {
     if (is.null(lastBuildDate))
@@ -66,8 +61,7 @@ biocConfigVersion <- function(
         dir.create(yamlDir)
     ## download and edit config.yaml file
     yaml_file <- file.path(yamlDir, "config.yaml")
-    if (!file.exists(yaml_file) || overwrite)
-        download.file(.BIOC_CONFIG_YAML, yaml_file)
+    download.file(.BIOC_CONFIG_YAML, yaml_file)
     config <- readLines(yaml_file)
     if (!snapshot %in% c("RSPM", "MRAN"))
         stop("Unknown 'snapshot' option; use either 'RSPM' or 'MRAN'")
@@ -78,10 +72,8 @@ biocConfigVersion <- function(
     )
     indx <- which(startsWith(config, "release_dates")) - 1L
     config <- append(config, mapelement, after = indx)
-    if (overwrite) {
-        message("Updating 'config.yaml' at ", dirname(yaml_file))
-        writeLines(config, yaml_file)
-    }
+    message("Updating 'config.yaml' at ", dirname(yaml_file))
+    writeLines(config, yaml_file)
 
     ## update Renviron with config.yaml location
     if (!is.null(Renviron)) {
