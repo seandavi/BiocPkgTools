@@ -59,6 +59,6 @@ option is set.
 }
 \examples{
 if (interactive()) {
-  biocConfigVersion("3.15", "RSPM", overwrite = TRUE)
+  biocConfigVersion("3.14")
 }
 }
