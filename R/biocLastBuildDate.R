@@ -17,6 +17,7 @@
 #'
 #' @export
 biocLastBuildDate <- function(version) {
+    version <- as.character(version)
     if (!requireNamespace("lubridate", quietly = TRUE))
         stop("Install 'lubridate' to run 'biocLastBuildDate'")
     buildrep <- read_html("https://bioconductor.org/checkResults/")
