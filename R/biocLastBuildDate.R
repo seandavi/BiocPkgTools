@@ -6,7 +6,7 @@
 #' <https://bioconductor.org/checkResults/> and parses the dates listed.
 #'
 #' @param version character(1) Indicates the Bioconductor version for which the
-#'   last build date is sought.
+#'   last build date is sought. By default, 'all' versions will be returned.
 #'
 #' @importFrom rvest html_nodes html_text
 #' @importFrom xml2 read_html
@@ -16,8 +16,10 @@
 #' biocLastBuildDate(version = "3.14")
 #'
 #' @export
-biocLastBuildDate <- function(version) {
-    version <- as.character(version)
+biocLastBuildDate <- function(version = "all") {
+    stopifnot(
+        identical(length(version), 1L), !is.na(version), is.character(version)
+    )
     if (!requireNamespace("lubridate", quietly = TRUE))
         stop("Install 'lubridate' to run 'biocLastBuildDate'")
     buildrep <- read_html("https://bioconductor.org/checkResults/")
@@ -35,8 +37,9 @@ biocLastBuildDate <- function(version) {
     )
     last_bioc_dates <- format(lubridate::mdy(lastdates), "%Y-%m-%d")
     names(last_bioc_dates) <- names(lastdates)
-    if (missing(version))
-        last_bioc_dates
+    if (identical(version, "all"))
+        version <- names(last_bioc_dates)
     else
-        last_bioc_dates[version]
+        version <- as.character(version)
+    last_bioc_dates[version]
 }

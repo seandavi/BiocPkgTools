@@ -4,11 +4,11 @@
 \alias{biocLastBuildDate}
 \title{Obtain the last build date for a particular Bioconductor version}
 \usage{
-biocLastBuildDate(version)
+biocLastBuildDate(version = "all")
 }
 \arguments{
 \item{version}{character(1) Indicates the Bioconductor version for which the
-last build date is sought.}
+last build date is sought. By default, 'all' versions will be returned.}
 }
 \description{
 The function facilitates the discovery of last build dates useful for
