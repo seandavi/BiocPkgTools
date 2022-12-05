@@ -1,5 +1,3 @@
-context("Check biocLastBuildDate")
-
 test_that("biocLastBuildDate returns a character string with a name", {
     expect_true(
         length(biocLastBuildDate()) >= 30L
