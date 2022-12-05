@@ -32,6 +32,8 @@
 #' This function allows users to install packages from a previously released
 #' Bioconductor version.
 #'
+#' @aliases BiocPkgTools.snapshot BiocManager.snapshot
+#'
 #' @details
 #'
 #' CRAN packages for out-of-date _Bioconductor_ installations can be
@@ -52,7 +54,8 @@
 #' setting for `CRAN` to allow installation of CRAN packages from either the
 #' [RSPM] or [MRAN] time machines. The function will also modify the
 #' `BIOCONDUCTOR_USE_CONTAINER_REPOSITORY` environment variable to temporarily
-#' disable binary package installations.
+#' disable binary package installations. `BiocPkgTools.snapshot` has replaced
+#' `BiocManager.snapshot`.
 #'
 #' It may be desirable to specify different default repositories, especially
 #' CRAN, for intentionally out-of-date _Bioconductor_ releases (e.g., to support

@@ -2,6 +2,8 @@
 % Please edit documentation in R/archiveInstall.R
 \name{archiveInstall}
 \alias{archiveInstall}
+\alias{BiocPkgTools.snapshot}
+\alias{BiocManager.snapshot}
 \title{Install packages from a previous release of Bioconductor for reproducibility}
 \usage{
 archiveInstall(
