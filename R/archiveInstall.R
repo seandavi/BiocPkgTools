@@ -85,8 +85,7 @@ archiveInstall <- function(
         snapshot,
         RSPM = .repositories_rspm(cran, last_date),
         MRAN = .repositories_mran(cran, last_date),
-        CRAN = .repositories_cran(cran),
-        stop("unknown option 'BiocPkgTools.snapshot = \"%s\"'", snapshot)
+        CRAN = .repositories_cran(cran)
     )
     old_opt <- options(repos = repos["CRAN"])
     on.exit(options(old_opt))
