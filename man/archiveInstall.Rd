@@ -38,15 +38,30 @@ This function allows users to install packages from a previously released
 Bioconductor version.
 }
 \details{
-The \code{version} argument is largely dictated by the actual R /
-Bioconductor installation, e.g., Bioconductor version 3.14. With this
-information and the value of \code{getOption("BiocPkgTools.snapshot")}, the
-function will temporarily change the \code{getOption('repos')} setting for
-\code{CRAN} to allow installation of CRAN packages from either the RSPM or MRAN
-time machines. The date of the 'snapshot' coincides with the \emph{last} release
-date for the indicated Bioconductor version. The function will also modify
-the \code{BIOCONDUCTOR_USE_CONTAINER_REPOSITORY} environment variable to
-temporarily disable binary package installations.
+CRAN packages for out-of-date \emph{Bioconductor} installations can be
+installed from historical 'snapshots' consistent with the last date
+the Bioconductor version was current. This behavior is largely dictated by
+the actual R/Bioconductor installation, e.g., Bioconductor 3.11. For example,
+\emph{Bioconductor} version 3.11 was current until October 28, 2020; CRAN packages
+are therefore installed from a snapshot created on 2020-10-28. By default,
+the snapshots are from 'RSPM', the \href{https://packagemanager.rstudio.com/client/#/repos/2/overview}{RStudio Package Manager}. Use
+\code{options(BiocPkgTools.snapshot = "MRAN")} to instead use the \href{https://mran.microsoft.com/timemachine}{Microsoft R Archive Network}, or \code{options(BiocPkgTools.snapshot = "CRAN")} to use
+the current CRAN repository (i.e., disabling the snapshot feature).
+
+Note that the function will temporarily change the \code{getOption('repos')}
+setting for \code{CRAN} to allow installation of CRAN packages from either the
+\href{https://packagemanager.rstudio.com/client/#/repos/2/overview}{RSPM} or \href{https://mran.microsoft.com/timemachine}{MRAN} time machines. The function will also modify the
+\code{BIOCONDUCTOR_USE_CONTAINER_REPOSITORY} environment variable to temporarily
+disable binary package installations.
+
+It may be desirable to specify different default repositories, especially
+CRAN, for intentionally out-of-date \emph{Bioconductor} releases (e.g., to support
+reproducible research). Use the approach provided by base \emph{R} to specify
+alternative repositories, e.g., \code{options(repos = c(CRAN = "https://mran.microsoft.com/snapshot/2020-02-08"))}. This is supported, but
+generates an error because specification of an inappropriate CRAN repository
+(one providing packages not consistent with the dates of the \emph{Bioconductor}
+release) results in use of CRAN packages not consistent with \emph{Bioconductor}
+best practices.
 }
 \examples{
 
