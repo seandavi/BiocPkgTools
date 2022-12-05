@@ -319,12 +319,15 @@ latestPkgStats <-
 #'   "created_at", "number", "title")
 #'
 #' @examples
+#' if (interactive()) {
 #'
-#' activitySince("Bioconductor/S4Vectors", "issues", "closed", "2021-05-01")
+#'   activitySince("Bioconductor/S4Vectors", "issues", "closed", "2021-05-01")
 #'
-#' activitySince("Bioconductor/S4Vectors", "issues", "open", "2022-05-01")
+#'   activitySince("Bioconductor/S4Vectors", "issues", "open", "2022-05-01")
 #'
-#' activitySince("Bioconductor/S4Vectors", "commits", Date = "2022-05-01")
+#'   activitySince("Bioconductor/S4Vectors", "commits", Date = "2022-05-01")
+#'
+#' }
 #'
 #' @export
 activitySince <- function(
