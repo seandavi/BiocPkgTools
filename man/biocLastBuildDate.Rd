@@ -13,7 +13,7 @@ last build date is sought.}
 \description{
 The function facilitates the discovery of last build dates useful for
 selecting a fixed date to be used in conjunction with
-\code{options(BiocManager.snapshot)}. Currently, it looks at
+\code{options(BiocPkgTools.snapshot)}. Currently, it looks at
 \url{https://bioconductor.org/checkResults/} and parses the dates listed.
 }
 \examples{

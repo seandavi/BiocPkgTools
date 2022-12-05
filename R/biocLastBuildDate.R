@@ -2,7 +2,7 @@
 #'
 #' The function facilitates the discovery of last build dates useful for
 #' selecting a fixed date to be used in conjunction with
-#' `options(BiocManager.snapshot)`. Currently, it looks at
+#' `options(BiocPkgTools.snapshot)`. Currently, it looks at
 #' <https://bioconductor.org/checkResults/> and parses the dates listed.
 #'
 #' @param version character(1) Indicates the Bioconductor version for which the
