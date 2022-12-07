@@ -55,7 +55,7 @@ biocRevDepEmail <-
     core.id <- core.list[["core.id"]]
 
     db <- available.packages(
-        repos = BiocManager:::.repositories_bioc(version)[1]
+        repos = BiocManager:::.repositories_bioc(version)["BioCsoft"]
     )
     revdeps <- tools::package_dependencies(
         pkg, db, reverse = TRUE, which = which
