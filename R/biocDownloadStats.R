@@ -218,9 +218,11 @@ pkgDownloadRank <-
 #' @inheritParams activitySince
 #'
 #' @examples
+#' if (interactive()) {
 #'
-#' latestPkgStats("Bioconductor/BiocGenerics", "2021-05-05")
+#'   latestPkgStats("Bioconductor/BiocGenerics", "2021-05-05")
 #'
+#' }
 #' @export
 latestPkgStats <-
     function(
