@@ -1,7 +1,7 @@
 Package: BiocPkgTools
 Type: Package
 Title: Collection of simple tools for learning about Bioconductor Packages
-Version: 1.17.4
+Version: 1.17.5
 Date: 2022-10-16
 Authors@R: c( 
     person("Shian", "Su", role=c("aut", "ctb"), email = "su.s@wehi.edu.au"),
