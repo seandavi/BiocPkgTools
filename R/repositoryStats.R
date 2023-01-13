@@ -9,6 +9,9 @@
 #'   indicating the _Bioconductor_ version (e.g., "3.8") for which
 #'   repositories are required.
 #'
+#' @param binary_repository `character(1)` location of binary repository as
+#'   given by `BiocManager::containerRepository` (default)
+#'
 #' @param ... further arguments passed to or from other methods (not used).
 #'
 #' @return a list of class `repositoryStats` with the following fields:
@@ -62,14 +65,15 @@
 #' stats$container             # access an element for further computation
 #'
 #' @export
-repositoryStats <- function(version = BiocManager::version())
-{
+repositoryStats <- function(
+    version = BiocManager::version(),
+    binary_repository = BiocManager::containerRepository(version)
+) {
     platform_docker <- BiocManager:::.repository_container_version()
     container <- platform_docker$platform
     bioc_repository <- suppressMessages({
         BiocManager::repositories()[["BioCsoft"]]
     })
-    binary_repository <- containerRepository(version)
     db_bioc <- available.packages(repos = bioc_repository)
     if (length(binary_repository)) {
         db_binary <- available.packages(repos = binary_repository)

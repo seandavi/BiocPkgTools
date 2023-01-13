@@ -5,7 +5,10 @@
 \alias{print.repositoryStats}
 \title{Bioconductor Binary Repository Statistics}
 \usage{
-repositoryStats(version = BiocManager::version())
+repositoryStats(
+  version = BiocManager::version(),
+  binary_repository = BiocManager::containerRepository(version)
+)
 
 \method{print}{repositoryStats}(x, ...)
 }
@@ -13,6 +16,9 @@ repositoryStats(version = BiocManager::version())
 \item{version}{(Optional) \code{character(1)} or \code{package_version}
 indicating the \emph{Bioconductor} version (e.g., "3.8") for which
 repositories are required.}
+
+\item{binary_repository}{\code{character(1)} location of binary repository as
+given by \code{BiocManager::containerRepository} (default)}
 
 \item{x}{the object returned by \code{repositoryStats()}.}
 
