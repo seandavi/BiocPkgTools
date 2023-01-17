@@ -17,6 +17,14 @@
 #'
 #' @export
 biocLastBuildDate <- function(version) {
+    .Deprecated(
+        "lastBuilt", "BiocArchive",
+        c(
+            "'biocLastBuildDate' is deprecated.\n",
+            "Use 'BiocArchive::lastBuilt' instead.\n",
+            "See help(\"lastBuilt\", package = \"BiocArchive\")"
+        )
+    )
     if (!requireNamespace("lubridate", quietly = TRUE))
         stop("Install 'lubridate' to run 'biocLastBuildDate'")
     buildrep <- read_html("https://bioconductor.org/checkResults/")
