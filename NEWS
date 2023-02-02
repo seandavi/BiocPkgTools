@@ -4,6 +4,8 @@ CHANGES IN VERSION 1.18.0
 SIGNIFICANT USER-VISIBLE CHANGES
 
     o `biocLastBuildDate` has been deprecated and moved to `BiocArchive`.
+    o `pkgBiocDeps` returns only the Bioconductor dependencies for a given
+      vector of packages; can be set to all dependencies.
 
 BUG FIXES
 
