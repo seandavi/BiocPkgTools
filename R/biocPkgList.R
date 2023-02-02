@@ -97,9 +97,14 @@ biocPkgList = function(version = BiocManager::version(), repo='BioCsoft',
                       cranFileUrl <- sprintf("%s/web/packages/packages.rds",
                                              repos[r])
                       con <- url(cranFileUrl)
-                      ret <- as.data.frame(readRDS(gzcon(con)),
-                                           stringsAsFactors=FALSE)
-                      close(con)
+                      on.exit(close(con))
+                      res <- try(readRDS(gzcon(con)), silent = TRUE)
+                      if (is(res, "try-error"))
+                          stop(
+                              "'packages.rds' not found in CRAN 'repo'",
+                              call. = FALSE
+                          )
+                      ret <- as.data.frame(res, stringsAsFactors=FALSE)
                       rownames(ret) <- NULL
 
                       ## to increase the overlap of the information from
