@@ -5,6 +5,12 @@ SIGNIFICANT USER-VISIBLE CHANGES
 
     o `biocLastBuildDate` has been deprecated and moved to `BiocArchive`.
 
+BUG FIXES
+
+    o `biocPkgList` throws a descriptive error when using an alternative
+      repository to the default CRAN, e.g., `RSPM` where the `packages.rds`
+      file does not exist.
+
 CHANGES IN VERSION 1.16.0
 -------------------------
 
