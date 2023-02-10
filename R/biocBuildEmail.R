@@ -16,20 +16,25 @@
 #' These templates are used with `biocBuildEmail` to notify maintainers
 #' regarding package errors and final deprecation warning.
 #'
-#' @param type character(1) Either one of 'buildemail', 'cranreport',
-#'     'deprecation', or 'revdepnote'
+#' @param type character(1) Either one of "buildemail", "deprecation",
+#'   "deprecguide", "cranreport", or "revdepnote". See the templates in the
+#'   `resources` folder.
+#'
 #'
 #' @export
-templatePath <-
-    function(type = c("buildemail", "deprecation", "cranreport", "revdepnote"))
-{
+templatePath <- function(
+    type = c(
+        "buildemail", "deprecation", "deprecguide", "cranreport", "revdepnote"
+    )
+) {
     type <- match.arg(type)
     type <- switch(
         type,
         buildemail = "BiocBuildEmail_Template.Rmd",
         cranreport = "CRANReport_Template.Rmd",
         deprecation = "Deprecation_Template.Rmd",
-        revdepnote = "Deprecation_Notification.Rmd"
+        deprecguide = "Deprecation_Guidelines.Rmd",
+        revdepnote = "Deprecation_RevDeps.Rmd"
     )
     system.file(
         package = "BiocPkgTools", "resources", type,

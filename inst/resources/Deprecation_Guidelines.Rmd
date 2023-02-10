@@ -1,0 +1,50 @@
+---
+title: "%s Bioconductor Package Notification"
+author:
+- name: "%s"
+  affiliation:
+  - Roswell Park Comprehensive Cancer Center, Buffalo, NY, USA
+date: "%s"
+output:
+  BiocStyle::html_document:
+    toc: false
+    number_sections: false
+---
+
+## Package: %s
+
+---
+
+
+Hi %s,
+
+I am contacting you concerning the `%s` package, on the %s
+branch of Bioconductor, for which you are listed as the maintainer.
+
+We have recently discovered that your package is violating our [Deprecation
+Guidelines](https://contributions.bioconductor.org/deprecation.html).
+
+If you have any questions, feel free to reach out to the
+[Bioc-devel](mailto:bioc-devel@r-project.org) mailing list.
+
+%s
+
+We thank you for providing important software to the Bioconductor
+community.
+
+Best Regards,
+
+%s
+
+%s
+
+---
+
+<footer>
+<p>Bioconductor Core Team
+<br>Roswell Park Comprehensive Cancer Center
+<br>Dept. of Biostatistics & Bioinformatics
+<br>Elm & Carlton Streets
+<br>Buffalo, New York 14263
+</p>
+</footer>
