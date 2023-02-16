@@ -1,9 +1,18 @@
-#' Obtain the last build date for a particular Bioconductor version
+#' @name BiocPkgTools-deprecated
 #'
-#' The function facilitates the discovery of last build dates useful for
-#' selecting a fixed date to be used in conjunction with
-#' `options(BiocManager.snapshot)`. Currently, it looks at
-#' <https://bioconductor.org/checkResults/> and parses the dates listed.
+#' @aliases biocLastBuildDate
+#'
+#' @title Deprecated functions in `BiocPkgTools`
+#'
+#' @description Currently, `biocLastBuildDate` is **DEPRECATED**. See
+#'   functionality in `BiocArchive`.
+#'
+#' @details The function facilitates the discovery of last build dates useful
+#'   for selecting a fixed date. Currently, it looks at
+#'   <https://bioconductor.org/checkResults/> and parses the dates listed.
+#'
+#'
+#' @seealso <https://github.com/LiNk-NY/BiocArchive>
 #'
 #' @param version character(1) Indicates the Bioconductor version for which the
 #'   last build date is sought.
@@ -22,7 +31,7 @@ biocLastBuildDate <- function(version) {
         c(
             "'biocLastBuildDate' is deprecated.\n",
             "Use 'BiocArchive::lastBuilt' instead.\n",
-            "See help(\"lastBuilt\", package = \"BiocArchive\")"
+            "See help(\"BiocPkgTools-deprecated\")"
         )
     )
     if (!requireNamespace("lubridate", quietly = TRUE))
