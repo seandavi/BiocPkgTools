@@ -9,6 +9,9 @@ SIGNIFICANT USER-VISIBLE CHANGES
 
 BUG FIXES
 
+    o Use `bfcdownload` when a web resource needs updating. Functions that
+    download and cache files are affected including `biocBuildReport`,
+    `biocDownloadStats`, `biocPkgRanges`, and `CRANstatus`.
     o `biocPkgList` throws a descriptive error when using an alternative
       repository to the default CRAN, e.g., `RSPM` where the `packages.rds`
       file does not exist.
