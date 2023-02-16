@@ -32,7 +32,7 @@ repo_short_names <- data.frame(
 #' @importFrom utils read.table
 #' @importFrom tibble as_tibble
 #' @importFrom BiocFileCache BiocFileCache bfcupdate bfcneedsupdate bfcrpath
-#'     bfcquery bfcnew
+#'     bfcquery bfcnew bfcdownload
 #'
 #' @return A \code{tibble} of download statistics for all Bioconductor packages
 #'
