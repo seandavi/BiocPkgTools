@@ -5,6 +5,8 @@
 #'
 #' @inheritParams biocBuildEmail
 #'
+#' @importFrom rvest html_table
+#'
 #' @param to.mail The email of the CRAN report recipient
 #'
 #' @export
