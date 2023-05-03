@@ -4,7 +4,7 @@
 #'
 #' @title Deprecated functions in `BiocPkgTools`
 #'
-#' @description Currently, `biocLastBuildDate` is **DEPRECATED**. See
+#' @description Currently, `biocLastBuildDate` is **DEFUNCT**. See
 #'   functionality in `BiocArchive`.
 #'
 #' @details The function facilitates the discovery of last build dates useful

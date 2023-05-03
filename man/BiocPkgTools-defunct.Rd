@@ -12,7 +12,7 @@ biocLastBuildDate(version)
 last build date is sought.}
 }
 \description{
-Currently, \code{biocLastBuildDate} is \strong{DEPRECATED}. See
+Currently, \code{biocLastBuildDate} is \strong{DEFUNCT}. See
 functionality in \code{BiocArchive}.
 }
 \details{
