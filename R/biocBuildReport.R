@@ -206,7 +206,7 @@ get_deprecated_status_df <- function(version) {
     bfc <- BiocFileCache()
     bquery <- bfcquery(bfc, url, "rname", exact = TRUE)
     if (identical(nrow(bquery), 1L) && bfcneedsupdate(bfc, bquery[["rid"]]))
-        bfcdownload(x = bfc, rid = bquery[["rid"]], rtype = "web")
+        bfcdownload(x = bfc, rid = bquery[["rid"]], rtype = "web", ask = FALSE)
 
     bfcrpath(
         bfc, rnames = url, exact = TRUE, download = TRUE, rtype = "web"
