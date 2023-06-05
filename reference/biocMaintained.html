@@ -18,7 +18,7 @@ return all packages associated with the maintainer@bioconductor.org email."><!--
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BiocPkgTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.15.13</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.19.2</span>
       </span>
     </div>
 
@@ -82,30 +82,29 @@ column as obtained from <code><a href="biocPkgList.html">biocPkgList()</a></code
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">biocMaintained</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 'getOption("repos")' replaces Bioconductor standard repositories, see</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> '?repositories' for details</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> replacement repositories:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 'help("repositories", package = "BiocManager")' for details.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Replacement repositories:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     CRAN: https://cloud.r-project.org</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 53 × 46</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Package  Version Depends Sugge…¹ License MD5sum Needs…² Title Descr…³ biocV…⁴</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> annotate 1.74.0  &lt;chr&gt;   &lt;chr&gt;   Artist… 9ea0f… no      <span style="color: #949494;">"</span>Ann… <span style="color: #949494;">"</span>Using… &lt;chr&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Annotat… 1.58.0  &lt;chr&gt;   &lt;chr&gt;   Artist… 0ca49… no      <span style="color: #949494;">"</span>Man… <span style="color: #949494;">"</span>Imple… &lt;chr&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Annotat… 1.20.0  &lt;chr&gt;   &lt;chr&gt;   Artist… 02a5a… no      <span style="color: #949494;">"</span>Fac… <span style="color: #949494;">"</span>This … &lt;chr&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Annotat… 1.38.1  &lt;chr&gt;   &lt;chr&gt;   Artist… 903b1… no      <span style="color: #949494;">"</span>Too… <span style="color: #949494;">"</span>Provi… &lt;chr&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Annotat… 3.4.0   &lt;chr&gt;   &lt;chr&gt;   Artist… 51942… yes     <span style="color: #949494;">"</span>Cli… <span style="color: #949494;">"</span>This … &lt;chr&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Annotat… 1.26.1  &lt;chr&gt;   &lt;chr&gt;   Artist… 7af52… no      <span style="color: #949494;">"</span>Tra… <span style="color: #949494;">"</span>These… &lt;chr&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Biobase  2.56.0  &lt;chr&gt;   &lt;chr&gt;   Artist… 244f7… yes     <span style="color: #949494;">"</span>Bio… <span style="color: #949494;">"</span>Funct… &lt;chr&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> BiocChe… 1.32.1  &lt;chr&gt;   &lt;chr&gt;   Artist… e5b71… no      <span style="color: #949494;">"</span>Bio… <span style="color: #949494;">"</span>BiocC… &lt;chr&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> BiocDoc… 1.8.1   &lt;chr&gt;   &lt;chr&gt;   Artist… 72832… no      <span style="color: #949494;">"</span>Acc… <span style="color: #949494;">"</span>Packa… &lt;chr&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> BiocGen… 0.42.0  &lt;chr&gt;   &lt;chr&gt;   Artist… 7e10e… no      <span style="color: #949494;">"</span>S4 … <span style="color: #949494;">"</span>The p… &lt;chr&gt;  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 43 more rows, 36 more variables: Author &lt;list&gt;, Maintainer &lt;list&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   git_url &lt;chr&gt;, git_branch &lt;chr&gt;, git_last_commit &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 40 × 47</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Package        Version Depends Suggests License MD5sum NeedsCompilation Title</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> annotate       1.78.0  <span style="color: #949494;">&lt;chr&gt;</span>   <span style="color: #949494;">&lt;chr&gt;</span>    Artist… fb518… no               <span style="color: #949494;">"</span>Ann…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> AnnotationDbi  1.62.1  <span style="color: #949494;">&lt;chr&gt;</span>   <span style="color: #949494;">&lt;chr&gt;</span>    Artist… ccf96… no               <span style="color: #949494;">"</span>Man…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> AnnotationFil… 1.24.0  <span style="color: #949494;">&lt;chr&gt;</span>   <span style="color: #949494;">&lt;chr&gt;</span>    Artist… 2838a… no               <span style="color: #949494;">"</span>Fac…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> AnnotationFor… 1.42.0  <span style="color: #949494;">&lt;chr&gt;</span>   <span style="color: #949494;">&lt;chr&gt;</span>    Artist… 5c210… no               <span style="color: #949494;">"</span>Too…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> AnnotationHub  3.8.0   <span style="color: #949494;">&lt;chr&gt;</span>   <span style="color: #949494;">&lt;chr&gt;</span>    Artist… 458bb… yes              <span style="color: #949494;">"</span>Cli…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> AnnotationHub… 1.30.0  <span style="color: #949494;">&lt;chr&gt;</span>   <span style="color: #949494;">&lt;chr&gt;</span>    Artist… d9248… no               <span style="color: #949494;">"</span>Tra…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Biobase        2.60.0  <span style="color: #949494;">&lt;chr&gt;</span>   <span style="color: #949494;">&lt;chr&gt;</span>    Artist… 7e427… yes              <span style="color: #949494;">"</span>Bio…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> BiocDockerMan… 1.11.0  <span style="color: #949494;">&lt;chr&gt;</span>   <span style="color: #949494;">&lt;chr&gt;</span>    Artist… 94bb9… no               <span style="color: #949494;">"</span>Acc…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> BiocStyle      2.28.0  <span style="color: #949494;">&lt;chr&gt;</span>   <span style="color: #949494;">&lt;chr&gt;</span>    Artist… 91272… no               <span style="color: #949494;">"</span>Sta…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> BiocVersion    3.17.1  <span style="color: #949494;">&lt;chr&gt;</span>   <span style="color: #949494;">&lt;chr&gt;</span>    Artist… 9fea6… no               <span style="color: #949494;">"</span>Set…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 30 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 39 more variables: Description &lt;chr&gt;, biocViews &lt;list&gt;, Author &lt;list&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   Maintainer &lt;list&gt;, git_url &lt;chr&gt;, git_branch &lt;chr&gt;, git_last_commit &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   git_last_commit_date &lt;chr&gt;, `Date/Publication` &lt;chr&gt;, source.ver &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   win.binary.ver &lt;chr&gt;, mac.binary.ver &lt;chr&gt;, vignettes &lt;list&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   vignetteTitles &lt;list&gt;, hasREADME &lt;chr&gt;, hasNEWS &lt;chr&gt;, hasINSTALL &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   hasLICENSE &lt;chr&gt;, Rfiles &lt;list&gt;, dependencyCount &lt;chr&gt;, Imports &lt;list&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   Enhances &lt;list&gt;, dependsOnMe &lt;list&gt;, suggestsMe &lt;list&gt;, …</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   win.binary.ver &lt;chr&gt;, `mac.binary.big-sur-x86_64.ver` &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   `mac.binary.big-sur-arm64.ver` &lt;chr&gt;, vignettes &lt;list&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   vignetteTitles &lt;list&gt;, hasREADME &lt;chr&gt;, hasNEWS &lt;chr&gt;, hasINSTALL &lt;chr&gt;, …</span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
@@ -121,7 +120,7 @@ column as obtained from <code><a href="biocPkgList.html">biocPkgList()</a></code
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

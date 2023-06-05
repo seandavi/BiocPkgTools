@@ -25,6 +25,9 @@
     <loc>/reference/BiocPkgTools-cache.html</loc>
   </url>
   <url>
+    <loc>/reference/BiocPkgTools-defunct.html</loc>
+  </url>
+  <url>
     <loc>/reference/BiocPkgTools.html</loc>
   </url>
   <url>
@@ -47,9 +50,6 @@
   </url>
   <url>
     <loc>/reference/biocExplore.html</loc>
-  </url>
-  <url>
-    <loc>/reference/biocLastBuildDate.html</loc>
   </url>
   <url>
     <loc>/reference/biocMaintained.html</loc>
@@ -119,6 +119,9 @@
   </url>
   <url>
     <loc>/reference/orcid_table.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pkgBiocDeps.html</loc>
   </url>
   <url>
     <loc>/reference/pkgCombDependencyGain.html</loc>

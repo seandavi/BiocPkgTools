@@ -18,7 +18,7 @@ regarding package errors and final deprecation warning."><!-- mathjax --><script
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BiocPkgTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.15.13</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.19.2</span>
       </span>
     </div>
 
@@ -55,14 +55,17 @@ regarding package errors and final deprecation warning.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">templatePath</span><span class="op">(</span>type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"buildemail"</span>, <span class="st">"deprecation"</span>, <span class="st">"cranreport"</span>, <span class="st">"revdepnote"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">templatePath</span><span class="op">(</span></span>
+<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"buildemail"</span>, <span class="st">"deprecation"</span>, <span class="st">"deprecguide"</span>, <span class="st">"cranreport"</span>, <span class="st">"revdepnote"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>type</dt>
-<dd><p>character(1) Either one of 'buildemail', 'cranreport',
-'deprecation', or 'revdepnote'</p></dd>
+<dd><p>character(1) Either one of "buildemail", "deprecation",
+"deprecguide", "cranreport", or "revdepnote". See the templates in the
+<code>resources</code> folder.</p></dd>
 
 </dl></div>
 
@@ -78,7 +81,7 @@ regarding package errors and final deprecation warning.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

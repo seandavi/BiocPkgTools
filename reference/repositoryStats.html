@@ -18,7 +18,7 @@ Terra container in use."><!-- mathjax --><script src="https://cdnjs.cloudflare.c
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BiocPkgTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.15.13</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.19.2</span>
       </span>
     </div>
 
@@ -55,7 +55,10 @@ Terra container in use.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">repositoryStats</span><span class="op">(</span>version <span class="op">=</span> <span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/version.html" class="external-link">version</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">repositoryStats</span><span class="op">(</span></span>
+<span>  version <span class="op">=</span> <span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/version.html" class="external-link">version</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  binary_repository <span class="op">=</span> <span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/repositories.html" class="external-link">containerRepository</a></span><span class="op">(</span><span class="va">version</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for repositoryStats</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
@@ -67,6 +70,11 @@ Terra container in use.</p>
 <dd><p>(Optional) <code>character(1)</code> or <code>package_version</code>
 indicating the <em>Bioconductor</em> version (e.g., "3.8") for which
 repositories are required.</p></dd>
+
+
+<dt>binary_repository</dt>
+<dd><p><code>character(1)</code> location of binary repository as
+given by <code><a href="https://rdrr.io/pkg/BiocManager/man/repositories.html" class="external-link">BiocManager::containerRepository</a></code> (default)</p></dd>
 
 
 <dt>x</dt>
@@ -122,14 +130,14 @@ availability in binary repositories.</p></li>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">stats</span> <span class="op">&lt;-</span> <span class="fu">repositoryStats</span><span class="op">(</span><span class="op">)</span> <span class="co"># obtain statistics</span></span></span>
 <span class="r-in"><span><span class="va">stats</span>                       <span class="co"># display a summary</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Container: NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Bioconductor version: 3.15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Bioconductor version: 3.17</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Bioconductor binary repos:  NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> PACKAGES timestamp: NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Query timestamp: 2022-10-24 18:23 UTC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Bioconductor software packages: 2123</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Query timestamp: 2023-06-05 18:09 UTC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Bioconductor software packages: 2184</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Binary packages: 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Binary software packages: 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Missing binary software packages: 2123</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Missing binary software packages: 2184</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Out-of-date binary software packages: 0</span>
 <span class="r-in"><span><span class="va">stats</span><span class="op">$</span><span class="va">container</span>             <span class="co"># access an element for further computation</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA</span>
@@ -148,7 +156,7 @@ availability in binary repositories.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

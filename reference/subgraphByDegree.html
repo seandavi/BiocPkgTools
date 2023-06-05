@@ -22,7 +22,7 @@ package named."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/l
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BiocPkgTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.15.13</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.19.2</span>
       </span>
     </div>
 
@@ -84,7 +84,7 @@ adjacent vertices to this degree.</p></dd>
 
 
 <dt>...</dt>
-<dd><p>passed on to <code><a href="https://rdrr.io/pkg/igraph/man/distances.html" class="external-link">distances</a></code></p></dd>
+<dd><p>passed on to <code><a href="https://r.igraph.org/reference/distances.html" class="external-link">distances</a></code></p></dd>
 
 </dl></div>
     <div id="value">
@@ -100,23 +100,22 @@ edges within degree of the named package</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">=</span> <span class="fu"><a href="buildPkgDependencyIgraph.html">buildPkgDependencyIgraph</a></span><span class="op">(</span><span class="fu"><a href="buildPkgDependencyDataFrame.html">buildPkgDependencyDataFrame</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 'getOption("repos")' replaces Bioconductor standard repositories, see</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> '?repositories' for details</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> replacement repositories:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 'help("repositories", package = "BiocManager")' for details.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Replacement repositories:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     CRAN: https://cloud.r-project.org</span>
 <span class="r-in"><span><span class="va">g2</span> <span class="op">=</span> <span class="fu">subgraphByDegree</span><span class="op">(</span><span class="va">g</span>, <span class="st">'GEOquery'</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g2</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 93c4fc4 DN-- 31 75 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 1eb57e8 DN-- 28 71 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (v/c), edgetype (e/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 93c4fc4 (vertex names):</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] bigmelon     -&gt;Biobase  bigmelon     -&gt;GEOquery bigmelon     -&gt;minfi   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4] bigmelon     -&gt;methods  Biobase      -&gt;methods  BioPlex      -&gt;GEOquery</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] BioPlex      -&gt;methods  ChIPXpress   -&gt;Biobase  ChIPXpress   -&gt;GEOquery</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10] DExMA        -&gt;Biobase  DExMA        -&gt;GEOquery DExMA        -&gt;limma   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13] DExMA        -&gt;methods  DrugVsDisease-&gt;GEOquery DrugVsDisease-&gt;limma   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16] GEOexplorer  -&gt;Biobase  GEOexplorer  -&gt;GEOquery GEOexplorer  -&gt;limma   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [19] GEOmetadb    -&gt;GEOquery GEOquery     -&gt;Biobase  GEOquery     -&gt;limma   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [22] GEOquery     -&gt;methods  GEOquery     -&gt;dplyr    GEOquery     -&gt;magrittr</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 1eb57e8 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] bigmelon     -&gt;Biobase    bigmelon     -&gt;GEOquery  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3] bigmelon     -&gt;minfi      bigmelon     -&gt;methods   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5] Biobase      -&gt;methods    ChIPXpress   -&gt;Biobase   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] ChIPXpress   -&gt;GEOquery   DExMA        -&gt;Biobase   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9] DExMA        -&gt;GEOquery   DExMA        -&gt;limma     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11] DExMA        -&gt;methods    DrugVsDisease-&gt;GEOquery  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13] DrugVsDisease-&gt;limma      EpiMix       -&gt;Biobase   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [15] EpiMix       -&gt;GEOquery   EpiMix       -&gt;limma     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + ... omitted several edges</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
@@ -133,7 +132,7 @@ edges within degree of the named package</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
