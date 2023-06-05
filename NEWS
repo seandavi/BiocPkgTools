@@ -1,3 +1,11 @@
+CHANGES IN VERSION 1.20.0
+-------------------------
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o When package stats are not available for a particular year,
+      `biocDownloadStats` will warn about the year there is no data for.
+
 CHANGES IN VERSION 1.18.0
 -------------------------
 
