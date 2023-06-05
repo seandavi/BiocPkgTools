@@ -81,13 +81,23 @@ biocDownloadStats <-
 }
 
 .try.read.table <- function(...) {
-    tryCatch({
-        read.table(...)
-    }, error = function(err) {
-        data.frame(
-            Year = integer(0L), Month = character(0L),
-            Nb_of_distinct_IPs = integer(0L), Nb_of_downloads = integer(0L)
-        )
+    withCallingHandlers({
+        tryCatch({
+            read.table(...)
+        }, error = function(err) {
+            data.frame(
+                Year = integer(0L), Month = character(0L),
+                Nb_of_distinct_IPs = integer(0L), Nb_of_downloads = integer(0L)
+            )
+        })
+    }, warning = function(w) {
+        w <- conditionMessage(w)
+        if (grepl("404 Not Found", w, fixed = TRUE))
+            warning(
+                "No data for year: ", gsub(".*_([0-9]{4})_.*", "\\1", w),
+                call. = FALSE
+            )
+        invokeRestart("muffleWarning")
     })
 }
 
