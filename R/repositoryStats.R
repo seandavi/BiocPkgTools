@@ -124,7 +124,8 @@ repositoryStats <- function(
     function(x)
 {
     msg <- paste(sort(x), collapse = " ")
-    paste(strwrap(msg, indent = 2L, exdent = 2L), collapse = "\n")
+    msg <- paste(strwrap(msg, indent = 2L, exdent = 2L), collapse = "\n")
+    paste0(msg, "\n")
 }
 
 #' @describeIn repositoryStats Print a summary of package
