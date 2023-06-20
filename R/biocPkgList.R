@@ -85,28 +85,9 @@ biocPkgList = function(version = BiocManager::version(), repo='BioCsoft',
     ret <- lapply(as.list(repo),
                   function(r) {
                     if (r != "CRAN") {
-                      viewsFileUrl = paste(repos[r], 'VIEWS', sep = '/')
-                      con = url(viewsFileUrl)
-                      ret <- suppressWarnings(try(read.dcf(con), silent = TRUE))
-                      if(methods::is(ret,'try-error'))
-                        stop('No dcf file found for repo ',r,'(version ',version,') at ',
-                             viewsFileUrl,'. Check that the version is available.')
-                      ret = as.data.frame(ret, stringsAsFactors = FALSE)
-                      close(con)
+                      ret <- get_VIEWS(version = version, type = r)
                     } else {
-                      cranFileUrl <- sprintf("%s/web/packages/packages.rds",
-                                             repos[r])
-                      con <- url(cranFileUrl)
-                      on.exit(close(con))
-                      res <- try(readRDS(gzcon(con)), silent = TRUE)
-                      if (is(res, "try-error"))
-                          stop(
-                              "'packages.rds' not found in CRAN 'repo'",
-                              call. = FALSE
-                          )
-                      ret <- as.data.frame(res, stringsAsFactors=FALSE)
-                      rownames(ret) <- NULL
-
+                      ret <- get_CRAN_pkg_rds()
                       ## to increase the overlap of the information from
                       ## CRAN with Bioconductor, replace CRAN column names
                       ## to Bioconductor column names for 'reverse imports',
@@ -172,3 +153,45 @@ biocPkgList = function(version = BiocManager::version(), repo='BioCsoft',
 }
 
 stripVersionString = function(s) sub('\\s?\\(.*\\)\\s?','',s)
+
+get_VIEWS_url <- function(version, type) {
+    bioc_repos <- BiocManager:::.repositories_bioc(version = version)
+    paste0(bioc_repos[type], "/VIEWS")
+}
+
+read_VIEWS_url <- function(url) {
+    con <- url(url)
+    on.exit(close(con))
+    res <- suppressWarnings({
+        try(read.dcf(con), silent = TRUE)
+    })
+    if (inherits(res, "try-error"))
+        stop("Unable to read VIEWS file URL: ", url)
+    else
+        as.data.frame(res, stringsAsFactors = FALSE)
+}
+
+get_VIEWS <- function(version, type) {
+    views_url <- get_VIEWS_url(version = version, type = type)
+    read_VIEWS_url(views_url)
+}
+
+CRAN_pkg_rds_url <- function() {
+    cran_repo <- BiocManager:::.repositories_base()
+    paste0(cran_repo, "/web/packages/packages.rds")
+}
+
+read_CRAN_url <- function(url) {
+    con <- url(url)
+    on.exit(close(con))
+    res <- try(readRDS(gzcon(con)), silent = TRUE)
+    if (inherits(res, "try-error"))
+        stop("'packages.rds' not found in CRAN 'repo'", call. = FALSE)
+    else
+        as.data.frame(res, stringsAsFactors = FALSE)
+}
+
+get_CRAN_pkg_rds <- function() {
+    cran_url <- CRAN_pkg_rds_url()
+    read_CRAN_url(cran_url)
+}
