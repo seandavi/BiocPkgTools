@@ -6,6 +6,11 @@ SIGNIFICANT USER-VISIBLE CHANGES
     o When package stats are not available for a particular year,
       `biocDownloadStats` will warn about the year there is no data for.
 
+BUG FIXES
+
+    o `pkgDownloadRank` calculates the denominator for ranks using the `VIEWS`
+    file; matches Bioc badges more closely.
+
 CHANGES IN VERSION 1.18.0
 -------------------------
 
