@@ -109,6 +109,6 @@ pkgBiocRevDeps <- function(
 summary.biocrevdeps <- function(object, ...) {
     totals <- lapply(object, length)
     data.frame(
-        totals, Total = sum(unlist(totals)), row.names = attr(obj, "package")
+        totals, Total = sum(unlist(totals)), row.names = attr(object, "package")
     )
 }
