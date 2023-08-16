@@ -144,31 +144,23 @@ get_build_status_db_url <- function(version) {
   )
 }
 
-get_deprecated_status_db_url <- function(version) {
-  sprintf(
-    "https://bioconductor.org/checkResults/%s/bioc-LATEST/meat-index.dcf",
-    version
-  )
-}
-
 get_deprecated_status_df <- function(version) {
-    statusIndexFile <- file(get_deprecated_status_db_url(version))
-    pkg_status <- try(read.dcf(statusIndexFile))
-    close(statusIndexFile)
-    if (!inherits(pkg_status, "try-error")) {
+    viewsfile <- get_VIEWS(version = version, type = "BioCsoft")
+
+    if (nrow(viewsfile))
         depdf <- cbind.data.frame(
-            Package = pkg_status[, "Package"],
-            Deprecated = pkg_status[, "PackageStatus"] == "Deprecated" &
-                !is.na(pkg_status[, "PackageStatus"]),
-            PackageStatus = pkg_status[, "PackageStatus"]
+            Package = viewsfile[, "Package"],
+            Deprecated = viewsfile[, "PackageStatus"] == "Deprecated" &
+                !is.na(viewsfile[, "PackageStatus"]),
+            PackageStatus = viewsfile[, "PackageStatus"]
         )
-    } else {
+    else
         depdf <- data.frame(
             Package = character(0L),
             Deprecated = logical(0L),
             PackageStatus = character(0L)
         )
-    }
+
     depdf
 }
 
