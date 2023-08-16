@@ -3,6 +3,8 @@ CHANGES IN VERSION 1.20.0
 
 SIGNIFICANT USER-VISIBLE CHANGES
 
+    o `biocDownloadStats` now filters out packages that are not part of the
+      `pkgType` option and strictly returns stats for Bioconductor packages
     o When package stats are not available for a particular year,
       `biocDownloadStats` will warn about the year there is no data for.
 
