@@ -20,6 +20,13 @@ repo_short_names <- data.frame(
     c("BioCsoft", "BioCexp", "BioCworkflows", "BioCann", "BioCbooks")
 )
 
+.get_all_biocpkgs <- function() {
+    db <- available.packages(
+        repos = BiocManager:::.repositories_bioc(version = version)
+    )
+    rownames(db)
+}
+
 #' Get Bioconductor download statistics
 #'
 #' @details Note that Bioconductor package download
@@ -54,6 +61,11 @@ biocDownloadStats <-
     pkgType <- switch(pkgType, all = tail(formal.args, -1), pkgType)
     linkPkg <- .matchGetShortName(pkgType, "stat.url")
     fnameType <- .matchGetShortName(pkgType, "stat.file")
+    repo_name <- .matchGetShortName(pkgType, "repo.name")
+    if (identical(pkgType, "all"))
+        pkgs <- .get_all_biocpkgs()
+    else
+        pkgs <- biocPkgList(repo = repo_name)[["Package"]]
 
     base_url <- "http://bioconductor.org/packages/stats/%s/%s_pkg_stats.tab"
 
@@ -75,6 +87,8 @@ biocDownloadStats <-
                 paste(.data$Year, .data$Month, '01'), '%Y %b %d'
             )
         )
+
+    tbl <- tbl[tbl$Package %in% pkgs, ]
 
     class(tbl) <- c('bioc_downloads', class(tbl))
     tbl
