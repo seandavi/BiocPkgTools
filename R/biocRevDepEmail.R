@@ -1,26 +1,57 @@
-.createBiocPkgLink <- function(pkg, version = "devel", md = TRUE) {
+.pkgsLinks <- function(pkgs, version, md = TRUE) {
+    db <- available.packages(repos = BiocManager::repositories())
+    pkgsdb <- db[rownames(db) %in% pkgs, , drop = FALSE]
+    isbioc <- grepl("bioconductor", pkgsdb[, "Repository"], fixed = TRUE)
+    c(
+        .biocPkgsLinks(pkgs[isbioc], version = version, md = md),
+        .CRANpkgsLinks(pkgs[!isbioc], md = md)
+    )
+}
+
+.biocPkgsLinks <- function(pkgs, version, md = TRUE) {
+    if (!length(pkgs))
+        return(NULL)
+
     buildrepURL <- paste0(
-        "https://bioconductor.org/checkResults/", version, "/bioc-LATEST/", pkg
+        "https://bioconductor.org/checkResults/", version, "/bioc-LATEST/", pkgs
     )
     if (md)
-        paste0("[", pkg, "]", "(", buildrepURL, ")")
+        paste0("[", pkgs, "]", "(", buildrepURL, ")")
     else
         buildrepURL
 }
 
-#' Notify downstream maintainers of changes in upstream package
+.CRANpkgsLinks <- function(pkgs, md = TRUE) {
+    if (!length(pkgs))
+        return(NULL)
+
+    cranrepURL <- paste0(
+        "https://cran.r-project.org/package=", pkgs
+    )
+    if (md)
+        paste0("[", pkgs, "]", "(", cranrepURL, ")")
+    else
+        cranrepURL
+}
+
+#' Notify downstream maintainers of changes in upstream packages
 #'
 #' @description
-#'     The `biocRevDepEmail` function collects all the emails of the reverse
-#' dependencies and sends a notification that an upstream package has been
-#' deprecated or removed. It uses a template found in `inst/resources` with
-#' the `templatePath()` function.
+#' The `biocRevDepEmail` function collects all the emails of the reverse
+#' dependencies and sends a notification that upstream package(s) have been
+#' deprecated or removed. It uses a template found in `inst/resources` with the
+#' `templatePath()` function.
 #'
-#' @param pkg character(1) The name of the package for whose reverse
-#'     dependencies are to be checked and notified.
+#' @param packages `character()` A vector of CRAN and/or Bioconductor packages
+#'   for whose reverse dependencies are to be checked and notified.
 #'
 #' @param cc character() A vector of email addresses for sending the message
 #'   as a carbon copy.
+#'
+#' @param pkg `character(1)` DEPRECATED. The name of a single package whose
+#'   reverse dependencies are to be checked and notified.
+#'
+#' @param \ldots Additional inputs to internal functions (not used).
 #'
 #' @inheritParams biocBuildEmail
 #' @inheritParams tools::package_dependencies
@@ -33,16 +64,17 @@
 #'
 #' @export
 biocRevDepEmail <-
-    function(pkg, which = c("strong", "most", "all"),
+    function(packages, which = c("strong", "most", "all"),
         PS = character(1L), version = BiocManager::version(),
         dry.run = TRUE,  cc = NULL, emailTemplate = templatePath("revdepnote"),
         core.name = NULL, core.email = NULL, core.id = NULL,
-        textOnly = FALSE, verbose = FALSE, credFile = "~/.blastula_creds")
+        textOnly = FALSE, verbose = FALSE, credFile = "~/.blastula_creds",
+        ..., pkg)
 {
     stopifnot(
-        is.character(pkg), identical(length(pkg), 1L),
+        is.character(packages),
         is.character(PS), identical(length(PS), 1L),
-        !is.na(pkg), !is.na(PS), !is.na(core.name), !is.na(core.email),
+        !is.na(packages), !is.na(PS), !is.na(core.name), !is.na(core.email),
         !is.na(core.id)
     )
     if (!file.exists(emailTemplate))
@@ -54,15 +86,22 @@ biocRevDepEmail <-
     core.email <- core.list[["core.email"]]
     core.id <- core.list[["core.id"]]
 
+    if (!missing(pkg)) {
+        .Deprecated(msg = "'pkg' argument is deprecated. Use 'packages'.")
+        packages <- pkg
+    }
+
     db <- available.packages(
         repos = BiocManager:::.repositories_bioc(version)["BioCsoft"]
     )
     revdeps <- tools::package_dependencies(
-        pkg, db, reverse = TRUE, which = which
-    )[[pkg]]
+        packages, db, reverse = TRUE, which = which
+    )
+    revdeps <- Filter(length, revdeps)
+    revdeps <- unlist(revdeps, use.names = FALSE)
 
     if (!length(revdeps))
-        stop("No reverse dependencies on ", pkg)
+        stop("No reverse dependencies on ", packages)
 
     listall <- biocPkgList(version = version)
     pkgMeta <- listall[listall[["Package"]] %in% revdeps, "Maintainer"]
@@ -72,18 +111,23 @@ biocRevDepEmail <-
 
     mainEmails <- unname(vapply(mainInfo, .emailCut, character(1L)))
 
-    repolink <- .createBiocPkgLink(pkg, version, FALSE)
+    repolinks <- .pkgsLinks(packages, version = version, md = TRUE)
+    bioclinks <- .biocPkgsLinks(revdeps, version = version)
 
     if (nchar(PS))
         PS <- paste0("**P.S.** ", PS)
 
-    revdeps <- paste(.createBiocPkgLink(revdeps, version), collapse = "\n\n")
+    revdeps <- paste(bioclinks, collapse = "\n\n")
     mail <- paste0(readLines(emailTemplate), collapse = "\n")
     maildate <- format(Sys.time(), "%B %d, %Y")
     firstname <- vapply(strsplit(core.name, "\\s"), `[`, character(1L), 1L)
-    send <- sprintf(mail, pkg, core.name, maildate, pkg, pkg, revdeps,
-        repolink, firstname, PS)
-    title <- sprintf("Bioconductor Package %s Deprecation Notification", pkg)
+    cpackages <- paste(packages, collapse = ", ")
+    crepolinks <- paste(repolinks, collapse = ", ")
+    send <- sprintf(
+        mail, core.name, maildate, cpackages, crepolinks,
+        revdeps, PS, firstname
+    )
+    title <- "Package(s) Deprecation Notification"
 
     if (dry.run)
         message("Message not sent: Set 'dry.run=FALSE'")

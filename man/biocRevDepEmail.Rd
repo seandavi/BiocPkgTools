@@ -2,10 +2,10 @@
 % Please edit documentation in R/biocRevDepEmail.R
 \name{biocRevDepEmail}
 \alias{biocRevDepEmail}
-\title{Notify downstream maintainers of changes in upstream package}
+\title{Notify downstream maintainers of changes in upstream packages}
 \usage{
 biocRevDepEmail(
-  pkg,
+  packages,
   which = c("strong", "most", "all"),
   PS = character(1L),
   version = BiocManager::version(),
@@ -17,12 +17,14 @@ biocRevDepEmail(
   core.id = NULL,
   textOnly = FALSE,
   verbose = FALSE,
-  credFile = "~/.blastula_creds"
+  credFile = "~/.blastula_creds",
+  ...,
+  pkg
 )
 }
 \arguments{
-\item{pkg}{character(1) The name of the package for whose reverse
-dependencies are to be checked and notified.}
+\item{packages}{\code{character()} A vector of CRAN and/or Bioconductor packages
+for whose reverse dependencies are to be checked and notified.}
 
 \item{which}{a character vector listing the types of
     dependencies, a subset of
@@ -69,14 +71,17 @@ system clipboard if the \code{clipr} package is installed (default: FALSE)}
 \code{blastula::create_smtp_creds_file} function containing email
 authentication information (default: "~/.blastula_creds"). See
 \code{?biocBuildEmail} details.}
+
+\item{pkg}{\code{character(1)} DEPRECATED. The name of a single package whose
+reverse dependencies are to be checked and notified.}
+
+\item{\ldots}{Additional inputs to internal functions (not used).}
 }
 \description{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{The `biocRevDepEmail` function collects all the emails of the reverse
-}\if{html}{\out{</div>}}
-
-dependencies and sends a notification that an upstream package has been
-deprecated or removed. It uses a template found in \code{inst/resources} with
-the \code{templatePath()} function.
+The \code{biocRevDepEmail} function collects all the emails of the reverse
+dependencies and sends a notification that upstream package(s) have been
+deprecated or removed. It uses a template found in \code{inst/resources} with the
+\code{templatePath()} function.
 }
 \examples{
 

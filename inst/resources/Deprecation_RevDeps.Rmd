@@ -1,5 +1,5 @@
 ---
-title: "%s Bioconductor Package Deprecation Notification"
+title: "Package(s) Deprecation Notification"
 author:
 - name: "%s"
   affiliation:
@@ -11,31 +11,28 @@ output:
     number_sections: false
 ---
 
-## Deprecated Package: %s
+## Deprecated Package(s): %s
 
 ---
 
 
 Hi Maintainers,
 
-Unfortunately, due to the deprecation of the `%s` package in Bioconductor,
-your package has been affected. Please remove the facilities of the deprecated
-package from your package. This includes the removal of imported functions and
-the package from your `DESCRIPTION` file.
+Unfortunately, due to the deprecation of the %s package(s), your packages
+have been affected. Please remove the facilities of the deprecated
+packages from your packages. This includes the removal of imported functions
+and the package from your `DESCRIPTION` file.
 
-Here is the full list of affected packages:
+Here is the full list of affected Bioconductor packages:
 
 %s
 
-We apologize for this inconvenience and if you have any questions please
+We apologize for the inconvenience and if you have any questions please
 direct them to the mailing list at bioc-devel@bioconductor.org.
 
 %s
 
 Best regards,
-
-%s
-
 
 %s
 
