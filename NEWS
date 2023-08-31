@@ -12,6 +12,8 @@ SIGNIFICANT USER-VISIBLE CHANGES
 
 BUG FIXES
 
+    o Warn when a download stats URL is not available and filter out in
+    `pkgDownloadStats`.
     o `pkgDownloadRank` calculates the denominator for ranks using the `VIEWS`
     file; matches Bioc badges more closely.
 
