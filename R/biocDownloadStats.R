@@ -62,10 +62,7 @@ biocDownloadStats <-
     linkPkg <- .matchGetShortName(pkgType, "stat.url")
     fnameType <- .matchGetShortName(pkgType, "stat.file")
     repo_name <- .matchGetShortName(pkgType, "repo.name")
-    if (identical(pkgType, "all"))
-        pkgs <- .get_all_biocpkgs()
-    else
-        pkgs <- biocPkgList(repo = repo_name)[["Package"]]
+    pkgs <- biocPkgList(repo = repo_name)[["Package"]]
 
     base_url <- "http://bioconductor.org/packages/stats/%s/%s_pkg_stats.tab"
 
