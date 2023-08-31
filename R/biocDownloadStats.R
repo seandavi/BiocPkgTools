@@ -2,7 +2,7 @@ utils::globalVariables(
     c(".data", "biocViewsVocab", "Nb_of_distinct_IPs", "Nb_of_downloads")
 )
 
-.cacheRead <- function(uri) {
+.cache_read <- function(uri) {
     ufile <- .cache_url_file(uri)
     read.table(ufile, header = TRUE)
 }
@@ -73,7 +73,7 @@ biocDownloadStats <-
         linkPkg, fnameType
     )
 
-    tlist <- lapply(stats_urls, .cacheRead)
+    tlist <- lapply(stats_urls, .cache_read)
     tbl <- as_tibble(
         cbind(
             pkgType = rep(pkgType, vapply(tlist, nrow, numeric(1L))),
