@@ -27,6 +27,24 @@ repo_short_names <- data.frame(
     rownames(db)
 }
 
+.filter_http_error <- function(urls) {
+    invalid <- vapply(
+        urls,
+        httr::http_error,
+        logical(1L),
+        httr::config(followlocation = 0L)
+    )
+    if (any(invalid)) {
+        inv_urls <- paste(names(urls)[invalid], collapse = ", ")
+        warning(
+            "Download stats for these resources are currently down:\n  ",
+            inv_urls,
+            call. = FALSE
+        )
+    }
+    urls[!invalid]
+}
+
 #' Get Bioconductor download statistics
 #'
 #' @details Note that Bioconductor package download
@@ -69,11 +87,13 @@ biocDownloadStats <-
     stats_urls <- sprintf(base_url,
         linkPkg, fnameType
     )
+    names(stats_urls) <- pkgType
+    stats_urls <- .filter_http_error(stats_urls)
 
     tlist <- lapply(stats_urls, .cache_read)
     tbl <- as_tibble(
         cbind(
-            pkgType = rep(pkgType, vapply(tlist, nrow, numeric(1L))),
+            pkgType = rep(names(stats_urls), vapply(tlist, nrow, numeric(1L))),
             dplyr::bind_rows(tlist)
         )
     )
