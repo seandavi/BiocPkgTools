@@ -2,7 +2,7 @@
 % Please edit documentation in R/pkgBiocDeps.R
 \name{pkgBiocDeps}
 \alias{pkgBiocDeps}
-\title{Look up a packages Bioconductor dependencies}
+\title{Look up a package's Bioconductor dependencies}
 \usage{
 pkgBiocDeps(
   pkg,

@@ -1,4 +1,4 @@
-#' Look up a packages Bioconductor dependencies
+#' Look up a package's Bioconductor dependencies
 #'
 #' The function uses the `pkgType` argument to restrict the look up to only the
 #' relevant Bioconductor repository. It works for multiple packages of the same
