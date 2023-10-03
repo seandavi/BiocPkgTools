@@ -5,7 +5,7 @@
 \title{Get Bioconductor download statistics}
 \usage{
 biocDownloadStats(
-  pkgType = c("all", "software", "data-experiment", "workflows", "data-annotation")
+  pkgType = c("software", "data-experiment", "workflows", "data-annotation")
 )
 }
 \arguments{

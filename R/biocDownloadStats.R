@@ -68,15 +68,18 @@ repo_short_names <- data.frame(
 biocDownloadStats <-
     function(
         pkgType = c(
-            "all", "software", "data-experiment",
+            "software", "data-experiment",
             "workflows", "data-annotation"
         )
     )
 {
-
-    formal.args <- eval(formals()[["pkgType"]])
-    pkgType <- match.arg(pkgType)
-    pkgType <- switch(pkgType, all = tail(formal.args, -1), pkgType)
+    if (identical(pkgType, "all")) {
+        .Deprecated(
+            msg = "Value 'all' is deprecated for 'pkgType' argument"
+        )
+        pkgType <- eval(formals()[["pkgType"]])
+    }
+    pkgType <- match.arg(pkgType, several.ok = TRUE)
     linkPkg <- .matchGetShortName(pkgType, "stat.url")
     fnameType <- .matchGetShortName(pkgType, "stat.file")
     repo_name <- .matchGetShortName(pkgType, "repo.name")
