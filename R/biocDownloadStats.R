@@ -50,8 +50,8 @@ repo_short_names <- data.frame(
 #' @details Note that Bioconductor package download
 #' stats are not version-specific.
 #'
-#' @param pkgType character(1) Either one of 'software', 'data-experiment',
-#'     'workflows', or 'data-annotation' (defaults to 'all' or 'software')
+#' @param pkgType character(1) All or one of 'software', 'data-experiment',
+#'     'workflows', or 'data-annotation' (defaults to all types)
 #'
 #' @importFrom dplyr mutate
 #' @importFrom utils read.table

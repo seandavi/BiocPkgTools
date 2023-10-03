@@ -5,19 +5,23 @@
 \title{Bioconductor Maintained Packages}
 \usage{
 biocMaintained(
+  main = "maintainer@bioconductor\\\\.org",
   version = BiocManager::version(),
-  main = "maintainer@bioconductor\\\\.org"
+  pkgType = c("software", "data-experiment", "workflows", "data-annotation")
 )
 }
 \arguments{
+\item{main}{character(1) The regex for searching through the Maintainer
+column as obtained from \code{biocPkgList()}.}
+
 \item{version}{character(1) the character version number
 as used to access the online build report. For
 example, "3.14". The default is the "current version"
 as given by \code{BiocManager::version()}. Note
 that this is a character vector of length one and not a number.}
 
-\item{main}{character(1) The regex for searching through the Maintainer
-column as obtained from \code{biocPkgList()}.}
+\item{pkgType}{character(1) All or one of 'software', 'data-experiment',
+'workflows', or 'data-annotation' (defaults to all types)}
 }
 \description{
 List all the packages associated with a maintainer. By default, it will
