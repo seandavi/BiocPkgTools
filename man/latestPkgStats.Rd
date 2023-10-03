@@ -18,8 +18,8 @@ username / organization and the repository name, e.g.,
 \item{Date}{character(1) The date cutoff from which to analyze closed issues
 in the YYYY-MM-DD or YYYY-MM-DDTHH:MM:SSZ format (ISO 8601).}
 
-\item{pkgType}{character(1) Either one of 'software', 'data-experiment',
-'workflows', or 'data-annotation' (defaults to 'all' or 'software')}
+\item{pkgType}{character(1) One of 'software', 'data-experiment',
+'workflows', or 'data-annotation' (defaults to 'software')}
 }
 \description{
 The \code{latestPkgStats} function combines outputs from several functions to

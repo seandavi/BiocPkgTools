@@ -139,10 +139,11 @@ biocDownloadStats <-
 #'
 #' @param pkg character(1) The name of a Bioconductor package
 #'
+#' @param pkgType character(1) One of 'software', 'data-experiment',
+#'     'workflows', or 'data-annotation' (defaults to 'software')
+#'
 #' @param years numeric(), character() A vector of years from which to
 #'     obtain download statistics (defaults to current year)
-#'
-#' @inheritParams biocDownloadStats
 #'
 #' @return A \code{tibble} of download statistics
 #'

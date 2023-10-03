@@ -15,8 +15,8 @@ pkgBiocDeps(
 \arguments{
 \item{pkg}{character(1) The name of a Bioconductor package}
 
-\item{pkgType}{character(1) Either one of 'software', 'data-experiment',
-'workflows', or 'data-annotation' (defaults to 'all' or 'software')}
+\item{pkgType}{character(1) One of 'software', 'data-experiment',
+'workflows', or 'data-annotation' (defaults to 'software')}
 
 \item{which}{a character vector listing the types of
     dependencies, a subset of
