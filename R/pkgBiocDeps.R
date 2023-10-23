@@ -29,11 +29,12 @@ pkgBiocDeps <- function(
 ) {
     pkgType <- match.arg(pkgType)
     repo.name <- .matchGetShortName(pkgType, "repo.name")
+    all_db <- utils::available.packages(repos = BiocManager::repositories())
     repo <- BiocManager:::.repositories_bioc(version)[repo.name]
-    db <- utils::available.packages(repos = repo)
-    res <- tools::package_dependencies(pkg, db = db, which = which)
+    biocdb <- utils::available.packages(repos = repo)
+    res <- tools::package_dependencies(pkg, db = all_db, which = which)
     if (only.bioc)
-        lapply(res, function(pkglist) pkglist[pkglist %in% rownames(db)])
+        lapply(res, function(pkglist) pkglist[pkglist %in% rownames(biocdb)])
     else
         res
 }
@@ -82,19 +83,20 @@ pkgBiocRevDeps <- function(
 
     pkgType <- match.arg(pkgType)
     repo.name <- .matchGetShortName(pkgType, "repo.name")
+    all_db <- utils::available.packages(repos = BiocManager::repositories())
     repo <- BiocManager:::.repositories_bioc(version)[repo.name]
-    db <- utils::available.packages(
-        repos = BiocManager:::.repositories_bioc(version)[repo.name]
-    )
+    biocdb <- utils::available.packages(repos = repo)
 
     res <- lapply(which, function(ofwhich) {
         tools::package_dependencies(
-            pkg, db, reverse = TRUE, which = ofwhich
+            pkg, all_db, reverse = TRUE, which = ofwhich
         )[[pkg]]
     })
 
     if (only.bioc)
-        res <- lapply(res, function(pkglist) pkglist[pkglist %in% rownames(db)])
+        res <- lapply(
+            res, function(pkglist) pkglist[pkglist %in% rownames(biocdb)]
+        )
 
     attributes(res) <-
         list(package = pkg, class = "biocrevdeps", names = names(res))
