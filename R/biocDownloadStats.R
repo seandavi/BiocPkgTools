@@ -45,6 +45,8 @@ repo_short_names <- data.frame(
     urls[!invalid]
 }
 
+.STATS_BASE_URL <- "http://stats.test.bioconductor.org/packages/stats/"
+
 #' Get Bioconductor download statistics
 #'
 #' @details Note that Bioconductor package download
@@ -85,7 +87,7 @@ biocDownloadStats <-
     repo_name <- .matchGetShortName(pkgType, "repo.name")
     pkgs <- biocPkgList(repo = repo_name)[["Package"]]
 
-    base_url <- "http://bioconductor.org/packages/stats/%s/%s_pkg_stats.tab"
+    base_url <- paste0(.STATS_BASE_URL, "%s/%s_pkg_stats.tab")
 
     stats_urls <- sprintf(base_url,
         linkPkg, fnameType
