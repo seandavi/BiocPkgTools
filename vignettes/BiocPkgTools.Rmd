@@ -5,6 +5,8 @@ author:
   affiliation: Walter and Eliza Hall Institute, Melbourne, Australia
 - name: Vince Carey
   affiliation: Channing Lab, Brigham and Womens Hospital, Harvard University, Boston, MA USA
+- name: Marcel Ramos
+  affiliation: Roswell Park Comprehensive Cancer Center, Buffalo, NY USA
 - name: Lori Shepherd
   affiliation: Roswell Park Comprehensive Cancer Center, Buffalo, NY USA
 - name: Martin Morgan
@@ -26,7 +28,11 @@ vignette: |
 
 # Introduction
 
-Bioconductor has a rich ecosystem of metadata around packages, usage, and build status. This package is a simple collection of functions to access that metadata from R in a tidy data format. The goal is to expose metadata for data mining and value-added functionality such as package searching, text mining, and analytics on packages. 
+Bioconductor has a rich ecosystem of metadata around packages, usage, and build
+status. This package is a simple collection of functions to access that metadata
+from R in a tidy data format. The goal is to expose metadata for data mining and
+value-added functionality such as package searching, text mining, and analytics
+on packages. 
 
 Functionality includes access to :
 
@@ -59,19 +65,21 @@ head(biocBuildReport())
 
 ## Personal build report
 
-Because developers may be interested in a quick view of their own
-packages, there is a simple function, `problemPage`, to produce an HTML report of
-the build status of packages matching a given author *regex* supplied to the `authorPattern` argument. 
-The default is to report only "problem" build statuses (ERROR, WARNING).
+Because developers may be interested in a quick view of their own packages,
+there is a simple function, `problemPage`, to produce an HTML report of the
+build status of packages matching a given author *regex* supplied to the
+`authorPattern` argument. The default is to report only "problem" build statuses
+(ERROR, WARNING).
 
 ```{r eval=FALSE}
 problemPage(authorPattern = "V.*Carey")
 ```
 
-In similar fashion, maintainers of packages that have many downstream packages that
-depend on them may wish to check that a change they introduced hasn't suddenly broken
-a large number of these.  You can use the `dependsOn` argument to produce the summary report
-of those packages that "depend on" the given package.
+In similar fashion, maintainers of packages that have many downstream packages
+that depend on them may wish to check that a change they introduced hasn't
+suddenly broken a large number of these.  You can use the `dependsOn` argument
+to produce the summary report of those packages that "depend on" the given
+package.
 
 ```{r eval=FALSE}
 problemPage(dependsOn = "limma")
@@ -93,27 +101,28 @@ are returned as a tidy data.frame for further analysis.
 head(biocDownloadStats())
 ```
 
-The download statistics reported are for ***all available versions*** of a package.
-There are no separate, publicly available statistics broken down by version.
-
-The majority of Bioconductor Software packages are also available through other channels
-such as Anaconda, who also provided download statistics for packages installed from 
-their repositories.  Access to these counts is provided by the `anacondaDownloadStats` function:
+The download statistics reported are for ***all available versions*** of a
+package. There are no separate, publicly available statistics broken down by
+version.
+The majority of Bioconductor Software packages are also available through other
+channels such as Anaconda, who also provided download statistics for packages
+installed from their repositories.  Access to these counts is provided by the
+`anacondaDownloadStats` function:
 
 ```{r}
 head(anacondaDownloadStats())
 ```
 
-Note that Anaconda do not provide counts for distinct IP addresses, but this column is included for
-compatibility with the Bioconductor count tables.
+Note that Anaconda do not provide counts for distinct IP addresses, but this
+column is included for compatibility with the Bioconductor count tables.
 
 # Package details
 
 The R `DESCRIPTION` file contains a plethora of information regarding package
-authors, dependencies, versions, etc. In a repository such as Bioconductor, these
-details are available in bulk for all included packages. The `biocPkgList` returns
-a data.frame with a row for each package. Tons of information are available, as 
-evidenced by the column names of the results.
+authors, dependencies, versions, etc. In a repository such as Bioconductor,
+these details are available in bulk for all included packages. The `biocPkgList`
+returns a data.frame with a row for each package. Tons of information are
+available, as evidenced by the column names of the results.
 
 ```{r}
 bpi = biocPkgList()
@@ -162,9 +171,11 @@ functions to convert package dependencies to R graphs. A modular approach leads
 to the following workflow.
 
 1. Create a `data.frame` of dependencies using `buildPkgDependencyDataFrame`.
-2. Create an `igraph` object from the dependency data frame using `buildPkgDependencyIgraph`
+2. Create an `igraph` object from the dependency data frame using
+  `buildPkgDependencyIgraph`
 3. Use native `igraph` functionality to perform arbitrary network operations. 
-Convenience functions, `inducedSubgraphByPkgs` and `subgraphByDegree` are available.
+  Convenience functions, `inducedSubgraphByPkgs` and `subgraphByDegree` are
+  available.
 4. Visualize with packages such as `r CRANpkg("visNetwork")`.
 
 
@@ -173,7 +184,6 @@ Convenience functions, `inducedSubgraphByPkgs` and `subgraphByDegree` are availa
 A dependency graph for all of Bioconductor is a starting place.
 
 ```{r}
-library(BiocPkgTools)
 dep_df = buildPkgDependencyDataFrame()
 g = buildPkgDependencyIgraph(dep_df)
 g
@@ -260,8 +270,8 @@ visNetwork(nodes = data$nodes, edges = data$edges, height = "500px") %>%
 [Work in progress]
 
 The `r Biocpkg("biocViews")` package is a small ontology of terms describing
-Bioconductor packages. This is a work-in-progress section, but here is a small example of 
-plotting the biocViews graph.
+Bioconductor packages. This is a work-in-progress section, but here is a small
+example of plotting the biocViews graph.
 
 ```{r biocViews}
 library(biocViews)
@@ -291,7 +301,6 @@ packages in Bioconductor and CRAN and dependencies categorised as `Depends`
 or `Imports`, which are the ones installed by default for a given package.
 
 ```{r}
-library(BiocPkgTools)
 
 depdf <- buildPkgDependencyDataFrame(repo=c("BioCsoft", "CRAN"),
                                      dependencies=c("Depends", "Imports"))
@@ -318,7 +327,8 @@ the following information:
     actually used in the given package.
   * `DepOverlap`: Similarity between the dependency graph structure of the
     given package and the one of the dependency in the corresponding row,
-    estimated as the [Jaccard index](https://en.wikipedia.org/wiki/Jaccard_index)
+    estimated as the
+    [Jaccard index](https://en.wikipedia.org/wiki/Jaccard_index)
     between the two sets of vertices of the corresponding graphs. Its values
     goes between 0 and 1, where 0 indicates that no dependency is shared, while
     1 indicates that the given package and the corresponding dependency depend
@@ -333,17 +343,17 @@ fraction of their functionality and therefore, it could be easier remove them.
 To aid in that decision, the column `DepOverlap` reports the overlap of the
 dependency graph of each dependency with the one of the analyzed package. Here
 a value above, e.g., 0.5, could, albeit not necessarily, imply that removing
-that dependency could substantially lighten the dependency burden of the analyzed
-package.
+that dependency could substantially lighten the dependency burden of the
+analyzed package.
 
 An `NA` value in the `ImportedAndUsed` column indicates that the function
 `pkgDepMetrics()` could not identify what functionality calls in the analyzed
 package are made to the dependency. This may happen because `pkgDepMetrics()`
 has failed to identify the corresponding calls, as it happens with imported
 built-in constants such as `DNA_BASES` from `Biostrings`, or that although the
-given package is importing that dependency, none of its functionality is actually
-being used. In such a case, this dependency could be safely removed without
-any further change in the analyzed package.
+given package is importing that dependency, none of its functionality is
+actually being used. In such a case, this dependency could be safely removed
+without any further change in the analyzed package.
 
 We can find out what actually functionality calls are we importing as follows:
 

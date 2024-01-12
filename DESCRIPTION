@@ -6,7 +6,8 @@ Date: 2022-10-16
 Authors@R: c( 
     person("Shian", "Su", role=c("aut", "ctb"), email = "su.s@wehi.edu.au"),
     person("Lori", "Shepherd", role="ctb", email = "Lori.Shepherd@roswellpark.org"),
-    person("Marcel", "Ramos", role="ctb", email = "marcel.ramos@roswellpark.org"),
+    person("Marcel", "Ramos", , "marcel.ramos@roswellpark.org", c("aut", "ctb"),
+      c(ORCID = "0000-0002-3242-0582")),
     person("Felix G.M.", "Ernst", role="ctb", email = "felix.gm.ernst@outlook.com"),
     person("Jennifer","Wokaty", role="ctb", email="jennifer.wokaty@gmail.com"),
     person("Charlotte", "Soneson", role="ctb", email = "charlottesoneson@gmail.com"),
