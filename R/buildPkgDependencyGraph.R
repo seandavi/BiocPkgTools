@@ -171,8 +171,9 @@ buildPkgDependencyIgraph = function(pkgDepDF) {
 #' @examples
 #' library(igraph)
 #' g = buildPkgDependencyIgraph(buildPkgDependencyDataFrame())
-#' g2 = inducedSubgraphByPkgs(g, pkgs=c('GenomicFeatures',
-#' 'TCGAbiolinksGUI', 'BiocGenerics', 'org.Hs.eg.db', 'minfi', 'limma'))
+#' ## subgraph of only the first 10 packages maintained by Bioconductor
+#' biocmaintained <- head(biocMaintained()[["Package"]], 10L)
+#' g2 = inducedSubgraphByPkgs(g, pkgs = biocmaintained)
 #' g2
 #' V(g2)
 #'
@@ -215,7 +216,7 @@ inducedSubgraphByPkgs = function(g, pkgs, pkg_color='red') {
 #'
 #' g = buildPkgDependencyIgraph(buildPkgDependencyDataFrame())
 #' g2 = subgraphByDegree(g, 'GEOquery')
-#' g2
+#' plot(g2)
 #'
 #' @export
 subgraphByDegree = function(g, pkg, degree=1, ...) {

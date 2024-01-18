@@ -34,6 +34,6 @@ package named.
 
 g = buildPkgDependencyIgraph(buildPkgDependencyDataFrame())
 g2 = subgraphByDegree(g, 'GEOquery')
-g2
+plot(g2)
 
 }
