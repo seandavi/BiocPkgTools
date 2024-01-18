@@ -2,6 +2,7 @@
 % Please edit documentation in R/biocPkgTools.R
 \docType{package}
 \name{BiocPkgTools}
+\alias{BiocPkgTools-package}
 \alias{BiocPkgTools}
 \title{BiocPkgTools: Examine and analyze Bioconductor package metadata}
 \description{
@@ -33,3 +34,31 @@ This package contains basic infrastructure for creating, updating,
 and de-referencing DOIs.
 }
 
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/seandavi/BiocPkgTools}
+  \item Report bugs at \url{https://github.com/seandavi/BiocPkgTools/issues/new}
+}
+
+}
+\author{
+\strong{Maintainer}: Sean Davis \email{seandavi@gmail.com}
+
+Authors:
+\itemize{
+  \item Shian Su \email{su.s@wehi.edu.au} [contributor]
+}
+
+Other contributors:
+\itemize{
+  \item Lori Shepherd \email{Lori.Shepherd@roswellpark.org} [contributor]
+  \item Marcel Ramos \email{marcel.ramos@roswellpark.org} [contributor]
+  \item Felix G.M. Ernst \email{felix.gm.ernst@outlook.com} [contributor]
+  \item Jennifer Wokaty \email{jennifer.wokaty@gmail.com} [contributor]
+  \item Charlotte Soneson \email{charlottesoneson@gmail.com} [contributor]
+  \item Martin Morgan \email{martin.morgan@roswellpark.org} [contributor]
+  \item Vince Carey \email{stvjc@channing.harvard.edu} [contributor]
+}
+
+}

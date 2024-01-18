@@ -21,7 +21,6 @@
 #' Bioconductor packages all have Digital Object Identifiers (DOIs).
 #' This package contains basic infrastructure for creating, updating,
 #' and de-referencing DOIs.
-#' 
-#' @docType package
+#'
 #' @name BiocPkgTools
-NULL
+"_PACKAGE"
