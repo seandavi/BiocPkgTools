@@ -9,6 +9,7 @@ pkgBiocDeps(
   pkgType = c("software", "data-experiment", "workflows", "data-annotation"),
   which = "strong",
   only.bioc = TRUE,
+  recursive = FALSE,
   version = BiocManager::version()
 )
 }
@@ -30,6 +31,11 @@ pkgBiocDeps(
 
 \item{only.bioc}{\code{logical(1)} Whether to only return Bioconductor
 dependencies in the list (default \code{TRUE})}
+
+\item{recursive}{a logical indicating whether (reverse) dependencies
+    of (reverse) dependencies (and so on) should be included, or a
+    character vector like \code{which} indicating the type of (reverse)
+    dependencies to be added recursively.}
 
 \item{version}{(Optional) \code{character(1)} or \code{package_version}
 indicating the \emph{Bioconductor} version (e.g., "3.8") for which

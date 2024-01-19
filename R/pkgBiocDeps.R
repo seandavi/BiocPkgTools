@@ -25,6 +25,7 @@ pkgBiocDeps <- function(
     ),
     which = "strong",
     only.bioc = TRUE,
+    recursive = FALSE,
     version = BiocManager::version()
 ) {
     pkgType <- match.arg(pkgType)
@@ -32,7 +33,9 @@ pkgBiocDeps <- function(
     all_db <- utils::available.packages(repos = BiocManager::repositories())
     repo <- BiocManager:::.repositories_bioc(version)[repo.name]
     biocdb <- utils::available.packages(repos = repo)
-    res <- tools::package_dependencies(pkg, db = all_db, which = which)
+    res <- tools::package_dependencies(
+        pkg, db = all_db, which = which, recursive = recursive
+    )
     if (only.bioc)
         lapply(res, function(pkglist) pkglist[pkglist %in% rownames(biocdb)])
     else
