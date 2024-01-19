@@ -34,7 +34,24 @@ biocmaintained <- head(biocMaintained()[["Package"]], 10L)
 g2 = inducedSubgraphByPkgs(g, pkgs = biocmaintained)
 g2
 V(g2)
-
 plot(g2)
 
+## subgraph of a package's strong Bioconductor package dependencies
+maedeps <- unlist(pkgBiocDeps(
+    "MultiAssayExperiment", which = "strong",
+    recursive = TRUE, only.bioc = TRUE
+), use.names = FALSE)
+g3 <- inducedSubgraphByPkgs(g, pkgs = maedeps)
+plot(g3)
+
+## same subgraph with networkD3::forceNetwork
+library(networkD3)
+wt <- cluster_walktrap(g3)
+members <- membership(wt)
+ndg3 <- igraph_to_networkD3(g3, group = members)
+forceNetwork(
+    Links = ndg3$links, Nodes = ndg3$nodes, Source = 'source',
+    Target = 'target', NodeID = 'name', Group = 'group', zoom = TRUE,
+    linkDistance = 200, fontSize = 20, opacity = 0.9, opacityNoHover = 0.9
+)
 }
