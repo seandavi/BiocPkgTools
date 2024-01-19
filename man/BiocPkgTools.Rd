@@ -48,12 +48,12 @@ Useful links:
 Authors:
 \itemize{
   \item Shian Su \email{su.s@wehi.edu.au} [contributor]
+  \item Marcel Ramos \email{marcel.ramos@roswellpark.org} (\href{https://orcid.org/0000-0002-3242-0582}{ORCID}) [contributor]
 }
 
 Other contributors:
 \itemize{
   \item Lori Shepherd \email{Lori.Shepherd@roswellpark.org} [contributor]
-  \item Marcel Ramos \email{marcel.ramos@roswellpark.org} [contributor]
   \item Felix G.M. Ernst \email{felix.gm.ernst@outlook.com} [contributor]
   \item Jennifer Wokaty \email{jennifer.wokaty@gmail.com} [contributor]
   \item Charlotte Soneson \email{charlottesoneson@gmail.com} [contributor]
