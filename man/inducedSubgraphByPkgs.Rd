@@ -28,12 +28,13 @@ and their intervening dependencies.
 }
 \examples{
 library(igraph)
-g = buildPkgDependencyIgraph(buildPkgDependencyDataFrame())
+g <- buildPkgDependencyIgraph(buildPkgDependencyDataFrame())
 ## subgraph of only the first 10 packages maintained by Bioconductor
 biocmaintained <- head(biocMaintained()[["Package"]], 10L)
-g2 = inducedSubgraphByPkgs(g, pkgs = biocmaintained)
+g2 <- inducedSubgraphByPkgs(g, pkgs = biocmaintained)
 g2
 V(g2)
+
 plot(g2)
 
 ## subgraph of a package's strong Bioconductor package dependencies
