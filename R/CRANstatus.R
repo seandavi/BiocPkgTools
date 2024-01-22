@@ -1,3 +1,5 @@
+.CRAN_WEB_URL <- "https://cran.r-project.org/"
+
 #' Check the CRAN build report page and email a notification
 #'
 #' The \code{CRANstatus} function allows users to check the status of a package
