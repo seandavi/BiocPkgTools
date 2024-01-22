@@ -1,12 +1,12 @@
 #' @import biocViews
 #' @importFrom RBGL transitive.closure
-.computeBiocViewsTransitiveClosure = function() {
+.computeBiocViewsTransitiveClosure <- function() {
   data("biocViewsVocab", package = "biocViews", envir = environment())
   return(RBGL::transitive.closure(biocViewsVocab))
 }
 
 #' @importFrom graph edges nodes
-.biocChildToParent = function() {
+.biocChildToParent <- function() {
   biocViewsTC = .computeBiocViewsTransitiveClosure()
   biocViewsTCEdges = edges(biocViewsTC)
   df = data.frame(child = unlist(biocViewsTCEdges, use.names = FALSE),
@@ -63,7 +63,7 @@
 #'   pull(c('importsMe'))
 #'
 #' @export
-biocPkgList = function(version = BiocManager::version(), repo='BioCsoft',
+biocPkgList <- function(version = BiocManager::version(), repo='BioCsoft',
                        addBiocViewParents = TRUE) {
     if(!is.logical(addBiocViewParents) ||
        !(addBiocViewParents %in% c(TRUE,FALSE)))
@@ -154,7 +154,9 @@ biocPkgList = function(version = BiocManager::version(), repo='BioCsoft',
     ret
 }
 
-stripVersionString = function(s) sub('\\s?\\(.*\\)\\s?','',s)
+stripVersionString <- function(s) {
+    sub('\\s?\\(.*\\)\\s?','',s)
+}
 
 get_VIEWS_url <- function(version, type) {
     bioc_repos <- BiocManager:::.repositories_bioc(version = version)

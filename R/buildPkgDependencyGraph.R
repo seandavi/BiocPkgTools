@@ -140,7 +140,7 @@ buildPkgDependencyDataFrame <-
 #' head(sort(degree(g, mode='out'), decreasing=TRUE))
 #'
 #' @export
-buildPkgDependencyIgraph = function(pkgDepDF) {
+buildPkgDependencyIgraph <- function(pkgDepDF) {
     g = igraph::graph_from_data_frame(pkgDepDF)
     class(g) = c('biocDepGraph',class(g))
     g
@@ -198,7 +198,7 @@ buildPkgDependencyIgraph = function(pkgDepDF) {
 #'     linkDistance = 200, fontSize = 20, opacity = 0.9, opacityNoHover = 0.9
 #' )
 #' @export
-inducedSubgraphByPkgs = function(g, pkgs, pkg_color='red') {
+inducedSubgraphByPkgs <- function(g, pkgs, pkg_color='red') {
     pkgs = intersect(pkgs, names(igraph::V(g)))
     g2 = igraph::induced_subgraph(graph=g, vids=pkgs)
     igraph::V(g2)[pkgs]$color='red'
@@ -237,7 +237,7 @@ inducedSubgraphByPkgs = function(g, pkgs, pkg_color='red') {
 #' plot(g2)
 #'
 #' @export
-subgraphByDegree = function(g, pkg, degree=1, ...) {
+subgraphByDegree <- function(g, pkg, degree=1, ...) {
     stopifnot(is.character(pkg) & pkg %in% names(igraph::V(g)) & length(pkg)==1)
     stopifnot(is.igraph(g))
     d = igraph::distances(graph=g, v=pkg, ...)

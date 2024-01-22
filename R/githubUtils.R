@@ -21,7 +21,7 @@
 #' head(urldetails)
 #'
 #' @export
-githubURLParts = function(urls) {
+githubURLParts <- function(urls) {
     tmp = str_match(urls,'.*http[s]?://github.com/(([^/]+)/([^/]+)).*')
     tmp = data.frame(tmp, stringsAsFactors = FALSE)
     colnames(tmp) = c('url', 'user_repo', 'user', 'repo')
@@ -32,7 +32,7 @@ githubURLParts = function(urls) {
 }
 
 
-.gh_pkg_info = function(user_repo) {
+.gh_pkg_info <- function(user_repo) {
     f = tryCatch(gh(sprintf('/repos/%s', user_repo)),
                  error=function(e) {
                      warning(sprintf("package %s not found", user_repo))
@@ -89,7 +89,7 @@ githubURLParts = function(urls) {
 #' lapply(ghd, '[[', "stargazers")
 #'
 #' @export
-githubDetails = function(pkgs, sleep=0) {
+githubDetails <- function(pkgs, sleep=0) {
     vals = lapply(pkgs, function(pkg) {
         Sys.sleep(sleep)
         .gh_pkg_info(pkg)
