@@ -73,7 +73,9 @@ biocPkgList = function(version = BiocManager::version(), repo='BioCsoft',
     # nasty hack here, but BiocManager::repositories throws errors for
     # repositories not matching the current R version--counterproductive
     # for this function.
-    repos <- BiocManager:::.repositories(site_repository=NA, version = version)
+    repos <- BiocManager:::.repositories(
+        site_repository = character(), version = version
+    )
     mask <- !repo %in% names(repos)
     if (any(mask))
       warning(sprintf("repo %s not found in known repositories. Valid values for repo can be shown by running names(BiocManager::repositories()).",
