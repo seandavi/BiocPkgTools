@@ -32,8 +32,7 @@ CRANstatus <-
     core.id <- core.list[["core.id"]]
 
 
-    URL <- paste0("https://cran.r-project.org/web/checks/check_results_",
-        pkg, ".html")
+    URL <- paste0(.CRAN_WEB_URL, "/web/checks/check_results_", pkg, ".html")
 
     htmlfile <- .cache_url_file(URL)
     html <- xml2::read_html(htmlfile)

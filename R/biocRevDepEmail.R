@@ -26,7 +26,7 @@
         return(NULL)
 
     cranrepURL <- paste0(
-        "https://cran.r-project.org/package=", pkgs
+        .CRAN_WEB_URL, "package=", pkgs
     )
     if (md)
         paste0("[", pkgs, "]", "(", cranrepURL, ")")
