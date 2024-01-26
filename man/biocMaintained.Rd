@@ -20,8 +20,14 @@ example, "3.14". The default is the "current version"
 as given by \code{BiocManager::version()}. Note
 that this is a character vector of length one and not a number.}
 
-\item{pkgType}{character(1) All or one of 'software', 'data-experiment',
-'workflows', or 'data-annotation' (defaults to all types)}
+\item{pkgType}{\code{character(1)} The type of packages for which to get build
+status information for. Valid values are:
+\itemize{
+\item \code{software}: Software packages
+\item \code{data-experiment}: Experiment data packages
+\item \code{data-annotation}: Annotation data packages
+\item \code{workflows}: Workflow packages
+}}
 }
 \description{
 List all the packages associated with a maintainer. By default, it will
