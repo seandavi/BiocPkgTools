@@ -17,6 +17,8 @@
 #' elapsed time for each build, check, install stage from each building in
 #' the result (default: FALSE)
 #'
+#' @inheritParams biocBuildStatusDB
+#'
 #' @return A \code{tbl_df} object with columns pkg, version,
 #' author, commit, date, node, stage, and result.
 #'
@@ -37,14 +39,18 @@
 #' head(latest_build)
 #'
 #' @export
-biocBuildReport <- function(version=BiocManager::version(), stage.timings = FALSE) {
+biocBuildReport <- function(
+    version = BiocManager::version(),
+    pkgType = c(
+        "software", "data-experiment", "data-annotation", "workflows"
+    ),
+    stage.timings = FALSE
+) {
+  stopifnot(is.logical(stage.timings), is.character(pkgType))
   if (version %in% c("release", "devel"))
     version <- BiocManager:::.version_bioc(version)
 
-  url <- get_build_status_db_url(version)
-  dat <- readLines(url)
-  z <- do.call(rbind.data.frame, strsplit(dat, "#|: "))
-  names(z) <- c("pkg", "node", "stage", "result")
+  z <- biocBuildStatusDB(version, pkgType)
 
   if (version >= package_version("3.14")) {
     tfile <- paste(dirname(url), "report.tgz", sep = "/")

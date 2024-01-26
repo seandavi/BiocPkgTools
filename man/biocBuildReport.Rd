@@ -4,7 +4,11 @@
 \alias{biocBuildReport}
 \title{Tidy Bioconductor build report results}
 \usage{
-biocBuildReport(version = BiocManager::version(), stage.timings = FALSE)
+biocBuildReport(
+  version = BiocManager::version(),
+  pkgType = c("software", "data-experiment", "data-annotation", "workflows"),
+  stage.timings = FALSE
+)
 }
 \arguments{
 \item{version}{character(1) the character version number
@@ -12,6 +16,15 @@ as used to access the online build report. For
 example, "3.14". The default is the "current version"
 as given by \code{BiocManager::version()}. Note
 that this is a character vector of length one and not a number.}
+
+\item{pkgType}{\code{character(1)} The type of packages for which to get build
+status information for. Valid values are:
+\itemize{
+\item \code{software}: Software packages
+\item \code{data-experiment}: Experiment data packages
+\item \code{data-annotation}: Annotation data packages
+\item \code{workflows}: Workflow packages
+}}
 
 \item{stage.timings}{logical(1) Whether to include the start, end, and
 elapsed time for each build, check, install stage from each building in
