@@ -6,7 +6,9 @@
 #'
 #' @inheritParams tools::package_dependencies
 #' @inheritParams BiocManager::repositories
-#' @inheritParams pkgDownloadStats
+#'
+#' @param pkgType `character()` Any of 'software', 'data-experiment',
+#'   'workflows', and / or 'data-annotation' (defaults to all)
 #'
 #' @param only.bioc `logical(1)` Whether to only return Bioconductor
 #'   dependencies in the list (default `TRUE`)
@@ -28,7 +30,7 @@ pkgBiocDeps <- function(
     recursive = FALSE,
     version = BiocManager::version()
 ) {
-    pkgType <- match.arg(pkgType)
+    pkgType <- match.arg(pkgType, several.ok = TRUE)
     repo.name <- .matchGetShortName(pkgType, "repo.name")
     all_db <- utils::available.packages(repos = BiocManager::repositories())
     repo <- BiocManager:::.repositories_bioc(version)[repo.name]
@@ -84,7 +86,7 @@ pkgBiocRevDeps <- function(
     )
     which <- whiches[lwhich]
 
-    pkgType <- match.arg(pkgType)
+    pkgType <- match.arg(pkgType, several.ok = TRUE)
     repo.name <- .matchGetShortName(pkgType, "repo.name")
     all_db <- utils::available.packages(repos = BiocManager::repositories())
     repo <- BiocManager:::.repositories_bioc(version)[repo.name]
