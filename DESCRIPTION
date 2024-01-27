@@ -31,6 +31,7 @@ Imports:
     methods,
     rlang,
     stringr,
+    stats,
     rvest,
     dplyr,
     xml2,
