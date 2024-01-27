@@ -33,6 +33,10 @@ biocBuildStatusDB <- function(
         version <- BiocManager:::.version_bioc(version)
 
     pkgType <- match.arg(pkgType, several.ok = TRUE)
+
+    if (version < package_version("3.14"))
+        pkgType <- "software"
+
     pkgType <- .matchGetShortName(pkgType, "stat.url")
 
     urls <- get_build_status_db_url(version, pkgType)

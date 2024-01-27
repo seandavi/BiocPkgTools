@@ -15,9 +15,9 @@ test_that("columns are consistent in report output", {
     expect_true(inherits(bioc3.13_build[["git_last_commit_date"]], "POSIXct"))
     expect_true(tibble::is_tibble(bioc3.13_build))
 
-    biocdevel_build <- biocBuildReport("3.14")
-    expect_true(all(columnames %in% colnames(biocdevel_build)))
-    expect_true(inherits(biocdevel_build[["git_last_commit_date"]], "POSIXct"))
-    expect_true(tibble::is_tibble(biocdevel_build))
+    bioc3.14_build <- biocBuildReport("3.14")
+    expect_true(all(columnames %in% colnames(bioc3.14_build)))
+    expect_true(inherits(bioc3.14_build[["git_last_commit_date"]], "POSIXct"))
+    expect_true(tibble::is_tibble(bioc3.14_build))
 })
 
