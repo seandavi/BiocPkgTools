@@ -101,7 +101,7 @@ biocBuildReport <- function(
       xpath = '//*[@id="THE_BIG_GCARD_LIST"]/tbody/tr/td[@rowspan=3]')
     values <- meta %>% html_nodes("table") %>% html_text2()
 
-    if (version >= package_version(3.13)) {
+    if (version >= package_version("3.13")) {
       values <- trimws(gsub("[\n]*git_last_commit[_date]*:", "", values))
       splitter <- "\\s"
     } else {
