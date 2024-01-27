@@ -7,6 +7,18 @@ get_build_status_db_url <- function(version, pkgType) {
   )
 }
 
+.get_build_report_tgz_url <- function(version, pkgType) {
+    url <- .get_build_report_url(version = version, pkgType = pkgType)
+    paste0(url, "/report.tgz")
+}
+
+.get_build_report_url <- function(version, pkgType) {
+    sprintf(
+        'https://bioconductor.org/checkResults/%s/%s-LATEST',
+        version, pkgType
+    )
+}
+
 get_deprecated_status_df <- function(version) {
     viewsfile <- get_VIEWS(version = version, type = "BioCsoft")
 

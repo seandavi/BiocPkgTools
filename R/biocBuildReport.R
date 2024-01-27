@@ -53,18 +53,21 @@ biocBuildReport <- function(
   z <- biocBuildStatusDB(version, pkgType)
 
   if (version >= package_version("3.14")) {
-    tfile <- paste(dirname(url), "report.tgz", sep = "/")
-    treport <- .cache_url_file(tfile)
-    untar(treport, exdir = dcf_folder <- tempfile())
-    y <- .read_info_dcfs(dcf_folder)
+    y <- biocBuildReportDB(version, pkgType)
 
-    if (stage.timings)
-      z <- merge(z, .read_summary_dcfs(dcf_folder),
+    if (stage.timings) {
+      typeTimings <- lapply(attr(y, "dcf_folder"), .read_summary_dcfs)
+      timings <- do.call(rbind, unname(typeTimings))
+      z <- merge(
+          z, timings,
           by.x = c("pkg", "node", "stage"),
           by.y = c("Package", "node", "stage")
       )
+    }
   } else {
-    dat <- xml2::read_html(dirname(url))
+    warning("Only 'software' provided for Bioconductor < 3.14")
+    url <- .get_build_report_url(version, pkgType = "bioc")
+    dat <- xml2::read_html(url)
 
     rowspan <- length(html_text(html_nodes(
         dat,xpath='/html/body/table[@class="node_specs"]/tr[@class!=""]'
@@ -84,7 +87,7 @@ biocBuildReport <- function(
     versions <- vapply(strsplit(versions, "\\s"), `[`, character(1L), 2L)
     maints <- html_nodes(dat,
       xpath = '//*[@id="THE_BIG_GCARD_LIST"]/tbody/tr/td[@rowspan=3]/text()'
-    ) %>% html_text2()
+    ) |> html_text2()
     # Account for packages with malformed maintainer fields in page
     idx <- which(rle(maints)$lengths > 1)
     if (length(idx)) {
