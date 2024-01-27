@@ -32,7 +32,7 @@ get_deprecated_status_df <- function(version) {
         full.names = TRUE, recursive = TRUE)
     fields <- c("Package", "StartedAt", "EndedAt", "EllapsedTime")
     summaries <- lapply(summary_dcfs, .import_dcf_stage_node, fields = fields)
-    do.call(rbind, summaries)
+    as.data.frame(do.call(rbind, summaries))
 }
 
 .import_dcf_stage_node <- function(filepath, fields) {

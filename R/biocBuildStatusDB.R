@@ -45,10 +45,9 @@ biocBuildStatusDB <- function(
         }
     )
     sdat <- do.call(
-        function(...) {
-            rbind.data.frame(..., row.names = NULL)
-        }, unlist(url_list, recursive = FALSE)
+        rbind, unlist(url_list, recursive = FALSE)
     )
+    sdat <- as.data.frame(sdat)
     names(sdat) <- c("pkg", "node", "stage", "result")
     attr(sdat, "BioCversion") <- version
     attr(sdat, "retrieved") <- Sys.time()
