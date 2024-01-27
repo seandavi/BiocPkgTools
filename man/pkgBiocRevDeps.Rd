@@ -16,6 +16,8 @@ pkgBiocRevDeps(
 \method{summary}{biocrevdeps}(object, ...)
 }
 \arguments{
+\item{pkg}{\code{character(1)} The package for which to look up dependencies.}
+
 \item{pkgType}{\code{character()} Any of 'software', 'data-experiment',
 'workflows', and / or 'data-annotation' (defaults to all)}
 

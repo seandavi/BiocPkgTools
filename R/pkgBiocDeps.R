@@ -7,6 +7,8 @@
 #' @inheritParams tools::package_dependencies
 #' @inheritParams BiocManager::repositories
 #'
+#' @param pkg `character(1)` The package for which to look up dependencies.
+#'
 #' @param pkgType `character()` Any of 'software', 'data-experiment',
 #'   'workflows', and / or 'data-annotation' (defaults to all)
 #'
