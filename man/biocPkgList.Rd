@@ -6,7 +6,7 @@
 \usage{
 biocPkgList(
   version = BiocManager::version(),
-  repo = "BioCsoft",
+  repo = c("BioCsoft", "BioCexp", "BioCworkflows", "BioCann", "CRAN"),
   addBiocViewParents = TRUE
 )
 }
@@ -14,13 +14,12 @@ biocPkgList(
 \item{version}{The requested Bioconductor version. Will
 default to use the BiocManager defaults (i.e., \code{version()}).}
 
-\item{repo}{The requested Bioconductor repository. The default will be the
-Bioconductor software repository: BioCsoft. Available repos include:
-"BioCsoft", "BioCann", "BioCexp", "BioCworkflows", and "CRAN". Note
-that not all repos are available for all versions, particularly older
-versions (but who would use those, right?).}
+\item{repo}{\code{character(1)} The requested Bioconductor repository. The default
+is to pull from the "BioCsoft" repository. Possible repositories include
+"BioCsoft", "BioCexp", "BioCworkflows", "BioCann", and "CRAN". Note that
+not all repos are available for all versions, particularly older versions.}
 
-\item{addBiocViewParents}{logical(), whether to add all biocViews
+\item{addBiocViewParents}{\code{logical(1)} whether to add all biocViews
 parents to biocViews annotations.}
 }
 \value{
@@ -43,15 +42,16 @@ to their biocViews. If one wants to stick to only the most
 specific terms, set \code{addBiocViewParents} to \code{FALSE}.
 }
 \examples{
-bpkgl = biocPkgList()
+bpkgl <- biocPkgList(repo = "BioCsoft")
 bpkgl
-unlist(bpkgl[1,'Depends'])
+unlist(bpkgl[1,'Depends'], use.names = FALSE)
 
 # Get a list of all packages that
 # import "GEOquery"
 library(dplyr)
-bpkgl \%>\%
-  filter(Package=='GEOquery') \%>\%
-  pull(c('importsMe'))
+bpkgl |>
+  filter(Package == 'GEOquery') |>
+  pull('importsMe') |>
+  unlist()
 
 }

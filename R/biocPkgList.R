@@ -34,12 +34,12 @@
 #' specific terms, set \code{addBiocViewParents} to \code{FALSE}.
 #'
 #' @param version The requested Bioconductor version. Will
-#'     default to use the BiocManager defaults (i.e., \code{version()}).
-#' @param repo The requested Bioconductor repository. The default will be the
-#'    Bioconductor software repository: BioCsoft. Available repos include:
-#'    "BioCsoft", "BioCann", "BioCexp", "BioCworkflows", and "CRAN". Note
-#'    that not all repos are available for all versions, particularly older
-#'    versions (but who would use those, right?).
+#'     default to use the BiocManager defaults (i.e., `version()`).
+#'
+#' @param repo `character(1)` The requested Bioconductor repository. The default
+#'   is to pull from the "BioCsoft" repository. Possible repositories include
+#'   "BioCsoft", "BioCexp", "BioCworkflows", "BioCann", and "CRAN". Note that
+#'   not all repos are available for all versions, particularly older versions.
 #'
 #' @param addBiocViewParents logical(), whether to add all biocViews
 #'    parents to biocViews annotations.
@@ -51,23 +51,31 @@
 #' @importFrom tibble as_tibble
 #'
 #' @examples
-#' bpkgl = biocPkgList()
+#' bpkgl <- biocPkgList(repo = "BioCsoft")
 #' bpkgl
-#' unlist(bpkgl[1,'Depends'])
+#' unlist(bpkgl[1,'Depends'], use.names = FALSE)
 #'
 #' # Get a list of all packages that
 #' # import "GEOquery"
 #' library(dplyr)
-#' bpkgl %>%
-#'   filter(Package=='GEOquery') %>%
-#'   pull(c('importsMe'))
+#' bpkgl |>
+#'   filter(Package == 'GEOquery') |>
+#'   pull('importsMe') |>
+#'   unlist()
 #'
 #' @export
-biocPkgList <- function(version = BiocManager::version(), repo='BioCsoft',
-                       addBiocViewParents = TRUE) {
+biocPkgList <- function(
+    version = BiocManager::version(),
+    repo = c("BioCsoft", "BioCexp", "BioCworkflows", "BioCann", "CRAN"),
+    addBiocViewParents = TRUE
+) {
     if(!is.logical(addBiocViewParents) ||
        !(addBiocViewParents %in% c(TRUE,FALSE)))
       stop('addBiocViewParents must be a single logical.')
+    if (missing(repo))
+        repo <- "BioCsoft"
+    else
+        repo <- match.arg(repo, several.ok = TRUE)
     if (!is.character(repo))
       stop('repo must be a character vector.')
     # nasty hack here, but BiocManager::repositories throws errors for
