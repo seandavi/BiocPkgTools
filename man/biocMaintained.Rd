@@ -2,12 +2,19 @@
 % Please edit documentation in R/biocMaintained.R
 \name{biocMaintained}
 \alias{biocMaintained}
+\alias{hasBiocMaint}
 \title{Bioconductor Maintained Packages}
 \usage{
 biocMaintained(
   main = "maintainer@bioconductor\\\\.org",
   version = BiocManager::version(),
   pkgType = c("software", "data-experiment", "workflows", "data-annotation")
+)
+
+hasBiocMaint(
+  pkg,
+  version = BiocManager::version(),
+  repo = c("BioCsoft", "BioCexp", "BioCworkflows", "BioCann")
 )
 }
 \arguments{
@@ -28,10 +35,25 @@ status information for. Valid values are:
 \item \code{data-annotation}: Annotation data packages
 \item \code{workflows}: Workflow packages
 }}
+
+\item{pkg}{\code{character(1)} A vector of package names (case sensitive).}
+
+\item{repo}{\code{character()} A vector of Bioconductor repositories to search
+through. By default, it will search through all Bioconductor repositories.}
+}
+\value{
+For \code{biocMaintained}: a \code{tibble} of packages associated with the
+maintainer.
+
+For \code{hasBiocMaint}: a logical vector indicating whether the
+package is maintained by Bioconductor.
 }
 \description{
 List all the packages associated with a maintainer. By default, it will
 return all packages associated with the \code{maintainer@bioconductor.org} email.
+\code{hasBiocMaint} returns a logical vector corresponding to the input character
+vector of packages indicating whether any package is maintained by the
+Bioconductor core team.
 }
 \examples{
 
