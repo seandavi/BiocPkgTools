@@ -14,6 +14,7 @@ biocMaintained(
 hasBiocMaint(
   pkg,
   version = BiocManager::version(),
+  main = "maintainer@bioconductor\\\\.org",
   repo = c("BioCsoft", "BioCexp", "BioCworkflows", "BioCann")
 )
 }
@@ -58,5 +59,8 @@ Bioconductor core team.
 \examples{
 
 biocMaintained()
+
+## maintained by Hervé and not maintainer at bioconductor dot org
+hasBiocMaint("BiocGenerics")
 
 }

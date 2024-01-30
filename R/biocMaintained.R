@@ -54,22 +54,33 @@ biocMaintained <-
 #' @return For `hasBiocMaint`: a logical vector indicating whether the
 #'   package is maintained by Bioconductor.
 #'
+#' @examples
+#' ## maintained by Hervé and not maintainer at bioconductor dot org
+#' hasBiocMaint("BiocGenerics")
+#'
 #' @export
 hasBiocMaint <- function(
     pkg,
     version = BiocManager::version(),
+    main = "maintainer@bioconductor\\.org",
     repo = c("BioCsoft", "BioCexp", "BioCworkflows", "BioCann")
 ) {
     pkgs <- biocPkgList(
         version = version, repo = repo, addBiocViewParents = FALSE
     )
+    match_idx <- match(pkg, pkgs[["Package"]])
+    pkgs <- pkgs[match_idx, c("Package", "Maintainer")]
+    missing_pkgs <- is.na(pkgs[["Package"]])
+    if (any(missing_pkgs))
+        pkgs[missing_pkgs, "Package"] <- pkg[missing_pkgs]
+
     res <- vapply(
-        unlist(pkgs[pkgs$Package %in% pkg, "Maintainer"], recursive = FALSE),
+        pkgs[["Maintainer"]],
         function(maint) {
-            any(grepl("maintainer@bioconductor\\.org", maint))
+            any(grepl(main, maint))
         },
         logical(1L)
     )
-    names(res) <- pkgs$Package
+    names(res) <- pkgs[["Package"]]
     res
 }
