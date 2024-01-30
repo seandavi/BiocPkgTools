@@ -19,11 +19,11 @@
 
 #' Get full Bioconductor software package listing, with details
 #'
-#' The BiocViews-generated \code{VIEWS} file is available
+#' The BiocViews-generated `VIEWS` file is available
 #' for Bioconductor release and devel repositories. It
 #' contains quite a bit more information from the
-#' package \code{DESCRIPTION} files than the \code{PACKAGES}
-#' file. In particular, it contains \code{biocViews} annotations
+#' package `DESCRIPTION` files than the `PACKAGES`
+#' file. In particular, it contains `biocViews` annotations
 #' and URLs for vignettes and developer URLs.
 #'
 #' Since packages are annotated with the most specific
@@ -31,7 +31,7 @@
 #' for all views for each package. For example, in the bioCsoft
 #' repository, all packages will have at least "Software" added
 #' to their biocViews. If one wants to stick to only the most
-#' specific terms, set \code{addBiocViewParents} to \code{FALSE}.
+#' specific terms, set `addBiocViewParents` to `FALSE`.
 #'
 #' @param version The requested Bioconductor version. Will
 #'     default to use the BiocManager defaults (i.e., `version()`).
@@ -41,10 +41,10 @@
 #'   "BioCsoft", "BioCexp", "BioCworkflows", "BioCann", and "CRAN". Note that
 #'   not all repos are available for all versions, particularly older versions.
 #'
-#' @param addBiocViewParents logical(), whether to add all biocViews
+#' @param addBiocViewParents `logical(1)` whether to add all biocViews
 #'    parents to biocViews annotations.
 #'
-#' @return An object of class \code{tbl_df}.
+#' @return An object of class `tbl_df`.
 #'
 #' @importFrom BiocManager repositories version
 #' @importFrom stringr str_split str_replace_all str_remove_all str_squish
