@@ -48,7 +48,7 @@ generateBiocPkgDOI <- function(pkg, authors, pubyear, event = "publish", testing
 
   if (testing) {
     # View results at: https://doi.test.datacite.org
-    bioc_prefix <- "10.22018"
+    bioc_prefix <- "10.82962"
     base_url <- "https://api.test.datacite.org/dois"
   } else {
     bioc_prefix <- "10.18129"
