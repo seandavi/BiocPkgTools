@@ -1,7 +1,21 @@
 CHANGES IN VERSION 1.22.0
 -------------------------
 
+SIGNIFICANT USER-VISIBLE CHANGES
+
     o `biocLastBuildDate` has been removed from the package.
+    o Added a `recursive = FALSE` argument to `pkgBiocDeps`.
+    o Add `biocBuildStatusDB` function to download and parse build status info
+    from BBS artifact.
+    o Include `hasBiocMaint` to check if a package is maintained by a particular
+    email address (default to Bioconductor maintainer email).
+
+BUG FIXES AND MINOR IMPROVEMENTS
+
+    o Use all `pkgType` options in `pkgBiocDeps` and `pkgBiocRevDeps`.
+    o Add example to `buildPkgDependencyGraph` using packages from
+    `biocMaintained`.
+    o Include an example using `networkD3` in `buildPkgDependencyGraph`.
 
 CHANGES IN VERSION 1.20.0
 -------------------------
