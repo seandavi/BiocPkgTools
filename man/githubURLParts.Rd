@@ -7,15 +7,15 @@
 githubURLParts(urls)
 }
 \arguments{
-\item{urls}{A \code{character()} vector of URLs}
+\item{urls}{\code{character()} A vector of URLs}
 }
 \value{
 A \code{data.frame} with four columns:
 \itemize{
-\item{url}{The original GitHub URL}
-\item{user_repo}{The GitHub "username/repo", combined}
-\item{user}{The GitHub username}
-\item{repo}{The GitHub repo name}
+\item url: The original GitHub URL
+\item user_repo: The GitHub "username/repo", combined
+\item user:  The GitHub username
+\item repo: The GitHub repo name
 }
 }
 \description{

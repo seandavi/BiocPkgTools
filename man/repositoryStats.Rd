@@ -27,43 +27,33 @@ given by \code{BiocManager::containerRepository} (default)}
 \value{
 a list of class \code{repositoryStats} with the following fields:
 \itemize{
-
-\item{container: }{character(1) container label, e.g.,
-\code{bioconductor_docker}, or NA if not evaluated on a supported
-container}
-
-\item{bioconductor_version: }{\code{package_version} the
-Bioconductor version provided by the user.}
-
-\item{repository_exists: }{logical(1) TRUE if a binary repository
-exists for the container and Bioconductor_Version version.}
-
-\item{bioconductor_binary_repository: }{character(1) repository
-location, if available, or NA if the repository does not exist.}
-
-\item{n_software_packages: }{integer(1) number of software packages
-in the Bioconductor source repository.}
-
-\item{n_binary_packages: }{integer(1) number of binary packages
+\item container: \code{character(1)} container label, e.g.,
+\code{bioconductor_docker}, or NA if not evaluated on a supported container
+\item bioconductor_version: \code{package_version} the
+Bioconductor version provided by the user.
+\item repository_exists: \code{logical(1)} TRUE if a binary repository
+exists for the container and Bioconductor_Version version.
+\item bioconductor_binary_repository: \code{character(1)} repository
+location, if available, or NA if the repository does not exist.
+\item n_software_packages: \code{integer(1)} number of software packages
+in the Bioconductor source repository.
+\item n_binary_packages: \code{integer(1)} number of binary packages
 available. When a binary repository exists, this number is likely
 to be larger than the number of source software packages, because
 it includes the binary version of the source software packages, as
-well as the (possibly CRAN) dependencies of the binary packages}
-
-\item{n_binary_software_packages: }{integer(1) number of binary
+well as the (possibly CRAN) dependencies of the binary packages
+\item n_binary_software_packages: \code{integer(1)} number of binary
 packages derived from Bioconductor source packages. This number is
-less than or equal to \code{n_software_packages}.}
-
-\item{missing_binaries: }{integer(1) the number of Bioconductor
+less than or equal to \code{n_software_packages}.
+\item missing_binaries: \code{integer(1)} the number of Bioconductor
 source software packages that are not present in the binary
-repository.}
-
-\item{out_of_date_binaries: }{integer(1) the number of Bioconductor
+repository.
+\item out_of_date_binaries: \code{integer(1)} the number of Bioconductor
 source software packages that are newer than their binary
 counterpart. A newer source software package
 might occur when the main Bioconductor build system has
 updated a package after the most recent run of the binary
-build system.}
+build system.
 }
 }
 \description{
@@ -81,4 +71,7 @@ stats <- repositoryStats() # obtain statistics
 stats                       # display a summary
 stats$container             # access an element for further computation
 
+}
+\author{
+M. Morgan
 }

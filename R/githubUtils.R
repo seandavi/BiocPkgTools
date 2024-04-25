@@ -1,14 +1,12 @@
 #' Extract GitHub user and repo name from GitHub URL
 #'
-#' @param urls A \code{character()} vector of URLs
+#' @param urls `character()` A vector of URLs
 #'
-#' @return A \code{data.frame} with four columns:
-#'   \itemize{
-#'     \item{url}{The original GitHub URL}
-#'     \item{user_repo}{The GitHub "username/repo", combined}
-#'     \item{user}{The GitHub username}
-#'     \item{repo}{The GitHub repo name}
-#'   }
+#' @return A `data.frame` with four columns:
+#'   * url: The original GitHub URL
+#'   * user_repo: The GitHub "username/repo", combined
+#'   * user:  The GitHub username
+#'   * repo: The GitHub repo name
 #'
 #' @importFrom stringr str_match
 #'
