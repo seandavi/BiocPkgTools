@@ -190,7 +190,7 @@ get_VIEWS <- function(version, type) {
 
 CRAN_pkg_rds_url <- function() {
     cran_repo <- BiocManager:::.repositories_base()
-    if (grepl("packagemanager", cran_repo))
+    if (any(grepl("packagemanager", cran_repo["CRAN"])))
         cran_repo <- .CRAN_WEB_URL
     paste0(cran_repo, "/web/packages/packages.rds")
 }
