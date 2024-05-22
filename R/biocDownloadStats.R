@@ -7,18 +7,28 @@ utils::globalVariables(
     read.table(ufile, header = TRUE)
 }
 
-repo_short_names <- data.frame(
-  repository =
-    c("software", "data-experiment", "workflows", "data-annotation", "books"),
-  stat.url =
-    c("bioc", "data-experiment", "workflows", "data-annotation", NA_character_),
-  stat.file =
-    c("bioc", "experiment", "workflows", "annotation", NA_character_),
-  json.file =
-    c("bioc", "data/experiment", "workflows", "data/annotation", NA_character_),
-  repo.name =
-    c("BioCsoft", "BioCexp", "BioCworkflows", "BioCann", "BioCbooks")
-)
+.repos_short_names <- function() {
+    data.frame(
+        code.names = c(
+            "software", "data-experiment", "workflows", "data-annotation",
+            "books"
+        ),
+        stat.url = c(
+            "bioc", "data-experiment", "workflows", "data-annotation",
+            NA_character_
+        ),
+        stat.file = c(
+            "bioc", "experiment", "workflows", "annotation", NA_character_
+        ),
+        pkg.url = c(
+            "bioc", "data/experiment", "workflows", "data/annotation",
+            NA_character_
+        ),
+        biocmanager.names = c(
+            "BioCsoft", "BioCexp", "BioCworkflows", "BioCann", "BioCbooks"
+        )
+    )
+}
 
 .get_all_biocpkgs <- function() {
     db <- available.packages(
@@ -84,7 +94,7 @@ biocDownloadStats <-
     pkgType <- match.arg(pkgType, several.ok = TRUE)
     linkPkg <- .matchGetShortName(pkgType, "stat.url")
     fnameType <- .matchGetShortName(pkgType, "stat.file")
-    repo_name <- .matchGetShortName(pkgType, "repo.name")
+    repo_name <- .matchGetShortName(pkgType, "biocmanager.names")
     pkgs <- biocPkgList(repo = repo_name)[["Package"]]
 
     base_url <- paste0(.STATS_BASE_URL, "%s/%s_pkg_stats.tab")
@@ -209,7 +219,8 @@ firstInBioc <- function(download_stats) {
 }
 
 .matchGetShortName <- function(pkgType, colName) {
-    repo_short_names[match(pkgType, repo_short_names[["repository"]]), colName]
+    rsn <- .repos_short_names()
+    rsn[match(pkgType, rsn[["code.names"]]), colName]
 }
 
 #' What is a package's download rank?
@@ -240,7 +251,7 @@ pkgDownloadRank <-
     )
 {
     pkgType <- match.arg(pkgType)
-    jsonPath <- .matchGetShortName(pkgType, "json.file")
+    jsonPath <- .matchGetShortName(pkgType, "pkg.url")
     rankURL <-
         "https://www.bioconductor.org/packages/json/%s/%s/packages.json"
     ufile <- .cache_url_file(sprintf(rankURL, version, jsonPath))
@@ -248,7 +259,7 @@ pkgDownloadRank <-
     pkgs <- jsonlite::fromJSON(ufile)
     rank <- pkgs[[pkg]]$Rank
 
-    repoType <- .matchGetShortName(pkgType, "repo.name")
+    repoType <- .matchGetShortName(pkgType, "biocmanager.names")
     viewsdb <- get_VIEWS(version = version, repoType)
 
     pct <- round(rank*100 / nrow(viewsdb), 2)

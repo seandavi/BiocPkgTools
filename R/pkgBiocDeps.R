@@ -33,7 +33,7 @@ pkgBiocDeps <- function(
     version = BiocManager::version()
 ) {
     pkgType <- match.arg(pkgType, several.ok = TRUE)
-    repo.name <- .matchGetShortName(pkgType, "repo.name")
+    repo.name <- .matchGetShortName(pkgType, "biocmanager.names")
     all_db <- utils::available.packages(repos = BiocManager::repositories())
     repo <- BiocManager:::.repositories_bioc(version)[repo.name]
     biocdb <- utils::available.packages(repos = repo)
@@ -89,7 +89,7 @@ pkgBiocRevDeps <- function(
     which <- whiches[lwhich]
 
     pkgType <- match.arg(pkgType, several.ok = TRUE)
-    repo.name <- .matchGetShortName(pkgType, "repo.name")
+    repo.name <- .matchGetShortName(pkgType, "biocmanager.names")
     all_db <- utils::available.packages(repos = BiocManager::repositories())
     repo <- BiocManager:::.repositories_bioc(version)[repo.name]
     biocdb <- utils::available.packages(repos = repo)
