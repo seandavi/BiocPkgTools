@@ -9,8 +9,9 @@ biocDownloadStats(
 )
 }
 \arguments{
-\item{pkgType}{character(1) All or one of 'software', 'data-experiment',
-'workflows', or 'data-annotation' (defaults to all types)}
+\item{pkgType}{character() All, some, or one of 'software',
+'data-experiment', 'workflows', or 'data-annotation' (defaults to all
+types)}
 }
 \value{
 A \code{tibble} of download statistics for all Bioconductor packages

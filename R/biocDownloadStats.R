@@ -62,8 +62,9 @@ utils::globalVariables(
 #' @details Note that Bioconductor package download
 #' stats are not version-specific.
 #'
-#' @param pkgType character(1) All or one of 'software', 'data-experiment',
-#'     'workflows', or 'data-annotation' (defaults to all types)
+#' @param pkgType character() All, some, or one of 'software',
+#'   'data-experiment', 'workflows', or 'data-annotation' (defaults to all
+#'   types)
 #'
 #' @importFrom dplyr mutate
 #' @importFrom utils read.table
@@ -85,12 +86,10 @@ biocDownloadStats <-
         )
     )
 {
-    if (identical(pkgType, "all")) {
-        .Deprecated(
-            msg = "Value 'all' is deprecated for 'pkgType' argument"
+    if (identical(pkgType, "all"))
+        .Defunct(
+            msg = "Value 'all' is defunct as 'pkgType' option"
         )
-        pkgType <- eval(formals()[["pkgType"]])
-    }
     pkgType <- match.arg(pkgType, several.ok = TRUE)
     linkPkg <- .matchGetShortName(pkgType, "stat.url")
     fnameType <- .matchGetShortName(pkgType, "stat.file")
