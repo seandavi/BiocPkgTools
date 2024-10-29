@@ -86,10 +86,8 @@ biocRevDepEmail <-
     core.email <- core.list[["core.email"]]
     core.id <- core.list[["core.id"]]
 
-    if (!missing(pkg)) {
-        .Deprecated(msg = "'pkg' argument is deprecated. Use 'packages'.")
-        packages <- pkg
-    }
+    if (!missing(pkg))
+        .Defunct(msg = "'pkg' argument is defunct. Use 'packages'.")
 
     db <- available.packages(
         repos = BiocManager:::.repositories_bioc(version)["BioCsoft"]
