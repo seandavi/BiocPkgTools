@@ -40,6 +40,9 @@ biocBuildStatusDB <- function(
     pkgType <- .matchGetShortName(pkgType, "stat.url")
 
     urls <- get_build_status_db_url(version, pkgType)
+    names(urls) <- pkgType
+    urls <- Filter(.url_exists, urls)
+
     url_list <- lapply(
         urls,
         function(url) {

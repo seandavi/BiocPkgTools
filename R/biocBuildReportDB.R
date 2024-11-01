@@ -22,9 +22,11 @@ biocBuildReportDB <- function(
     pkgType <- .matchGetShortName(pkgType, "stat.url")
 
     urls <- .get_build_report_tgz_url(version, pkgType)
-    tempfolders <- vapply(
-        setNames(seq_along(urls), pkgType), function(i) tempfile(), character(1L)
-    )
+    names(urls) <- pkgType
+    urls <- Filter(.url_exists, urls)
+
+    tempfolders <- replicate(length(urls), tempfile())
+
     dcf_tables <- Map(
         function(url, tempfolder) {
             treport <- .cache_url_file(url)
@@ -33,10 +35,8 @@ biocBuildReportDB <- function(
         }, url = urls, tempfolder = tempfolders
     )
     report_table <- do.call(rbind.data.frame, unname(dcf_tables))
-    report_table[["pkgType"]] <- rep(pkgType, vapply(dcf_tables, nrow, 1L))
+    report_table[["pkgType"]] <- rep(names(urls), vapply(dcf_tables, nrow, 1L))
     attr(report_table, "dcf_folder") <- tempfolders
     report_table
 }
 
-.append_summary_dcf <- function(data) {
-}

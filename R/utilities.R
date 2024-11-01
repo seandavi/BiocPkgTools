@@ -73,14 +73,22 @@ get_deprecated_status_df <- function(version) {
     bfc <- BiocFileCache()
     bquery <- bfcquery(bfc, url, "rname", exact = TRUE)
     needsUpdate <- bfcneedsupdate(bfc, bquery[["rid"]])
-    if (identical(nrow(bquery), 1L) && (is.na(needsUpdate) || needsUpdate))
-        tryCatch({
-            bfcdownload(
-                x = bfc, rid = bquery[["rid"]], rtype = "web", ask = FALSE
-            )
-        }, error = warning)
+    if (
+        identical(nrow(bquery), 1L) && (is.na(needsUpdate) || needsUpdate)
+    )
+        bfcdownload(
+            x = bfc, rid = bquery[["rid"]], rtype = "web", ask = FALSE
+        )
 
     bfcrpath(
         bfc, rnames = url, exact = TRUE, download = TRUE, rtype = "web"
     )
+}
+
+.url_exists <- function(url) {
+    response <- httr::HEAD(url)
+    status <- httr::status_code(response) < 300
+    if (!status)
+        warning(url, " cannot be reached", call. = FALSE)
+    status
 }
