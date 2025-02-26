@@ -1,3 +1,61 @@
+utils::globalVariables(c("Release", "approx_years_in", "category",
+                         "first_version_available",
+                         "first_version_release_date", "last_version_available",
+                         "last_version_release_date", "major", "minor",
+                         "package", "packages", "release", "years_before_rm"))
+#'  
+#' Calculate the years in Bioconductor
+#'
+#' @description This function determines the number of years a package has been in
+#'     Bioconductor. Available information includes first Bioconductor version a
+#'     package appeared and the current length of time in Bioconductor. If a
+#'     package has been removed from Bioconductor, information on the last
+#'     Bioconductor version and approximate time in Bioconductor before removal
+#'     is available.
+#' 
+#' @param pkglist List of packages to retrieve information. If default NULL,
+#'     returns a tibble of all Bioconductor packages.
+#' 
+#' @author Lori Shepherd Kern, Robert Shear
+#' 
+#' @return 'tibble' with the following columns:
+#'   * package: name of Bioconductor package
+#'   * category: bioc, data/experiment, data/annotation, workflow
+#'   * first_version_available: Bioconductor version (e.g. 1.9, 3.21) the
+#'     package first became available
+#'   * first_version_release_date: Equivalent calendar date of given
+#'     Bioconductor release
+#'   * approx_years_in: Numeric indicator of years in Bioconductor. If empty,
+#'     indicates package was removed. See final three columns for more
+#'     information.
+#'   * last_version_available: If package was removed from Bioconductor, the
+#'     last Bioconductor version (e.g. 1.9, 3.21) the package was able to be installed
+#'   * last_version_release_date: Equivalent calendar date of given Bioconductor
+#'     release
+#'   * years_before_rm: If removed, how many years it was in Bioconductor
+#' 
+#' @importFrom yaml read_yaml
+#' @importFrom dplyr filter mutate select group_by summarize arrange
+#' @importFrom purrr list_rbind map2
+#' @importFrom glue glue
+#' @importFrom curl curl has_internet
+#' @importFrom tidyr tibble unnest_longer
+#' @importFrom lubridate mdy
+#' @importFrom BiocFileCache bfcquery bfcnew bfcrpath
+#'
+#' @examples
+#' \dontrun{
+#'    ## full table all Bioconductor packages
+#'    tbl <- getPkgYearsInBioc()
+#'
+#'    ## example of package list. Packages active in Bioconductor
+#'    tbl <- getPkgYearsInBioc(c("BiocFileCache", "BiocPkgTools"))
+#'
+#'    ## example of a package that has been removed from Bioconductor
+#'    tbl <- getPkgYearsInBioc("ensemblVEP")
+#' }
+#' 
+#' @export
 
 getPkgYearsInBioc <- function(pkglist=NULL){
 
@@ -29,6 +87,9 @@ getPkgYearsInBioc <- function(pkglist=NULL){
     
 }
 
+## Internal: reformat information to be per package instead of per release. This
+## will also calculate out when package first appears and when if applicable
+## last appears (if it was removed).
 .formatBiocYearsDF <- function(NeededYearsData){
 
     config <- NeededYearsData[["config"]]
@@ -66,6 +127,9 @@ getPkgYearsInBioc <- function(pkglist=NULL){
     return(YearsInBiocDF) 
 }
 
+## Internal: Check if the current data frame is up-to-date or needs to be
+## updated with a new Bioconductor release. Avoids regenerating entire data
+## frame and only adds and saves update
 .updateYearsInBioc <- function(NeededYearsData, cachepathinfo){
 
     config <- NeededYearsData[["config"]]
@@ -93,6 +157,9 @@ getPkgYearsInBioc <- function(pkglist=NULL){
     return(NeededYearsData)
 }
 
+## Internal: Determine all Bioconductor releases and loop over
+## .genBiocManfiestDF to determine list of package per release
+## Save data frame to given [cache] path to avoid lengthy regeneration.
 .generateBiocYearsInData <- function(cachefilepath){
 
     message("Internet Access Required For Data Generation \n",
@@ -115,7 +182,8 @@ getPkgYearsInBioc <- function(pkglist=NULL){
     return(NeededYearsData)
 }
 
-
+## Internal: Loop over versions to determine package list of packages in a given
+## release
 .genBiocManifestDF <- function(major, minor) {
     manifest_template <- "https://www.bioconductor.org/packages/{version}/{category}/src/contrib/PACKAGES"
     categories = c("bioc", "data/annotation", "data/experiment")
