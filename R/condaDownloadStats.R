@@ -1,5 +1,3 @@
-utils::globalVariables(c("Package", "Year", "Date"))
-
 #' Get download statistics for Bioconductor packages distributed via
 #' Anaconda.
 #'
@@ -27,21 +25,29 @@ utils::globalVariables(c("Package", "Year", "Date"))
 #'
 #' @export
 anacondaDownloadStats <- function() {
-  temp_file = tempfile()
-  url = 'https://github.com/grimbough/anaconda-download-stats/raw/master/rdata/bioc_counts.rds'
-  download.file(url, destfile = temp_file, quiet = TRUE, mode = "wb")
+    temp_file <- tempfile()
+    url <- paste0(
+        "https://github.com/grimbough/anaconda-download-stats",
+        "/raw/master/rdata/bioc_counts.rds"
+    )
+    download.file(url, destfile = temp_file, quiet = TRUE, mode = "wb")
 
-  tmp = readRDS(temp_file)
-  tmp$repo = 'Anaconda'
-  tmp$Nb_of_distinct_IPs = NA_integer_
+    tmp <- readRDS(temp_file)
+    tmp$repo <- "Anaconda"
+    tmp$Nb_of_distinct_IPs <- NA_integer_
 
-  tmp = as_tibble(tmp) |>
-    dplyr::mutate(Date = as.Date(paste(.data$Year, .data$Month, '01'),
-                          '%Y %b %d')) |>
-    select('Package', 'Year', 'Month', 'Nb_of_distinct_IPs', 'Nb_of_downloads', 'repo', 'Date') |>
-    ## put this into the same order as the BioC table
-    arrange(tmp, Package, desc(Year), Date)
+    tmp <- as_tibble(tmp) |>
+        dplyr::mutate(Date = as.Date(
+            paste(.data$Year, .data$Month, "01"),
+            "%Y %b %d"
+        )) |>
+        select(
+            "Package", "Year", "Month", "Nb_of_distinct_IPs",
+            "Nb_of_downloads", "repo", "Date"
+        ) |>
+        ## put this into the same order as the BioC table
+        arrange(tmp, .data$Package, desc(.data$Year), .data$Date)
 
-  class(tmp) = c('bioc_downloads', class(tmp))
-  tmp
+    class(tmp) <- c("bioc_downloads", class(tmp))
+    tmp
 }
