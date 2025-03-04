@@ -10,7 +10,8 @@ pkgBiocRevDeps(
   pkgType = c("software", "data-experiment", "workflows", "data-annotation"),
   which = "all",
   only.bioc = TRUE,
-  version = BiocManager::version()
+  version = BiocManager::version(),
+  recursive = FALSE
 )
 
 \method{summary}{biocrevdeps}(object, ...)
@@ -37,6 +38,11 @@ dependencies in the list (default \code{TRUE})}
 \item{version}{(Optional) \code{character(1)} or \code{package_version}
 indicating the \emph{Bioconductor} version (e.g., "3.8") for which
 repositories are required.}
+
+\item{recursive}{a logical indicating whether (reverse) dependencies
+    of (reverse) dependencies (and so on) should be included, or a
+    character vector like \code{which} indicating the type of (reverse)
+    dependencies to be added recursively.}
 
 \item{object}{an object for which a summary is desired.}
 
