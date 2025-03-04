@@ -1,7 +1,7 @@
 Package: BiocPkgTools
 Type: Package
 Title: Collection of simple tools for learning about Bioconductor Packages
-Version: 1.25.2
+Version: 1.25.3
 Date: 2024-11-01
 Authors@R: c( 
     person("Shian", "Su", role=c("aut", "ctb"), email = "su.s@wehi.edu.au"),
@@ -46,10 +46,16 @@ Imports:
     gh,
     RBGL,
     graph,
-    rorcid
+    rorcid,
+    curl,
+    glue,
+    lubridate,
+    purrr,
+    tidyr,
+    yaml
 VignetteBuilder: knitr
 Suggests: BiocStyle, knitr, rmarkdown,
-    testthat, tm, lubridate, networkD3,
+    testthat, tm, networkD3,
     visNetwork, clipr, blastula, kableExtra, DiagrammeR, SummarizedExperiment
 License: MIT + file LICENSE
 BugReports: https://github.com/seandavi/BiocPkgTools/issues/new
