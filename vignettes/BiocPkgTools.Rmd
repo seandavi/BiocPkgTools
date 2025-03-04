@@ -6,7 +6,7 @@ author:
 - name: Vince Carey
   affiliation: Channing Lab, Brigham and Womens Hospital, Harvard University, Boston, MA USA
 - name: Marcel Ramos
-  affiliation: Roswell Park Comprehensive Cancer Center, Buffalo, NY USA
+  affiliation: CUNY School of Public Health, New York, NY USA
 - name: Lori Shepherd
   affiliation: Roswell Park Comprehensive Cancer Center, Buffalo, NY USA
 - name: Martin Morgan
