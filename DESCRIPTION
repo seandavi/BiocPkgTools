@@ -21,7 +21,7 @@ Description: Bioconductor has a rich ecosystem of metadata around
   is to expose metadata for data mining and value-added functionality
   such as package searching, text mining, and analytics on
   packages.
-Depends: htmlwidgets
+Depends: htmlwidgets, R (>= 4.1.0)
 Imports:
     BiocFileCache,
     BiocManager,
