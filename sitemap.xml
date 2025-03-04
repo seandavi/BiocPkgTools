@@ -1,153 +1,56 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/articles/BiocPkgTools.html</loc>
-  </url>
-  <url>
-    <loc>/articles/BiocPkgTools_files/bioc_explore-1.0.0/index.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/BiocPkgTools-cache.html</loc>
-  </url>
-  <url>
-    <loc>/reference/BiocPkgTools-defunct.html</loc>
-  </url>
-  <url>
-    <loc>/reference/BiocPkgTools.html</loc>
-  </url>
-  <url>
-    <loc>/reference/CRANstatus.html</loc>
-  </url>
-  <url>
-    <loc>/reference/activitySince.html</loc>
-  </url>
-  <url>
-    <loc>/reference/anacondaDownloadStats.html</loc>
-  </url>
-  <url>
-    <loc>/reference/biocBuildEmail.html</loc>
-  </url>
-  <url>
-    <loc>/reference/biocBuildReport.html</loc>
-  </url>
-  <url>
-    <loc>/reference/biocDownloadStats.html</loc>
-  </url>
-  <url>
-    <loc>/reference/biocExplore.html</loc>
-  </url>
-  <url>
-    <loc>/reference/biocMaintained.html</loc>
-  </url>
-  <url>
-    <loc>/reference/biocPkgList.html</loc>
-  </url>
-  <url>
-    <loc>/reference/biocPkgRanges.html</loc>
-  </url>
-  <url>
-    <loc>/reference/biocRevDepEmail.html</loc>
-  </url>
-  <url>
-    <loc>/reference/buildPkgDependencyDataFrame.html</loc>
-  </url>
-  <url>
-    <loc>/reference/buildPkgDependencyIgraph.html</loc>
-  </url>
-  <url>
-    <loc>/reference/class-dependencies.html</loc>
-  </url>
-  <url>
-    <loc>/reference/dataciteXMLGenerate.html</loc>
-  </url>
-  <url>
-    <loc>/reference/dot-getDepGain.html</loc>
-  </url>
-  <url>
-    <loc>/reference/dot-get_cre_orcid.html</loc>
-  </url>
-  <url>
-    <loc>/reference/dot-get_orcid_rec.html</loc>
-  </url>
-  <url>
-    <loc>/reference/firstInBioc.html</loc>
-  </url>
-  <url>
-    <loc>/reference/generateBiocPkgDOI.html</loc>
-  </url>
-  <url>
-    <loc>/reference/getBiocVignette.html</loc>
-  </url>
-  <url>
-    <loc>/reference/getPackageInfo.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_bioc_data.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_cre_orcids.html</loc>
-  </url>
-  <url>
-    <loc>/reference/githubDetails.html</loc>
-  </url>
-  <url>
-    <loc>/reference/githubURLParts.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/inducedSubgraphByPkgs.html</loc>
-  </url>
-  <url>
-    <loc>/reference/latestPkgStats.html</loc>
-  </url>
-  <url>
-    <loc>/reference/orcid_table.html</loc>
-  </url>
-  <url>
-    <loc>/reference/pkgBiocDeps.html</loc>
-  </url>
-  <url>
-    <loc>/reference/pkgCombDependencyGain.html</loc>
-  </url>
-  <url>
-    <loc>/reference/pkgDepImports.html</loc>
-  </url>
-  <url>
-    <loc>/reference/pkgDepMetrics.html</loc>
-  </url>
-  <url>
-    <loc>/reference/pkgDownloadRank.html</loc>
-  </url>
-  <url>
-    <loc>/reference/pkgDownloadStats.html</loc>
-  </url>
-  <url>
-    <loc>/reference/problemPage.html</loc>
-  </url>
-  <url>
-    <loc>/reference/repositoryStats.html</loc>
-  </url>
-  <url>
-    <loc>/reference/subgraphByDegree.html</loc>
-  </url>
-  <url>
-    <loc>/reference/templatePath.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/LICENSE-text.html</loc></url>
+<url><loc>/articles/BiocPkgTools.html</loc></url>
+<url><loc>/articles/BiocPkgTools_files/bioc_explore-1.0.0/index.html</loc></url>
+<url><loc>/articles/index.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/reference/BiocPkgTools-cache.html</loc></url>
+<url><loc>/reference/BiocPkgTools.html</loc></url>
+<url><loc>/reference/CRANstatus.html</loc></url>
+<url><loc>/reference/activitySince.html</loc></url>
+<url><loc>/reference/anacondaDownloadStats.html</loc></url>
+<url><loc>/reference/biocBuildEmail.html</loc></url>
+<url><loc>/reference/biocBuildReport.html</loc></url>
+<url><loc>/reference/biocBuildReportDB.html</loc></url>
+<url><loc>/reference/biocBuildStatusDB.html</loc></url>
+<url><loc>/reference/biocDownloadStats.html</loc></url>
+<url><loc>/reference/biocExplore.html</loc></url>
+<url><loc>/reference/biocMaintained.html</loc></url>
+<url><loc>/reference/biocPkgList.html</loc></url>
+<url><loc>/reference/biocPkgRanges.html</loc></url>
+<url><loc>/reference/biocRevDepEmail.html</loc></url>
+<url><loc>/reference/buildPkgDependencyDataFrame.html</loc></url>
+<url><loc>/reference/buildPkgDependencyIgraph.html</loc></url>
+<url><loc>/reference/class-dependencies.html</loc></url>
+<url><loc>/reference/dataciteXMLGenerate.html</loc></url>
+<url><loc>/reference/dot-getDepGain.html</loc></url>
+<url><loc>/reference/dot-get_cre_orcid.html</loc></url>
+<url><loc>/reference/dot-get_orcid_rec.html</loc></url>
+<url><loc>/reference/firstInBioc.html</loc></url>
+<url><loc>/reference/generateBiocPkgDOI.html</loc></url>
+<url><loc>/reference/getBiocVignette.html</loc></url>
+<url><loc>/reference/getPackageInfo.html</loc></url>
+<url><loc>/reference/getPkgYearsInBioc.html</loc></url>
+<url><loc>/reference/get_bioc_data.html</loc></url>
+<url><loc>/reference/get_cre_orcids.html</loc></url>
+<url><loc>/reference/githubDetails.html</loc></url>
+<url><loc>/reference/githubURLParts.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/inducedSubgraphByPkgs.html</loc></url>
+<url><loc>/reference/latestPkgStats.html</loc></url>
+<url><loc>/reference/orcid_table.html</loc></url>
+<url><loc>/reference/pkgBiocDeps.html</loc></url>
+<url><loc>/reference/pkgBiocRevDeps.html</loc></url>
+<url><loc>/reference/pkgCombDependencyGain.html</loc></url>
+<url><loc>/reference/pkgDepImports.html</loc></url>
+<url><loc>/reference/pkgDepMetrics.html</loc></url>
+<url><loc>/reference/pkgDownloadRank.html</loc></url>
+<url><loc>/reference/pkgDownloadStats.html</loc></url>
+<url><loc>/reference/problemPage.html</loc></url>
+<url><loc>/reference/repositoryStats.html</loc></url>
+<url><loc>/reference/subgraphByDegree.html</loc></url>
+<url><loc>/reference/templatePath.html</loc></url>
 </urlset>
+
