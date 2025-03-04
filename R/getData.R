@@ -19,7 +19,7 @@ get_bioc_data <- function() {
         raw_dl_stats = BiocPkgTools::biocDownloadStats()
     )
 
-    full_data <- full_data %>%
+    full_data <- full_data |>
         dplyr::filter(!is.na(.data$tags))
 
     message("Package data download complete")
@@ -48,7 +48,7 @@ process_data <- function(pkg_list, raw_dl_stats) {
     pkg_list$Package <- as.character(pkg_list$Package)
     dl_stats$Package <- as.character(dl_stats$Package)
 
-    full_data <- dplyr::inner_join(pkg_list, dl_stats, by = "Package") %>%
+    full_data <- dplyr::inner_join(pkg_list, dl_stats, by = "Package") |>
         dplyr::select(
             .data$Author,
             .data$Package,
@@ -57,10 +57,10 @@ process_data <- function(pkg_list, raw_dl_stats) {
             .data$Description,
             .data$downloads_month,
             .data$downloads_total
-        ) %>%
+        ) |>
         dplyr::mutate(
             page = pkg_link(.data$Package)
-        ) %>%
+        ) |>
         dplyr::rename(
             authors = .data$Author,
             name = .data$Package,
@@ -76,8 +76,8 @@ process_data <- function(pkg_list, raw_dl_stats) {
 
 # summarise download stats into monthly and total lifetime downloads
 summarise_dl_stats <- function(dl_stats) {
-    dl_stats %>%
-        dplyr::group_by(.data$Package) %>%
+    dl_stats |>
+        dplyr::group_by(.data$Package) |>
         dplyr::summarise(
             downloads_month = dplyr::first(.data$Nb_of_downloads),
             downloads_total = sum(.data$Nb_of_downloads)
@@ -87,9 +87,9 @@ summarise_dl_stats <- function(dl_stats) {
 # collapse list of names into a comma separated string
 # final two authors separated by 'and'
 author_list_to_string <- function(authors) {
-    collapse_list <- function(x) unlist(x) %>% paste(collapse = ", ")
-    sapply(authors, collapse_list) %>%
-        stringr::str_replace(" and ", ", ") %>%
+    collapse_list <- function(x) unlist(x) |> paste(collapse = ", ")
+    sapply(authors, collapse_list) |>
+        stringr::str_replace(" and ", ", ") |>
         stringr::str_replace(",([^,]*)$", " and\\1")
 }
 
@@ -123,7 +123,7 @@ write_to_cache <- function(json_data) {
     cached_data_path <- system.file(
         "extdata",
         package = "BiocExplorer"
-    ) %>%
+    ) |>
         file.path("data.Rds")
 
     saveRDS(json_data, cached_data_path)

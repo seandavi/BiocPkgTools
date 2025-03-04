@@ -129,15 +129,15 @@ biocPkgList <- function(
                       ret$biocViews = tmp
                     }
 
-                    ret[["Author"]] = ret[["Author"]] %>%
-                        str_replace_all("\n", " ") %>%
-                        str_remove_all("\\[.*?\\]") %>%
-                        str_remove_all("<.*?>") %>%
-                        str_remove_all("\\(.*?\\)") %>%
-                        str_squish() %>%
-                        str_replace_all("\\w* contributions ?\\w*", ", ") %>%
-                        str_replace_all("\\sand\\s", ", ") %>%
-                        str_replace_all(",\\s+,", ",") %>%
+                    ret[["Author"]] = ret[["Author"]] |>
+                        str_replace_all("\n", " ") |>
+                        str_remove_all("\\[.*?\\]") |>
+                        str_remove_all("<.*?>") |>
+                        str_remove_all("\\(.*?\\)") |>
+                        str_squish() |>
+                        str_replace_all("\\w* contributions ?\\w*", ", ") |>
+                        str_replace_all("\\sand\\s", ", ") |>
+                        str_replace_all(",\\s+,", ",") |>
                         str_replace_all(",+", ",")
 
                     ret[["Author"]] = lapply(

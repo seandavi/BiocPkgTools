@@ -37,10 +37,10 @@ library(tm)
 v = VCorpus(VectorSource(y))
 library(magrittr)
 
-v <- v \%>\%
-    tm_map(stripWhitespace) \%>\%
-    tm_map(content_transformer(tolower)) \%>\%
-    tm_map(removeWords, stopwords("english")) \%>\%
+v <- v |>
+    tm_map(stripWhitespace) |>
+    tm_map(content_transformer(tolower)) |>
+    tm_map(removeWords, stopwords("english")) |>
     tm_map(stemDocument)
 dtm = DocumentTermMatrix(v)
 inspect(DocumentTermMatrix(v,

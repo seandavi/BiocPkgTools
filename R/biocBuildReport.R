@@ -28,7 +28,6 @@
 #' @importFrom xml2 read_html
 #' @importFrom dplyr left_join
 #' @importFrom BiocManager version
-#' @importFrom magrittr %>%
 #'
 #' @examples
 #'
@@ -76,13 +75,13 @@ biocBuildReport <- function(
       warning("Detected an unusual number of builders == ",rowspan," ... ")
     }
     res <- html_nodes(dat,
-      xpath = '/html/body/table[@id="THE_BIG_GCARD_LIST"]') %>%
-      html_nodes("tr") %>% html_nodes("td") %>% html_nodes("b") %>%
+      xpath = '/html/body/table[@id="THE_BIG_GCARD_LIST"]') |>
+      html_nodes("tr") |> html_nodes("td") |> html_nodes("b") |>
       html_nodes("a")
     pkgnames <- html_text(res)
     versions <- html_nodes(dat,
-      xpath = '/html/body/table[@id="THE_BIG_GCARD_LIST"]') %>%
-      html_nodes(xpath = "//td[@rowspan=3]") %>% html_nodes("b") %>%
+      xpath = '/html/body/table[@id="THE_BIG_GCARD_LIST"]') |>
+      html_nodes(xpath = "//td[@rowspan=3]") |> html_nodes("b") |>
       html_text2()
     versions <- vapply(strsplit(versions, "\\s"), `[`, character(1L), 2L)
     maints <- html_nodes(dat,
@@ -102,7 +101,7 @@ biocBuildReport <- function(
 
     meta <- html_nodes(dat,
       xpath = '//*[@id="THE_BIG_GCARD_LIST"]/tbody/tr/td[@rowspan=3]')
-    values <- meta %>% html_nodes("table") %>% html_text2()
+    values <- meta |> html_nodes("table") |> html_text2()
 
     if (version >= package_version("3.13")) {
       values <- trimws(gsub("[\n]*git_last_commit[_date]*:", "", values))

@@ -9,7 +9,7 @@ utils::globalVariables(c("Package", "Year", "Date"))
 #' This function provides a mechanism to download these monthly counts for
 #' Bioconductor packages distributed through Anaconda.
 #'
-#' @importFrom dplyr mutate select arrange desc %>%
+#' @importFrom dplyr mutate select arrange desc
 #' @importFrom utils read.table download.file
 #' @importFrom tibble as_tibble
 #'
@@ -35,10 +35,10 @@ anacondaDownloadStats <- function() {
   tmp$repo = 'Anaconda'
   tmp$Nb_of_distinct_IPs = NA_integer_
 
-  tmp = as_tibble(tmp) %>%
+  tmp = as_tibble(tmp) |>
     dplyr::mutate(Date = as.Date(paste(.data$Year, .data$Month, '01'),
-                          '%Y %b %d')) %>%
-    select('Package', 'Year', 'Month', 'Nb_of_distinct_IPs', 'Nb_of_downloads', 'repo', 'Date') %>%
+                          '%Y %b %d')) |>
+    select('Package', 'Year', 'Month', 'Nb_of_distinct_IPs', 'Nb_of_downloads', 'repo', 'Date') |>
     ## put this into the same order as the BioC table
     arrange(tmp, Package, desc(Year), Date)
 
