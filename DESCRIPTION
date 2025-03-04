@@ -27,7 +27,6 @@ Imports:
     BiocManager,
     biocViews,
     tibble,
-    magrittr,
     methods,
     rlang,
     stringr,

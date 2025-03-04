@@ -22,7 +22,6 @@
 #' y = paste(y,collapse=" ")
 #' library(tm)
 #' v = VCorpus(VectorSource(y))
-#' library(magrittr)
 #'
 #' v <- v |>
 #'     tm_map(stripWhitespace) |>
