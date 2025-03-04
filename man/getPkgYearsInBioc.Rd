@@ -23,19 +23,20 @@ Bioconductor release
 indicates package was removed. See final three columns for more
 information.
 \item last_version_available: If package was removed from Bioconductor, the
-last Bioconductor version (e.g. 1.9, 3.21) the package was able to be installed
+last Bioconductor version (e.g. 1.9, 3.21) the package was able to be
+installed
 \item last_version_release_date: Equivalent calendar date of given Bioconductor
 release
 \item years_before_rm: If removed, how many years it was in Bioconductor
 }
 }
 \description{
-This function determines the number of years a package has been in
-Bioconductor. Available information includes first Bioconductor version a
-package appeared and the current length of time in Bioconductor. If a
+This function determines the number of years a package has been
+in Bioconductor. Available information includes first Bioconductor version
+a package appeared and the current length of time in Bioconductor. If a
 package has been removed from Bioconductor, information on the last
-Bioconductor version and approximate time in Bioconductor before removal
-is available.
+Bioconductor version and approximate time in Bioconductor before removal is
+available.
 }
 \examples{
 \dontrun{
