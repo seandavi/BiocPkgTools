@@ -31,7 +31,8 @@ utils::globalVariables(c(
 #'     indicates package was removed. See final three columns for more
 #'     information.
 #'   * last_version_available: If package was removed from Bioconductor, the
-#'     last Bioconductor version (e.g. 1.9, 3.21) the package was able to be installed
+#'     last Bioconductor version (e.g. 1.9, 3.21) the package was able to be
+#'     installed
 #'   * last_version_release_date: Equivalent calendar date of given Bioconductor
 #'     release
 #'   * years_before_rm: If removed, how many years it was in Bioconductor
