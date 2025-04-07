@@ -1,3 +1,29 @@
+CHANGES IN VERSION 1.26.0
+-------------------------
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o Defunct `pkgType = "all"` argument in `biocDownloadStats` and
+    `biocRevDepEmail`
+    o Added `R (>= 4.1.0)` requirement and replaced usage of `%>%` (magrittr)
+    with native pipe `|>` throughout the package
+    o Removed dependency on the `magrittr` package
+
+BUG FIXES AND MINOR IMPROVEMENTS
+
+    o Filter URLs with helper function that checks availability in
+    `biocBuildReportDB`
+    o Always use `.CRAN_WEB_URL` in `CRAN_pkg_rds_url()` helper
+    o Updated `getPkgYearsInBioc()` and documentation
+    o Reformatted output from `anacondaDownloadStats()`
+
+CHANGES IN VERSION 1.24.0
+-------------------------
+
+BUG FIXES AND MINOR IMPROVEMENTS
+
+    o Use a helper function for internal key value pairs used to generate URLs
+
 CHANGES IN VERSION 1.22.0
 -------------------------
 
