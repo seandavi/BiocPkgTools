@@ -13,7 +13,7 @@
 #'   given by `BiocManager::containerRepository` (default)
 #'
 #' @param local `logical(1)` whether to check the local file system for the
-#'   last modified date
+#'   `PACKAGES` file's last modified date (default: `FALSE`).
 #'
 #' @param ... further arguments passed to or from other methods (not used).
 #'
@@ -49,6 +49,12 @@
 #' @importFrom utils available.packages
 #' @importFrom httr HEAD headers
 #' @importFrom BiocManager containerRepository
+#'
+#' @details For local repositories, use the `local = TRUE` argument. Local
+#'   repositories will typically start with the `file://` URI. The function
+#'   checks the `mtime` of the output of `file.info` on the `PACKAGES` file in
+#'   the local repository. Otherwise, by default, it will check the
+#'   `last-modified` header of the `PACKAGES` file via `httr::HEAD()`.
 #'
 #' @author M. Morgan
 #'
