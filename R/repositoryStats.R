@@ -12,6 +12,9 @@
 #' @param binary_repository `character(1)` location of binary repository as
 #'   given by `BiocManager::containerRepository` (default)
 #'
+#' @param local `logical(1)` whether to check the local file system for the
+#'   last modified date
+#'
 #' @param ... further arguments passed to or from other methods (not used).
 #'
 #' @return a list of class `repositoryStats` with the following fields:
@@ -57,7 +60,8 @@
 #' @export
 repositoryStats <- function(
     version = BiocManager::version(),
-    binary_repository = BiocManager::containerRepository(version)
+    binary_repository = BiocManager::containerRepository(version),
+    local = FALSE
 ) {
     platform_docker <- BiocManager:::.repository_container_version()
     container <- platform_docker$platform
@@ -68,8 +72,12 @@ repositoryStats <- function(
     if (length(binary_repository)) {
         db_binary <- available.packages(repos = binary_repository)
         packages <- paste0(contrib.url(binary_repository), "/PACKAGES")
-        response <- HEAD(packages)
-        last_modified <- headers(response)$`last-modified`
+        if (!local) {
+            response <- HEAD(packages)
+            last_modified <- headers(response)$`last-modified`
+        } else {
+            last_modified <- file.info(packages)$mtime
+        }
         PACKAGES_mtime <-
             format(strptime(
                 last_modified, "%a, %d %b %Y %H:%M", tz = "UTC"

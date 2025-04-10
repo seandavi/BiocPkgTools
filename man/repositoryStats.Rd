@@ -7,7 +7,8 @@
 \usage{
 repositoryStats(
   version = BiocManager::version(),
-  binary_repository = BiocManager::containerRepository(version)
+  binary_repository = BiocManager::containerRepository(version),
+  local = FALSE
 )
 
 \method{print}{repositoryStats}(x, ...)
@@ -19,6 +20,9 @@ repositories are required.}
 
 \item{binary_repository}{\code{character(1)} location of binary repository as
 given by \code{BiocManager::containerRepository} (default)}
+
+\item{local}{\code{logical(1)} whether to check the local file system for the
+last modified date}
 
 \item{x}{the object returned by \code{repositoryStats()}.}
 
