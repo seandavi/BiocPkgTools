@@ -3,7 +3,8 @@ CHANGES IN VERSION 1.28.0
 
 SIGNIFICANT USER-VISIBLE CHANGES
 
-    o Add `recursive` argument to `pkgBiocRevDeps`
+    o `pkgBiocRevDeps` now has `recursive` argument
+    o `repositoryStats` supports in-house repositories with `local=TRUE`
 
 BUG FIXES AND MINOR IMPROVEMENTS
 
