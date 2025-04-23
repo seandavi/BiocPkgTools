@@ -77,6 +77,8 @@ pkgBiocRevDeps <- function(
     whiches <- c("Depends", "Imports", "LinkingTo", "Suggests", "Enhances")
     names(whiches) <- whiches
 
+    stopifnot(is.character(pkg), !is.na(pkg), nzchar(pkg))
+
     if (!all(which %in% c(whiches, "all", "strong", "most")))
         stop("'which' dependency type is invalid; see ?package_dependencies")
 
