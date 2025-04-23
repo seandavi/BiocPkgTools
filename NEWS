@@ -1,3 +1,15 @@
+CHANGES IN VERSION 1.28.0
+-------------------------
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o Add `recursive` argument to `pkgBiocRevDeps`
+
+BUG FIXES AND MINOR IMPROVEMENTS
+
+    o Enhance `summary` method for `biocrevdeps` class output from
+    `pkgBiocRevDeps`
+
 CHANGES IN VERSION 1.26.0
 -------------------------
 
