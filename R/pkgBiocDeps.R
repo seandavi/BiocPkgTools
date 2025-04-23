@@ -108,7 +108,6 @@ pkgBiocRevDeps <- function(
             )[[pkg]]
         })
 
-
     if (only.bioc && recursive)
         res <- list(recursive = res[res %in% rownames(biocdb)])
     else if (only.bioc)
@@ -116,8 +115,11 @@ pkgBiocRevDeps <- function(
             res, function(pkglist) pkglist[pkglist %in% rownames(biocdb)]
         )
 
-    attributes(res) <-
-        list(package = pkg, class = "biocrevdeps", names = names(res))
+    attributes(res) <- list(
+        package = pkg, class = "biocrevdeps", which = which,
+        only.bioc = only.bioc, recursive = recursive,
+        version = version, reverse = TRUE
+    )
     res
 }
 
@@ -128,7 +130,23 @@ pkgBiocRevDeps <- function(
 #' @export
 summary.biocrevdeps <- function(object, ...) {
     totals <- lapply(object, length)
-    data.frame(
-        totals, Total = sum(unlist(totals)), row.names = attr(object, "package")
+    sum.df <- data.frame(
+        totals,
+        row.names = attr(object, "package"),
+        only.bioc = attr(object, "only.bioc")
     )
+    if (!"recursive" %in% names(object)) {
+        tot.df <- data.frame(Total = sum(unlist(totals)))
+        sum.df <- cbind.data.frame(sum.df, tot.df)
+    }
+    cat(
+        "tools::package_dependencies(",
+        "\n  ", dQuote(attr(object, "package"), FALSE), ",",
+        "\n  db=utils::available.packages(repos=BiocManager::repositories()),",
+        "\n  which=", capture.output(dput(unname(attr(object, "which")))), ",",
+        "\n  recursive=", attr(object, "recursive"), ",",
+        "\n  reverse=", attr(object, "reverse"), "\n)\n",
+        sep = ""
+    )
+    sum.df
 }
