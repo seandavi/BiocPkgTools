@@ -77,7 +77,7 @@ get_deprecated_status_df <- function(version) {
         identical(nrow(bquery), 1L) && (is.na(needsUpdate) || needsUpdate)
     )
         bfcdownload(
-            x = bfc, rid = bquery[["rid"]], rtype = "web", ask = FALSE
+            x = bfc, rid = bquery[["rid"]], ask = FALSE
         )
 
     bfcrpath(
