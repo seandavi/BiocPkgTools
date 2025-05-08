@@ -25,7 +25,7 @@ attributes (see graph_from_data_frame)."><!-- mathjax --><script src="https://cd
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BiocPkgTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.26.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.26.1</span>
       </span>
     </div>
 
@@ -122,9 +122,9 @@ package for details of what can be done.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">g</span> <span class="op">=</span> <span class="fu">buildPkgDependencyIgraph</span><span class="op">(</span><span class="va">pkg_dep_df</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 47df18d DN-- 3713 30026 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 77a0925 DN-- 3713 30026 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (v/c), edgetype (e/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 47df18d (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 77a0925 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] a4       -&gt;a4Base       a4       -&gt;a4Preproc    a4       -&gt;a4Classif   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [4] a4       -&gt;a4Core       a4       -&gt;a4Reporting  a4Base   -&gt;a4Preproc   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [7] a4Base   -&gt;a4Core       a4Classif-&gt;a4Core       a4Classif-&gt;a4Preproc   </span>
@@ -137,10 +137,10 @@ package for details of what can be done.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Look at nodes and edges</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="https://r.igraph.org/reference/V.html" class="external-link">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">)</span> <span class="co"># vertices</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 6/3713 vertices, named, from 47df18d:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 6/3713 vertices, named, from 77a0925:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] a4        a4Base    a4Classif ABSSeq    acde      aCGH     </span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="https://r.igraph.org/reference/E.html" class="external-link">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">)</span> <span class="co"># edges</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 6/30026 edges from 47df18d (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 6/30026 edges from 77a0925 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] a4    -&gt;a4Base      a4    -&gt;a4Preproc   a4    -&gt;a4Classif  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [4] a4    -&gt;a4Core      a4    -&gt;a4Reporting a4Base-&gt;a4Preproc  </span>
 <span class="r-in"><span></span></span>
