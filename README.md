@@ -1,7 +1,7 @@
 # BiocPkgTools
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/seandavi/BiocPkgTools/workflows/R-CMD-check/badge.svg)](https://github.com/seandavi/BiocPkgTools/actions)
+[![R-CMD-check](https://github.com/seandavi/BiocPkgTools/actions/workflows/R-CMD-check.yaml/badge.svg?branch=RELEASE_3_21)](https://github.com/seandavi/BiocPkgTools/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 Bioconductor has a rich ecosystem of metadata around packages, usage, and build status. 
