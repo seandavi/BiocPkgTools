@@ -31,7 +31,7 @@ biocMaintained <-
     )
 {
     pkgType <- match.arg(pkgType, several.ok = TRUE)
-    repos <- .matchGetShortName(pkgType, "repo.name")
+    repos <- .matchGetShortName(pkgType, "biocmanager.names")
     pkgs <- biocPkgList(version = version, repo = repos)
     biocmaint <- vapply(
         pkgs$Maintainer,
