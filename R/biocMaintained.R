@@ -6,8 +6,8 @@
 #' vector of packages indicating whether any package is maintained by the
 #' Bioconductor core team.
 #'
-#' @param main character(1) The regex for searching through the Maintainer
-#' column as obtained from `biocPkgList()`.
+#' @param main `character(1)` A regex string to search for in the `Maintainer`
+#'   column from the `biocPkgList()` output.
 #'
 #' @inheritParams biocBuildReport
 #' @inheritParams biocDownloadStats

@@ -19,8 +19,8 @@ hasBiocMaint(
 )
 }
 \arguments{
-\item{main}{character(1) The regex for searching through the Maintainer
-column as obtained from \code{biocPkgList()}.}
+\item{main}{\code{character(1)} A regex string to search for in the \code{Maintainer}
+column from the \code{biocPkgList()} output.}
 
 \item{version}{character(1) the character version number
 as used to access the online build report. For
