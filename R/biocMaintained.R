@@ -36,7 +36,7 @@ biocMaintained <-
     biocmaint <- vapply(
         pkgs$Maintainer,
         function(x)
-            any(grepl(main, x)),
+            any(grepl(main, x, ignore.case = TRUE)),
         logical(1L)
     )
     pkgs[biocmaint, ]
