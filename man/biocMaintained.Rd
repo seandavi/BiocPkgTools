@@ -6,7 +6,7 @@
 \title{Bioconductor Maintained Packages}
 \usage{
 biocMaintained(
-  main = "maintainer@bioconductor\\\\.org",
+  main = "maintainer@bioconductor.org",
   version = BiocManager::version(),
   pkgType = c("software", "data-experiment", "workflows", "data-annotation")
 )

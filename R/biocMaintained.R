@@ -22,7 +22,7 @@
 #' @export
 biocMaintained <-
     function(
-        main = "maintainer@bioconductor\\.org",
+        main = "maintainer@bioconductor.org",
         version = BiocManager::version(),
         pkgType = c(
             "software", "data-experiment",
