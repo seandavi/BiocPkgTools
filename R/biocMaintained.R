@@ -39,7 +39,11 @@ biocMaintained <-
             any(grepl(main, x, ignore.case = TRUE)),
         logical(1L)
     )
-    pkgs[biocmaint, ]
+    filtered <- pkgs[biocmaint, ]
+    attr(filtered, "version") <- version
+    attr(filtered, "maintainer") <- main
+    attr(filtered, "pkgType") <- pkgType
+    filtered
 }
 
 #' @rdname biocMaintained
