@@ -278,7 +278,7 @@ library(biocViews)
 data(biocViewsVocab)
 biocViewsVocab
 library(igraph)
-g = igraph.from.graphNEL(biocViewsVocab)
+g = graph_from_graphnel(biocViewsVocab)
 library(visNetwork)
 gv = toVisNetworkData(g)
 visNetwork(gv$nodes, gv$edges, width="100%") %>%

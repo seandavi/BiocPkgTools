@@ -225,7 +225,7 @@ inducedSubgraphByPkgs <- function(g, pkgs, pkg_color='red') {
 #'
 #' @param ... passed on to \code{\link[igraph]{distances}}
 #'
-#' @importFrom igraph distances induced_subgraph V is.igraph
+#' @importFrom igraph distances induced_subgraph V is_igraph
 #'
 #' @return An igraph graph, with only nodes and their
 #' edges within degree of the named package
@@ -239,7 +239,7 @@ inducedSubgraphByPkgs <- function(g, pkgs, pkg_color='red') {
 #' @export
 subgraphByDegree <- function(g, pkg, degree=1, ...) {
     stopifnot(is.character(pkg) & pkg %in% names(igraph::V(g)) & length(pkg)==1)
-    stopifnot(is.igraph(g))
+    stopifnot(is_igraph(g))
     d = igraph::distances(graph=g, v=pkg, ...)
     d2 = d[1,d[1,]<= degree]
     igraph::induced_subgraph(graph=g, vids=names(d2))

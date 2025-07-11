@@ -40,7 +40,7 @@ Imports:
     DT,
     tools,
     utils,
-    igraph,
+    igraph (>= 2.0.0),
     jsonlite,
     gh,
     RBGL,
