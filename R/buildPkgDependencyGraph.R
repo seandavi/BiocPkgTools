@@ -232,8 +232,8 @@ inducedSubgraphByPkgs <- function(g, pkgs, pkg_color='red') {
 #'
 #' @examples
 #'
-#' g = buildPkgDependencyIgraph(buildPkgDependencyDataFrame())
-#' g2 = subgraphByDegree(g, 'GEOquery')
+#' g <- buildPkgDependencyIgraph(buildPkgDependencyDataFrame())
+#' g2 <- subgraphByDegree(g, 'GEOquery')
 #' plot(g2)
 #'
 #' @export

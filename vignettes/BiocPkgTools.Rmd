@@ -280,10 +280,10 @@ biocViewsVocab
 library(igraph)
 g = graph_from_graphnel(biocViewsVocab)
 library(visNetwork)
-gv = toVisNetworkData(g)
 visNetwork(gv$nodes, gv$edges, width="100%") %>%
     visIgraphLayout(layout = "layout_as_tree", circular=TRUE) %>%
     visNodes(size=20) %>%
+gv <- toVisNetworkData(g)
     visPhysics(stabilization=FALSE)
 ```
 
