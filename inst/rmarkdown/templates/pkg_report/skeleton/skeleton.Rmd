@@ -27,10 +27,14 @@ pkl_me <- pkl[pkl$Package==params$package,]
 ```{r echo=FALSE, fig.cap="Package download counts. Bioconductor tracks the number of unique IP addresses that download individual packages. These numbers can be used as a proxy for the number of users of a software package."}
 library(ggplot2)
 library(dplyr)
-downloads <- dls %>% filter(Package == params$package) %>%
-  filter(!is.na(Date))
-ggplot(downloads, aes(y=Nb_of_distinct_IPs, x=Date)) + geom_bar(stat='identity') +
-  ylab("Distinct IP Downloads") + ggtitle("Number of Downloads")
+downloads <- dls |>
+    filter(Package == params$package) |>
+    filter(!is.na(Date))
+ggplot(
+    downloads, aes(y=Nb_of_distinct_IPs, x=Date)) + geom_bar(stat='identity'
+) +
+    ylab("Distinct IP Downloads") +
+    ggtitle("Number of Downloads")
 ```
 
 # Dependencies

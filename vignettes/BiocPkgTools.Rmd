@@ -143,9 +143,9 @@ the `importsMe` column to find the packages that import the
 ```{r}
 require(dplyr)
 bpi = biocPkgList()
-bpi %>% 
-    filter(Package=="GEOquery") %>%
-    pull(importsMe) %>%
+bpi |> 
+    filter(Package=="GEOquery") |>
+    pull(importsMe) |>
     unlist()
 ```
 
@@ -240,7 +240,7 @@ For fun, we can watch the graph stabilize during drawing, best viewed
 interactively.
 
 ```{r}
-visNetwork(nodes = data$nodes, edges = data$edges, height = "500px") %>%
+visNetwork(nodes = data$nodes, edges = data$edges, height = "500px") |>
     visPhysics(stabilization=FALSE)
 ```
 
@@ -251,7 +251,7 @@ data$edges$color='lightblue'
 data$edges[data$edges$edgetype=='Imports','color']= 'red'
 data$edges[data$edges$edgetype=='Depends','color']= 'green'
 
-visNetwork(nodes = data$nodes, edges = data$edges, height = "500px") %>%
+visNetwork(nodes = data$nodes, edges = data$edges, height = "500px") |>
     visEdges(arrows='from') 
 ```
 
@@ -260,8 +260,8 @@ Add a legend.
 ```{r}
 ledges <- data.frame(color = c("green", "lightblue", "red"),
   label = c("Depends", "Suggests", "Imports"), arrows =c("from", "from", "from"))
-visNetwork(nodes = data$nodes, edges = data$edges, height = "500px") %>%
-  visEdges(arrows='from') %>%
+visNetwork(nodes = data$nodes, edges = data$edges, height = "500px") |>
+  visEdges(arrows='from') |>
   visLegend(addEdges=ledges)
 ```
 
@@ -280,10 +280,10 @@ biocViewsVocab
 library(igraph)
 g = graph_from_graphnel(biocViewsVocab)
 library(visNetwork)
-visNetwork(gv$nodes, gv$edges, width="100%") %>%
-    visIgraphLayout(layout = "layout_as_tree", circular=TRUE) %>%
-    visNodes(size=20) %>%
 gv <- toVisNetworkData(g)
+visNetwork(gv$nodes, gv$edges, width="100%") |>
+    visIgraphLayout(layout = "layout_as_tree", circular=TRUE) |>
+    visNodes(size=20) |>
     visPhysics(stabilization=FALSE)
 ```
 
@@ -359,7 +359,7 @@ We can find out what actually functionality calls are we importing as follows:
 
 ```{r}
 imp <- pkgDepImports("BiocPkgTools")
-imp %>% filter(pkg == "DT")
+imp |> filter(pkg == "DT")
 ```
 
 # Identities of maintainers
