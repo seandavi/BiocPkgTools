@@ -118,7 +118,7 @@ pkgBiocRevDeps <- function(
     attributes(res) <- list(
         package = pkg, class = "biocrevdeps", which = which,
         only.bioc = only.bioc, recursive = recursive,
-        version = version, reverse = TRUE
+        names = names(res), version = version, reverse = TRUE
     )
     res
 }
