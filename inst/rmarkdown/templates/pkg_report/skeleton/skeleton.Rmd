@@ -46,7 +46,24 @@ ggplot(downloads, aes(y=Nb_of_distinct_IPs, x=Date)) +
 The `r params$package` package depends on `r length(pkl_me$Depends[1][[1]])`
 packages and suggests `r length(pkl_me$Suggests[1][[1]])` packages.
 
-```{r results='asis', echo=FALSE}
-cat("- Depends\n")
-cat(sapply(pkl_me$Depends[1][[1]], function(x) {sprintf("  - %s\n", x)}))
+```{r, echo=FALSE}
+library(pkgndep)
+pkg_report <-  pkgndep(params$package)
+pkg_report
+```
+
+```{r,echo=FALSE}
+rmd_dir <- dirname(knitr::current_input(dir = TRUE))
+## NOTE. this command saves a file in the directory of the Rmd file
+heatmap_file <- file.path(rmd_dir, "heatmap.png")
+dependency_heatmap(pkg_report, file = heatmap_file)
+```
+
+```{r, echo=FALSE, results="asis"}
+cat(paste0(
+'<div style="overflow-x: auto; width: 100%; border: 1px solid #ddd;">\n',
+'<img src="', heatmap_file,
+'" alt="Dependency Heatmap" style="display: block; max-width: none;">\n',
+'</div>'
+))
 ```
