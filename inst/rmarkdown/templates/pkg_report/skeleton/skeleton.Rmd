@@ -12,7 +12,7 @@ params:
 ```{r include=FALSE}
 library(knitr)
 library(BiocStyle)
-opts_chunk$set(message = FALSE, warning = FALSE)
+opts_chunk$set(message = FALSE, warning = FALSE, cache = TRUE)
 ```
 
 ```{r include=FALSE}
