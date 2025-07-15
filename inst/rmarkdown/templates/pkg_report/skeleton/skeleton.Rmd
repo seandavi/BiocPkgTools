@@ -24,23 +24,27 @@ pkl_me <- pkl[pkl$Package==params$package,]
 
 # Downloads and Usage
 
-```{r echo=FALSE, fig.cap="Package download counts. Bioconductor tracks the number of unique IP addresses that download individual packages. These numbers can be used as a proxy for the number of users of a software package."}
+```{r echo=FALSE}
+#| fig.cap = paste0(
+#|  "Package download counts. Bioconductor tracks the number of unique IP",
+#|  " addresses that download individual packages. These numbers can be used",
+#|  " as a proxy for the number of users of a software package.",
+#| )
 library(ggplot2)
 library(dplyr)
 downloads <- dls |>
     filter(Package == params$package) |>
     filter(!is.na(Date))
-ggplot(
-    downloads, aes(y=Nb_of_distinct_IPs, x=Date)) + geom_bar(stat='identity'
-) +
+ggplot(downloads, aes(y=Nb_of_distinct_IPs, x=Date)) +
+    geom_bar(stat='identity') +
     ylab("Distinct IP Downloads") +
     ggtitle("Number of Downloads")
 ```
 
 # Dependencies
 
-The `r params$package` package depends on `r length(pkl_me$Depends[1][[1]])` additional packages and suggests
-`r length(pkl_me$Suggests[1][[1]])` more packages.
+The `r params$package` package depends on `r length(pkl_me$Depends[1][[1]])`
+packages and suggests `r length(pkl_me$Suggests[1][[1]])` packages.
 
 ```{r results='asis', echo=FALSE}
 cat("- Depends\n")
