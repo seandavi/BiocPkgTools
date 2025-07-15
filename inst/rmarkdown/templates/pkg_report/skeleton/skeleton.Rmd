@@ -1,5 +1,5 @@
 ---
-title: '`r sprintf("%s Package Report", params$package)`'
+title: '`r sprintf("Package Report: %s", params$package)`'
 date: "`r Sys.Date()`"
 output: 
   BiocStyle::html_document:
