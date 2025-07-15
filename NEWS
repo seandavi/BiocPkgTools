@@ -5,6 +5,8 @@ SIGNIFICANT USER-VISIBLE CHANGES
 
     o `pkgBiocRevDeps` now has `recursive` argument
     o `repositoryStats` supports in-house repositories with `local=TRUE`
+    o The dependency report template now uses `pkgndep` to display a dependency
+    heatmap
 
 BUG FIXES AND MINOR IMPROVEMENTS
 
