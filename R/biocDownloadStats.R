@@ -37,22 +37,27 @@ utils::globalVariables(
     rownames(db)
 }
 
+#' @importFrom httr2 request req_options req_perform
 .filter_http_error <- function(urls) {
-    invalid <- vapply(
-        urls,
-        httr::http_error,
-        logical(1L),
-        httr::config(followlocation = 0L)
-    )
-    if (any(invalid)) {
-        inv_urls <- paste(names(urls)[invalid], collapse = ", ")
+    check_url <- function(url) {
+        res <- try({
+            request(url) |>
+                req_options(followlocation = FALSE) |>
+                req_perform()
+        }, silent = TRUE)
+        !inherits(res, "try-error")
+    }
+    is_valid <- vapply(urls, check_url, logical(1L))
+
+    if (any(!is_valid)) {
+        inv_urls <- paste(names(urls)[!is_valid], collapse = ", ")
         warning(
-            "Download stats for these resources are currently down:\n  ",
+            "Download stats for these resources are currently down:\n ",
             inv_urls,
             call. = FALSE
         )
     }
-    urls[!invalid]
+    urls[is_valid]
 }
 
 .STATS_BASE_URL <- "https://bioconductor.org/packages/stats/"

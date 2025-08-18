@@ -2,22 +2,27 @@
 % Please edit documentation in R/use_orcid.R
 \name{orcid_table}
 \alias{orcid_table}
-\title{get data.frame of employment info from orcid}
+\title{Obtain employment data from ORCID}
 \usage{
 orcid_table(orcids)
 }
 \arguments{
-\item{orcids}{character()}
+\item{orcids}{\code{character()} A vector of ORCID identifiers}
+}
+\value{
+a \code{data.frame} of employment info using the ORCID API
 }
 \description{
-get data.frame of employment info from orcid
+Get a \code{data.frame} of employment info from ORCID
 }
 \examples{
-if (interactive()) { # need a token?
-    oids <- c("0000-0003-4046-0063", "0000-0003-4046-0063")
-    print(orcid_table(oids))
-    oids <- c(oids, NA)
-    print(orcid_table(oids))
-    print(orcid_table(oids[1]))
+if (interactive()) {
+    orcid_table(
+        orcid_ids = c(
+            "0000-0002-3242-0582",
+            "0000-0003-4046-0063",
+            "0000-0003-2725-0694"
+        )
+    )
 }
 }
