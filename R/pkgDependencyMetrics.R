@@ -73,47 +73,47 @@
                  pkg))
 }
 
-#' Calculate the 'dependency gain' from excluding one or more direct 
+#' Calculate the 'dependency gain' from excluding one or more direct
 #' dependencies
-#' 
-#' Calculate the difference between the total number of dependencies of a 
-#' package and the number of dependencies that would remain if one or more 
-#' of the direct dependencies were removed. 
-#' 
+#'
+#' Calculate the difference between the total number of dependencies of a
+#' package and the number of dependencies that would remain if one or more
+#' of the direct dependencies were removed.
+#'
 #' @param g Package dependency graph
 #' @param pkg Character string representing the package of interest
-#' @param depsToRemove Character vector representing the dependencies 
+#' @param depsToRemove Character vector representing the dependencies
 #'   to remove
-#' 
+#'
 #' @author Charlotte Soneson
-#' 
-#' @return The 'dependency gain' that would be achieved by excluding the 
+#'
+#' @return The 'dependency gain' that would be achieved by excluding the
 #'   indicated direct dependencies
-#' 
-#' @keywords internal 
-#' 
+#'
+#' @keywords internal
+#'
 #' @importFrom igraph degree delete_vertices V delete_edges
-#' 
+#'
 .getDepGain <- function(g, pkg, depsToRemove) {
   ## First make sure that there are no vertices with in-degree 0 in the graph
-  ## (these will anyway be removed below, but they are not dependencies 
+  ## (these will anyway be removed below, but they are not dependencies
   ## of pkg)
   while (sum(igraph::degree(g, mode = "in") == 0) > 1) {
     g <- igraph::delete_vertices(
       g, setdiff(names(which(igraph::degree(g, mode = "in") == 0)), pkg)
     )
   }
-  
+
   ## Get number of vertices
   nVertices <- length(igraph::V(g))
-  
+
   ## For each package in depsToRemove, remove the edge from pkg to
   ## the dependency
   for (dtr in depsToRemove) {
     g <- igraph::delete_edges(g, paste(pkg, dtr, sep = "|"))
   }
-  
-  ## Iteratively remove vertices with in-degree 0 
+
+  ## Iteratively remove vertices with in-degree 0
   ## (there's nothing left that depends on it)
   ## pkg will always have in-degree 0, but will be retained
   while (sum(igraph::degree(g, mode = "in") == 0) > 1) {
@@ -121,7 +121,7 @@
       g, setdiff(names(which(igraph::degree(g, mode = "in") == 0)), pkg)
     )
   }
-  
+
   ## Return the dependency gain
   nVertices - length(igraph::V(g))
 }
@@ -149,10 +149,10 @@
 #'            the analyzed package.
 #'
 #' @author Robert Castelo
-#' 
+#'
 #' @examples
 #' pkgDepImports('BiocPkgTools')
-#' 
+#'
 #' @export
 #' @md
 pkgDepImports <- function(pkg) {
@@ -230,63 +230,63 @@ pkgDepImports <- function(pkg) {
 }
 
 #' Calculate dependency gain achieved by excluding combinations of packages
-#' 
+#'
 #' @param pkg character, the name of the package for which we want
 #'   to estimate the dependency gain
 #' @param depdf a tidy data frame with package dependency information
 #'   obtained through the function \code{\link{buildPkgDependencyDataFrame}}
-#' @param maxNbr numeric, the maximal number of direct dependencies to leave 
+#' @param maxNbr numeric, the maximal number of direct dependencies to leave
 #'   out simultaneously
-#' 
+#'
 #' @export
-#' 
+#'
 #' @author Charlotte Soneson
-#' 
-#' @return A data frame with three columns: ExclPackages (the excluded direct 
+#'
+#' @return A data frame with three columns: ExclPackages (the excluded direct
 #'   dependencies), NbrExcl (the number of excluded direct dependencies),
 #'   DepGain (the dependency gain from excluding these direct dependencies)
-#' 
+#'
 #' @examples
 #' depdf <- buildPkgDependencyDataFrame(
-#'   dependencies=c("Depends", "Imports"), 
+#'   dependencies=c("Depends", "Imports"),
 #'   repo=c("BioCsoft", "CRAN")
 #' )
 #' pcd <- pkgCombDependencyGain('GEOquery', depdf, maxNbr = 3L)
 #' head(pcd[order(pcd$DepGain, decreasing = TRUE), ])
-#' 
+#'
 #' @importFrom igraph induced_subgraph subcomponent ego
 #' @importFrom utils combn
-#' 
+#'
 pkgCombDependencyGain <- function(pkg, depdf, maxNbr = 3L) {
-  
+
   ## check arguments
   .pkgDepCheckArgs(pkg, depdf)
 
   ## fetch dependency graph
   g <- buildPkgDependencyIgraph(depdf)
-  
+
   ## exclude 'R', 'base' and 'methods'
   excludedpkgs <- c("R", "base", "methods")
   g <- igraph::induced_subgraph(g, setdiff(names(V(g)), excludedpkgs))
-  
+
   ## get all reachable dependencies
   deppkgs <- igraph::subcomponent(g, pkg, mode="out")
-  
+
   ## get the induced subgraph of dependencies for 'pkg'
   g.pkg <- igraph::induced_subgraph(g, deppkgs)
-  
+
   ## fetch first level dependencies
   dep1pkgs <- names(igraph::ego(g.pkg, nodes=pkg, mode="out", mindist=1)[[1]])
 
-  ## exclude each combination of dependencies and calculate the 
+  ## exclude each combination of dependencies and calculate the
   ## dependency gain
-  allcombs <- do.call(rbind, lapply(seq_len(min(maxNbr, length(dep1pkgs))), 
+  allcombs <- do.call(rbind, lapply(seq_len(min(maxNbr, length(dep1pkgs))),
                                     function(i) {
     combs <- utils::combn(dep1pkgs, i)
     do.call(rbind, apply(combs, 2, function(w) {
       data.frame(Packages = paste(w, collapse = ", "),
-                 NbrExcl = length(w), 
-                 DepGain = .getDepGain(g = g.pkg, pkg = pkg, 
+                 NbrExcl = length(w),
+                 DepGain = .getDepGain(g = g.pkg, pkg = pkg,
                                        depsToRemove = w),
                  stringsAsFactors = FALSE)
     }))
@@ -333,7 +333,7 @@ pkgCombDependencyGain <- function(pkg, depdf, maxNbr = 3L) {
 #'  a value above, e.g., 0.5, could, albeit not necessarily, imply that removing
 #'  that dependency could substantially lighten the dependency burden of the analyzed
 #'  package.
-#'  
+#'
 #'  An `NA` value in the `ImportedAndUsed` column indicates that the function
 #'  `pkgDepMetrics()` could not identify what functionality calls in the analyzed
 #'  package are made to the dependency.
@@ -343,11 +343,11 @@ pkgCombDependencyGain <- function(pkg, depdf, maxNbr = 3L) {
 #'
 #' @examples
 #' depdf <- buildPkgDependencyDataFrame(
-#'   dependencies=c("Depends", "Imports"), 
+#'   dependencies=c("Depends", "Imports"),
 #'   repo=c("BioCsoft", "CRAN")
 #' )
 #' pkgDepMetrics('BiocPkgTools', depdf)
-#' 
+#'
 #' @export
 #' @md
 pkgDepMetrics <- function(pkg, depdf) {
@@ -359,7 +359,7 @@ pkgDepMetrics <- function(pkg, depdf) {
   g <- buildPkgDependencyIgraph(depdf)
 
   ## exclude 'R', 'base' and 'methods'
-  excludedpkgs <- c("R", "base", "methods")
+  excludedpkgs <- c("R", "base", "methods", "rorcid")
   g <- induced_subgraph(g, setdiff(names(V(g)), excludedpkgs))
 
   ## get all reachable dependencies
