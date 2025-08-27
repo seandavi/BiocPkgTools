@@ -20,10 +20,10 @@ graph (though Bioconductor dependencies are
 not an acyclic graph). This function simply
 returns an igraph graph from the package
 dependency data frame from a call to
-\code{\link{buildPkgDependencyDataFrame}} or
+\code{\link[=buildPkgDependencyDataFrame]{buildPkgDependencyDataFrame()}} or
 any tidy data frame with rows of (Package, dependency)
 pairs. Additional columns are added as igraph edge
-attributes (see \code{\link[igraph]{graph_from_data_frame}}).
+attributes (see \code{\link[igraph:graph_from_data_frame]{igraph::graph_from_data_frame()}}).
 }
 \examples{
 
@@ -49,9 +49,9 @@ head(sort(degree(g, mode='out'), decreasing=TRUE))
 
 }
 \seealso{
-See \code{\link{buildPkgDependencyDataFrame}},
-\code{\link[igraph]{graph_from_data_frame}},
-\code{\link{inducedSubgraphByPkgs}}, \code{\link{subgraphByDegree}},
-\code{\link[igraph]{igraph-es-indexing}},
-\code{\link[igraph]{igraph-vs-indexing}}
+See \code{\link[=buildPkgDependencyDataFrame]{buildPkgDependencyDataFrame()}},
+\code{\link[igraph:graph_from_data_frame]{igraph::graph_from_data_frame()}},
+\code{\link[=inducedSubgraphByPkgs]{inducedSubgraphByPkgs()}}, \code{\link[=subgraphByDegree]{subgraphByDegree()}},
+\link[igraph:igraph-es-indexing]{igraph::igraph-es-indexing},
+\link[igraph:igraph-vs-indexing]{igraph::igraph-vs-indexing}
 }

@@ -13,7 +13,7 @@ Character string "all" is shorthand for that vector, character string
 "most" for the same vector without "Enhances", character string "strong"
 (default) for the first three elements of that vector.}
 
-\item{...}{parameters passed along to \code{\link{biocPkgList}}}
+\item{...}{parameters passed along to \code{\link[=biocPkgList]{biocPkgList()}}}
 }
 \value{
 A \code{data.frame} (also a \code{tbl_df}) of
@@ -26,7 +26,7 @@ core capabilities and data structures. This leads
 to package developers depending on other packages
 for interoperability and functionality. This
 function extracts package dependency information
-from \code{\link{biocPkgList}} and returns a tidy
+from \code{\link[=biocPkgList]{biocPkgList()}} and returns a tidy
 \code{data.frame} that can be used for analysis
 and to build graph structures of package dependencies.
 }
@@ -62,5 +62,5 @@ biocPkgList() |> select(Package, Description) |>
   head()
 }
 \seealso{
-See \code{\link{buildPkgDependencyIgraph}}, \code{\link{biocPkgList}}.
+See \code{\link[=buildPkgDependencyIgraph]{buildPkgDependencyIgraph()}}, \code{\link[=biocPkgList]{biocPkgList()}}.
 }

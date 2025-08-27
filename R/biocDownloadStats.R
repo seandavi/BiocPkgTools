@@ -205,7 +205,7 @@ pkgDownloadStats <-
 #'
 #' @importFrom dplyr filter group_by top_n collect
 #'
-#' @param download_stats a data.frame from \code{\link{biocDownloadStats}}
+#' @param download_stats a data.frame from [biocDownloadStats()]
 #'
 #' @examples
 #'

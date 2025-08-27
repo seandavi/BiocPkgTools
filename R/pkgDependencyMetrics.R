@@ -234,7 +234,7 @@ pkgDepImports <- function(pkg) {
 #' @param pkg character, the name of the package for which we want
 #'   to estimate the dependency gain
 #' @param depdf a tidy data frame with package dependency information
-#'   obtained through the function \code{\link{buildPkgDependencyDataFrame}}
+#'   obtained through the function [buildPkgDependencyDataFrame()]
 #' @param maxNbr numeric, the maximal number of direct dependencies to leave
 #'   out simultaneously
 #'
@@ -304,7 +304,7 @@ pkgCombDependencyGain <- function(pkg, depdf, maxNbr = 3L) {
 #' to obtain metrics on its dependency burden.
 #'
 #' @param depdf a tidy data frame with package dependency information
-#' obtained through the function \code{\link{buildPkgDependencyDataFrame}}.
+#' obtained through the function [buildPkgDependencyDataFrame()].
 #'
 #' @return A tidy data frame with different metrics on the
 #'         package dependency burden. More concretely, the following columns:

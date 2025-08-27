@@ -8,14 +8,14 @@
 #' packages.
 #'
 #' @section For developers:
-#' The \code{\link{biocBuildReport}} function returns a computable
-#' form of the Bioconductor Build Report. 
+#' The [biocBuildReport()] function returns a computable
+#' form of the Bioconductor Build Report.
 #'
 #' @section For users:
-#' The \code{\link{biocDownloadStats}} function gets Bioconductor
+#' The [biocDownloadStats()] function gets Bioconductor
 #' download stats, allowing users to quickly find commonly used
-#' packages. The \code{\link{biocPkgList}} is useful for getting
-#' a complete listing of all Bioconductor packages. 
+#' packages. The [biocPkgList()] is useful for getting
+#' a complete listing of all Bioconductor packages.
 #'
 #' @section Infrastructure:
 #' Bioconductor packages all have Digital Object Identifiers (DOIs).

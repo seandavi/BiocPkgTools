@@ -48,7 +48,7 @@ githubURLParts <- function(urls) {
 #' GitHub details for the listed packages.
 #'
 #' @details
-#' The \code{\link[gh]{gh}} function is used to
+#' The [gh::gh()] function is used to
 #' do the fetching. If the number of packages supplied
 #' to this function is large (>40 or so), it is possible
 #' to run into problems with API rate limits. The `gh`

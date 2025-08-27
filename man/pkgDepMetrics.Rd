@@ -11,7 +11,7 @@ pkgDepMetrics(pkg, depdf)
 to obtain metrics on its dependency burden.}
 
 \item{depdf}{a tidy data frame with package dependency information
-obtained through the function \code{\link{buildPkgDependencyDataFrame}}.}
+obtained through the function \code{\link[=buildPkgDependencyDataFrame]{buildPkgDependencyDataFrame()}}.}
 }
 \value{
 A tidy data frame with different metrics on the

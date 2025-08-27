@@ -7,7 +7,7 @@
 firstInBioc(download_stats)
 }
 \arguments{
-\item{download_stats}{a data.frame from \code{\link{biocDownloadStats}}}
+\item{download_stats}{a data.frame from \code{\link[=biocDownloadStats]{biocDownloadStats()}}}
 }
 \description{
 This function uses the biocDownloadStats

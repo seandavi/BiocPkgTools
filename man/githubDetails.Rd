@@ -23,7 +23,7 @@ further details. This function returns the
 GitHub details for the listed packages.
 }
 \details{
-The \code{\link[gh]{gh}} function is used to
+The \code{\link[gh:gh]{gh::gh()}} function is used to
 do the fetching. If the number of packages supplied
 to this function is large (>40 or so), it is possible
 to run into problems with API rate limits. The \code{gh}

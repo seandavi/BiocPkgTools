@@ -12,7 +12,7 @@ A \code{data.frame} of download statistics for
 all Bioconductor packages distributed by Anaconda, in tidy format.
 Note: Anaconda do not provide counts for unique IP addresses.  This column
 is listed as \code{NA} for all packages to provide continuity with data from
-Bioconductor.org obtained by \code{\link{biocDownloadStats}}.  The counts are
+Bioconductor.org obtained by \code{\link[=biocDownloadStats]{biocDownloadStats()}}.  The counts are
 updated monthly, so do not expect to see counts for the current month.
 }
 \description{

@@ -8,7 +8,7 @@ inducedSubgraphByPkgs(g, pkgs, pkg_color = "red")
 }
 \arguments{
 \item{g}{an igraph graph, typically created by
-\code{\link{buildPkgDependencyIgraph}}}
+\code{\link[=buildPkgDependencyIgraph]{buildPkgDependencyIgraph()}}}
 
 \item{pkgs}{character() vector of packages to
 include. Package names not included in

@@ -21,8 +21,7 @@ getBiocVignette(
 character(1) The filename of the downloaded vignette
 }
 \description{
-The actual vignette path is available using
-\code{\link{biocPkgList}}.
+The actual vignette path is available using \code{\link[=biocPkgList]{biocPkgList()}}.
 }
 \examples{
 x = biocPkgList()

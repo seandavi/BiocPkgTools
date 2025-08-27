@@ -1,7 +1,6 @@
 #' Download a Bioconductor vignette
 #'
-#' The actual vignette path is available using
-#' \code{\link{biocPkgList}}.
+#' The actual vignette path is available using [biocPkgList()].
 #'
 #' @param vignettePath character(1) the additional path information to get to the vignette
 #' @param destfile character(1) the file location to store the vignette

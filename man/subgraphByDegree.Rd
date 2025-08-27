@@ -8,7 +8,7 @@ subgraphByDegree(g, pkg, degree = 1, ...)
 }
 \arguments{
 \item{g}{an igraph graph, typically created by
-\code{\link{buildPkgDependencyIgraph}}}
+\code{\link[=buildPkgDependencyIgraph]{buildPkgDependencyIgraph()}}}
 
 \item{pkg}{character(1) package name from which to
 measure degree.}
@@ -16,14 +16,14 @@ measure degree.}
 \item{degree}{integer(1) degree, limit search for
 adjacent vertices to this degree.}
 
-\item{...}{passed on to \code{\link[igraph]{distances}}}
+\item{...}{passed on to \code{\link[igraph:distances]{igraph::distances()}}}
 }
 \value{
 An igraph graph, with only nodes and their
 edges within degree of the named package
 }
 \description{
-While the \code{\link{inducedSubgraphByPkgs}}
+While the \code{\link[=inducedSubgraphByPkgs]{inducedSubgraphByPkgs()}}
 returns the subgraph with the minimal connections
 between named packages, this function takes a vector of
 package names, a degree (1 or more) and returns the

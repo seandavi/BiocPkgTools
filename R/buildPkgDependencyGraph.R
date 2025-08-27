@@ -5,7 +5,7 @@
 #' to package developers depending on other packages
 #' for interoperability and functionality. This
 #' function extracts package dependency information
-#' from \code{\link{biocPkgList}} and returns a tidy
+#' from [biocPkgList()] and returns a tidy
 #' `data.frame` that can be used for analysis
 #' and to build graph structures of package dependencies.
 #'
@@ -15,11 +15,11 @@
 #'   "most" for the same vector without "Enhances", character string "strong"
 #'   (default) for the first three elements of that vector.
 #'
-#' @param ... parameters passed along to \code{\link{biocPkgList}}
+#' @param ... parameters passed along to [biocPkgList()]
 #'
 #' @importFrom dplyr bind_rows
 #'
-#' @seealso See \code{\link{buildPkgDependencyIgraph}}, \code{\link{biocPkgList}}.
+#' @seealso See [buildPkgDependencyIgraph()], [biocPkgList()].
 #'
 #' @note This function requires network access.
 #'
@@ -98,21 +98,21 @@ buildPkgDependencyDataFrame <-
 #' not an acyclic graph). This function simply
 #' returns an igraph graph from the package
 #' dependency data frame from a call to
-#' \code{\link{buildPkgDependencyDataFrame}} or
+#' [buildPkgDependencyDataFrame()] or
 #' any tidy data frame with rows of (Package, dependency)
 #' pairs. Additional columns are added as igraph edge
-#' attributes (see \code{\link[igraph]{graph_from_data_frame}}).
+#' attributes (see [igraph::graph_from_data_frame()]).
 #'
 #' @importFrom igraph graph_from_data_frame
 #'
 #' @param pkgDepDF a tidy data frame. See description for
 #' details.
 #'
-#' @seealso See \code{\link{buildPkgDependencyDataFrame}},
-#' \code{\link[igraph]{graph_from_data_frame}},
-#' \code{\link{inducedSubgraphByPkgs}}, \code{\link{subgraphByDegree}},
-#' \code{\link[igraph]{igraph-es-indexing}},
-#' \code{\link[igraph]{igraph-vs-indexing}}
+#' @seealso See [buildPkgDependencyDataFrame()],
+#' [igraph::graph_from_data_frame()],
+#' [inducedSubgraphByPkgs()], [subgraphByDegree()],
+#' [igraph::igraph-es-indexing],
+#' [igraph::igraph-vs-indexing]
 #'
 #' @return An igraph directed graph. See the igraph
 #' package for details of what can be done.
@@ -156,7 +156,7 @@ buildPkgDependencyIgraph <- function(pkgDepDF) {
 #' and their intervening dependencies.
 #'
 #' @param g an igraph graph, typically created by
-#' \code{\link{buildPkgDependencyIgraph}}
+#' [buildPkgDependencyIgraph()]
 #'
 #' @param pkgs character() vector of packages to
 #' include. Package names not included in
@@ -207,7 +207,7 @@ inducedSubgraphByPkgs <- function(g, pkgs, pkg_color='red') {
 
 #' Subset graph by degree
 #'
-#' While the \code{\link{inducedSubgraphByPkgs}}
+#' While the [inducedSubgraphByPkgs()]
 #' returns the subgraph with the minimal connections
 #' between named packages, this function takes a vector of
 #' package names, a degree (1 or more) and returns the
@@ -215,7 +215,7 @@ inducedSubgraphByPkgs <- function(g, pkgs, pkg_color='red') {
 #' package named.
 #'
 #' @param g an igraph graph, typically created by
-#' \code{\link{buildPkgDependencyIgraph}}
+#' [buildPkgDependencyIgraph()]
 #'
 #' @param pkg character(1) package name from which to
 #' measure degree.
@@ -223,7 +223,7 @@ inducedSubgraphByPkgs <- function(g, pkgs, pkg_color='red') {
 #' @param degree integer(1) degree, limit search for
 #' adjacent vertices to this degree.
 #'
-#' @param ... passed on to \code{\link[igraph]{distances}}
+#' @param ... passed on to [igraph::distances()]
 #'
 #' @importFrom igraph distances induced_subgraph V is_igraph
 #'
