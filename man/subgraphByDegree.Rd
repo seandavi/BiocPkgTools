@@ -10,7 +10,7 @@ subgraphByDegree(g, pkg, degree = 1, ...)
 \item{g}{an igraph graph, typically created by
 \code{\link[=buildPkgDependencyIgraph]{buildPkgDependencyIgraph()}}}
 
-\item{pkg}{character(1) package name from which to
+\item{pkg}{\code{character(1)} package name from which to
 measure degree.}
 
 \item{degree}{integer(1) degree, limit search for

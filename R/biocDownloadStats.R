@@ -67,7 +67,7 @@ utils::globalVariables(
 #' @details Note that Bioconductor package download
 #' stats are not version-specific.
 #'
-#' @param pkgType character() All, some, or one of 'software',
+#' @param pkgType `character()` All, some, or one of 'software',
 #'   'data-experiment', 'workflows', or 'data-annotation' (defaults to all
 #'   types)
 #'
@@ -153,12 +153,12 @@ biocDownloadStats <-
 
 #' Get Bioconductor download statistics for a package
 #'
-#' @param pkg character(1) The name of a Bioconductor package
+#' @param pkg `character(1)` The name of a Bioconductor package
 #'
-#' @param pkgType character(1) One of 'software', 'data-experiment',
+#' @param pkgType `character(1)` One of 'software', 'data-experiment',
 #'     'workflows', or 'data-annotation' (defaults to 'software')
 #'
-#' @param years numeric(), character() A vector of years from which to
+#' @param years numeric(), `character()` A vector of years from which to
 #'     obtain download statistics (defaults to current year)
 #'
 #' @return A `tibble` of download statistics
@@ -356,26 +356,26 @@ latestPkgStats <-
 #'   For information on other columns, refer to the GitHub API under repository
 #'   issues or pulls (e.g., `/repos/:repo/issues`).
 #'
-#' @param gh_repo character(1) The GitHub repository location including the
+#' @param gh_repo `character(1)` The GitHub repository location including the
 #'   username / organization and the repository name, e.g.,
 #'   "Bioconductor/S4Vectors"
 #'
-#' @param activity character(1) The type of repository activity to pull from the
+#' @param activity `character(1)` The type of repository activity to pull from the
 #'   GitHub API. It can be one of "issues" (default), "pulls", or "commits".
 #'
-#' @param Date character(1) The date cutoff from which to analyze closed issues
+#' @param Date `character(1)` The date cutoff from which to analyze closed issues
 #'   in the YYYY-MM-DD or YYYY-MM-DDTHH:MM:SSZ format (ISO 8601).
 #'
-#' @param status character(1) One of 'closed', 'open', or 'all' corresponding to
+#' @param status `character(1)` One of 'closed', 'open', or 'all' corresponding to
 #'   the issue state desired from the GitHub API (Default: "closed"). This
 #'   argument is ignored for the "commits" activity report.
 #'
-#' @param issue_metadata character() The metadata labels to extract from the
+#' @param issue_metadata `character()` The metadata labels to extract from the
 #'   `gh::gh` response. See `?gh::gh` for more details. Defaults to
 #'   'created_at', 'number', and 'title'. This argument is ignored for the
 #'   "commits" activity report.
 #'
-#' @param token character(1) For big requests, e.g., commit history, you may be
+#' @param token `character(1)` For big requests, e.g., commit history, you may be
 #'   prompted to use a GitHub Personal Access Token. Enter the token as plain
 #'   text.
 #'

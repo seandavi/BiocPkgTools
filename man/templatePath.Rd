@@ -9,7 +9,7 @@ templatePath(
 )
 }
 \arguments{
-\item{type}{character(1) Either one of "buildemail", "deprecation",
+\item{type}{\code{character(1)} Either one of "buildemail", "deprecation",
 "deprecguide", "cranreport", or "revdepnote". See the templates in the
 \code{resources} folder.}
 }

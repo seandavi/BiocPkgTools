@@ -110,7 +110,7 @@ orcid_table <- function(orcids) {
 }
 
 #' get ORCID ids from cre fields of Authors@R in packageDescription results
-#' @param pkgnames character() must be installed
+#' @param pkgnames `character()` must be installed
 #' @note returns NA if no ORCID provided in Authors@R for package description
 #' @examples
 #' get_cre_orcids(c("BiocPkgTools", "utils"))

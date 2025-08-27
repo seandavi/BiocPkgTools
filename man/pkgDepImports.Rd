@@ -7,7 +7,7 @@
 pkgDepImports(pkg)
 }
 \arguments{
-\item{pkg}{character() name of the package for which we want
+\item{pkg}{\code{character()} name of the package for which we want
 to obtain the functionality calls imported from its dependencies
 and used within the package.}
 }

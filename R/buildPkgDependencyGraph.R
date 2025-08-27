@@ -9,7 +9,7 @@
 #' `data.frame` that can be used for analysis
 #' and to build graph structures of package dependencies.
 #'
-#' @param dependencies character() a vector listing the types of dependencies, a
+#' @param dependencies `character()` a vector listing the types of dependencies, a
 #'   subset of c("Depends", "Imports", "LinkingTo", "Suggests", "Enhances").
 #'   Character string "all" is shorthand for that vector, character string
 #'   "most" for the same vector without "Enhances", character string "strong"
@@ -158,11 +158,11 @@ buildPkgDependencyIgraph <- function(pkgDepDF) {
 #' @param g an igraph graph, typically created by
 #' [buildPkgDependencyIgraph()]
 #'
-#' @param pkgs character() vector of packages to
+#' @param pkgs `character()` vector of packages to
 #' include. Package names not included in
 #' the graph are ignored.
 #'
-#' @param pkg_color character(1) giving color of named
+#' @param pkg_color `character(1)` giving color of named
 #' packages. Other packages in the graph that fall in
 #' connecting paths will be colored as the igraph default.
 #'
@@ -217,7 +217,7 @@ inducedSubgraphByPkgs <- function(g, pkgs, pkg_color='red') {
 #' @param g an igraph graph, typically created by
 #' [buildPkgDependencyIgraph()]
 #'
-#' @param pkg character(1) package name from which to
+#' @param pkg `character(1)` package name from which to
 #' measure degree.
 #'
 #' @param degree integer(1) degree, limit search for

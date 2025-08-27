@@ -1,16 +1,16 @@
 #' Grab build report results from BUILD_STATUS_DB for a particular package range
 #'
-#' @param start character(1) alphabetically first package name in range
+#' @param start `character(1)` alphabetically first package name in range
 #'
-#' @param end character(1) alphabetically last package name in range
+#' @param end `character(1)` alphabetically last package name in range
 #'
-#' @param condition character(1) condition string, typically 'ERROR' or
+#' @param condition `character(1)` condition string, typically 'ERROR' or
 #'     'WARNING'
 #'
-#' @param phase character(1) string for phase of event:
+#' @param phase `character(1)` string for phase of event:
 #'     'install', 'checksrc', or 'buildsrc' (default)
 #'
-#' @param version character(1) string indication Bioconductor version, either
+#' @param version `character(1)` string indication Bioconductor version, either
 #'     'devel' (default) or 'release'
 #'
 #' @author Vincent J. Carey

@@ -7,7 +7,7 @@
 buildPkgDependencyDataFrame(dependencies = c("strong", "most", "all"), ...)
 }
 \arguments{
-\item{dependencies}{character() a vector listing the types of dependencies, a
+\item{dependencies}{\code{character()} a vector listing the types of dependencies, a
 subset of c("Depends", "Imports", "LinkingTo", "Suggests", "Enhances").
 Character string "all" is shorthand for that vector, character string
 "most" for the same vector without "Enhances", character string "strong"

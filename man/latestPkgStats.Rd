@@ -11,14 +11,14 @@ latestPkgStats(
 )
 }
 \arguments{
-\item{gh_repo}{character(1) The GitHub repository location including the
+\item{gh_repo}{\code{character(1)} The GitHub repository location including the
 username / organization and the repository name, e.g.,
 "Bioconductor/S4Vectors"}
 
-\item{Date}{character(1) The date cutoff from which to analyze closed issues
+\item{Date}{\code{character(1)} The date cutoff from which to analyze closed issues
 in the YYYY-MM-DD or YYYY-MM-DDTHH:MM:SSZ format (ISO 8601).}
 
-\item{pkgType}{character(1) One of 'software', 'data-experiment',
+\item{pkgType}{\code{character(1)} One of 'software', 'data-experiment',
 'workflows', or 'data-annotation' (defaults to 'software')}
 }
 \description{

@@ -9,7 +9,7 @@ biocDownloadStats(
 )
 }
 \arguments{
-\item{pkgType}{character() All, some, or one of 'software',
+\item{pkgType}{\code{character()} All, some, or one of 'software',
 'data-experiment', 'workflows', or 'data-annotation' (defaults to all
 types)}
 }

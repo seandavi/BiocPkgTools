@@ -10,11 +10,11 @@ inducedSubgraphByPkgs(g, pkgs, pkg_color = "red")
 \item{g}{an igraph graph, typically created by
 \code{\link[=buildPkgDependencyIgraph]{buildPkgDependencyIgraph()}}}
 
-\item{pkgs}{character() vector of packages to
+\item{pkgs}{\code{character()} vector of packages to
 include. Package names not included in
 the graph are ignored.}
 
-\item{pkg_color}{character(1) giving color of named
+\item{pkg_color}{\code{character(1)} giving color of named
 packages. Other packages in the graph that fall in
 connecting paths will be colored as the igraph default.}
 }

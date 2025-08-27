@@ -22,7 +22,7 @@ hasBiocMaint(
 \item{main}{\code{character(1)} A regex string to search for in the \code{Maintainer}
 column from the \code{biocPkgList()} output.}
 
-\item{version}{character(1) the character version number
+\item{version}{\code{character(1)} the character version number
 as used to access the online build report. For
 example, "3.14". The default is the "current version"
 as given by \code{BiocManager::version()}. Note

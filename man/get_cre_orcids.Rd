@@ -7,7 +7,7 @@
 get_cre_orcids(pkgnames)
 }
 \arguments{
-\item{pkgnames}{character() must be installed}
+\item{pkgnames}{\code{character()} must be installed}
 }
 \description{
 get ORCID ids from cre fields of Authors@R in packageDescription results

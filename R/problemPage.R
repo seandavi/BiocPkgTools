@@ -53,11 +53,11 @@ checkDeps <- function(dependsOn, ver="devel", includeOK = FALSE) {
 #' @importFrom htmltools a
 #' @importFrom DT datatable
 #'
-#' @param authorPattern character(1) regexp used with grep() to filter author field of package DESCRIPTION for listing
-#' @param dependsOn character(1) name of a Bioconductor package. The function will return the status of packages
+#' @param authorPattern `character(1)` regexp used with grep() to filter author field of package DESCRIPTION for listing
+#' @param dependsOn `character(1)` name of a Bioconductor package. The function will return the status of packages
 #' that directly depend on this package  Can only be used when 'authorPattern' is the empty string.
-#' @param ver character(1) version tag for Bioconductor
-#' @param includeOK logical(1) include entries from the build report that are listed
+#' @param ver `character(1)` version tag for Bioconductor
+#' @param includeOK `logical(1)` include entries from the build report that are listed
 #'     as "OK". Default FALSE will result in only those entries that
 #'     are in WARNING or ERROR state.
 #'

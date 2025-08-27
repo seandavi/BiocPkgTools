@@ -11,7 +11,7 @@ biocBuildReport(
 )
 }
 \arguments{
-\item{version}{character(1) the character version number
+\item{version}{\code{character(1)} the character version number
 as used to access the online build report. For
 example, "3.14". The default is the "current version"
 as given by \code{BiocManager::version()}. Note
@@ -26,7 +26,7 @@ status information for. Valid values are:
 \item \code{workflows}: Workflow packages
 }}
 
-\item{stage.timings}{logical(1) Whether to include the start, end, and
+\item{stage.timings}{\code{logical(1)} Whether to include the start, end, and
 elapsed time for each build, check, install stage from each building in
 the result (default: FALSE)}
 }

@@ -11,9 +11,9 @@ pkgDownloadRank(
 )
 }
 \arguments{
-\item{pkg}{character(1) The name of a Bioconductor package}
+\item{pkg}{\code{character(1)} The name of a Bioconductor package}
 
-\item{pkgType}{character(1) One of 'software', 'data-experiment',
+\item{pkgType}{\code{character(1)} One of 'software', 'data-experiment',
 'workflows', or 'data-annotation' (defaults to 'software')}
 
 \item{version}{(Optional) \code{character(1)} or \code{package_version}

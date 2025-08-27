@@ -7,10 +7,10 @@
 githubDetails(pkgs, sleep = 0)
 }
 \arguments{
-\item{pkgs}{a character() vector of username/repo
+\item{pkgs}{a \code{character()} vector of username/repo
 for one or more GitHub repos, such as \code{seandavi/GEOquery}.}
 
-\item{sleep}{numeric() denoting the number of seconds to
+\item{sleep}{\code{numeric()} denoting the number of seconds to
 sleep between GitHub API calls. Since GitHub rate limits
 its APIs, it might be necessary to either use small
 chunks of packages iteratively or to supply a non-zero

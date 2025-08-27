@@ -13,12 +13,12 @@
 #'
 #' The GUI is available here: \url{https://doi.datacite.org/}.
 #'
-#' @param pkg character(1) package name
-#' @param authors character vector of authors (will be "pasted" together)
-#' @param pubyear integer(1) publication year
+#' @param pkg `character(1)` package name
+#' @param authors `character()` vector of authors (will be "pasted" together)
+#' @param pubyear `integer(1)` publication year
 #' @param event Either "hide", "register", or publish". Typically, we use
 #'     "publish" to make the DOI findable.
-#' @param testing logical(1) If true, will use the apitest
+#' @param testing `logical(1)` If true, will use the apitest
 #'     user with the password apitest. These DOIs will expire.
 #'     The same apitest:apitest combination can be used to
 #'     login to the website for doing things using the
@@ -26,7 +26,7 @@
 #'     user credentials should be in the correct environment
 #'     variables
 #'
-#' @return The DOI as a character(1) vector.
+#' @return The DOI as a `character(1)` vector.
 #'
 #' @importFrom httr VERB content_type content add_headers message_for_status
 #' @importFrom jsonlite toJSON fromJSON

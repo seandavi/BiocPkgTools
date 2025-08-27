@@ -134,7 +134,7 @@
 #' @importFrom tibble tibble
 #' @importFrom stats setNames
 #'
-#' @param pkg character() name of the package for which we want
+#' @param pkg `character()` name of the package for which we want
 #' to obtain the functionality calls imported from its dependencies
 #' and used within the package.
 #'
@@ -300,7 +300,7 @@ pkgCombDependencyGain <- function(pkg, depdf, maxNbr = 3L) {
 #'
 #' @importFrom igraph subcomponent ego
 #'
-#' @param pkg character() name of the package for which we want
+#' @param pkg `character()` name of the package for which we want
 #' to obtain metrics on its dependency burden.
 #'
 #' @param depdf a tidy data frame with package dependency information

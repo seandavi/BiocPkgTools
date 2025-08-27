@@ -12,14 +12,14 @@ problemPage(
 )
 }
 \arguments{
-\item{authorPattern}{character(1) regexp used with grep() to filter author field of package DESCRIPTION for listing}
+\item{authorPattern}{\code{character(1)} regexp used with grep() to filter author field of package DESCRIPTION for listing}
 
-\item{dependsOn}{character(1) name of a Bioconductor package. The function will return the status of packages
+\item{dependsOn}{\code{character(1)} name of a Bioconductor package. The function will return the status of packages
 that directly depend on this package  Can only be used when 'authorPattern' is the empty string.}
 
-\item{ver}{character(1) version tag for Bioconductor}
+\item{ver}{\code{character(1)} version tag for Bioconductor}
 
-\item{includeOK}{logical(1) include entries from the build report that are listed
+\item{includeOK}{\code{logical(1)} include entries from the build report that are listed
 as "OK". Default FALSE will result in only those entries that
 are in WARNING or ERROR state.}
 }

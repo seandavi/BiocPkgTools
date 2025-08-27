@@ -2,13 +2,13 @@
 #'
 #' The actual vignette path is available using [biocPkgList()].
 #'
-#' @param vignettePath character(1) the additional path information to get to the vignette
-#' @param destfile character(1) the file location to store the vignette
-#' @param version character(1) such as "3.7", defaults to user version
+#' @param vignettePath `character(1)` the additional path information to get to the vignette
+#' @param destfile `character(1)` the file location to store the vignette
+#' @param version `character(1)` such as "3.7", defaults to user version
 #'
 #' @importFrom utils download.file
 #'
-#' @return character(1) The filename of the downloaded vignette
+#' @return `character(1)` The filename of the downloaded vignette
 #'
 #' @examples
 #' x = biocPkgList()

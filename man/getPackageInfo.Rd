@@ -8,7 +8,7 @@ directory.}
 getPackageInfo(dir)
 }
 \arguments{
-\item{dir}{character(1) Path to package}
+\item{dir}{\code{character(1)} Path to package}
 }
 \value{
 A \code{data.frame}

@@ -13,17 +13,17 @@ biocPkgRanges(
 )
 }
 \arguments{
-\item{start}{character(1) alphabetically first package name in range}
+\item{start}{\code{character(1)} alphabetically first package name in range}
 
-\item{end}{character(1) alphabetically last package name in range}
+\item{end}{\code{character(1)} alphabetically last package name in range}
 
-\item{condition}{character(1) condition string, typically 'ERROR' or
+\item{condition}{\code{character(1)} condition string, typically 'ERROR' or
 'WARNING'}
 
-\item{phase}{character(1) string for phase of event:
+\item{phase}{\code{character(1)} string for phase of event:
 'install', 'checksrc', or 'buildsrc' (default)}
 
-\item{version}{character(1) string indication Bioconductor version, either
+\item{version}{\code{character(1)} string indication Bioconductor version, either
 'devel' (default) or 'release'}
 }
 \description{

@@ -7,16 +7,16 @@
 generateBiocPkgDOI(pkg, authors, pubyear, event = "publish", testing = TRUE)
 }
 \arguments{
-\item{pkg}{character(1) package name}
+\item{pkg}{\code{character(1)} package name}
 
-\item{authors}{character vector of authors (will be "pasted" together)}
+\item{authors}{\code{character()} vector of authors (will be "pasted" together)}
 
-\item{pubyear}{integer(1) publication year}
+\item{pubyear}{\code{integer(1)} publication year}
 
 \item{event}{Either "hide", "register", or publish". Typically, we use
 "publish" to make the DOI findable.}
 
-\item{testing}{logical(1) If true, will use the apitest
+\item{testing}{\code{logical(1)} If true, will use the apitest
 user with the password apitest. These DOIs will expire.
 The same apitest:apitest combination can be used to
 login to the website for doing things using the
@@ -25,7 +25,7 @@ user credentials should be in the correct environment
 variables}
 }
 \value{
-The DOI as a character(1) vector.
+The DOI as a \code{character(1)} vector.
 }
 \description{
 This function makes calls out to the DataCite REST API described

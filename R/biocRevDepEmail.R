@@ -45,7 +45,7 @@
 #' @param packages `character()` A vector of CRAN and/or Bioconductor packages
 #'   for whose reverse dependencies are to be checked and notified.
 #'
-#' @param cc character() A vector of email addresses for sending the message
+#' @param cc `character()` A vector of email addresses for sending the message
 #'   as a carbon copy.
 #'
 #' @param pkg `character(1)` DEPRECATED. The name of a single package whose

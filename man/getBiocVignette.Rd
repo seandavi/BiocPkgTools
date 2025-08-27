@@ -11,14 +11,14 @@ getBiocVignette(
 )
 }
 \arguments{
-\item{vignettePath}{character(1) the additional path information to get to the vignette}
+\item{vignettePath}{\code{character(1)} the additional path information to get to the vignette}
 
-\item{destfile}{character(1) the file location to store the vignette}
+\item{destfile}{\code{character(1)} the file location to store the vignette}
 
-\item{version}{character(1) such as "3.7", defaults to user version}
+\item{version}{\code{character(1)} such as "3.7", defaults to user version}
 }
 \value{
-character(1) The filename of the downloaded vignette
+\code{character(1)} The filename of the downloaded vignette
 }
 \description{
 The actual vignette path is available using \code{\link[=biocPkgList]{biocPkgList()}}.

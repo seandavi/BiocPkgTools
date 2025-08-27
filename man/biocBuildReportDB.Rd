@@ -23,7 +23,7 @@ status information for. Valid values are:
 \item \code{workflows}: Workflow packages
 }}
 
-\item{stage.timings}{logical(1) Whether to include the start, end, and
+\item{stage.timings}{\code{logical(1)} Whether to include the start, end, and
 elapsed time for each build, check, install stage from each building in
 the result (default: FALSE)}
 }

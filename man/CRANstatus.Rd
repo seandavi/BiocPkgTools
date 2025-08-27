@@ -15,22 +15,22 @@ CRANstatus(
 )
 }
 \arguments{
-\item{pkg}{character(1) The name of the package in trouble}
+\item{pkg}{\code{character(1)} The name of the package in trouble}
 
-\item{core.name}{character(1) The full name of the core team member}
+\item{core.name}{\code{character(1)} The full name of the core team member}
 
-\item{core.email}{character(1) The Roswell Park email of the core team
+\item{core.email}{\code{character(1)} The Roswell Park email of the core team
 member}
 
-\item{core.id}{character(1) The internal identifier for the Roswell employee.
+\item{core.id}{\code{character(1)} The internal identifier for the Roswell employee.
 This ID usually matches \verb{^[A-Z]\{2\}[0-9]\{5\}} for more recent identifiers.}
 
 \item{to.mail}{The email of the CRAN report recipient}
 
-\item{dry.run}{logical(1) Display the email without sending to the recipient.
+\item{dry.run}{\code{logical(1)} Display the email without sending to the recipient.
 It only works for HTML email reports and ignored when \code{textOnly=TRUE}}
 
-\item{emailTemplate}{character(1) The path to the email template Rmd file as
+\item{emailTemplate}{\code{character(1)} The path to the email template Rmd file as
 obtained by \code{templatePath()}. A custom template can be provided as file
 path.}
 }

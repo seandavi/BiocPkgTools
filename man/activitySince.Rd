@@ -14,26 +14,26 @@ activitySince(
 )
 }
 \arguments{
-\item{gh_repo}{character(1) The GitHub repository location including the
+\item{gh_repo}{\code{character(1)} The GitHub repository location including the
 username / organization and the repository name, e.g.,
 "Bioconductor/S4Vectors"}
 
-\item{activity}{character(1) The type of repository activity to pull from the
+\item{activity}{\code{character(1)} The type of repository activity to pull from the
 GitHub API. It can be one of "issues" (default), "pulls", or "commits".}
 
-\item{status}{character(1) One of 'closed', 'open', or 'all' corresponding to
+\item{status}{\code{character(1)} One of 'closed', 'open', or 'all' corresponding to
 the issue state desired from the GitHub API (Default: "closed"). This
 argument is ignored for the "commits" activity report.}
 
-\item{Date}{character(1) The date cutoff from which to analyze closed issues
+\item{Date}{\code{character(1)} The date cutoff from which to analyze closed issues
 in the YYYY-MM-DD or YYYY-MM-DDTHH:MM:SSZ format (ISO 8601).}
 
-\item{issue_metadata}{character() The metadata labels to extract from the
+\item{issue_metadata}{\code{character()} The metadata labels to extract from the
 \code{gh::gh} response. See \code{?gh::gh} for more details. Defaults to
 'created_at', 'number', and 'title'. This argument is ignored for the
 "commits" activity report.}
 
-\item{token}{character(1) For big requests, e.g., commit history, you may be
+\item{token}{\code{character(1)} For big requests, e.g., commit history, you may be
 prompted to use a GitHub Personal Access Token. Enter the token as plain
 text.}
 }

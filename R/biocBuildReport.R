@@ -7,13 +7,13 @@
 #' from the build report online pages to generate
 #' a tidy data frame version of the build report.
 #'
-#' @param version character(1) the character version number
+#' @param version `character(1)` the character version number
 #' as used to access the online build report. For
 #' example, "3.14". The default is the "current version"
 #' as given by \code{BiocManager::version()}. Note
 #' that this is a character vector of length one and not a number.
 #'
-#' @param stage.timings logical(1) Whether to include the start, end, and
+#' @param stage.timings `logical(1)` Whether to include the start, end, and
 #' elapsed time for each build, check, install stage from each building in
 #' the result (default: FALSE)
 #'
