@@ -18,7 +18,7 @@ Get a \code{data.frame} of employment info from ORCID
 \examples{
 if (interactive()) {
     orcid_table(
-        orcid_ids = c(
+        orcids = c(
             "0000-0002-3242-0582",
             "0000-0003-4046-0063",
             "0000-0003-2725-0694"
