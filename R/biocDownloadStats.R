@@ -77,7 +77,7 @@ utils::globalVariables(
 #' @importFrom BiocFileCache BiocFileCache bfcupdate bfcneedsupdate bfcrpath
 #'     bfcquery bfcnew bfcdownload
 #'
-#' @return A \code{tibble} of download statistics for all Bioconductor packages
+#' @return A `tibble` of download statistics for all Bioconductor packages
 #'
 #' @examples
 #' biocDownloadStats()
@@ -161,7 +161,7 @@ biocDownloadStats <-
 #' @param years numeric(), character() A vector of years from which to
 #'     obtain download statistics (defaults to current year)
 #'
-#' @return A \code{tibble} of download statistics
+#' @return A `tibble` of download statistics
 #'
 #' @examples
 #'

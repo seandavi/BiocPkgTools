@@ -51,13 +51,13 @@ githubURLParts <- function(urls) {
 #' The \code{\link[gh]{gh}} function is used to
 #' do the fetching. If the number of packages supplied
 #' to this function is large (>40 or so), it is possible
-#' to run into problems with API rate limits. The \code{gh}
+#' to run into problems with API rate limits. The `gh`
 #' package uses the environment variable "GITHUB_PAT"
 #' (for personal access token) to authenticate and then
 #' provide higher rate limits. If you run into problems
 #' with rate limits, set sleep to some small positive
 #' number to slow queries. Alternatively, create a Personal
-#' Access Token on GitHub and register it. See the \code{gh}
+#' Access Token on GitHub and register it. See the `gh`
 #' package for details.
 #'
 #' @importFrom gh gh

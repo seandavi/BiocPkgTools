@@ -2,7 +2,7 @@
 
 #' Check the CRAN build report page and email a notification
 #'
-#' The \code{CRANstatus} function allows users to check the status of a package
+#' The `CRANstatus` function allows users to check the status of a package
 #' and send an email report of any failures.
 #'
 #' @inheritParams biocBuildEmail

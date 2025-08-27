@@ -74,12 +74,10 @@ authentication information (default: "~/.blastula_creds"). See
 A character string of the email
 }
 \description{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{The \code{biocBuildEmail} function provides a template for notifying
-}\if{html}{\out{</div>}}
-
+The \code{biocBuildEmail} function provides a template for notifying
 maintainers of errors in the Bioconductor Build System (BBS). This
-convenience function returns the body of the email from a template
-within the package and provides a copy in the clipboard.
+convenience function returns the body of the email from a template within the
+package and provides a copy in the clipboard.
 }
 \details{
 The \code{credFile} argument is a convenience for avoiding password entry

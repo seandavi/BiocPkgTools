@@ -6,7 +6,7 @@
 #' for interoperability and functionality. This
 #' function extracts package dependency information
 #' from \code{\link{biocPkgList}} and returns a tidy
-#' \code{data.frame} that can be used for analysis
+#' `data.frame` that can be used for analysis
 #' and to build graph structures of package dependencies.
 #'
 #' @param dependencies character() a vector listing the types of dependencies, a
@@ -23,7 +23,7 @@
 #'
 #' @note This function requires network access.
 #'
-#' @return A \code{data.frame} (also a \code{tbl_df}) of
+#' @return A `data.frame` (also a `tbl_df`) of
 #' S3 class "biocDepDF" including columns "Package", "dependency",
 #' and "edgetype".
 #'
@@ -211,7 +211,7 @@ inducedSubgraphByPkgs <- function(g, pkgs, pkg_color='red') {
 #' returns the subgraph with the minimal connections
 #' between named packages, this function takes a vector of
 #' package names, a degree (1 or more) and returns the
-#' subgraph(s) that are within \code{degree} of the
+#' subgraph(s) that are within `degree` of the
 #' package named.
 #'
 #' @param g an igraph graph, typically created by

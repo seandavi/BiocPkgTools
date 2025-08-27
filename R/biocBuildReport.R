@@ -19,7 +19,7 @@
 #'
 #' @inheritParams biocBuildStatusDB
 #'
-#' @return A \code{tbl_df} object with columns pkg, version,
+#' @return A `tbl_df` object with columns pkg, version,
 #' author, commit, date, node, stage, and result.
 #'
 #' @importFrom readr read_lines

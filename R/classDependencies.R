@@ -4,15 +4,15 @@ utils::globalVariables(".from")
 #'
 #' As the title says it should do something with class relationships
 #'
-#' @param class a single \code{character} value defining a \sQuote{S4} class
+#' @param class a single `character` value defining a \sQuote{S4} class
 #'   name
-#' @param includeUnions \code{TRUE} or \code{FALSE}: Should union definitions
-#'   included in the result? (default: \code{FALSE})
+#' @param includeUnions `TRUE` or `FALSE`: Should union definitions
+#'   included in the result? (default: `FALSE`)
 #' @param data a \code{data.frame} with compatible columns. See output of
-#'   \code{buildClassDepData}
-#' @param g an \code{igraph} object with compatible edge attributes. See output
-#'   of \code{buildClassDepGraph}
-#' @param pkg a single \code{character} value defining a package name
+#'   `buildClassDepData`
+#' @param g an `igraph` object with compatible edge attributes. See output
+#'   of `buildClassDepGraph`
+#' @param pkg a single `character` value defining a package name
 #'
 #' @name class-dependencies
 #'

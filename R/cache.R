@@ -28,7 +28,7 @@
 #' @section pkgToolsCache:
 #' Get the directory location of the cache. It will prompt the user to create
 #' a cache if not already created. A specific directory can be used via
-#' \code{setCache}.
+#' `setCache`.
 #'
 #' @section setCache:
 #' Specify the directory location of the data cache. By default, it will
@@ -41,7 +41,7 @@
 #' @param ask logical (default TRUE when interactive session) Confirm the file
 #' location of the cache directory
 #'
-#' @param ... For \code{pkgToolsCache}, arguments are passed to \code{setCache}
+#' @param ... For `pkgToolsCache`, arguments are passed to `setCache`
 #'
 #' @export
 setCache <-

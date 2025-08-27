@@ -130,11 +130,10 @@ templatePath <- function(
 #'
 #' @title Create and copy e-mail package notification template to clipboard
 #'
-#' @description
-#'     The \code{biocBuildEmail} function provides a template for notifying
+#' @description The `biocBuildEmail` function provides a template for notifying
 #' maintainers of errors in the Bioconductor Build System (BBS). This
-#' convenience function returns the body of the email from a template
-#' within the package and provides a copy in the clipboard.
+#' convenience function returns the body of the email from a template within the
+#' package and provides a copy in the clipboard.
 #'
 #' @param pkg character(1) The name of the package in trouble
 #'
