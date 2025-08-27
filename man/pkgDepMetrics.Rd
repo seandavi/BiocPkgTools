@@ -53,7 +53,7 @@ Elaborate a report on the dependency burden of a given package.
 }
 \examples{
 depdf <- buildPkgDependencyDataFrame(
-  dependencies=c("Depends", "Imports"), 
+  dependencies=c("Depends", "Imports"),
   repo=c("BioCsoft", "CRAN")
 )
 pkgDepMetrics('BiocPkgTools', depdf)
