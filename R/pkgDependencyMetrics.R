@@ -359,7 +359,7 @@ pkgDepMetrics <- function(pkg, depdf) {
   g <- buildPkgDependencyIgraph(depdf)
 
   ## exclude 'R', 'base' and 'methods'
-  excludedpkgs <- c("R", "base", "methods")
+  excludedpkgs <- c("R", "base", "methods", "rorcid")
   g <- induced_subgraph(g, setdiff(names(V(g)), excludedpkgs))
 
   ## get all reachable dependencies
