@@ -27,10 +27,21 @@ biocMaintained <-
         pkgType = c(
             "software", "data-experiment",
             "workflows", "data-annotation"
-        )
+        ),
+        test.API = FALSE
     )
 {
     pkgType <- match.arg(pkgType, several.ok = TRUE)
+    if (test.API) {
+        .TEST_API_URL <- "http://127.0.0.1:8000/"
+        req_url <- paste0(.TEST_API_URL, "packages/", main)
+        res <- request(req_url) |>
+            req_perform() |>
+            resp_body_json()
+        return(
+            do.call(rbind.data.frame, res)
+        )
+    }
     repos <- .matchGetShortName(pkgType, "biocmanager.names")
     pkgs <- biocPkgList(version = version, repo = repos)
     biocmaint <- vapply(
