@@ -27,34 +27,47 @@ biocBuildStatusDB <- function(
     version = BiocManager::version(),
     pkgType = c(
         "software", "data-experiment", "data-annotation", "workflows"
-    )
+    ),
+    ...,
+    test.API = FALSE
 ) {
-    if (version %in% c("release", "devel"))
-        version <- BiocManager:::.version_bioc(version)
+    if (test.API) {
+        args <- list(...)
+        main <- args[["main"]]
+        .TEST_API_URL <- "http://127.0.0.1:8000/"
+        req_url <- paste0(.TEST_API_URL, "checkResults/maintainer/", main)
+        sdat <- request(req_url) |>
+            req_perform() |>
+            resp_body_json() |>
+            do.call(what = rbind.data.frame, args = _)
+    } else {
+        if (version %in% c("release", "devel"))
+            version <- BiocManager:::.version_bioc(version)
 
-    pkgType <- match.arg(pkgType, several.ok = TRUE)
+        pkgType <- match.arg(pkgType, several.ok = TRUE)
 
-    if (version < package_version("3.14"))
-        pkgType <- "software"
+        if (version < package_version("3.14"))
+            pkgType <- "software"
 
-    pkgType <- .matchGetShortName(pkgType, "stat.url")
+        pkgType <- .matchGetShortName(pkgType, "stat.url")
 
-    urls <- get_build_status_db_url(version, pkgType)
-    names(urls) <- pkgType
-    urls <- Filter(.url_exists, urls)
+        urls <- get_build_status_db_url(version, pkgType)
+        names(urls) <- pkgType
+        urls <- Filter(.url_exists, urls)
 
-    url_list <- lapply(
-        urls,
-        function(url) {
-            file <- .cache_url_file(url)
-            dat <- readLines(file)
-            sdat <- strsplit(dat, "#|:\\s")
-        }
-    )
-    sdat <- do.call(
-        rbind, unlist(url_list, recursive = FALSE)
-    )
-    sdat <- as.data.frame(sdat)
+        url_list <- lapply(
+            urls,
+            function(url) {
+                file <- .cache_url_file(url)
+                dat <- readLines(file)
+                sdat <- strsplit(dat, "#|:\\s")
+            }
+        )
+        sdat <- do.call(
+            rbind, unlist(url_list, recursive = FALSE)
+        )
+        sdat <- as.data.frame(sdat)
+    }
     names(sdat) <- c("pkg", "node", "stage", "result")
     attr(sdat, "BioCversion") <- version
     attr(sdat, "retrieved") <- Sys.time()
