@@ -5,15 +5,7 @@
 #'  the current release and the previous release. Other versions may be
 #'  available.
 #'
-#' @param version `character(1)` The numeric version of Bioconductor to use,
-#'   e.g., "3.19". Keywords "release" and "devel" are also accepted.
-#'
-#' @param pkgType `character(1)` The type of packages for which to get build
-#'   status information for. Valid values are:
-#'   * `software`: Software packages
-#'   * `data-experiment`: Experiment data packages
-#'   * `data-annotation`: Annotation data packages
-#'   * `workflows`: Workflow packages
+#' @inheritParams biocBuildReport
 #'
 #' @return A `data.frame` with the following columns:
 #'  * pkg: The name of the package

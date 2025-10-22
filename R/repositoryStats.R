@@ -5,9 +5,7 @@
 #' @description Summarize binary packages compatible with the Bioconductor or
 #'   Terra container in use.
 #'
-#' @param version (Optional) `character(1)` or `package_version`
-#'   indicating the _Bioconductor_ version (e.g., "3.8") for which
-#'   repositories are required.
+#' @inheritParams biocBuildReport
 #'
 #' @param binary_repository `character(1)` location of binary repository as
 #'   given by `BiocManager::containerRepository` (default)

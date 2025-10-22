@@ -7,17 +7,21 @@
 #' from the build report online pages to generate
 #' a tidy data frame version of the build report.
 #'
-#' @param version `character(1)` the character version number
-#' as used to access the online build report. For
-#' example, "3.14". The default is the "current version"
-#' as given by \code{BiocManager::version()}. Note
-#' that this is a character vector of length one and not a number.
+#' @param version `character(1)` or `package_version` indicating the
+#'   _Bioconductor_ version (e.g., "3.22"). Defaults to the "current version"
+#'   provided by `BiocManager::version()`. The keywords "release" and "devel"
+#'   are also accepted.
+#'
+#' @param pkgType `character()` The type of packages for which to get
+#'   information for. Values can be one or more of the following:
+#'   * `software`: Software packages
+#'   * `data-experiment`: Experiment data packages
+#'   * `data-annotation`: Annotation data packages
+#'   * `workflows`: Workflow packages
 #'
 #' @param stage.timings `logical(1)` Whether to include the start, end, and
 #' elapsed time for each build, check, install stage from each building in
 #' the result (default: FALSE)
-#'
-#' @inheritParams biocBuildStatusDB
 #'
 #' @return A `tbl_df` object with columns pkg, version,
 #' author, commit, date, node, stage, and result.

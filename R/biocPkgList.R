@@ -33,8 +33,7 @@
 #' to their biocViews. If one wants to stick to only the most
 #' specific terms, set `addBiocViewParents` to `FALSE`.
 #'
-#' @param version The requested Bioconductor version. Will
-#'     default to use the BiocManager defaults (i.e., `version()`).
+#' @inheritParams biocBuildReport
 #'
 #' @param repo `character(1)` The requested Bioconductor repository. The default
 #'   is to pull from the "BioCsoft" repository. Possible repositories include
