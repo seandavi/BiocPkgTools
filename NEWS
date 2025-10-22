@@ -3,6 +3,7 @@ CHANGES IN VERSION 1.28.0
 
 SIGNIFICANT USER-VISIBLE CHANGES
 
+    o `biocVIEWSdb` parses the package metadata VIEWS file
     o `pkgBiocRevDeps` now has `recursive` argument
     o `repositoryStats` supports in-house repositories with `local=TRUE`
     o The dependency report template now uses `pkgndep` to display a dependency
