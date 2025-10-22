@@ -2,7 +2,8 @@
 #'
 #' The actual vignette path is available using [biocPkgList()].
 #'
-#' @param vignettePath `character(1)` the additional path information to get to the vignette
+#' @param vignettePath `character(1)` the additional path information to get to
+#'   the vignette
 #' @param destfile `character(1)` the file location to store the vignette
 #' @param version `character(1)` such as "3.7", defaults to user version
 #'
@@ -32,11 +33,17 @@
 #'     list(dictionary = as.character(x$Package))))
 #'}
 #' @export
-getBiocVignette <- function(vignettePath,
-                        destfile = tempfile(),
-                        version = BiocManager::version()) {
-    stopifnot(is.character(vignettePath) & length(vignettePath)==1)
-    p = sprintf('https://bioconductor.org/packages/%s/bioc/%s',version,vignettePath)
+getBiocVignette <- function(
+    vignettePath,
+    destfile = tempfile(),
+    version = BiocManager::version()
+) {
+    stopifnot(is.character(vignettePath) & length(vignettePath) == 1)
+    p = sprintf(
+        'https://bioconductor.org/packages/%s/bioc/%s',
+        version,
+        vignettePath
+    )
     download.file(p, destfile, mode = "wb")
     destfile
 }
