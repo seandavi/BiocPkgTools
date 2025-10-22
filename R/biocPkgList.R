@@ -78,9 +78,10 @@ biocPkgList <- function(
         repo <- match.arg(repo, several.ok = TRUE)
     if (!is.character(repo))
       stop('repo must be a character vector.')
-    # nasty hack here, but BiocManager::repositories throws errors for
-    # repositories not matching the current R version--counterproductive
-    # for this function.
+
+    if (version %in% c("release", "devel"))
+        version <- BiocManager:::.version_bioc(version)
+
     repos <- BiocManager:::.repositories(
         site_repository = character(), version = version
     )
