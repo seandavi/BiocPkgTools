@@ -11,14 +11,13 @@ biocBuildReport(
 )
 }
 \arguments{
-\item{version}{\code{character(1)} the character version number
-as used to access the online build report. For
-example, "3.14". The default is the "current version"
-as given by \code{BiocManager::version()}. Note
-that this is a character vector of length one and not a number.}
+\item{version}{\code{character(1)} or \code{package_version} indicating the
+\emph{Bioconductor} version (e.g., "3.22"). Defaults to the "current version"
+provided by \code{BiocManager::version()}. The keywords "release" and "devel"
+are also accepted.}
 
-\item{pkgType}{\code{character(1)} The type of packages for which to get build
-status information for. Valid values are:
+\item{pkgType}{\code{character()} The type of packages for which to get
+information for. Values can be one or more of the following:
 \itemize{
 \item \code{software}: Software packages
 \item \code{data-experiment}: Experiment data packages

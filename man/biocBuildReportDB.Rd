@@ -11,11 +11,13 @@ biocBuildReportDB(
 )
 }
 \arguments{
-\item{version}{\code{character(1)} The numeric version of Bioconductor to use,
-e.g., "3.19". Keywords "release" and "devel" are also accepted.}
+\item{version}{\code{character(1)} or \code{package_version} indicating the
+\emph{Bioconductor} version (e.g., "3.22"). Defaults to the "current version"
+provided by \code{BiocManager::version()}. The keywords "release" and "devel"
+are also accepted.}
 
-\item{pkgType}{\code{character(1)} The type of packages for which to get build
-status information for. Valid values are:
+\item{pkgType}{\code{character()} The type of packages for which to get
+information for. Values can be one or more of the following:
 \itemize{
 \item \code{software}: Software packages
 \item \code{data-experiment}: Experiment data packages

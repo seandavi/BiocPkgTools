@@ -14,9 +14,10 @@ repositoryStats(
 \method{print}{repositoryStats}(x, ...)
 }
 \arguments{
-\item{version}{(Optional) \code{character(1)} or \code{package_version}
-indicating the \emph{Bioconductor} version (e.g., "3.8") for which
-repositories are required.}
+\item{version}{\code{character(1)} or \code{package_version} indicating the
+\emph{Bioconductor} version (e.g., "3.22"). Defaults to the "current version"
+provided by \code{BiocManager::version()}. The keywords "release" and "devel"
+are also accepted.}
 
 \item{binary_repository}{\code{character(1)} location of binary repository as
 given by \code{BiocManager::containerRepository} (default)}

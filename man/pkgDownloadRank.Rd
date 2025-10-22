@@ -16,9 +16,10 @@ pkgDownloadRank(
 \item{pkgType}{\code{character(1)} One of 'software', 'data-experiment',
 'workflows', or 'data-annotation' (defaults to 'software')}
 
-\item{version}{(Optional) \code{character(1)} or \code{package_version}
-indicating the \emph{Bioconductor} version (e.g., "3.8") for which
-repositories are required.}
+\item{version}{\code{character(1)} or \code{package_version} indicating the
+\emph{Bioconductor} version (e.g., "3.22"). Defaults to the "current version"
+provided by \code{BiocManager::version()}. The keywords "release" and "devel"
+are also accepted.}
 }
 \value{
 The package's percentile rank, in terms of download statistics, and
