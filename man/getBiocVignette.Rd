@@ -11,7 +11,8 @@ getBiocVignette(
 )
 }
 \arguments{
-\item{vignettePath}{\code{character(1)} the additional path information to get to the vignette}
+\item{vignettePath}{\code{character(1)} the additional path information to get to
+the vignette}
 
 \item{destfile}{\code{character(1)} the file location to store the vignette}
 
