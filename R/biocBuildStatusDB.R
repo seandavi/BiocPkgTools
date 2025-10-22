@@ -24,6 +24,11 @@ biocBuildStatusDB <- function(
     if (version %in% c("release", "devel"))
         version <- BiocManager:::.version_bioc(version)
 
+    if (!is.package_version(version))
+        stop(
+            "'version' is not 'release', 'devel', or a valid 'package_version'"
+        )
+
     pkgType <- match.arg(pkgType, several.ok = TRUE)
 
     if (version < package_version("3.14"))

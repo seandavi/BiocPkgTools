@@ -67,6 +67,14 @@ repositoryStats <- function(
     binary_repository = BiocManager::containerRepository(version),
     local = FALSE
 ) {
+    if (version %in% c("release", "devel"))
+        version <- BiocManager:::.version_bioc(version)
+
+    if (!is.package_version(version))
+        stop(
+            "'version' is not 'release', 'devel', or a valid 'package_version'"
+        )
+
     platform_docker <- BiocManager:::.repository_container_version()
     container <- platform_docker$platform
     bioc_repository <- suppressMessages({
