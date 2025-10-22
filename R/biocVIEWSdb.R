@@ -4,15 +4,18 @@
 }
 
 .read_VIEWS_url <- function(url) {
-    con <- url(url)
-    on.exit(close(con))
-    res <- suppressWarnings({
-        try(read.dcf(con), silent = TRUE)
+    file <- .cache_url_file(url)
+    tryCatch({
+        read.dcf(file) |>
+            as.data.frame()
+    }, error = function(e) {
+        stop(
+            "Error reading VIEWS file from URL: ",
+            url,
+            "\n",
+            conditionMessage(e)
+        )
     })
-    if (inherits(res, "try-error"))
-        stop("Unable to read VIEWS file URL: ", url)
-    else
-        as.data.frame(res, stringsAsFactors = FALSE)
 }
 
 .get_VIEWS <- function(version, type) {
