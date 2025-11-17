@@ -264,7 +264,7 @@ pkgDownloadRank <-
     rank <- pkgs[[pkg]]$Rank
 
     repoType <- .matchGetShortName(pkgType, "biocmanager.names")
-    viewsdb <- get_VIEWS(version = version, repoType)
+    viewsdb <- .get_VIEWS(version = version, repoType)
 
     pct <- round(rank*100 / nrow(viewsdb), 2)
     names(pct) <- paste(rank, nrow(viewsdb), sep = "/")
