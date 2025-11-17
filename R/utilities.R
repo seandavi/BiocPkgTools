@@ -20,7 +20,7 @@ get_build_status_db_url <- function(version, pkgType) {
 }
 
 get_deprecated_status_df <- function(version) {
-    viewsfile <- get_VIEWS(version = version, type = "BioCsoft")
+    viewsfile <- .get_VIEWS(version = version, type = "BioCsoft")
 
     if (nrow(viewsfile))
         depdf <- cbind.data.frame(
