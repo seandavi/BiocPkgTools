@@ -32,14 +32,14 @@ biocPkgRanges <-
 
     sdat <- biocBuildStatusDB(version = version, pkgType = "software")
 
-    cur <- which(sdat$package >= start & sdat$package <= end)
+    cur <- which(sdat[["pkg"]] >= start & sdat[["pkg"]] <= end)
     if (!length(cur))
         stop("no packages in range")
     mine <- sdat[cur,]
-    crit <- mine[grep("OK|skipped", mine$status, invert = TRUE), ]
+    crit <- mine[grep("OK|skipped", mine[["result"]], invert = TRUE), ]
     if (!nrow(crit))
         stop("all packages OK or skipped!")
-    flag <- crit[grep(condition, crit$status),]
-    flagged <- flag[grep(phase, flag$status),]
-    split(flagged, flagged$package)
+    flag <- crit[grep(condition, crit[["result"]]),]
+    flagged <- flag[grep(phase, flag[["stage"]]),]
+    split(flagged, flagged[["pkg"]])
 }
