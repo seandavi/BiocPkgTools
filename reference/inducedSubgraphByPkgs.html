@@ -22,7 +22,7 @@ and their intervening dependencies."><!-- mathjax --><script src="https://cdnjs.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BiocPkgTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.26.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.28.1</span>
       </span>
     </div>
 
@@ -49,7 +49,7 @@ and their intervening dependencies."><!-- mathjax --><script src="https://cdnjs.
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Return a minimal subgraph based on package name(s)</h1>
-    <small class="dont-index">Source: <a href="https://github.com/seandavi/BiocPkgTools/blob/RELEASE_3_21/R/buildPkgDependencyGraph.R" class="external-link"><code>R/buildPkgDependencyGraph.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/seandavi/BiocPkgTools/blob/RELEASE_3_22/R/buildPkgDependencyGraph.R" class="external-link"><code>R/buildPkgDependencyGraph.R</code></a></small>
     <div class="hidden name"><code>inducedSubgraphByPkgs.Rd</code></div>
     </div>
 
@@ -72,17 +72,17 @@ and their intervening dependencies.</p>
 
 <dl><dt id="arg-g">g<a class="anchor" aria-label="anchor" href="#arg-g"></a></dt>
 <dd><p>an igraph graph, typically created by
-<code><a href="buildPkgDependencyIgraph.html">buildPkgDependencyIgraph</a></code></p></dd>
+<code><a href="buildPkgDependencyIgraph.html">buildPkgDependencyIgraph()</a></code></p></dd>
 
 
 <dt id="arg-pkgs">pkgs<a class="anchor" aria-label="anchor" href="#arg-pkgs"></a></dt>
-<dd><p>character() vector of packages to
+<dd><p><code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code> vector of packages to
 include. Package names not included in
 the graph are ignored.</p></dd>
 
 
 <dt id="arg-pkg-color">pkg_color<a class="anchor" aria-label="anchor" href="#arg-pkg-color"></a></dt>
-<dd><p>character(1) giving color of named
+<dd><p><code>character(1)</code> giving color of named
 packages. Other packages in the graph that fall in
 connecting paths will be colored as the igraph default.</p></dd>
 
@@ -104,21 +104,20 @@ connecting paths will be colored as the igraph default.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     CRAN: https://cran.rstudio.com</span>
 <span class="r-in"><span><span class="va">g2</span> <span class="op">&lt;-</span> <span class="fu">inducedSubgraphByPkgs</span><span class="op">(</span><span class="va">g</span>, pkgs <span class="op">=</span> <span class="va">biocmaintained</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g2</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 4751610 DN-- 10 13 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 7361c09 DN-- 10 11 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (v/c), color (v/c), edgetype (e/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 4751610 (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 7361c09 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] annotate         -&gt;AnnotationDbi   annotate         -&gt;Biobase        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [3] AnnotationDbi    -&gt;Biobase         AnnotationForge  -&gt;AnnotationDbi  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [5] AnnotationForge  -&gt;Biobase         AnnotationHub    -&gt;AnnotationDbi  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [7] AnnotationHub    -&gt;BiocVersion     AnnotationHubData-&gt;AnnotationDbi  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [9] AnnotationHubData-&gt;AnnotationForge AnnotationHubData-&gt;AnnotationHub  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] AnnotationHubData-&gt;Biobase         AnnotationHubData-&gt;biocViews      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13] biocViews        -&gt;Biobase        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11] AnnotationHubData-&gt;Biobase        </span>
 <span class="r-in"><span><span class="fu"><a href="https://r.igraph.org/reference/V.html" class="external-link">V</a></span><span class="op">(</span><span class="va">g2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 10/10 vertices, named, from 4751610:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 10/10 vertices, named, from 7361c09:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] annotate          AnnotationDbi     AnnotationForge   AnnotationHub    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5] AnnotationHubData Biobase           AnnotationFilter  BiocStyle        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9] biocViews         BiocVersion      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5] AnnotationHubData Biobase           AnnotationFilter  Bioc.gff         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9] BiocStyle         BiocVersion      </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">g2</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="inducedSubgraphByPkgs-1.png" alt="" width="700" height="433"></span>
@@ -152,7 +151,7 @@ connecting paths will be colored as the igraph default.</p></dd>
 <span class="r-in"><span>    linkDistance <span class="op">=</span> <span class="fl">200</span>, fontSize <span class="op">=</span> <span class="fl">20</span>, opacity <span class="op">=</span> <span class="fl">0.9</span>, opacityNoHover <span class="op">=</span> <span class="fl">0.9</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <div id="htmlwidget-ac96cb3ee4656e2e9ec3" style="width:700px;height:432.632880098888px;" class="forceNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-ac96cb3ee4656e2e9ec3">{"x":{"links":{"source":[10,0,2,9,5,3,11,7,10,4,8,11,10,4,10,3,10,4,7,9,3,2,9,11,11,11,10,4,2,9,10,9,10,2,2,11,9,2,10,13,7,5,3,11,5,11,4,7,4,9,2,3,9,4,9],"target":[0,1,1,1,1,1,1,1,1,1,1,1,2,3,3,14,4,5,5,5,5,5,5,5,5,5,5,5,6,6,6,7,7,7,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,9,13,11,11,11],"colour":["#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666"]},"nodes":{"name":["Biobase","BiocGenerics","DelayedArray","GenomeInfoDb","GenomicRanges","IRanges","MatrixGenerics","S4Arrays","S4Vectors","SparseArray","SummarizedExperiment","XVector","BiocBaseUtils","UCSC.utils","GenomeInfoDbData"],"group":[1,1,1,2,1,1,1,1,1,1,1,1,3,2,4]},"options":{"NodeID":"name","Group":"group","colourScale":"d3.scaleOrdinal(d3.schemeCategory20);","fontSize":20,"fontFamily":"serif","clickTextSize":50,"linkDistance":200,"linkWidth":"function(d) { return Math.sqrt(d.value); }","charge":-30,"opacity":0.9,"zoom":true,"legend":false,"arrows":false,"nodesize":false,"radiusCalculation":" Math.sqrt(d.nodesize)+6","bounded":false,"opacityNoHover":0.9,"clickAction":null}},"evals":[],"jsHooks":[]}</script></code></pre></div>
+<script type="application/json" data-for="htmlwidget-ac96cb3ee4656e2e9ec3">{"x":{"links":{"source":[10,0,2,4,6,11,10,3,8,9,11,7,10,10,11,8,2,9,11,3,3,9,6,10,11,2,9,10,9,10,2,6,3,8,4,2,4,11,2,6,10,3,9,11,9,11,10,3,2,9,9],"target":[0,1,1,1,1,1,1,1,1,1,1,1,2,3,4,4,4,4,4,4,4,4,4,4,4,5,5,5,6,6,6,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,8,8,9,11,11],"colour":["#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666"]},"nodes":{"name":["Biobase","BiocGenerics","DelayedArray","GenomicRanges","IRanges","MatrixGenerics","S4Arrays","S4Vectors","Seqinfo","SparseArray","SummarizedExperiment","XVector","BiocBaseUtils"],"group":[3,1,2,1,2,4,2,2,1,2,1,2,5]},"options":{"NodeID":"name","Group":"group","colourScale":"d3.scaleOrdinal(d3.schemeCategory20);","fontSize":20,"fontFamily":"serif","clickTextSize":50,"linkDistance":200,"linkWidth":"function(d) { return Math.sqrt(d.value); }","charge":-30,"opacity":0.9,"zoom":true,"legend":false,"arrows":false,"nodesize":false,"radiusCalculation":" Math.sqrt(d.nodesize)+6","bounded":false,"opacityNoHover":0.9,"clickAction":null}},"evals":[],"jsHooks":[]}</script></code></pre></div>
     </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -166,7 +165,7 @@ connecting paths will be colored as the igraph default.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
       </footer></div>

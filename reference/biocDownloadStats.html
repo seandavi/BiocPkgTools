@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BiocPkgTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.26.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.28.1</span>
       </span>
     </div>
 
@@ -44,7 +44,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Get Bioconductor download statistics</h1>
-    <small class="dont-index">Source: <a href="https://github.com/seandavi/BiocPkgTools/blob/RELEASE_3_21/R/biocDownloadStats.R" class="external-link"><code>R/biocDownloadStats.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/seandavi/BiocPkgTools/blob/RELEASE_3_22/R/biocDownloadStats.R" class="external-link"><code>R/biocDownloadStats.R</code></a></small>
     <div class="hidden name"><code>biocDownloadStats.Rd</code></div>
     </div>
 
@@ -63,7 +63,7 @@
 
 
 <dl><dt id="arg-pkgtype">pkgType<a class="anchor" aria-label="anchor" href="#arg-pkgtype"></a></dt>
-<dd><p>character() All, some, or one of 'software',
+<dd><p><code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code> All, some, or one of 'software',
 'data-experiment', 'workflows', or 'data-annotation' (defaults to all
 types)</p></dd>
 
@@ -85,11 +85,21 @@ stats are not version-specific.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 'help("repositories", package = "BiocManager")' for details.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Replacement repositories:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     CRAN: https://cran.rstudio.com</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> adding rname 'https://bioconductor.org/packages/3.22/data/experiment/VIEWS'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> adding rname 'https://bioconductor.org/packages/3.22/workflows/VIEWS'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> adding rname 'https://bioconductor.org/packages/3.22/data/annotation/VIEWS'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> adding rname 'https://bioconductor.org/packages/stats/bioc/bioc_pkg_stats.tab'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> adding rname 'https://bioconductor.org/packages/stats/data-experiment/experiment_pkg_stats.tab'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> adding rname 'https://bioconductor.org/packages/stats/workflows/workflows_pkg_stats.tab'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> adding rname 'https://bioconductor.org/packages/stats/data-annotation/annotation_pkg_stats.tab'</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 457,296 × 7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 452,004 × 7</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    pkgType  Package  Year Month Nb_of_distinct_IPs Nb_of_downloads Date      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> software a4       <span style="text-decoration: underline;">2</span>025 Jan                  171             628 2025-01-01</span>
@@ -100,9 +110,9 @@ stats are not version-specific.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> software a4       <span style="text-decoration: underline;">2</span>025 Jun                  201             499 2025-06-01</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> software a4       <span style="text-decoration: underline;">2</span>025 Jul                  282             567 2025-07-01</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> software a4       <span style="text-decoration: underline;">2</span>025 Aug                  227             398 2025-08-01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> software a4       <span style="text-decoration: underline;">2</span>025 Sep                    0               0 2025-09-01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> software a4       <span style="text-decoration: underline;">2</span>025 Oct                    0               0 2025-10-01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 457,286 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> software a4       <span style="text-decoration: underline;">2</span>025 Sep                  252             425 2025-09-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> software a4       <span style="text-decoration: underline;">2</span>025 Oct                  135             261 2025-10-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 451,994 more rows</span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
@@ -118,7 +128,7 @@ stats are not version-specific.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
       </footer></div>

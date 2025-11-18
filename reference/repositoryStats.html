@@ -18,7 +18,7 @@ Terra container in use."><!-- mathjax --><script src="https://cdnjs.cloudflare.c
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BiocPkgTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.26.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.28.1</span>
       </span>
     </div>
 
@@ -45,7 +45,7 @@ Terra container in use."><!-- mathjax --><script src="https://cdnjs.cloudflare.c
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Bioconductor Binary Repository Statistics</h1>
-    <small class="dont-index">Source: <a href="https://github.com/seandavi/BiocPkgTools/blob/RELEASE_3_21/R/repositoryStats.R" class="external-link"><code>R/repositoryStats.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/seandavi/BiocPkgTools/blob/RELEASE_3_22/R/repositoryStats.R" class="external-link"><code>R/repositoryStats.R</code></a></small>
     <div class="hidden name"><code>repositoryStats.Rd</code></div>
     </div>
 
@@ -57,7 +57,8 @@ Terra container in use.</p>
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">repositoryStats</span><span class="op">(</span></span>
 <span>  version <span class="op">=</span> <span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/version.html" class="external-link">version</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  binary_repository <span class="op">=</span> <span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/repositories.html" class="external-link">containerRepository</a></span><span class="op">(</span><span class="va">version</span><span class="op">)</span></span>
+<span>  binary_repository <span class="op">=</span> <span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/repositories.html" class="external-link">containerRepository</a></span><span class="op">(</span><span class="va">version</span><span class="op">)</span>,</span>
+<span>  local <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'repositoryStats'</span></span>
@@ -69,14 +70,20 @@ Terra container in use.</p>
 
 
 <dl><dt id="arg-version">version<a class="anchor" aria-label="anchor" href="#arg-version"></a></dt>
-<dd><p>(Optional) <code>character(1)</code> or <code>package_version</code>
-indicating the <em>Bioconductor</em> version (e.g., "3.8") for which
-repositories are required.</p></dd>
+<dd><p><code>character(1)</code> or <code>package_version</code> indicating the
+<em>Bioconductor</em> version (e.g., "3.22"). Defaults to the "current version"
+provided by <code><a href="https://bioconductor.github.io/BiocManager/reference/version.html" class="external-link">BiocManager::version()</a></code>. The keywords "release" and "devel"
+are also accepted.</p></dd>
 
 
 <dt id="arg-binary-repository">binary_repository<a class="anchor" aria-label="anchor" href="#arg-binary-repository"></a></dt>
 <dd><p><code>character(1)</code> location of binary repository as
 given by <code><a href="https://bioconductor.github.io/BiocManager/reference/repositories.html" class="external-link">BiocManager::containerRepository</a></code> (default)</p></dd>
+
+
+<dt id="arg-local">local<a class="anchor" aria-label="anchor" href="#arg-local"></a></dt>
+<dd><p><code>logical(1)</code> whether to check the local file system for the
+<code>PACKAGES</code> file's last modified date (default: <code>FALSE</code>).</p></dd>
 
 
 <dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
@@ -117,6 +124,14 @@ might occur when the main Bioconductor build system has
 updated a package after the most recent run of the binary
 build system.</p></li>
 </ul></div>
+    <div id="details">
+    <h2>Details</h2>
+    <p>For local repositories, use the <code>local = TRUE</code> argument. Local
+repositories will typically start with the <code>file://</code> URI. The function
+checks the <code>mtime</code> of the output of <code>file.info</code> on the <code>PACKAGES</code> file in
+the local repository. Otherwise, by default, it will check the
+<code>last-modified</code> header of the <code>PACKAGES</code> file via <code><a href="https://httr.r-lib.org/reference/HEAD.html" class="external-link">httr::HEAD()</a></code>.</p>
+    </div>
     <div id="methods-by-generic-">
     <h2>Methods (by generic)</h2>
 
@@ -133,14 +148,14 @@ availability in binary repositories.</p></li>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">stats</span> <span class="op">&lt;-</span> <span class="fu">repositoryStats</span><span class="op">(</span><span class="op">)</span> <span class="co"># obtain statistics</span></span></span>
 <span class="r-in"><span><span class="va">stats</span>                       <span class="co"># display a summary</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Container: NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Bioconductor version: 3.21</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Bioconductor version: 3.22</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Bioconductor binary repos:  NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> PACKAGES timestamp: NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Query timestamp: 2025-09-10 19:34 UTC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Bioconductor software packages: 2310</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Query timestamp: 2025-11-18 19:17 UTC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Bioconductor software packages: 2248</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Binary packages: 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Binary software packages: 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Missing binary software packages: 2310</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Missing binary software packages: 2248</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Out-of-date binary software packages: 0</span>
 <span class="r-in"><span><span class="va">stats</span><span class="op">$</span><span class="va">container</span>             <span class="co"># access an element for further computation</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] NA</span>
@@ -159,7 +174,7 @@ availability in binary repositories.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
       </footer></div>

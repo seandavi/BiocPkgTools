@@ -19,7 +19,7 @@ in the Bioconductor landing page."><!-- mathjax --><script src="https://cdnjs.cl
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BiocPkgTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.26.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.28.1</span>
       </span>
     </div>
 
@@ -46,7 +46,7 @@ in the Bioconductor landing page."><!-- mathjax --><script src="https://cdnjs.cl
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>What is a package's download rank?</h1>
-    <small class="dont-index">Source: <a href="https://github.com/seandavi/BiocPkgTools/blob/RELEASE_3_21/R/biocDownloadStats.R" class="external-link"><code>R/biocDownloadStats.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/seandavi/BiocPkgTools/blob/RELEASE_3_22/R/biocDownloadStats.R" class="external-link"><code>R/biocDownloadStats.R</code></a></small>
     <div class="hidden name"><code>pkgDownloadRank.Rd</code></div>
     </div>
 
@@ -69,18 +69,19 @@ in the Bioconductor landing page.</p>
 
 
 <dl><dt id="arg-pkg">pkg<a class="anchor" aria-label="anchor" href="#arg-pkg"></a></dt>
-<dd><p>character(1) The name of a Bioconductor package</p></dd>
+<dd><p><code>character(1)</code> The name of a Bioconductor package</p></dd>
 
 
 <dt id="arg-pkgtype">pkgType<a class="anchor" aria-label="anchor" href="#arg-pkgtype"></a></dt>
-<dd><p>character(1) One of 'software', 'data-experiment',
+<dd><p><code>character(1)</code> One of 'software', 'data-experiment',
 'workflows', or 'data-annotation' (defaults to 'software')</p></dd>
 
 
 <dt id="arg-version">version<a class="anchor" aria-label="anchor" href="#arg-version"></a></dt>
-<dd><p>(Optional) <code>character(1)</code> or <code>package_version</code>
-indicating the <em>Bioconductor</em> version (e.g., "3.8") for which
-repositories are required.</p></dd>
+<dd><p><code>character(1)</code> or <code>package_version</code> indicating the
+<em>Bioconductor</em> version (e.g., "3.22"). Defaults to the "current version"
+provided by <code><a href="https://bioconductor.github.io/BiocManager/reference/version.html" class="external-link">BiocManager::version()</a></code>. The keywords "release" and "devel"
+are also accepted.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -94,9 +95,10 @@ proportion in the name</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Percentile rank for BiocGenerics (top 1%)</span></span></span>
 <span class="r-in"><span><span class="fu">pkgDownloadRank</span><span class="op">(</span><span class="st">"BiocGenerics"</span>, <span class="st">"software"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> adding rname 'https://www.bioconductor.org/packages/json/3.21/bioc/packages.json'</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2/2341 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.09 </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> adding rname 'https://www.bioconductor.org/packages/json/3.22/bioc/packages.json'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2/2361 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.08 </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
@@ -112,7 +114,7 @@ proportion in the name</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
       </footer></div>

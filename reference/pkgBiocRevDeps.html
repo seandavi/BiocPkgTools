@@ -19,7 +19,7 @@ types of dependencies can be seen in the which argument documentation."><!-- mat
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BiocPkgTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.26.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.28.1</span>
       </span>
     </div>
 
@@ -46,7 +46,7 @@ types of dependencies can be seen in the which argument documentation."><!-- mat
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Obtain all the reverse dependencies for a Bioconductor package</h1>
-    <small class="dont-index">Source: <a href="https://github.com/seandavi/BiocPkgTools/blob/RELEASE_3_21/R/pkgBiocDeps.R" class="external-link"><code>R/pkgBiocDeps.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/seandavi/BiocPkgTools/blob/RELEASE_3_22/R/pkgBiocDeps.R" class="external-link"><code>R/pkgBiocDeps.R</code></a></small>
     <div class="hidden name"><code>pkgBiocRevDeps.Rd</code></div>
     </div>
 
@@ -62,7 +62,8 @@ types of dependencies can be seen in the <code>which</code> argument documentati
 <span>  pkgType <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"software"</span>, <span class="st">"data-experiment"</span>, <span class="st">"workflows"</span>, <span class="st">"data-annotation"</span><span class="op">)</span>,</span>
 <span>  which <span class="op">=</span> <span class="st">"all"</span>,</span>
 <span>  only.bioc <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  version <span class="op">=</span> <span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/version.html" class="external-link">version</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  version <span class="op">=</span> <span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/version.html" class="external-link">version</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  recursive <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'biocrevdeps'</span></span>
@@ -104,6 +105,13 @@ indicating the <em>Bioconductor</em> version (e.g., "3.8") for which
 repositories are required.</p></dd>
 
 
+<dt id="arg-recursive">recursive<a class="anchor" aria-label="anchor" href="#arg-recursive"></a></dt>
+<dd><p>a logical indicating whether (reverse) dependencies
+    of (reverse) dependencies (and so on) should be included, or a
+    character vector like <code>which</code> indicating the type of (reverse)
+    dependencies to be added recursively.</p></dd>
+
+
 <dt id="arg-object">object<a class="anchor" aria-label="anchor" href="#arg-object"></a></dt>
 <dd><p>an object for which a summary is desired.</p></dd>
 
@@ -132,39 +140,38 @@ repositories are required.</p></dd>
 <span class="r-in"><span><span class="va">rdeps</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $Depends</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "alabaster.mae"        "CAGEr"                "cBioPortalData"      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4] "ClassifyR"            "evaluomeR"            "hipathia"            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "HoloFoodR"            "InTAD"                "MGnifyR"             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10] "mia"                  "midasHLA"             "MIRit"               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "missRows"             "QFeatures"            "RFLOMICS"            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "terraTCGAdata"        "curatedPCaData"       "curatedTCGAData"     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [19] "microbiomeDataSets"   "OMICsPCAdata"         "scMultiome"          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [22] "SingleCellMultiModal"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4] "ClassifyR"            "evaluomeR"            "HoloFoodR"           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "InTAD"                "MGnifyR"              "mia"                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10] "midasHLA"             "MIRit"                "missRows"            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "QFeatures"            "RFLOMICS"             "terraTCGAdata"       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "curatedPCaData"       "curatedTCGAData"      "microbiomeDataSets"  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [19] "OMICsPCAdata"         "scMultiome"           "SingleCellMultiModal"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $Imports</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "AffiXcan"               "AMARETTO"               "animalcules"           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4] "autonomics"             "biosigner"              "CoreGx"                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "corral"                 "ELMER"                  "FindIT2"               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10] "gDRcore"                "gDRimport"              "gDRutils"              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "gINTomics"              "glmSparseNet"           "GOpro"                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "hermes"                 "Lheuristic"             "LinkHD"                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [19] "metabolomicsWorkbenchR" "MOMA"                   "MOSClip"               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [22] "msqrob2"                "MuData"                 "MultiBaC"              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [25] "MultimodalExperiment"   "nipalsMCIA"             "OMICsPCA"              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [28] "omicsPrint"             "omXplore"               "padma"                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [31] "PDATK"                  "PharmacoGx"             "phenomis"              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [34] "ropls"                  "scp"                    "scPipe"                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [37] "survClust"              "TCGAutils"              "TENET"                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [40] "vsclust"                "xcore"                  "curatedTBData"         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [43] "HMP2Data"               "LegATo"                 "MetaScope"             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [46] "TENET.ExperimentHub"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "AffiXcan"             "AMARETTO"             "anansi"              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4] "animalcules"          "autonomics"           "biosigner"           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "CoreGx"               "corral"               "ELMER"               </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10] "FindIT2"              "gDRcore"              "gDRimport"           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "gDRutils"             "glmSparseNet"         "GOpro"               </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [16] "hermes"               "Lheuristic"           "LinkHD"              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [19] "MOMA"                 "MOSClip"              "msqrob2"             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [22] "MuData"               "MultiBaC"             "MultimodalExperiment"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [25] "nipalsMCIA"           "OMICsPCA"             "omicsPrint"          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [28] "omXplore"             "padma"                "PDATK"               </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [31] "PharmacoGx"           "phenomis"             "ropls"               </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [34] "scGraphVerse"         "scp"                  "scPipe"              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [37] "SmartPhos"            "survClust"            "TCGAutils"           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [40] "TENET"                "vsclust"              "xcore"               </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [43] "curatedTBData"        "HMP2Data"             "LegATo"              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [46] "MetaScope"            "TENET.ExperimentHub" </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $LinkingTo</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> character(0)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $Suggests</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "BiocGenerics"     "CNVRanger"        "funOmics"         "maftools"        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5] "MOFA2"            "MultiDataSet"     "RaggedExperiment" "updateObject"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9] "brgedata"         "MOFAdata"        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "BatchQC"          "BiocGenerics"     "CNVRanger"        "funOmics"        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5] "maftools"         "MOFA2"            "MultiDataSet"     "RaggedExperiment"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9] "updateObject"     "brgedata"         "MOFAdata"        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $Enhances</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> character(0)</span>
@@ -173,9 +180,29 @@ repositories are required.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "MultiAssayExperiment"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "biocrevdeps"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"which")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     Depends     Imports   LinkingTo    Suggests    Enhances </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   "Depends"   "Imports" "LinkingTo"  "Suggests"  "Enhances" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"only.bioc")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"recursive")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"version")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] ‘3.22’</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"reverse")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">rdeps</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      Depends Imports LinkingTo Suggests Enhances Total</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> MultiAssayExperiment      22      46         0       10        0    78</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> tools::package_dependencies(</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   "MultiAssayExperiment",</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   db=utils::available.packages(repos=BiocManager::repositories()),</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   which=c("Depends", "Imports", "LinkingTo", "Suggests", "Enhances"),</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   recursive=FALSE,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   reverse=TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> )</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                      Depends Imports LinkingTo Suggests Enhances only.bioc</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> MultiAssayExperiment      21      47         0       11        0      TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                      Total</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> MultiAssayExperiment    79</span>
 </code></pre></div>
     </div>
   </div>
@@ -190,7 +217,7 @@ repositories are required.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
       </footer></div>

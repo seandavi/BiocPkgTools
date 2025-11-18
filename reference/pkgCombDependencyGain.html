@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BiocPkgTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.26.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.28.1</span>
       </span>
     </div>
 
@@ -44,7 +44,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Calculate dependency gain achieved by excluding combinations of packages</h1>
-    <small class="dont-index">Source: <a href="https://github.com/seandavi/BiocPkgTools/blob/RELEASE_3_21/R/pkgDependencyMetrics.R" class="external-link"><code>R/pkgDependencyMetrics.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/seandavi/BiocPkgTools/blob/RELEASE_3_22/R/pkgDependencyMetrics.R" class="external-link"><code>R/pkgDependencyMetrics.R</code></a></small>
     <div class="hidden name"><code>pkgCombDependencyGain.Rd</code></div>
     </div>
 
@@ -67,7 +67,7 @@ to estimate the dependency gain</p></dd>
 
 <dt id="arg-depdf">depdf<a class="anchor" aria-label="anchor" href="#arg-depdf"></a></dt>
 <dd><p>a tidy data frame with package dependency information
-obtained through the function <code><a href="buildPkgDependencyDataFrame.html">buildPkgDependencyDataFrame</a></code></p></dd>
+obtained through the function <code><a href="buildPkgDependencyDataFrame.html">buildPkgDependencyDataFrame()</a></code></p></dd>
 
 
 <dt id="arg-maxnbr">maxNbr<a class="anchor" aria-label="anchor" href="#arg-maxnbr"></a></dt>
@@ -89,7 +89,7 @@ DepGain (the dependency gain from excluding these direct dependencies)</p>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">depdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="buildPkgDependencyDataFrame.html">buildPkgDependencyDataFrame</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  dependencies<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Depends"</span>, <span class="st">"Imports"</span><span class="op">)</span>, </span></span>
+<span class="r-in"><span>  dependencies<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Depends"</span>, <span class="st">"Imports"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  repo<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"BioCsoft"</span>, <span class="st">"CRAN"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 'getOption("repos")' replaces Bioconductor standard repositories, see</span>
@@ -99,12 +99,12 @@ DepGain (the dependency gain from excluding these direct dependencies)</p>
 <span class="r-in"><span><span class="va">pcd</span> <span class="op">&lt;-</span> <span class="fu">pkgCombDependencyGain</span><span class="op">(</span><span class="st">'GEOquery'</span>, <span class="va">depdf</span>, maxNbr <span class="op">=</span> <span class="fl">3L</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">pcd</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="va">pcd</span><span class="op">$</span><span class="va">DepGain</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                   Packages NbrExcl DepGain</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 337   SummarizedExperiment, R.utils, readr       3      27</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 247 S4Vectors, SummarizedExperiment, readr       3      26</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 348     SummarizedExperiment, limma, readr       3      26</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 375     SummarizedExperiment, httr2, readr       3      26</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 383   SummarizedExperiment, readr, rentrez       3      26</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 384     SummarizedExperiment, readr, rvest       3      26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 337   SummarizedExperiment, R.utils, readr       3      25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 247 S4Vectors, SummarizedExperiment, readr       3      24</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 348     SummarizedExperiment, limma, readr       3      24</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 375     SummarizedExperiment, httr2, readr       3      24</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 383   SummarizedExperiment, readr, rentrez       3      24</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 384     SummarizedExperiment, readr, rvest       3      24</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
@@ -120,7 +120,7 @@ DepGain (the dependency gain from excluding these direct dependencies)</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
       </footer></div>

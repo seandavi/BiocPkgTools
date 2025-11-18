@@ -21,7 +21,7 @@ Bioconductor release. This function is mainly used by biocBuildReport()."><!-- m
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BiocPkgTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.26.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.28.1</span>
       </span>
     </div>
 
@@ -48,7 +48,7 @@ Bioconductor release. This function is mainly used by biocBuildReport()."><!-- m
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Parse the Build Report tarball for a Bioconductor release</h1>
-    <small class="dont-index">Source: <a href="https://github.com/seandavi/BiocPkgTools/blob/RELEASE_3_21/R/biocBuildReportDB.R" class="external-link"><code>R/biocBuildReportDB.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/seandavi/BiocPkgTools/blob/RELEASE_3_22/R/biocBuildReportDB.R" class="external-link"><code>R/biocBuildReportDB.R</code></a></small>
     <div class="hidden name"><code>biocBuildReportDB.Rd</code></div>
     </div>
 
@@ -73,13 +73,15 @@ Bioconductor release. This function is mainly used by <code><a href="biocBuildRe
 
 
 <dl><dt id="arg-version">version<a class="anchor" aria-label="anchor" href="#arg-version"></a></dt>
-<dd><p><code>character(1)</code> The numeric version of Bioconductor to use,
-e.g., "3.19". Keywords "release" and "devel" are also accepted.</p></dd>
+<dd><p><code>character(1)</code> or <code>package_version</code> indicating the
+<em>Bioconductor</em> version (e.g., "3.22"). Defaults to the "current version"
+provided by <code><a href="https://bioconductor.github.io/BiocManager/reference/version.html" class="external-link">BiocManager::version()</a></code>. The keywords "release" and "devel"
+are also accepted.</p></dd>
 
 
 <dt id="arg-pkgtype">pkgType<a class="anchor" aria-label="anchor" href="#arg-pkgtype"></a></dt>
-<dd><p><code>character(1)</code> The type of packages for which to get build
-status information for. Valid values are:</p><ul><li><p><code>software</code>: Software packages</p></li>
+<dd><p><code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code> The type of packages for which to get
+information for. Values can be one or more of the following:</p><ul><li><p><code>software</code>: Software packages</p></li>
 <li><p><code>data-experiment</code>: Experiment data packages</p></li>
 <li><p><code>data-annotation</code>: Annotation data packages</p></li>
 <li><p><code>workflows</code>: Workflow packages</p></li>
@@ -87,7 +89,7 @@ status information for. Valid values are:</p><ul><li><p><code>software</code>: S
 
 
 <dt id="arg-stage-timings">stage.timings<a class="anchor" aria-label="anchor" href="#arg-stage-timings"></a></dt>
-<dd><p>logical(1) Whether to include the start, end, and
+<dd><p><code>logical(1)</code> Whether to include the start, end, and
 elapsed time for each build, check, install stage from each building in
 the result (default: FALSE)</p></dd>
 
@@ -105,7 +107,7 @@ the result (default: FALSE)</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
       </footer></div>

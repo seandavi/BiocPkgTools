@@ -22,7 +22,7 @@ a tidy data frame version of the build report."><!-- mathjax --><script src="htt
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BiocPkgTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.26.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.28.1</span>
       </span>
     </div>
 
@@ -49,7 +49,7 @@ a tidy data frame version of the build report."><!-- mathjax --><script src="htt
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Tidy Bioconductor build report results</h1>
-    <small class="dont-index">Source: <a href="https://github.com/seandavi/BiocPkgTools/blob/RELEASE_3_21/R/biocBuildReport.R" class="external-link"><code>R/biocBuildReport.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/seandavi/BiocPkgTools/blob/RELEASE_3_22/R/biocBuildReport.R" class="external-link"><code>R/biocBuildReport.R</code></a></small>
     <div class="hidden name"><code>biocBuildReport.Rd</code></div>
     </div>
 
@@ -75,16 +75,15 @@ a tidy data frame version of the build report.</p>
 
 
 <dl><dt id="arg-version">version<a class="anchor" aria-label="anchor" href="#arg-version"></a></dt>
-<dd><p>character(1) the character version number
-as used to access the online build report. For
-example, "3.14". The default is the "current version"
-as given by <code><a href="https://bioconductor.github.io/BiocManager/reference/version.html" class="external-link">BiocManager::version()</a></code>. Note
-that this is a character vector of length one and not a number.</p></dd>
+<dd><p><code>character(1)</code> or <code>package_version</code> indicating the
+<em>Bioconductor</em> version (e.g., "3.22"). Defaults to the "current version"
+provided by <code><a href="https://bioconductor.github.io/BiocManager/reference/version.html" class="external-link">BiocManager::version()</a></code>. The keywords "release" and "devel"
+are also accepted.</p></dd>
 
 
 <dt id="arg-pkgtype">pkgType<a class="anchor" aria-label="anchor" href="#arg-pkgtype"></a></dt>
-<dd><p><code>character(1)</code> The type of packages for which to get build
-status information for. Valid values are:</p><ul><li><p><code>software</code>: Software packages</p></li>
+<dd><p><code><a href="https://rdrr.io/r/base/character.html" class="external-link">character()</a></code> The type of packages for which to get
+information for. Values can be one or more of the following:</p><ul><li><p><code>software</code>: Software packages</p></li>
 <li><p><code>data-experiment</code>: Experiment data packages</p></li>
 <li><p><code>data-annotation</code>: Annotation data packages</p></li>
 <li><p><code>workflows</code>: Workflow packages</p></li>
@@ -92,7 +91,7 @@ status information for. Valid values are:</p><ul><li><p><code>software</code>: S
 
 
 <dt id="arg-stage-timings">stage.timings<a class="anchor" aria-label="anchor" href="#arg-stage-timings"></a></dt>
-<dd><p>logical(1) Whether to include the start, end, and
+<dd><p><code>logical(1)</code> Whether to include the start, end, and
 elapsed time for each build, check, install stage from each building in
 the result (default: FALSE)</p></dd>
 
@@ -108,27 +107,37 @@ author, commit, date, node, stage, and result.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Set the stage--what version of Bioc am I using?</span></span></span>
 <span class="r-in"><span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/version.html" class="external-link">version</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] ‘3.21’</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] ‘3.22’</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">latest_build</span> <span class="op">&lt;-</span> <span class="fu">biocBuildReport</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> adding rname 'https://bioconductor.org/checkResults/3.21/bioc-LATEST/BUILD_STATUS_DB.txt'</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> adding rname 'https://bioconductor.org/checkResults/3.21/data-experiment-LATEST/BUILD_STATUS_DB.txt'</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> adding rname 'https://bioconductor.org/checkResults/3.21/data-annotation-LATEST/BUILD_STATUS_DB.txt'</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> adding rname 'https://bioconductor.org/checkResults/3.21/workflows-LATEST/BUILD_STATUS_DB.txt'</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> adding rname 'https://bioconductor.org/checkResults/3.21/bioc-LATEST/report.tgz'</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> adding rname 'https://bioconductor.org/checkResults/3.21/data-experiment-LATEST/report.tgz'</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> adding rname 'https://bioconductor.org/checkResults/3.21/data-annotation-LATEST/report.tgz'</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> adding rname 'https://bioconductor.org/checkResults/3.21/workflows-LATEST/report.tgz'</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> adding rname 'https://bioconductor.org/checkResults/3.22/bioc-LATEST/BUILD_STATUS_DB.txt'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> adding rname 'https://bioconductor.org/checkResults/3.22/data-experiment-LATEST/BUILD_STATUS_DB.txt'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> adding rname 'https://bioconductor.org/checkResults/3.22/data-annotation-LATEST/BUILD_STATUS_DB.txt'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> adding rname 'https://bioconductor.org/checkResults/3.22/workflows-LATEST/BUILD_STATUS_DB.txt'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> adding rname 'https://bioconductor.org/checkResults/3.22/bioc-LATEST/report.tgz'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> adding rname 'https://bioconductor.org/checkResults/3.22/data-experiment-LATEST/report.tgz'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> adding rname 'https://bioconductor.org/checkResults/3.22/data-annotation-LATEST/report.tgz'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> adding rname 'https://bioconductor.org/checkResults/3.22/workflows-LATEST/report.tgz'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> adding rname 'https://bioconductor.org/packages/3.22/bioc/VIEWS'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">latest_build</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 12</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   pkg    author  version git_last_commit git_last_commit_date pkgType Deprecated</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> ABSSeq Wentao… 1.62.0  df94993         2025-04-15 <span style="color: #949494;">10:30:09</span>  bioc    FALSE     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> ABSSeq Wentao… 1.62.0  df94993         2025-04-15 <span style="color: #949494;">10:30:09</span>  bioc    FALSE     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> ABSSeq Wentao… 1.62.0  df94993         2025-04-15 <span style="color: #949494;">10:30:09</span>  bioc    FALSE     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> ABSSeq Wentao… 1.62.0  df94993         2025-04-15 <span style="color: #949494;">10:30:09</span>  bioc    FALSE     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> ABSSeq Wentao… 1.62.0  df94993         2025-04-15 <span style="color: #949494;">10:30:09</span>  bioc    FALSE     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> ABSSeq Wentao… 1.62.0  df94993         2025-04-15 <span style="color: #949494;">10:30:09</span>  bioc    FALSE     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> ABSSeq Wentao… 1.64.0  f6fb00c         2025-10-29 <span style="color: #949494;">10:18:51</span>  bioc    FALSE     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> ABSSeq Wentao… 1.64.0  f6fb00c         2025-10-29 <span style="color: #949494;">10:18:51</span>  bioc    FALSE     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> ABSSeq Wentao… 1.64.0  f6fb00c         2025-10-29 <span style="color: #949494;">10:18:51</span>  bioc    FALSE     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> ABSSeq Wentao… 1.64.0  f6fb00c         2025-10-29 <span style="color: #949494;">10:18:51</span>  bioc    FALSE     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> ABSSeq Wentao… 1.64.0  f6fb00c         2025-10-29 <span style="color: #949494;">10:18:51</span>  bioc    FALSE     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> ABSSeq Wentao… 1.64.0  f6fb00c         2025-10-29 <span style="color: #949494;">10:18:51</span>  bioc    FALSE     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 5 more variables: PackageStatus &lt;chr&gt;, node &lt;chr&gt;, stage &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   result &lt;chr&gt;, bioc_version &lt;chr&gt;</span></span>
 <span class="r-in"><span></span></span>
@@ -146,7 +155,7 @@ author, commit, date, node, stage, and result.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
       </footer></div>
