@@ -23,10 +23,13 @@
 #' )
 #' }
 #' @export
-biocPkgRanges <-
-    function(start, end, condition = c("ERROR", "WARNINGS"),
-        phase = "buildsrc", version = c("devel", "release"))
-{
+biocPkgRanges <- function(
+    start,
+    end,
+    condition = c("ERROR", "WARNINGS"),
+    phase = "buildsrc",
+    version = c("devel", "release")
+) {
     condition <- match.arg(condition)
     version <- match.arg(version)
 
@@ -35,11 +38,14 @@ biocPkgRanges <-
     cur <- which(sdat[["pkg"]] >= start & sdat[["pkg"]] <= end)
     if (!length(cur))
         stop("no packages in range")
-    mine <- sdat[cur,]
+
+    mine <- sdat[cur, ]
+
     crit <- mine[grep("OK|skipped", mine[["result"]], invert = TRUE), ]
     if (!nrow(crit))
         stop("all packages OK or skipped!")
-    flag <- crit[grep(condition, crit[["result"]]),]
-    flagged <- flag[grep(phase, flag[["stage"]]),]
+
+    flag <- crit[grep(condition, crit[["result"]]), ]
+    flagged <- flag[grep(phase, flag[["stage"]]), ]
     split(flagged, flagged[["pkg"]])
 }
