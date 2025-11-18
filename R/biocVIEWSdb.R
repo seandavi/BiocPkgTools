@@ -42,7 +42,9 @@ biocVIEWSdb <- function(
     if (version %in% c("release", "devel"))
         version <- BiocManager:::.version_bioc(version)
 
-    if (!is.package_version(version))
+    version <- try(as.package_version(version), silent = TRUE)
+
+    if (is(version, "try-error"))
         stop(
             "'version' is not 'release', 'devel', or a valid 'package_version'"
         )
