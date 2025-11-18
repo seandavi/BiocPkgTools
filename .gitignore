@@ -5,7 +5,7 @@ doc
 .RData
 .Ruserdata
 .httr-oauth
-README.html
+*.html
 *~
 inst/doc/
 docs/*
