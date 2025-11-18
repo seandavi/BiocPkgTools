@@ -25,5 +25,4 @@ stats are not version-specific.
 }
 \examples{
 biocDownloadStats()
-
 }

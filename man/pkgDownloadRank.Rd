@@ -31,8 +31,6 @@ This function uses \code{available.packages} to calculate the download rank
 in the Bioconductor landing page.
 }
 \examples{
-
 ## Percentile rank for BiocGenerics (top 1\%)
 pkgDownloadRank("BiocGenerics", "software")
-
 }

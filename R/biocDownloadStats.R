@@ -81,7 +81,6 @@ utils::globalVariables(
 #'
 #' @examples
 #' biocDownloadStats()
-#'
 #' @export
 biocDownloadStats <-
     function(
@@ -164,9 +163,7 @@ biocDownloadStats <-
 #' @return A `tibble` of download statistics
 #'
 #' @examples
-#'
 #' pkgDownloadStats("GenomicRanges")
-#'
 #' @export
 pkgDownloadStats <-
     function(
@@ -208,10 +205,8 @@ pkgDownloadStats <-
 #' @param download_stats a data.frame from [biocDownloadStats()]
 #'
 #' @examples
-#'
 #' dls <- biocDownloadStats()
 #' tail(firstInBioc(dls))
-#'
 #' @export
 firstInBioc <- function(download_stats) {
   download_stats |>
@@ -240,10 +235,8 @@ firstInBioc <- function(download_stats) {
 #'   proportion in the name
 #'
 #' @examples
-#'
 #' ## Percentile rank for BiocGenerics (top 1%)
 #' pkgDownloadRank("BiocGenerics", "software")
-#'
 #' @export
 pkgDownloadRank <-
     function(
@@ -279,12 +272,8 @@ pkgDownloadRank <-
 #' @inheritParams pkgDownloadRank
 #' @inheritParams activitySince
 #'
-#' @examples
-#' if (interactive()) {
-#'
-#'   latestPkgStats("Bioconductor/BiocGenerics", "2021-05-05")
-#'
-#' }
+#' @examplesIf interactive()
+#' latestPkgStats("Bioconductor/BiocGenerics", "2021-05-05")
 #' @export
 latestPkgStats <-
     function(
@@ -382,15 +371,10 @@ latestPkgStats <-
 #' @return A `tibble` with three columns corresponding to issue metadata (i.e.,
 #'   "created_at", "number", "title")
 #'
-#' @examples
-#' if (interactive()) {
-#'
-#'   activitySince("Bioconductor/S4Vectors", "issues", "closed", "2021-05-01")
-#'   activitySince("Bioconductor/S4Vectors", "issues", "open", "2022-05-01")
-#'   activitySince("Bioconductor/S4Vectors", "commits", Date = "2022-05-01")
-#'
-#' }
-#'
+#' @examplesIf interactive()
+#' activitySince("Bioconductor/S4Vectors", "issues", "closed", "2021-05-01")
+#' activitySince("Bioconductor/S4Vectors", "issues", "open", "2022-05-01")
+#' activitySince("Bioconductor/S4Vectors", "commits", Date = "2022-05-01")
 #' @export
 activitySince <- function(
     gh_repo,

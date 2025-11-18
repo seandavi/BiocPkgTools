@@ -26,7 +26,5 @@ A \code{tibble} of download statistics
 Get Bioconductor download statistics for a package
 }
 \examples{
-
 pkgDownloadStats("GenomicRanges")
-
 }

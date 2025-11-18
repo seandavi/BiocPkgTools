@@ -26,9 +26,7 @@ The \code{latestPkgStats} function combines outputs from several functions to
 generate a table of relevant statistics for a given package.
 }
 \examples{
-if (interactive()) {
-
-  latestPkgStats("Bioconductor/BiocGenerics", "2021-05-05")
-
-}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
+latestPkgStats("Bioconductor/BiocGenerics", "2021-05-05")
+\dontshow{\}) # examplesIf}
 }
