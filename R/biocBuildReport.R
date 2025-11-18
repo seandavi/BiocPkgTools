@@ -55,7 +55,9 @@ biocBuildReport <- function(
   
   version <- try(as.package_version(version), silent = TRUE)
 
-  if (!is.package_version(version))
+  version <- try(as.package_version(version), silent = TRUE)
+
+  if (is(version, "try-error"))
     stop(
         "'version' is not 'release', 'devel', or a valid 'package_version'"
     )
