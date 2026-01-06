@@ -52,6 +52,8 @@ biocBuildReport <- function(
   stopifnot(is.logical(stage.timings), is.character(pkgType))
   if (version %in% c("release", "devel"))
     version <- BiocManager:::.version_bioc(version)
+  
+  version <- try(as.package_version(version), silent = TRUE)
 
   if (!is.package_version(version))
     stop(
