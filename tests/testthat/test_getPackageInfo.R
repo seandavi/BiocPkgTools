@@ -55,7 +55,7 @@ test_that(".extract_fnd() extracts single funder", {
     result <- BiocPkgTools:::.extract_fnd(
         "Jane Doe [aut], Big Funder [fnd]"
     )
-    expect_identical(result, "Big Funder")
+    expect_identical(result, "Big Funder [fnd]")
 })
 
 test_that(".extract_fnd() extracts multiple funders", {
@@ -63,7 +63,7 @@ test_that(".extract_fnd() extracts multiple funders", {
         "Jane Doe [aut], Funder One [fnd], Funder Two [fnd]"
     )
     expect_length(result, 2L)
-    expect_identical(result, c("Funder One", "Funder Two"))
+    expect_identical(result, c("Funder One [fnd]", "Funder Two [fnd]"))
 })
 
 test_that(".extract_fnd() extracts funders from multiline Author field", {
@@ -74,8 +74,8 @@ test_that(".extract_fnd() extracts funders from multiline Author field", {
     )
     result <- BiocPkgTools:::.extract_fnd(author)
     expect_length(result, 2L)
-    expect_identical(result[[1L]], "Chan Zuckerberg Initiative DAF CZF2019-002443")
-    expect_identical(result[[2L]], "NIH NCI ITCR U24CA180996")
+    expect_identical(result[[1L]], "Chan Zuckerberg Initiative DAF CZF2019-002443 [fnd]")
+    expect_identical(result[[2L]], "NIH NCI ITCR U24CA180996 [fnd]")
 })
 
 test_that(".extract_fnd() returns NA when no [fnd] tag present", {

@@ -2,19 +2,23 @@
 % Please edit documentation in R/biocPkgList.R
 \name{.extract_fnd}
 \alias{.extract_fnd}
-\title{Extract funder names from an \code{Authors@R} field value}
+\title{Extract funder names from a formatted \code{Author} field string}
 \usage{
-.extract_fnd(authors_at_r_string)
+.extract_fnd(author_string)
 }
 \arguments{
-\item{authors_at_r_string}{character(1) the value of the \code{Authors@R}
-DESCRIPTION field}
+\item{author_string}{character(1) a formatted \code{Author} field value as
+found in a Bioconductor \code{VIEWS} file, e.g.
+\code{"Jane Doe [aut, cre], Big Org [fnd]"}.  May contain embedded
+newlines.  Note: funder names that themselves contain commas will not be
+extracted correctly, as commas are used as entry separators in the
+formatted \code{Author} field.}
 }
 \value{
 character() of funder names, or \code{NA_character_} when no funder
-is found or parsing fails
+is found or the input is missing/empty
 }
 \description{
-Extract funder names from an \code{Authors@R} field value
+Extract funder names from a formatted \code{Author} field string
 }
 \keyword{internal}
