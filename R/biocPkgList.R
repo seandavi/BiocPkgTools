@@ -1,3 +1,28 @@
+#' Extract funder names from an \code{Authors@R} field value
+#'
+#' @param authors_at_r_string character(1) the value of the \code{Authors@R}
+#'   DESCRIPTION field
+#'
+#' @return character() of funder names, or \code{NA_character_} when no funder
+#'   is found or parsing fails
+#'
+#' @keywords internal
+.extract_fnd <- function(authors_at_r_string) {
+    if (is.na(authors_at_r_string) || !nzchar(trimws(authors_at_r_string)))
+        return(NA_character_)
+    tryCatch({
+        authors <- eval(parse(text = authors_at_r_string))
+        fnd_persons <- Filter(function(p) "fnd" %in% p$role, authors)
+        if (!length(fnd_persons))
+            return(NA_character_)
+        vapply(fnd_persons, function(p) {
+            name_parts <- c(p$given, p$family)
+            paste(name_parts[!is.na(name_parts) & nzchar(name_parts)],
+                  collapse = " ")
+        }, character(1))
+    }, error = function(e) NA_character_)
+}
+
 #' @import biocViews
 #' @importFrom RBGL transitive.closure
 .computeBiocViewsTransitiveClosure <- function() {
@@ -43,7 +68,11 @@
 #' @param addBiocViewParents `logical(1)` whether to add all biocViews
 #'    parents to biocViews annotations.
 #'
-#' @return An object of class `tbl_df`.
+#' @return An object of class `tbl_df`. When the `Authors@R` field is present
+#'   in the VIEWS data, the result includes a `fnd` list-column whose elements
+#'   are character vectors of funder names extracted from persons with role
+#'   `"fnd"`. Elements are `NA_character_` for packages that declare no
+#'   funder.
 #'
 #' @importFrom BiocManager repositories version
 #' @importFrom stringr str_split str_replace_all str_remove_all str_squish
@@ -150,6 +179,16 @@ biocPkgList <- function(
                         str_split(ret[["Author"]], ","),
                         str_squish
                     )
+
+                    ## Extract funder names from Authors@R if available
+                    if ("Authors@R" %in% colnames(ret)) {
+                        ret[["fnd"]] <- lapply(ret[["Authors@R"]],
+                                               .extract_fnd)
+                    } else {
+                        ret[["fnd"]] <- as.list(
+                            rep(NA_character_, nrow(ret))
+                        )
+                    }
                     ret
                   })
 
