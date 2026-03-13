@@ -25,11 +25,12 @@ not all repos are available for all versions, particularly older versions.}
 parents to biocViews annotations.}
 }
 \value{
-An object of class \code{tbl_df}. When the \code{Authors@R} field is
-present in the VIEWS data, the result includes a \code{fnd} list-column
-whose elements are character vectors of funder names extracted from
-persons with role \code{"fnd"}. Elements are \code{NA_character_} for
-packages that declare no funder.
+An object of class \code{tbl_df} with one row per package. The result
+always includes a \code{fnd} list-column whose elements are character
+vectors of funder names extracted from persons with role \code{"fnd"} in
+the formatted \code{Author} field. Elements are \code{NA_character_} for
+packages that declare no funder (or whose \code{Author} field contains no
+\code{[fnd]} role tag).
 }
 \description{
 The BiocViews-generated \code{VIEWS} file is available

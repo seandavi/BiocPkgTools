@@ -46,30 +46,41 @@ test_that(".extract_fnd() returns NA for no funder", {
         NA_character_
     )
     expect_identical(
-        BiocPkgTools:::.extract_fnd("person('Jane', 'Doe', role = 'aut')"),
+        BiocPkgTools:::.extract_fnd("Jane Doe [aut, cre]"),
         NA_character_
     )
 })
 
 test_that(".extract_fnd() extracts single funder", {
-    aar <- "c(person('Jane', 'Doe', role = 'aut'),
-              person('Big Funder', role = 'fnd'))"
-    result <- BiocPkgTools:::.extract_fnd(aar)
+    result <- BiocPkgTools:::.extract_fnd(
+        "Jane Doe [aut], Big Funder [fnd]"
+    )
     expect_identical(result, "Big Funder")
 })
 
 test_that(".extract_fnd() extracts multiple funders", {
-    aar <- "c(person('Jane', 'Doe', role = 'aut'),
-              person('Funder', 'One', role = 'fnd'),
-              person('Funder', 'Two', role = 'fnd'))"
-    result <- BiocPkgTools:::.extract_fnd(aar)
+    result <- BiocPkgTools:::.extract_fnd(
+        "Jane Doe [aut], Funder One [fnd], Funder Two [fnd]"
+    )
     expect_length(result, 2L)
     expect_identical(result, c("Funder One", "Funder Two"))
 })
 
-test_that(".extract_fnd() returns NA for malformed input", {
+test_that(".extract_fnd() extracts funders from multiline Author field", {
+    author <- paste0(
+        "Martin Morgan [aut, cre],\n",
+        "    Chan Zuckerberg Initiative DAF CZF2019-002443 [fnd],\n",
+        "    NIH NCI ITCR U24CA180996 [fnd]"
+    )
+    result <- BiocPkgTools:::.extract_fnd(author)
+    expect_length(result, 2L)
+    expect_identical(result[[1L]], "Chan Zuckerberg Initiative DAF CZF2019-002443")
+    expect_identical(result[[2L]], "NIH NCI ITCR U24CA180996")
+})
+
+test_that(".extract_fnd() returns NA when no [fnd] tag present", {
     expect_identical(
-        BiocPkgTools:::.extract_fnd("not valid R {{{"),
+        BiocPkgTools:::.extract_fnd("some text without role brackets"),
         NA_character_
     )
 })
