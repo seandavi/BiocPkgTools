@@ -1,3 +1,38 @@
+#' Extract funder names from a formatted \code{Author} field string
+#'
+#' @param author_string character(1) a formatted \code{Author} field value as
+#'   found in a Bioconductor \code{VIEWS} file, e.g.
+#'   \code{"Jane Doe [aut, cre], Big Org [fnd]"}.  May contain embedded
+#'   newlines.  Note: funder names that themselves contain commas will not be
+#'   extracted correctly, as commas are used as entry separators in the
+#'   formatted \code{Author} field.
+#'
+#' @return character() of funder names, or \code{NA_character_} when no funder
+#'   is found or the input is missing/empty
+#'
+#' @keywords internal
+.extract_fnd <- function(author_string) {
+    if (is.na(author_string) || !nzchar(trimws(author_string)))
+        return(NA_character_)
+    ## Normalise line-continuation whitespace
+    s <- gsub("\\s*[\n\r]+\\s*", " ", author_string)
+    ## Match author entries whose role bracket contains the "fnd" role
+    ## Format: "Some Name [role1, fnd, role2]"
+    m <- gregexpr(
+        "([^,\\[]+?)\\s*\\[([^\\]]*\\bfnd\\b[^\\]]*)\\]",
+        s, perl = TRUE
+    )
+    matches <- regmatches(s, m)[[1L]]
+    if (!length(matches))
+        return(NA_character_)
+    ## Strip the trailing "[roles]" to recover just the name
+    names_only <- trimws(sub("\\s*\\[[^\\]]*\\]$", "", matches))
+    ## Remove any stray leading comma (can occur when the entry is not first)
+    names_only <- trimws(sub("^,\\s*", "", names_only))
+    names_only <- names_only[nzchar(names_only)]
+    if (!length(names_only)) NA_character_ else names_only
+}
+
 #' @import biocViews
 #' @importFrom RBGL transitive.closure
 .computeBiocViewsTransitiveClosure <- function() {
@@ -43,7 +78,12 @@
 #' @param addBiocViewParents `logical(1)` whether to add all biocViews
 #'    parents to biocViews annotations.
 #'
-#' @return An object of class `tbl_df`.
+#' @return An object of class `tbl_df` with one row per package. The result
+#'   always includes a `fnd` list-column whose elements are character vectors
+#'   of funder names extracted from persons with role `"fnd"` in the
+#'   formatted `Author` field. Elements are `NA_character_` for packages
+#'   that declare no funder (or whose `Author` field contains no `[fnd]`
+#'   role tag).
 #'
 #' @importFrom BiocManager repositories version
 #' @importFrom stringr str_split str_replace_all str_remove_all str_squish
@@ -134,6 +174,10 @@ biocPkgList <- function(
                       })
                       ret$biocViews = tmp
                     }
+
+                    ## Extract funder names from the raw (unprocessed) Author
+                    ## field while role brackets are still present
+                    ret[["fnd"]] <- lapply(ret[["Author"]], .extract_fnd)
 
                     ret[["Author"]] = ret[["Author"]] |>
                         str_replace_all("\n", " ") |>
