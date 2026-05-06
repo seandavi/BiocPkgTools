@@ -29,8 +29,7 @@
 #' @return The DOI as a `character(1)` vector.
 #'
 #' @importFrom httr2 request req_auth_basic req_headers req_body_json
-#'   req_perform resp_body_json
-#' @importFrom jsonlite toJSON fromJSON
+#'   req_perform resp_body_json resp_check_status
 #'
 #' @keywords Internal
 #'
@@ -81,5 +80,6 @@ generateBiocPkgDOI <- function(pkg, authors, pubyear, event = "publish", testing
       req_body_json(payload) |>
       req_perform()
 
+  resp_check_status(response)
   resp_body_json(response)$data$id
 }
