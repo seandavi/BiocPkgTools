@@ -32,10 +32,8 @@
 #'
 #' @keywords Internal
 #'
-#' @examples
-#' \dontrun{
-#'   x = generateBiocPkgDOI('RANDOM_TEST_PACKAGE','Sean Davis',1972)
-#' }
+#' @examplesIf interactive()
+#' generateBiocPkgDOI('RANDOM_TEST_PACKAGE','Sean Davis',1972, testing = TRUE)
 generateBiocPkgDOI <- function(
     pkg,
     authors,

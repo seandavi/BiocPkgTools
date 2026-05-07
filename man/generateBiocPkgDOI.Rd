@@ -48,8 +48,8 @@ and "DATACITE_PASSWORD
 The GUI is available here: \url{https://doi.datacite.org/}.
 }
 \examples{
-\dontrun{
-  x = generateBiocPkgDOI('RANDOM_TEST_PACKAGE','Sean Davis',1972)
-}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
+generateBiocPkgDOI('RANDOM_TEST_PACKAGE','Sean Davis',1972, testing = TRUE)
+\dontshow{\}) # examplesIf}
 }
 \keyword{Internal}
