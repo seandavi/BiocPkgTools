@@ -234,6 +234,8 @@ firstInBioc <- function(download_stats) {
 #' @return The package's percentile rank, in terms of download statistics, and
 #'   proportion in the name
 #'
+#' @importFrom jsonlite fromJSON
+#'
 #' @examples
 #' ## Percentile rank for BiocGenerics (top 1%)
 #' pkgDownloadRank("BiocGenerics", "software")
