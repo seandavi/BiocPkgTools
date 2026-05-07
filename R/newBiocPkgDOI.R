@@ -28,9 +28,8 @@
 #'
 #' @return The DOI as a `character(1)` vector.
 #'
-#' @importFrom httr VERB content_type content add_headers message_for_status
-#' @importFrom jsonlite toJSON fromJSON
-#' @importFrom stringr str_to_upper
+#' @importFrom httr2 request req_auth_basic req_headers req_body_json
+#'   req_perform resp_body_json resp_check_status
 #'
 #' @keywords Internal
 #'
@@ -57,7 +56,6 @@ generateBiocPkgDOI <- function(pkg, authors, pubyear, event = "publish", testing
 
   bioc_doi_namespace <- "B9.bioc"
   pkg_doi <- paste0(bioc_prefix, "/", bioc_doi_namespace, ".", pkg)
-  encode <- "raw"
   payload <- list("data" = list("id" = paste0("https://doi.org/", pkg_doi),
                                 "doi" = stringr::str_to_upper(pkg_doi),
                                 "attributes" = list("doi" = pkg_doi,
@@ -76,19 +74,12 @@ generateBiocPkgDOI <- function(pkg, authors, pubyear, event = "publish", testing
                                 )
                  )
 
-  authorization <- jsonlite::base64_enc(paste(username, password, sep = ":"))
-  response <- httr::VERB("POST",
-                         base_url,
-                         body = jsonlite::toJSON(payload, auto_unbox = TRUE),
-                         httr::add_headers(Authorization = paste("Basic", authorization, sep = " ")),
-                         httr::content_type("application/vnd.api+json"),
-                         encode = encode)
+  response <- request(base_url) |>
+      req_auth_basic(username, password) |>
+      req_headers("Content-Type" = "application/vnd.api+json") |>
+      req_body_json(payload) |>
+      req_perform()
 
-  if (response$status_code >= 200 && response$status_code < 300) {
-    response_text <- httr::content(response, "text")
-    response_json <- jsonlite::fromJSON(response_text)
-    return(response_json$data$id)
-  } else {
-    httr::message_for_status(response)
-  }
+  resp_check_status(response)
+  resp_body_json(response)$data$id
 }
