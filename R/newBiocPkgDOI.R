@@ -40,15 +40,14 @@ generateBiocPkgDOI <- function(
     pkg,
     authors,
     pubyear,
-    event = "publish",
+    event = c("publish", "register", "hide"),
     testing = TRUE
 ) {
     username <- Sys.getenv("DATACITE_USERNAME")
     password <- Sys.getenv("DATACITE_PASSWORD")
 
+    event <- match.arg(event)
 
-    if (!is.element(event, c("hide", "register", "publish")))
-        stop("event must be 'hide', 'register', or 'publish'.")
     if (testing) {
         # View results at: https://doi.test.datacite.org
         bioc_prefix <- "10.82962"

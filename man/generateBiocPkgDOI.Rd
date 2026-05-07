@@ -8,7 +8,7 @@ generateBiocPkgDOI(
   pkg,
   authors,
   pubyear,
-  event = "publish",
+  event = c("publish", "register", "hide"),
   testing = TRUE
 )
 }
