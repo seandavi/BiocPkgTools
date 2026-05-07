@@ -4,7 +4,13 @@
 \alias{generateBiocPkgDOI}
 \title{Generate a DOI for a Bioconductor package}
 \usage{
-generateBiocPkgDOI(pkg, authors, pubyear, event = "publish", testing = TRUE)
+generateBiocPkgDOI(
+  pkg,
+  authors,
+  pubyear,
+  event = "publish",
+  testing = TRUE
+)
 }
 \arguments{
 \item{pkg}{\code{character(1)} package name}

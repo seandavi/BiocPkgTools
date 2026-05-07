@@ -1,4 +1,3 @@
-
 #' Generate a DOI for a Bioconductor package
 #'
 #' This function makes calls out to the DataCite REST API described
@@ -37,49 +36,58 @@
 #' \dontrun{
 #'   x = generateBiocPkgDOI('RANDOM_TEST_PACKAGE','Sean Davis',1972)
 #' }
-generateBiocPkgDOI <- function(pkg, authors, pubyear, event = "publish", testing = TRUE) {
+generateBiocPkgDOI <- function(
+    pkg,
+    authors,
+    pubyear,
+    event = "publish",
+    testing = TRUE
+) {
+    username <- Sys.getenv("DATACITE_USERNAME")
+    password <- Sys.getenv("DATACITE_PASSWORD")
 
-  username <- Sys.getenv("DATACITE_USERNAME")
-  password <- Sys.getenv("DATACITE_PASSWORD")
 
-  if (!is.element(event, c("hide", "register", "publish")))
-    stop("event must be 'hide', 'register', or 'publish'.")
+    if (!is.element(event, c("hide", "register", "publish")))
+        stop("event must be 'hide', 'register', or 'publish'.")
+    if (testing) {
+        # View results at: https://doi.test.datacite.org
+        bioc_prefix <- "10.82962"
+        base_url <- "https://api.test.datacite.org/dois"
+    } else {
+        bioc_prefix <- "10.18129"
+        base_url <- "https://api.datacite.org/dois"
+    }
 
-  if (testing) {
-    # View results at: https://doi.test.datacite.org
-    bioc_prefix <- "10.82962"
-    base_url <- "https://api.test.datacite.org/dois"
-  } else {
-    bioc_prefix <- "10.18129"
-    base_url <- "https://api.datacite.org/dois"
-  }
+    bioc_doi_namespace <- "B9.bioc"
+    pkg_doi <- paste0(bioc_prefix, "/", bioc_doi_namespace, ".", pkg)
+    payload <- list(
+        "data" = list(
+            "id" = paste0("https://doi.org/", pkg_doi),
+            "doi" = stringr::str_to_upper(pkg_doi),
+            "attributes" = list(
+                "doi" = pkg_doi,
+                "event" = event,
+                "prefix" = bioc_prefix,
+                "suffix" = paste(bioc_doi_namespace, pkg, sep = "."),
+                "identifiers" = list(
+                    "identifier" = pkg_doi, "identifierType" = "DOI"
+                ),
+                "creators" = list("name" = paste(authors, collapse = ", ")),
+                "titles" = list("title" = pkg),
+                "url" = paste0("https://bioconductor.org/packages/", pkg),
+                "publisher" = "Bioconductor",
+                "publicationYear" = pubyear,
+                "types" = list("resourceTypeGeneral" = "Software")
+        )
+      )
+    )
 
-  bioc_doi_namespace <- "B9.bioc"
-  pkg_doi <- paste0(bioc_prefix, "/", bioc_doi_namespace, ".", pkg)
-  payload <- list("data" = list("id" = paste0("https://doi.org/", pkg_doi),
-                                "doi" = stringr::str_to_upper(pkg_doi),
-                                "attributes" = list("doi" = pkg_doi,
-                                                    "event" = event,
-                                                    "prefix" = bioc_prefix,
-                                                    "suffix" = paste(bioc_doi_namespace, pkg, sep = "."),
-                                                    "identifiers" = list("identifier" = pkg_doi,
-                                                                         "identifierType" = "DOI"),
-                                                    "creators" = list("name" = paste(authors, collapse = ", ")),
-                                                    "titles" = list("title" = pkg),
-                                                    "url" = paste0("https://bioconductor.org/packages/", pkg),
-                                                    "publisher" = "Bioconductor",
-                                                    "publicationYear" = pubyear,
-                                                    "types" = list("resourceTypeGeneral" = "Software")
-                                                   )
-                                )
-                 )
+    response <- request(base_url) |>
+        req_auth_basic(username, password) |>
+        req_headers("Content-Type" = "application/vnd.api+json") |>
+        req_body_json(payload) |>
+        req_perform()
 
-  response <- request(base_url) |>
-      req_auth_basic(username, password) |>
-      req_headers("Content-Type" = "application/vnd.api+json") |>
-      req_body_json(payload) |>
-      req_perform()
-
-  resp_check_status(response)
-  resp_body_json(response)$data$id
+    resp_check_status(response)
+    resp_body_json(response)$data$id
 }
