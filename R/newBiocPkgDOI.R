@@ -86,5 +86,5 @@ generateBiocPkgDOI <- function(
         req_perform()
 
     resp_check_status(response)
-    resp_body_json(response)$data$id
+    resp_body_json(response)[[c("data", "id")]]
 }
