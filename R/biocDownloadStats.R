@@ -75,7 +75,7 @@ utils::globalVariables(
 #' @importFrom utils read.table
 #' @importFrom tibble as_tibble
 #' @importFrom BiocFileCache BiocFileCache bfcupdate bfcneedsupdate bfcrpath
-#'     bfcquery bfcnew bfcdownload
+#' @importFrom BiocFileCache bfcquery bfcnew bfcdownload
 #'
 #' @return A `tibble` of download statistics for all Bioconductor packages
 #'

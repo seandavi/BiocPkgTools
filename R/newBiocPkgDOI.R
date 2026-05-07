@@ -28,7 +28,7 @@
 #' @return The DOI as a `character(1)` vector.
 #'
 #' @importFrom httr2 request req_auth_basic req_headers req_body_json
-#'   req_perform resp_body_json resp_check_status
+#' @importFrom httr2 req_perform resp_body_json resp_check_status
 #'
 #' @keywords Internal
 #'

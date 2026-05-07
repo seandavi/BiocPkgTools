@@ -61,8 +61,8 @@
 #' @description Get a `data.frame` of employment info from ORCID
 #'
 #' @importFrom httr2 request req_headers req_body_form req_method req_perform
-#'   resp_body_json req_template req_auth_bearer_token
-#'   oauth_flow_client_credentials oauth_client obfuscated
+#' @importFrom httr2 resp_body_json req_template req_auth_bearer_token
+#' @importFrom httr2 oauth_flow_client_credentials oauth_client obfuscated
 #'
 #' @param orcids `character()` A vector of ORCID identifiers
 #'

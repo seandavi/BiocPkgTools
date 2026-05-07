@@ -60,7 +60,7 @@ License: MIT + file LICENSE
 BugReports: https://github.com/seandavi/BiocPkgTools/issues/new
 URL: https://github.com/seandavi/BiocPkgTools
 Encoding: UTF-8
-RoxygenNote: 7.3.3
 Roxygen: list(markdown = TRUE)
 SystemRequirements: mailsend-go
 biocViews: Software, Infrastructure
+Config/roxygen2/version: 8.0.0
