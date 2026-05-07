@@ -70,7 +70,7 @@ For local repositories, use the \code{local = TRUE} argument. Local
 repositories will typically start with the \verb{file://} URI. The function
 checks the \code{mtime} of the output of \code{file.info} on the \code{PACKAGES} file in
 the local repository. Otherwise, by default, it will check the
-\code{last-modified} header of the \code{PACKAGES} file via \code{httr::HEAD()}.
+\code{last-modified} header of the \code{PACKAGES} file via \code{httr2::resp_header()}.
 }
 \section{Methods (by generic)}{
 \itemize{

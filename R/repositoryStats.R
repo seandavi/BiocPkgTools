@@ -52,7 +52,7 @@
 #'   repositories will typically start with the `file://` URI. The function
 #'   checks the `mtime` of the output of `file.info` on the `PACKAGES` file in
 #'   the local repository. Otherwise, by default, it will check the
-#'   `last-modified` header of the `PACKAGES` file via `httr::HEAD()`.
+#'   `last-modified` header of the `PACKAGES` file via `httr2::resp_header()`.
 #'
 #' @author M. Morgan
 #'
