@@ -58,23 +58,24 @@ generateBiocPkgDOI <- function(
     bioc_doi_namespace <- "B9.bioc"
     pkg_doi <- paste0(bioc_prefix, "/", bioc_doi_namespace, ".", pkg)
     payload <- list(
-        "data" = list(
-            "id" = paste0("https://doi.org/", pkg_doi),
-            "doi" = stringr::str_to_upper(pkg_doi),
-            "attributes" = list(
-                "doi" = pkg_doi,
-                "event" = event,
-                "prefix" = bioc_prefix,
-                "suffix" = paste(bioc_doi_namespace, pkg, sep = "."),
-                "identifiers" = list(
-                    "identifier" = pkg_doi, "identifierType" = "DOI"
+        data = list(
+            id = paste0("https://doi.org/", pkg_doi),
+            doi = stringr::str_to_upper(pkg_doi),
+            attributes = list(
+                doi = pkg_doi,
+                event = event,
+                prefix = bioc_prefix,
+                suffix = paste(bioc_doi_namespace, pkg, sep = "."),
+                identifiers = list(
+                    identifier = pkg_doi,
+                    identifierType = "DOI"
                 ),
-                "creators" = list("name" = paste(authors, collapse = ", ")),
-                "titles" = list("title" = pkg),
-                "url" = paste0("https://bioconductor.org/packages/", pkg),
-                "publisher" = "Bioconductor",
-                "publicationYear" = pubyear,
-                "types" = list("resourceTypeGeneral" = "Software")
+                creators = list(name = paste(authors, collapse = ", ")),
+                titles = list(title = pkg),
+                url = paste0("https://bioconductor.org/packages/", pkg),
+                publisher = "Bioconductor",
+                publicationYear = pubyear,
+                types = list(resourceTypeGeneral = "Software")
         )
       )
     )
