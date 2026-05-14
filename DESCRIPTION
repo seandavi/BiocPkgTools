@@ -35,7 +35,6 @@ Imports:
     dplyr,
     xml2,
     readr,
-    httr,
     httr2,
     htmltools,
     DT,
