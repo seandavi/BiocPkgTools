@@ -86,8 +86,11 @@ get_deprecated_status_df <- function(version) {
 }
 
 .url_exists <- function(url) {
-    response <- httr::HEAD(url)
-    status <- httr::status_code(response) < 300
+    response <- httr2::request(url) |>
+        httr2::req_method("HEAD") |>
+        httr2::req_error(is_error = \(resp) FALSE) |>
+        httr2::req_perform()
+    status <- !httr2::resp_is_error(response)
     if (!status)
         warning(url, " cannot be reached", call. = FALSE)
     status
