@@ -90,10 +90,6 @@ biocDownloadStats <-
         )
     )
 {
-    if (identical(pkgType, "all"))
-        .Defunct(
-            msg = "Value 'all' is defunct as 'pkgType' option"
-        )
     pkgType <- match.arg(pkgType, several.ok = TRUE)
     linkPkg <- .matchGetShortName(pkgType, "stat.url")
     fnameType <- .matchGetShortName(pkgType, "stat.file")

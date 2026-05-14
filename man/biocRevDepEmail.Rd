@@ -18,8 +18,7 @@ biocRevDepEmail(
   textOnly = FALSE,
   verbose = FALSE,
   credFile = "~/.blastula_creds",
-  ...,
-  pkg
+  ...
 )
 }
 \arguments{
@@ -71,9 +70,6 @@ system clipboard if the \code{clipr} package is installed (default: FALSE)}
 \code{blastula::create_smtp_creds_file} function containing email
 authentication information (default: "~/.blastula_creds"). See
 \code{?biocBuildEmail} details.}
-
-\item{pkg}{\code{character(1)} DEPRECATED. The name of a single package whose
-reverse dependencies are to be checked and notified.}
 
 \item{\ldots}{Additional inputs to internal functions (not used).}
 }
