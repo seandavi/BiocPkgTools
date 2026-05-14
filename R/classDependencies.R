@@ -257,7 +257,7 @@ plotClassDepGraph <- function(g) {
     # other edge settings
     E(g)$width <- 2
     # root
-    root <- which(degree(g, v = V(g), mode = "in")==0, useNames = T)
+    root <- which(degree(g, v = V(g), mode = "in")==0, useNames = TRUE)
     V(g)[root]$color <- "red"
     # plot
     co <- layout_with_kk(g)
