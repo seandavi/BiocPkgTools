@@ -3,7 +3,7 @@
 on:
   push:
     branches:
-      - RELEASE_3_22
+      - RELEASE_3_23
   release:
     types: [published]
   workflow_dispatch:
