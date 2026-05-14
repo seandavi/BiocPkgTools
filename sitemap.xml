@@ -26,10 +26,12 @@
 <url><loc>/reference/buildPkgDependencyIgraph.html</loc></url>
 <url><loc>/reference/class-dependencies.html</loc></url>
 <url><loc>/reference/dataciteXMLGenerate.html</loc></url>
+<url><loc>/reference/dot-extract_fnd.html</loc></url>
 <url><loc>/reference/dot-getDepGain.html</loc></url>
 <url><loc>/reference/dot-get_cre_orcid.html</loc></url>
 <url><loc>/reference/firstInBioc.html</loc></url>
 <url><loc>/reference/generateBiocPkgDOI.html</loc></url>
+<url><loc>/reference/generateBiocPkgDOI_REST.html</loc></url>
 <url><loc>/reference/getBiocVignette.html</loc></url>
 <url><loc>/reference/getPackageInfo.html</loc></url>
 <url><loc>/reference/getPkgYearsInBioc.html</loc></url>

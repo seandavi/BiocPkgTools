@@ -22,7 +22,7 @@ and their intervening dependencies."><!-- mathjax --><script src="https://cdnjs.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">BiocPkgTools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.28.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.30.0</span>
       </span>
     </div>
 
@@ -49,7 +49,7 @@ and their intervening dependencies."><!-- mathjax --><script src="https://cdnjs.
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Return a minimal subgraph based on package name(s)</h1>
-    <small class="dont-index">Source: <a href="https://github.com/seandavi/BiocPkgTools/blob/RELEASE_3_22/R/buildPkgDependencyGraph.R" class="external-link"><code>R/buildPkgDependencyGraph.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/seandavi/BiocPkgTools/blob/RELEASE_3_23/R/buildPkgDependencyGraph.R" class="external-link"><code>R/buildPkgDependencyGraph.R</code></a></small>
     <div class="hidden name"><code>inducedSubgraphByPkgs.Rd</code></div>
     </div>
 
@@ -104,9 +104,9 @@ connecting paths will be colored as the igraph default.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>     CRAN: https://cran.rstudio.com</span>
 <span class="r-in"><span><span class="va">g2</span> <span class="op">&lt;-</span> <span class="fu">inducedSubgraphByPkgs</span><span class="op">(</span><span class="va">g</span>, pkgs <span class="op">=</span> <span class="va">biocmaintained</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">g2</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH 80d407b DN-- 10 11 -- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IGRAPH aa1fd84 DN-- 10 11 -- </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> + attr: name (v/c), color (v/c), edgetype (e/c)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from 80d407b (vertex names):</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + edges from aa1fd84 (vertex names):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] annotate         -&gt;AnnotationDbi   annotate         -&gt;Biobase        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [3] AnnotationDbi    -&gt;Biobase         AnnotationForge  -&gt;AnnotationDbi  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [5] AnnotationForge  -&gt;Biobase         AnnotationHub    -&gt;AnnotationDbi  </span>
@@ -114,7 +114,7 @@ connecting paths will be colored as the igraph default.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [9] AnnotationHubData-&gt;AnnotationForge AnnotationHubData-&gt;AnnotationHub  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [11] AnnotationHubData-&gt;Biobase        </span>
 <span class="r-in"><span><span class="fu"><a href="https://r.igraph.org/reference/V.html" class="external-link">V</a></span><span class="op">(</span><span class="va">g2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> + 10/10 vertices, named, from 80d407b:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> + 10/10 vertices, named, from aa1fd84:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] annotate          AnnotationDbi     AnnotationForge   AnnotationHub    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [5] AnnotationHubData Biobase           AnnotationFilter  Bioc.gff         </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [9] BiocStyle         BiocVersion      </span>
@@ -151,7 +151,7 @@ connecting paths will be colored as the igraph default.</p></dd>
 <span class="r-in"><span>    linkDistance <span class="op">=</span> <span class="fl">200</span>, fontSize <span class="op">=</span> <span class="fl">20</span>, opacity <span class="op">=</span> <span class="fl">0.9</span>, opacityNoHover <span class="op">=</span> <span class="fl">0.9</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <div id="htmlwidget-ac96cb3ee4656e2e9ec3" style="width:700px;height:432.632880098888px;" class="forceNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-ac96cb3ee4656e2e9ec3">{"x":{"links":{"source":[10,0,2,4,6,11,10,3,8,9,11,7,10,10,11,8,2,9,11,3,3,9,6,10,11,2,9,10,9,10,2,6,3,8,4,2,4,11,2,6,10,3,9,11,9,11,10,3,2,9,9],"target":[0,1,1,1,1,1,1,1,1,1,1,1,2,3,4,4,4,4,4,4,4,4,4,4,4,5,5,5,6,6,6,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,8,8,9,11,11],"colour":["#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666"]},"nodes":{"name":["Biobase","BiocGenerics","DelayedArray","GenomicRanges","IRanges","MatrixGenerics","S4Arrays","S4Vectors","Seqinfo","SparseArray","SummarizedExperiment","XVector","BiocBaseUtils"],"group":[3,1,2,1,2,4,2,2,1,2,1,2,5]},"options":{"NodeID":"name","Group":"group","colourScale":"d3.scaleOrdinal(d3.schemeCategory20);","fontSize":20,"fontFamily":"serif","clickTextSize":50,"linkDistance":200,"linkWidth":"function(d) { return Math.sqrt(d.value); }","charge":-30,"opacity":0.9,"zoom":true,"legend":false,"arrows":false,"nodesize":false,"radiusCalculation":" Math.sqrt(d.nodesize)+6","bounded":false,"opacityNoHover":0.9,"clickAction":null}},"evals":[],"jsHooks":[]}</script></code></pre></div>
+<script type="application/json" data-for="htmlwidget-ac96cb3ee4656e2e9ec3">{"x":{"links":{"source":[10,0,2,11,3,7,8,4,9,6,10,11,10,10,11,3,8,9,9,11,11,6,10,2,9,10,2,9,2,10,8,4,4,6,2,11,6,11,3,9,11,10,9,10,3,2,9,9],"target":[0,1,1,1,1,1,1,1,1,1,1,1,2,3,4,4,4,4,4,4,4,4,4,4,5,5,5,6,6,6,7,7,7,7,7,7,7,7,7,7,7,7,7,8,8,9,11,11],"colour":["#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666"]},"nodes":{"name":["Biobase","BiocGenerics","DelayedArray","GenomicRanges","IRanges","MatrixGenerics","S4Arrays","S4Vectors","Seqinfo","SparseArray","SummarizedExperiment","XVector","BiocBaseUtils"],"group":[3,2,1,2,1,1,1,1,2,1,2,1,4]},"options":{"NodeID":"name","Group":"group","colourScale":"d3.scaleOrdinal(d3.schemeCategory20);","fontSize":20,"fontFamily":"serif","clickTextSize":50,"linkDistance":200,"linkWidth":"function(d) { return Math.sqrt(d.value); }","charge":-30,"opacity":0.9,"zoom":true,"legend":false,"arrows":false,"nodesize":false,"radiusCalculation":" Math.sqrt(d.nodesize)+6","bounded":false,"opacityNoHover":0.9,"clickAction":null}},"evals":[],"jsHooks":[]}</script></code></pre></div>
     </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
