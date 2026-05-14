@@ -58,7 +58,7 @@ However, they are not very computable.
 The `biocBuildReport` function does some heroic parsing of the HTML
 to produce a *tidy* data.frame for further processing in R. 
 
-```{r}
+```{r biocBuildReport}
 library(BiocPkgTools)
 head(biocBuildReport())
 ```
@@ -71,7 +71,7 @@ build status of packages matching a given author *regex* supplied to the
 `authorPattern` argument. The default is to report only "problem" build statuses
 (ERROR, WARNING).
 
-```{r eval=FALSE}
+```{r problemPage, eval=FALSE}
 problemPage(authorPattern = "V.*Carey")
 ```
 
@@ -81,7 +81,7 @@ suddenly broken a large number of these.  You can use the `dependsOn` argument
 to produce the summary report of those packages that "depend on" the given
 package.
 
-```{r eval=FALSE}
+```{r problemPageDepends, eval=FALSE}
 problemPage(dependsOn = "limma")
 ```
 
@@ -97,7 +97,7 @@ function grabs all available download stats for all packages in all
 Experiment Data, Annotation Data, and Software packages. The results
 are returned as a tidy data.frame for further analysis.
 
-```{r}
+```{r biocDownloadStats}
 head(biocDownloadStats())
 ```
 
@@ -109,7 +109,7 @@ channels such as Anaconda, who also provided download statistics for packages
 installed from their repositories.  Access to these counts is provided by the
 `anacondaDownloadStats` function:
 
-```{r}
+```{r anacondaDownloadStats}
 head(anacondaDownloadStats())
 ```
 
@@ -124,14 +124,14 @@ these details are available in bulk for all included packages. The `biocPkgList`
 returns a data.frame with a row for each package. Tons of information are
 available, as evidenced by the column names of the results.
 
-```{r}
+```{r biocPkgList}
 bpi = biocPkgList()
 colnames(bpi)
 ```
 
 Some of the variables are parsed to produce `list` columns. 
 
-```{r}
+```{r biocPkgListHead}
 head(bpi)
 ```
 
@@ -140,7 +140,7 @@ the `importsMe` column to find the packages that import the
 `r Biocpkg("GEOquery")` package.
 
 
-```{r}
+```{r GEOqueryImports}
 require(dplyr)
 bpi = biocPkgList()
 bpi |> 
@@ -183,7 +183,7 @@ to the following workflow.
 
 A dependency graph for all of Bioconductor is a starting place.
 
-```{r}
+```{r dependencyGraph}
 dep_df = buildPkgDependencyDataFrame()
 g = buildPkgDependencyIgraph(dep_df)
 g
@@ -205,7 +205,7 @@ that implements graph plotting in a browser. It can be integrated
 into shiny applications. Interactive graphs can also be included in
 Rmarkdown documents (see vignette)
 
-```{r}
+```{r visNetworkIgraph}
 igraph_network = buildPkgDependencyIgraph(buildPkgDependencyDataFrame())
 ``` 
 
@@ -214,7 +214,7 @@ doing so is possible. A common use case is to visualize the graph of
 dependencies "centered" on a package of interest. In this case, I will 
 focus on the `r Biocpkg("GEOquery")` package. 
 
-```{r}
+```{r geoquerySubgraph}
 igraph_geoquery_network = subgraphByDegree(igraph_network, "GEOquery")
 ```
 
@@ -224,7 +224,7 @@ The `subgraphByDegree()` function returns all nodes and connections within
 The visNework package can plot `igraph` objects directly, but more flexibility
 is offered by first converting the graph to visNetwork form.
 
-```{r}
+```{r toVisNetworkData}
 library(visNetwork)
 data <- toVisNetworkData(igraph_geoquery_network)
 ```
@@ -232,21 +232,21 @@ data <- toVisNetworkData(igraph_geoquery_network)
 The next few code chunks highlight just a few examples of the visNetwork
 capabilities, starting with a basic plot.
 
-```{r }
+```{r visNetworkPlot}
 visNetwork(nodes = data$nodes, edges = data$edges, height = "500px")
 ```
 
 For fun, we can watch the graph stabilize during drawing, best viewed
 interactively.
 
-```{r}
+```{r visNetworkStabilization}
 visNetwork(nodes = data$nodes, edges = data$edges, height = "500px") |>
     visPhysics(stabilization=FALSE)
 ```
 
 Add arrows and colors to better capture dependencies.
 
-```{r}
+```{r visNetworkArrows}
 data$edges$color='lightblue'
 data$edges[data$edges$edgetype=='Imports','color']= 'red'
 data$edges[data$edges$edgetype=='Depends','color']= 'green'
@@ -257,7 +257,7 @@ visNetwork(nodes = data$nodes, edges = data$edges, height = "500px") |>
 
 Add a legend.
 
-```{r}
+```{r visNetworkLegend}
 ledges <- data.frame(color = c("green", "lightblue", "red"),
   label = c("Depends", "Suggests", "Imports"), arrows =c("from", "from", "from"))
 visNetwork(nodes = data$nodes, edges = data$edges, height = "500px") |>
@@ -300,7 +300,7 @@ we should first gather all dependency information using the function
 packages in Bioconductor and CRAN and dependencies categorised as `Depends`
 or `Imports`, which are the ones installed by default for a given package.
 
-```{r}
+```{r dependencyBurden}
 
 depdf <- buildPkgDependencyDataFrame(repo=c("BioCsoft", "CRAN"),
                                      dependencies=c("Depends", "Imports"))
@@ -312,7 +312,7 @@ Finally, we call the function `pkgDepMetrics()` to obtain different metrics
 on the dependency burden of a package we want to analyze, in the case below,
 the package `BiocPkgTools` itself:
 
-```{r}
+```{r pkgDepMetrics}
 pkgDepMetrics("BiocPkgTools", depdf)
 ```
 
@@ -357,7 +357,7 @@ without any further change in the analyzed package.
 
 We can find out what actually functionality calls are we importing as follows:
 
-```{r}
+```{r pkgDepImports}
 imp <- pkgDepImports("BiocPkgTools")
 imp |> filter(pkg == "DT")
 ```
@@ -423,6 +423,6 @@ utils          <NA>     <NA>    <NA>                <NA>
 
 # Provenance
 
-```{r}
+```{r sessionInfo}
 sessionInfo()
 ```
