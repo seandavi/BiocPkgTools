@@ -13,7 +13,8 @@ Authors@R: c(
     person("Charlotte", "Soneson", role="ctb", email = "charlottesoneson@gmail.com"),
     person("Martin", "Morgan", role="ctb", email = "martin.morgan@roswellpark.org"),
     person("Vince", "Carey", role="ctb", email="stvjc@channing.harvard.edu"),
-    person("Sean", "Davis", email = "seandavi@gmail.com",role = c("aut", "cre"))
+    person("Sean", "Davis", , "seandavi@gmail.com", c("aut", "cre"),
+      c(ORCID = "0000-0002-8991-6458"))
     )
 Description: Bioconductor has a rich ecosystem of metadata around
   packages, usage, and build status. This package is a simple
