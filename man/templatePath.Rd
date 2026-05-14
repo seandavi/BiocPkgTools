@@ -17,3 +17,7 @@ templatePath(
 These templates are used with \code{biocBuildEmail} to notify maintainers
 regarding package errors and final deprecation warning.
 }
+\examples{
+
+templatePath("buildemail")
+}
