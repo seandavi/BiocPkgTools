@@ -12,6 +12,10 @@ SIGNIFICANT USER-VISIBLE CHANGES
 
 BUG FIXES AND MINOR IMPROVEMENTS
 
+    o `pkgBiocRevDeps(recursive = TRUE)` no longer returns forward
+      (non-reverse) dependencies. Recursion now follows only strong
+      dependencies, avoiding the `Suggests` / `Enhances` explosion that pulled
+      in nearly the entire repository (#81).
     o Switch `generateBiocPkgDOI` to use `httr2` instead of `httr`
     o Switch `repositoryStats` to use `httr2` instead of `httr`
     o Support `match.arg` for `event` argument in `generateBiocPkgDOI`
