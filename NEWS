@@ -1,12 +1,46 @@
-CHANGES IN VERSION 1.30.0
+CHANGES IN VERSION 1.32.0
 -------------------------
+
+DEPRECATED AND DEFUNCT
+
+    o Removed defunct `pkgType = "all"` argument in `biocDownloadStats` and
+      defunct `pkg` argument in `biocRevDepEmail`
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o Updated R dependency to >= 4.6.0
 
 BUG FIXES AND MINOR IMPROVEMENTS
 
     o `pkgBiocRevDeps(recursive = TRUE)` no longer returns forward
-    (non-reverse) dependencies. Recursion now follows only strong
-    dependencies, avoiding the `Suggests` / `Enhances` explosion that pulled
-    in nearly the entire repository (#81).
+      (non-reverse) dependencies. Recursion now follows only strong
+      dependencies, avoiding the `Suggests` / `Enhances` explosion that pulled
+      in nearly the entire repository (#81).
+    o Switch `generateBiocPkgDOI` to use `httr2` instead of `httr`
+    o Switch `repositoryStats` to use `httr2` instead of `httr`
+    o Support `match.arg` for `event` argument in `generateBiocPkgDOI`
+    o Removed the dependency on `httr` by migrating `.url_exists` helper to
+      `httr2`
+    o Removed duplicate internal function `generateBiocPkgDOI_REST`
+
+CHANGES IN VERSION 1.30.0
+-------------------------
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o `biocPkgList` now extracts funder ('fnd') role information from
+      `Authors@R`, adding a funder list-column to the output (@vjcitn, #80)
+
+BUG FIXES AND MINOR IMPROVEMENTS
+
+    o Coerce character version inputs to `package_version` class in build
+      report, build status, package list, VIEWS database, and repository
+      stats functions
+    o Fix call to helper function by using internal `.get_VIEWS` in
+      `pkgDownloadRank` and `get_deprecated_status_df`
+    o Update `biocPkgRanges` to use the new column names returned by
+      `biocBuildStatusDB`
+    o Add longtests for `CRANstatus` and `biocDownloadStats`
 
 CHANGES IN VERSION 1.28.0
 -------------------------

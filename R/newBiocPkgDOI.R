@@ -1,4 +1,3 @@
-
 #' Generate a DOI for a Bioconductor package
 #'
 #' This function makes calls out to the DataCite REST API described
@@ -28,67 +27,65 @@
 #'
 #' @return The DOI as a `character(1)` vector.
 #'
-#' @importFrom httr VERB content_type content add_headers message_for_status
-#' @importFrom jsonlite toJSON fromJSON
-#' @importFrom stringr str_to_upper
+#' @importFrom httr2 request req_auth_basic req_headers req_body_json
+#' @importFrom httr2 req_perform resp_body_json resp_check_status
 #'
 #' @keywords Internal
 #'
-#' @examples
-#' \dontrun{
-#'   x = generateBiocPkgDOI('RANDOM_TEST_PACKAGE','Sean Davis',1972)
-#' }
-generateBiocPkgDOI <- function(pkg, authors, pubyear, event = "publish", testing = TRUE) {
+#' @examplesIf interactive()
+#' generateBiocPkgDOI('RANDOM_TEST_PACKAGE','Sean Davis',1972, testing = TRUE)
+generateBiocPkgDOI <- function(
+    pkg,
+    authors,
+    pubyear,
+    event = c("publish", "register", "hide"),
+    testing = TRUE
+) {
+    username <- Sys.getenv("DATACITE_USERNAME")
+    password <- Sys.getenv("DATACITE_PASSWORD")
 
-  username <- Sys.getenv("DATACITE_USERNAME")
-  password <- Sys.getenv("DATACITE_PASSWORD")
+    event <- match.arg(event)
 
-  if (!is.element(event, c("hide", "register", "publish")))
-    stop("event must be 'hide', 'register', or 'publish'.")
+    if (testing) {
+        # View results at: https://doi.test.datacite.org
+        bioc_prefix <- "10.82962"
+        base_url <- "https://api.test.datacite.org/dois"
+    } else {
+        bioc_prefix <- "10.18129"
+        base_url <- "https://api.datacite.org/dois"
+    }
 
-  if (testing) {
-    # View results at: https://doi.test.datacite.org
-    bioc_prefix <- "10.82962"
-    base_url <- "https://api.test.datacite.org/dois"
-  } else {
-    bioc_prefix <- "10.18129"
-    base_url <- "https://api.datacite.org/dois"
-  }
+    bioc_doi_namespace <- "B9.bioc"
+    pkg_doi <- paste0(bioc_prefix, "/", bioc_doi_namespace, ".", pkg)
+    payload <- list(
+        data = list(
+            id = paste0("https://doi.org/", pkg_doi),
+            doi = stringr::str_to_upper(pkg_doi),
+            attributes = list(
+                doi = pkg_doi,
+                event = event,
+                prefix = bioc_prefix,
+                suffix = paste(bioc_doi_namespace, pkg, sep = "."),
+                identifiers = list(
+                    identifier = pkg_doi,
+                    identifierType = "DOI"
+                ),
+                creators = list(name = paste(authors, collapse = ", ")),
+                titles = list(title = pkg),
+                url = paste0("https://bioconductor.org/packages/", pkg),
+                publisher = "Bioconductor",
+                publicationYear = pubyear,
+                types = list(resourceTypeGeneral = "Software")
+        )
+      )
+    )
 
-  bioc_doi_namespace <- "B9.bioc"
-  pkg_doi <- paste0(bioc_prefix, "/", bioc_doi_namespace, ".", pkg)
-  encode <- "raw"
-  payload <- list("data" = list("id" = paste0("https://doi.org/", pkg_doi),
-                                "doi" = stringr::str_to_upper(pkg_doi),
-                                "attributes" = list("doi" = pkg_doi,
-                                                    "event" = event,
-                                                    "prefix" = bioc_prefix,
-                                                    "suffix" = paste(bioc_doi_namespace, pkg, sep = "."),
-                                                    "identifiers" = list("identifier" = pkg_doi,
-                                                                         "identifierType" = "DOI"),
-                                                    "creators" = list("name" = paste(authors, collapse = ", ")),
-                                                    "titles" = list("title" = pkg),
-                                                    "url" = paste0("https://bioconductor.org/packages/", pkg),
-                                                    "publisher" = "Bioconductor",
-                                                    "publicationYear" = pubyear,
-                                                    "types" = list("resourceTypeGeneral" = "Software")
-                                                   )
-                                )
-                 )
+    response <- request(base_url) |>
+        req_auth_basic(username, password) |>
+        req_headers("Content-Type" = "application/vnd.api+json") |>
+        req_body_json(payload) |>
+        req_perform()
 
-  authorization <- jsonlite::base64_enc(paste(username, password, sep = ":"))
-  response <- httr::VERB("POST",
-                         base_url,
-                         body = jsonlite::toJSON(payload, auto_unbox = TRUE),
-                         httr::add_headers(Authorization = paste("Basic", authorization, sep = " ")),
-                         httr::content_type("application/vnd.api+json"),
-                         encode = encode)
-
-  if (response$status_code >= 200 && response$status_code < 300) {
-    response_text <- httr::content(response, "text")
-    response_json <- jsonlite::fromJSON(response_text)
-    return(response_json$data$id)
-  } else {
-    httr::message_for_status(response)
-  }
+    resp_check_status(response)
+    resp_body_json(response)[[c("data", "id")]]
 }

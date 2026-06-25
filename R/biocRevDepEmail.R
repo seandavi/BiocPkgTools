@@ -48,9 +48,6 @@
 #' @param cc `character()` A vector of email addresses for sending the message
 #'   as a carbon copy.
 #'
-#' @param pkg `character(1)` DEPRECATED. The name of a single package whose
-#'   reverse dependencies are to be checked and notified.
-#'
 #' @param \ldots Additional inputs to internal functions (not used).
 #'
 #' @inheritParams biocBuildEmail
@@ -69,7 +66,7 @@ biocRevDepEmail <-
         dry.run = TRUE,  cc = NULL, emailTemplate = templatePath("revdepnote"),
         core.name = NULL, core.email = NULL, core.id = NULL,
         textOnly = FALSE, verbose = FALSE, credFile = "~/.blastula_creds",
-        ..., pkg)
+        ...)
 {
     stopifnot(
         is.character(packages),
@@ -85,9 +82,6 @@ biocRevDepEmail <-
     core.name <- core.list[["core.name"]]
     core.email <- core.list[["core.email"]]
     core.id <- core.list[["core.id"]]
-
-    if (!missing(pkg))
-        .Defunct(msg = "'pkg' argument is defunct. Use 'packages'.")
 
     db <- available.packages(
         repos = BiocManager:::.repositories_bioc(version)["BioCsoft"]

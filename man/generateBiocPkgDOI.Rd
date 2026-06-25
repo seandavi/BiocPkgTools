@@ -4,7 +4,13 @@
 \alias{generateBiocPkgDOI}
 \title{Generate a DOI for a Bioconductor package}
 \usage{
-generateBiocPkgDOI(pkg, authors, pubyear, event = "publish", testing = TRUE)
+generateBiocPkgDOI(
+  pkg,
+  authors,
+  pubyear,
+  event = c("publish", "register", "hide"),
+  testing = TRUE
+)
 }
 \arguments{
 \item{pkg}{\code{character(1)} package name}
@@ -42,8 +48,8 @@ and "DATACITE_PASSWORD
 The GUI is available here: \url{https://doi.datacite.org/}.
 }
 \examples{
-\dontrun{
-  x = generateBiocPkgDOI('RANDOM_TEST_PACKAGE','Sean Davis',1972)
-}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
+generateBiocPkgDOI('RANDOM_TEST_PACKAGE','Sean Davis',1972, testing = TRUE)
+\dontshow{\}) # examplesIf}
 }
 \keyword{Internal}

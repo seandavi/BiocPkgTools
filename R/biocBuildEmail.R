@@ -20,7 +20,9 @@
 #'   "deprecguide", "cranreport", or "revdepnote". See the templates in the
 #'   `resources` folder.
 #'
+#' @examples
 #'
+#' templatePath("buildemail")
 #' @export
 templatePath <- function(
     type = c(
@@ -196,6 +198,8 @@ templatePath <- function(
 #'
 #' @return A character string of the email
 #'
+#' @examplesIf interactive()
+#' biocBuildEmail("MultiAssayExperiment", dry.run = TRUE)
 #' @export
 biocBuildEmail <-
     function(pkg, version = c("release", "devel"), PS = character(1L),

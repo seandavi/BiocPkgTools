@@ -99,3 +99,8 @@ core-team:
  Check the history of emails sent
 }
 
+\examples{
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
+biocBuildEmail("MultiAssayExperiment", dry.run = TRUE)
+\dontshow{\}) # examplesIf}
+}

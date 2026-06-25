@@ -43,10 +43,11 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Sean Davis \email{seandavi@gmail.com}
+\strong{Maintainer}: Sean Davis \email{seandavi@gmail.com} (\href{https://orcid.org/0000-0002-8991-6458}{ORCID})
 
 Authors:
 \itemize{
+  \item Sean Davis \email{seandavi@gmail.com} (\href{https://orcid.org/0000-0002-8991-6458}{ORCID})
   \item Shian Su \email{su.s@wehi.edu.au} [contributor]
   \item Marcel Ramos \email{marcel.ramos@sph.cuny.edu} (\href{https://orcid.org/0000-0002-3242-0582}{ORCID}) [contributor]
 }

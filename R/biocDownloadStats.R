@@ -75,7 +75,7 @@ utils::globalVariables(
 #' @importFrom utils read.table
 #' @importFrom tibble as_tibble
 #' @importFrom BiocFileCache BiocFileCache bfcupdate bfcneedsupdate bfcrpath
-#'     bfcquery bfcnew bfcdownload
+#' @importFrom BiocFileCache bfcquery bfcnew bfcdownload
 #'
 #' @return A `tibble` of download statistics for all Bioconductor packages
 #'
@@ -90,10 +90,6 @@ biocDownloadStats <-
         )
     )
 {
-    if (identical(pkgType, "all"))
-        .Defunct(
-            msg = "Value 'all' is defunct as 'pkgType' option"
-        )
     pkgType <- match.arg(pkgType, several.ok = TRUE)
     linkPkg <- .matchGetShortName(pkgType, "stat.url")
     fnameType <- .matchGetShortName(pkgType, "stat.file")
@@ -233,6 +229,8 @@ firstInBioc <- function(download_stats) {
 #'
 #' @return The package's percentile rank, in terms of download statistics, and
 #'   proportion in the name
+#'
+#' @importFrom jsonlite fromJSON
 #'
 #' @examples
 #' ## Percentile rank for BiocGenerics (top 1%)

@@ -45,14 +45,14 @@
 #'   build system.
 #'
 #' @importFrom utils available.packages
-#' @importFrom httr HEAD headers
+#' @importFrom httr2 request req_method req_perform resp_header
 #' @importFrom BiocManager containerRepository
 #'
 #' @details For local repositories, use the `local = TRUE` argument. Local
 #'   repositories will typically start with the `file://` URI. The function
 #'   checks the `mtime` of the output of `file.info` on the `PACKAGES` file in
 #'   the local repository. Otherwise, by default, it will check the
-#'   `last-modified` header of the `PACKAGES` file via `httr::HEAD()`.
+#'   `last-modified` header of the `PACKAGES` file via `httr2::resp_header()`.
 #'
 #' @author M. Morgan
 #'
@@ -87,8 +87,10 @@ repositoryStats <- function(
         db_binary <- available.packages(repos = binary_repository)
         packages <- paste0(contrib.url(binary_repository), "/PACKAGES")
         if (!local) {
-            response <- HEAD(packages)
-            last_modified <- headers(response)$`last-modified`
+            last_modified <- request(packages) |>
+                req_method("HEAD") |>
+                req_perform() |>
+                resp_header("last-modified")
         } else {
             last_modified <- file.info(packages)$mtime
         }

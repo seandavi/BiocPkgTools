@@ -1,7 +1,7 @@
 Package: BiocPkgTools
 Type: Package
 Title: Collection of simple tools for learning about Bioconductor Packages
-Version: 1.29.5
+Version: 1.31.8
 Date: 2026-06-25
 Authors@R: c( 
     person("Shian", "Su", role=c("aut", "ctb"), email = "su.s@wehi.edu.au"),
@@ -13,7 +13,8 @@ Authors@R: c(
     person("Charlotte", "Soneson", role="ctb", email = "charlottesoneson@gmail.com"),
     person("Martin", "Morgan", role="ctb", email = "martin.morgan@roswellpark.org"),
     person("Vince", "Carey", role="ctb", email="stvjc@channing.harvard.edu"),
-    person("Sean", "Davis", email = "seandavi@gmail.com",role = c("aut", "cre"))
+    person("Sean", "Davis", , "seandavi@gmail.com", c("aut", "cre"),
+      c(ORCID = "0000-0002-8991-6458"))
     )
 Description: Bioconductor has a rich ecosystem of metadata around
   packages, usage, and build status. This package is a simple
@@ -21,7 +22,7 @@ Description: Bioconductor has a rich ecosystem of metadata around
   is to expose metadata for data mining and value-added functionality
   such as package searching, text mining, and analytics on
   packages.
-Depends: htmlwidgets, R (>= 4.1.0)
+Depends: htmlwidgets, R (>= 4.6.0)
 Imports:
     BiocFileCache,
     BiocManager,
@@ -35,7 +36,6 @@ Imports:
     dplyr,
     xml2,
     readr,
-    httr,
     httr2,
     htmltools,
     DT,
@@ -60,7 +60,7 @@ License: MIT + file LICENSE
 BugReports: https://github.com/seandavi/BiocPkgTools/issues/new
 URL: https://github.com/seandavi/BiocPkgTools
 Encoding: UTF-8
-RoxygenNote: 7.3.3
 Roxygen: list(markdown = TRUE)
 SystemRequirements: mailsend-go
 biocViews: Software, Infrastructure
+Config/roxygen2/version: 8.0.0
