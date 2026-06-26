@@ -24,5 +24,7 @@ Note that Bioconductor package download
 stats are not version-specific.
 }
 \examples{
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 biocDownloadStats()
+\dontshow{\}) # examplesIf}
 }

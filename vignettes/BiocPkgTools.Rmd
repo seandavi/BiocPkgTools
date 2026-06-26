@@ -98,7 +98,12 @@ Experiment Data, Annotation Data, and Software packages. The results
 are returned as a tidy data.frame for further analysis.
 
 ```{r biocDownloadStats}
-head(biocDownloadStats())
+stats <- try(biocDownloadStats(), silent=TRUE)
+if (!inherits(stats, "try-error")) {
+    head(stats)
+} else {
+    message("Download stats not available at this time.")
+}
 ```
 
 The download statistics reported are for ***all available versions*** of a

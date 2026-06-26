@@ -79,7 +79,7 @@ utils::globalVariables(
 #'
 #' @return A `tibble` of download statistics for all Bioconductor packages
 #'
-#' @examples
+#' @examplesIf interactive()
 #' biocDownloadStats()
 #' @export
 biocDownloadStats <-
@@ -111,6 +111,11 @@ biocDownloadStats <-
             dplyr::bind_rows(tlist)
         )
     )
+    if (!nrow(tbl))
+        stop(
+            "Download statistics not available for package type(s): ",
+            paste(pkgType, collapse = ", ")
+        )
 
     tbl <- filter(tbl, .data$Month != "all") |>
         dplyr::mutate(
