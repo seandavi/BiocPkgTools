@@ -16,6 +16,8 @@ Bioconductor. Note that the download stats
 go back only to 2009.
 }
 \examples{
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 dls <- biocDownloadStats()
 tail(firstInBioc(dls))
+\dontshow{\}) # examplesIf}
 }

@@ -205,7 +205,7 @@ pkgDownloadStats <-
 #'
 #' @param download_stats a data.frame from [biocDownloadStats()]
 #'
-#' @examples
+#' @examplesIf interactive()
 #' dls <- biocDownloadStats()
 #' tail(firstInBioc(dls))
 #' @export
