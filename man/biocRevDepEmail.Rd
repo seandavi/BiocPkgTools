@@ -80,9 +80,10 @@ deprecated or removed. It uses a template found in \code{inst/resources} with th
 \code{templatePath()} function.
 }
 \examples{
-
 biocRevDepEmail(
-    "FindMyFriends", version = "3.13", dry.run = TRUE, textOnly = TRUE
+    "FindMyFriends",
+    version = "3.13",
+    dry.run = TRUE,
+    textOnly = TRUE
 )
-
 }

@@ -54,11 +54,12 @@
 #' @inheritParams tools::package_dependencies
 #'
 #' @examples
-#'
 #' biocRevDepEmail(
-#'     "FindMyFriends", version = "3.13", dry.run = TRUE, textOnly = TRUE
+#'     "FindMyFriends",
+#'     version = "3.13",
+#'     dry.run = TRUE,
+#'     textOnly = TRUE
 #' )
-#'
 #' @export
 biocRevDepEmail <-
     function(packages, which = c("strong", "most", "all"),
