@@ -97,18 +97,18 @@ pkgBiocRevDeps <- function(
     repo <- BiocManager:::.repositories_bioc(version)[repo.name]
     biocdb <- utils::available.packages(repos = repo)
 
-    if (recursive)
-        res <- tools::package_dependencies(
-            pkg, all_db, reverse = TRUE, which = which, recursive = recursive
-        )[[pkg]]
-    else
+    if (isFALSE(recursive))
         res <- lapply(which, function(ofwhich) {
             tools::package_dependencies(
                 pkg, all_db, reverse = TRUE, which = ofwhich, recursive = recursive
             )[[pkg]]
         })
+    else
+        res <- tools::package_dependencies(
+            pkg, all_db, reverse = TRUE, which = which, recursive = recursive,
+        )[[pkg]]
 
-    if (only.bioc && recursive)
+    if (only.bioc && (is.character(recursive) || recursive))
         res <- list(recursive = res[res %in% rownames(biocdb)])
     else if (only.bioc)
         res <- lapply(
