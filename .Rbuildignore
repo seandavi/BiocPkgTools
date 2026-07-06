@@ -9,3 +9,5 @@
 ^\.github$
 ^\.httr-oauth$
 ^\.BBSoptions$
+^\.positai$
+^\.claude$

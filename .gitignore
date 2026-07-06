@@ -13,3 +13,4 @@ docs/*
 *.Rproj
 /vignettes/BiocPkgTools.R
 /vignettes/.build.timestamp
+.positai
