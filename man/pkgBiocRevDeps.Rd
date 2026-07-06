@@ -8,7 +8,7 @@
 pkgBiocRevDeps(
   pkg,
   pkgType = c("software", "data-experiment", "workflows", "data-annotation"),
-  which = "all",
+  which = "strong",
   only.bioc = TRUE,
   version = BiocManager::version(),
   recursive = FALSE
