@@ -69,10 +69,50 @@ get_deprecated_status_df <- function(version) {
     y
 }
 
+.get_remote_size <- function(url) {
+    tryCatch({
+        response <- httr2::request(url) |>
+            httr2::req_method("HEAD") |>
+            httr2::req_headers("Accept-Encoding" = "identity") |>
+            httr2::req_error(is_error = function(resp) { FALSE }) |>
+            httr2::req_perform()
+        if (httr2::resp_is_error(response))
+            return(NA_integer_)
+        cl <- httr2::resp_header(response, "content-length")
+        if (is.null(cl))
+            return(NA_integer_)
+        as.numeric(cl)
+    }, error = function(e) {
+        NA_integer_
+    })
+}
+
+.needs_update <- function(bfc, bquery, url) {
+    if (!identical(nrow(bquery), 1L))
+        return(NA)
+
+    needsUpdate <- bfcneedsupdate(bfc, bquery[["rid"]])
+
+    if (is.na(needsUpdate) || !needsUpdate) {
+        remote_size <- .get_remote_size(url)
+        if (!is.na(remote_size)) {
+            local_path <- bfcrpath(bfc, rids = bquery[["rid"]])
+            if (
+                !file.exists(local_path) || file.size(local_path) != remote_size
+            ) {
+                needsUpdate <- TRUE
+            }
+        }
+    }
+
+    needsUpdate
+}
+
 .cache_url_file <- function(url) {
     bfc <- BiocFileCache()
     bquery <- bfcquery(bfc, url, "rname", exact = TRUE)
-    needsUpdate <- bfcneedsupdate(bfc, bquery[["rid"]])
+    needsUpdate <- .needs_update(bfc, bquery, url)
+
     if (
         identical(nrow(bquery), 1L) && (is.na(needsUpdate) || needsUpdate)
     )
