@@ -97,22 +97,18 @@ pkgBiocRevDeps <- function(
     repo <- BiocManager:::.repositories_bioc(version)[repo.name]
     biocdb <- utils::available.packages(repos = repo)
 
-    if (recursive)
-        ## Only recurse over strong dependencies. Recursing reverse
-        ## dependencies over 'Suggests' / 'Enhances' explodes to nearly the
-        ## entire repository (e.g. thousands of packages 'Suggests' knitr),
-        ## which pulls in forward (non-reverse) dependencies. See issue #81.
-        res <- tools::package_dependencies(
-            pkg, all_db, reverse = TRUE, which = which, recursive = "strong"
-        )[[pkg]]
-    else
+    if (isFALSE(recursive))
         res <- lapply(which, function(ofwhich) {
             tools::package_dependencies(
                 pkg, all_db, reverse = TRUE, which = ofwhich, recursive = recursive
             )[[pkg]]
         })
+    else
+        res <- tools::package_dependencies(
+            pkg, all_db, reverse = TRUE, which = which, recursive = recursive,
+        )[[pkg]]
 
-    if (only.bioc && recursive)
+    if (only.bioc && (is.character(recursive) || recursive))
         res <- list(recursive = res[res %in% rownames(biocdb)])
     else if (only.bioc)
         res <- lapply(
