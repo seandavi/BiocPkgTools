@@ -141,7 +141,7 @@ biocBuildReport <- function(
       vapply(depdf, function(x) identical(length(x), 0L), logical(1L))
   )
   if (!isEmpty)
-      y <- merge(y, depdf, by.x = "pkg", by.y = "Package")
+      y <- merge(y, depdf, by.x = "pkg", by.y = "Package", all.x = TRUE)
 
   df <- suppressMessages(left_join(y, z)) # just suppress "Joining by...."
   df <- as_tibble(df)
