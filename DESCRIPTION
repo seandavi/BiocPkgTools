@@ -55,7 +55,8 @@ Imports:
 VignetteBuilder: knitr
 Suggests: BiocStyle, knitr, rmarkdown,
     testthat, tm, networkD3,
-    visNetwork, clipr, blastula, kableExtra, DiagrammeR, SummarizedExperiment
+    visNetwork, clipr, blastula, kableExtra, DiagrammeR, SummarizedExperiment,
+    withr, Biobase
 License: MIT + file LICENSE
 BugReports: https://github.com/seandavi/BiocPkgTools/issues/new
 URL: https://github.com/seandavi/BiocPkgTools

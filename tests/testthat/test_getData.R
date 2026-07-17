@@ -119,6 +119,11 @@ test_that("write_to_cache errors when the cache location is unavailable", {
         !nzchar(system.file(package = "BiocExplorer")),
         "BiocExplorer is installed in this environment"
     )
+    # Relies on a write to the filesystem root ("/data.Rds", since
+    # system.file() returns "" when BiocExplorer isn't installed) being
+    # denied. Windows CI runners run elevated and can write there, so this
+    # assumption doesn't hold on that platform.
+    skip_on_os("windows")
     expect_error(suppressWarnings(BiocPkgTools:::write_to_cache("{}")))
 })
 
