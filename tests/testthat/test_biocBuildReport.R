@@ -21,3 +21,17 @@ test_that("columns are consistent in report output", {
     expect_true(tibble::is_tibble(bioc3.14_build))
 })
 
+test_that("non-software package types are not dropped (#21)", {
+    full_build <- biocBuildReport(
+        "devel",
+        pkgType = c(
+            "software", "data-experiment", "data-annotation", "workflows"
+        )
+    )
+    reported_types <- unique(full_build[["pkgType"]])
+    expect_true(all(
+        c("data-annotation", "data-experiment", "workflows") %in%
+            reported_types
+    ))
+})
+
