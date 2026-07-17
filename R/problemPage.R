@@ -30,7 +30,9 @@ checkDeps <- function(dependsOn, ver="devel", includeOK = FALSE) {
 
   rep = biocBuildReport(ver)
   all_pkg_deps = buildPkgDependencyDataFrame()
-  pkg_deps <- all_pkg_deps[ all_pkg_deps$dependency == dependsOn, 1]
+  pkg_deps <- all_pkg_deps[
+      all_pkg_deps$dependency == dependsOn, "Package", drop = FALSE
+  ]
 
   mine = rep[rep$pkg %in% pkg_deps$Package, ]
 

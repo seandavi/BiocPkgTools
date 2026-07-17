@@ -32,7 +32,7 @@ utils::globalVariables(
 
 .get_all_biocpkgs <- function() {
     db <- available.packages(
-        repos = BiocManager:::.repositories_bioc(version = version)
+        repos = BiocManager:::.repositories_bioc(version = BiocManager::version())
     )
     rownames(db)
 }
