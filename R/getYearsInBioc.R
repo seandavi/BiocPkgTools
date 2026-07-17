@@ -249,7 +249,7 @@ getPkgYearsInBioc <- function(pkglist = NULL) {
     }
     list_rbind(mapply(
         \(category, version) {
-            print(glue("{category} / {version}"))
+            message(glue("{category} / {version}"))
 
             con <- curl(glue(manifest_template))
             result <- read.dcf(con)
