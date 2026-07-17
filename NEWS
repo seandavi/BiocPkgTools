@@ -22,6 +22,10 @@ BUG FIXES AND MINOR IMPROVEMENTS
     o Removed the dependency on `httr` by migrating `.url_exists` helper to
       `httr2`
     o Removed duplicate internal function `generateBiocPkgDOI_REST`
+    o Raised unit test coverage from 18% across the package (#85). Fixed
+      `.get_all_biocpkgs()` calling `BiocManager::version` unevaluated
+      (always errored) and `checkDeps()` dropping to an atomic vector on
+      subset, which broke `problemPage(dependsOn = ...)` entirely.
 
 CHANGES IN VERSION 1.30.0
 -------------------------
