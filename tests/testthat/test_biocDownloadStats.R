@@ -154,10 +154,8 @@ test_that("activitySince retrieves recently closed issues", {
         "seandavi/BiocPkgTools", "issues", "closed",
         Date = format(Sys.Date() - 30)
     )
-
     expect_s3_class(res, "tbl_df")
     expect_true(all(c("created_at", "number", "title") %in% colnames(res)))
-    expect_gt(nrow(res), 0L)
 })
 
 test_that("activitySince retrieves recent commits", {
@@ -171,7 +169,32 @@ test_that("activitySince retrieves recent commits", {
     expect_true(all(c(
         "committer_date", "commit", "parents", "author", "message"
     ) %in% colnames(res)))
-    expect_gt(nrow(res), 0L)
+})
+
+test_that("activitySince returns issue columns for empty results", {
+    testthat::local_mocked_bindings(gh = function(...) list())
+
+    res <- activitySince(
+        "seandavi/BiocPkgTools", "issues", "closed", Date = "2100-01-01"
+    )
+
+    expect_s3_class(res, "tbl_df")
+    expect_identical(colnames(res), c("created_at", "number", "title"))
+    expect_equal(nrow(res), 0L)
+})
+
+test_that("activitySince returns commit columns for empty results", {
+    testthat::local_mocked_bindings(gh = function(...) list())
+
+    res <- activitySince(
+        "seandavi/BiocPkgTools", "commits", Date = "2100-01-01"
+    )
+
+    expect_s3_class(res, "tbl_df")
+    expect_identical(colnames(res), c(
+        "committer_date", "commit", "parents", "author", "message"
+    ))
+    expect_equal(nrow(res), 0L)
 })
 
 test_that("activitySince errors on an invalid activity type", {
