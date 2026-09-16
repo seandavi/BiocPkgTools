@@ -405,6 +405,21 @@ activitySince <- function(
         since = Date,
         .accept = accept
     )
+    if (!length(act_report)) {
+        if (isCommits) {
+            return(tibble::tibble(
+                committer_date = character(),
+                commit = character(),
+                parents = character(),
+                author = character(),
+                message = character()
+            ))
+        }
+        return(tibble::as_tibble(stats::setNames(
+            rep(list(character()), length(issue_metadata)),
+            issue_metadata
+        )))
+    }
     dplyr::bind_rows(
         lapply(act_report, .gh_data_process,
             fields = issue_metadata, commits = isCommits)
