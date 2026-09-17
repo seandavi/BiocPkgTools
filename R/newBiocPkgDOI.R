@@ -59,19 +59,18 @@ generateBiocPkgDOI <- function(
     pkg_doi <- paste0(bioc_prefix, "/", bioc_doi_namespace, ".", pkg)
     payload <- list(
         data = list(
-            id = paste0("https://doi.org/", pkg_doi),
-            doi = stringr::str_to_upper(pkg_doi),
+            type = "dois",
             attributes = list(
                 doi = pkg_doi,
                 event = event,
                 prefix = bioc_prefix,
                 suffix = paste(bioc_doi_namespace, pkg, sep = "."),
-                identifiers = list(
+                identifiers = list(list(
                     identifier = pkg_doi,
                     identifierType = "DOI"
-                ),
-                creators = list(name = paste(authors, collapse = ", ")),
-                titles = list(title = pkg),
+                )),
+                creators = list(list(name = paste(authors, collapse = ", "))),
+                titles = list(list(title = pkg)),
                 url = paste0("https://bioconductor.org/packages/", pkg),
                 publisher = "Bioconductor",
                 publicationYear = pubyear,
@@ -80,12 +79,12 @@ generateBiocPkgDOI <- function(
       )
     )
 
-    response <- request(base_url) |>
+    resp <- request(base_url) |>
         req_auth_basic(username, password) |>
         req_headers("Content-Type" = "application/vnd.api+json") |>
         req_body_json(payload) |>
         req_perform()
 
-    resp_check_status(response)
-    resp_body_json(response)[[c("data", "id")]]
+    resp_check_status(resp)
+    resp_body_json(resp)[[c("data", "attributes", "doi")]]
 }
