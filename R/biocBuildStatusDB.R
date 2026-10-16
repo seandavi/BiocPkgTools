@@ -41,6 +41,8 @@ biocBuildStatusDB <- function(
     urls <- get_build_status_db_url(version, pkgType)
     names(urls) <- pkgType
     urls <- Filter(.url_exists, urls)
+    if (!length(urls))
+        stop("Bioconductor build report could not be reached", call. = FALSE)
 
     url_list <- lapply(
         urls,

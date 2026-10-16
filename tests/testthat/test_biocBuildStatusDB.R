@@ -46,3 +46,8 @@ test_that("biocBuildStatusDB errors on an invalid pkgType", {
         "'arg' should be one of"
     )
 })
+
+test_that("biocBuildStatusDB errors clearly when no build report URL is reachable", {
+    testthat::local_mocked_bindings(.url_exists = function(url) FALSE)
+    expect_error(biocBuildStatusDB("devel"), "could not be reached")
+})

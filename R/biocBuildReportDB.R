@@ -31,6 +31,8 @@ biocBuildReportDB <- function(
     urls <- .get_build_report_tgz_url(version, pkgType)
     names(urls) <- pkgType
     urls <- Filter(.url_exists, urls)
+    if (!length(urls))
+        stop("Bioconductor build report could not be reached", call. = FALSE)
 
     tempfolders <- replicate(length(urls), tempfile())
 
