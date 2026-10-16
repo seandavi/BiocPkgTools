@@ -17,6 +17,7 @@
 #' Bioconductor-hosted resources specifically (general internet access does
 #' not guarantee bioconductor.org is up).
 skip_if_bioc_offline <- function() {
+    testthat::skip_on_cran()
     testthat::skip_if_not(
         .bioc_reachable(), "bioconductor.org is not reachable"
     )

@@ -116,8 +116,12 @@ get_deprecated_status_df <- function(version) {
     if (
         identical(nrow(bquery), 1L) && (is.na(needsUpdate) || needsUpdate)
     )
-        bfcdownload(
-            x = bfc, rid = bquery[["rid"]], ask = FALSE
+        tryCatch(
+            bfcdownload(x = bfc, rid = bquery[["rid"]], ask = FALSE),
+            error = function(e) warning(
+                "could not refresh ", url, "; using cached copy: ",
+                conditionMessage(e), call. = FALSE
+            )
         )
 
     bfcrpath(
