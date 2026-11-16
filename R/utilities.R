@@ -69,7 +69,11 @@ get_deprecated_status_df <- function(version) {
     y
 }
 
-.get_remote_size <- function(url) {
+## HEAD the url and return its size and cache validators, or NULL if the
+## request fails. 'Accept-Encoding: identity' keeps servers that compress
+## on the fly (e.g. Cloudflare) from reporting a compressed size or a weak
+## ETag.
+.get_remote_info <- function(url) {
     tryCatch({
         response <- httr2::request(url) |>
             httr2::req_method("HEAD") |>
@@ -77,35 +81,82 @@ get_deprecated_status_df <- function(version) {
             httr2::req_error(is_error = function(resp) { FALSE }) |>
             httr2::req_perform()
         if (httr2::resp_is_error(response))
-            return(NA_integer_)
-        cl <- httr2::resp_header(response, "content-length")
-        if (is.null(cl))
-            return(NA_integer_)
-        as.numeric(cl)
+            return(NULL)
+        header <- function(name) {
+            value <- httr2::resp_header(response, name)
+            if (is.null(value)) NA_character_ else value
+        }
+        list(
+            size = as.numeric(header("content-length")),
+            etag = header("etag"),
+            modified = header("last-modified")
+        )
     }, error = function(e) {
-        NA_integer_
+        NULL
     })
 }
 
+.get_remote_size <- function(url) {
+    info <- .get_remote_info(url)
+    if (is.null(info))
+        return(NA_integer_)
+    info[["size"]]
+}
+
+## Strip quotes and the weak-validator prefix so that the strong and weak
+## forms of the same ETag compare equal.
+.normalize_etag <- function(etag) {
+    gsub('^W/|"', "", etag)
+}
+
+## Parse an RFC 7231 HTTP date ("Mon, 16 Nov 2026 09:52:30 GMT");
+## day and month names are English regardless of locale.
+.parse_http_date <- function(x) {
+    old <- Sys.getlocale("LC_TIME")
+    on.exit(Sys.setlocale("LC_TIME", old), add = TRUE)
+    Sys.setlocale("LC_TIME", "C")
+    as.POSIXct(strptime(x, "%a, %d %b %Y %H:%M:%S", tz = "GMT"))
+}
+
+## TRUE if the cached copy of 'url' is stale, FALSE if current, NA if 'url'
+## is not cached (or can't be checked).
+##
+## Staleness is judged from the remote size, ETag and Last-Modified rather
+## than BiocFileCache::bfcneedsupdate(), which compares the 'expires' date
+## at day granularity: with a short 'Cache-Control: max-age' (as
+## bioconductor.org now sends) every resource is 'expired' as soon as it
+## is downloaded, forcing a fresh download on every call (#92).
 .needs_update <- function(bfc, bquery, url) {
     if (!identical(nrow(bquery), 1L))
         return(NA)
 
-    needsUpdate <- bfcneedsupdate(bfc, bquery[["rid"]])
+    remote <- .get_remote_info(url)
+    if (is.null(remote))
+        return(bfcneedsupdate(bfc, bquery[["rid"]]))
 
-    if (is.na(needsUpdate) || !needsUpdate) {
-        remote_size <- .get_remote_size(url)
-        if (!is.na(remote_size)) {
-            local_path <- bfcrpath(bfc, rids = bquery[["rid"]])
-            if (
-                !file.exists(local_path) || file.size(local_path) != remote_size
-            ) {
-                needsUpdate <- TRUE
-            }
-        }
-    }
+    local_path <- bfcrpath(bfc, rids = bquery[["rid"]])
+    if (!file.exists(local_path))
+        return(TRUE)
+    if (!is.na(remote[["size"]]) && file.size(local_path) != remote[["size"]])
+        return(TRUE)
 
-    needsUpdate
+    local_etag <- bquery[["etag"]]
+    if (!is.na(local_etag) && !is.na(remote[["etag"]]))
+        return(
+            !identical(
+                .normalize_etag(unname(local_etag)),
+                .normalize_etag(remote[["etag"]])
+            )
+        )
+
+    local_time <- as.POSIXct(
+        bquery[["last_modified_time"]], tz = "GMT", optional = TRUE
+    )
+    remote_time <- .parse_http_date(remote[["modified"]])
+    if (!is.na(local_time) && !is.na(remote_time))
+        return(remote_time > local_time)
+
+    FALSE
 }
 
 .cache_url_file <- function(url) {

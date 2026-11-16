@@ -12,6 +12,15 @@ SIGNIFICANT USER-VISIBLE CHANGES
 
 BUG FIXES AND MINOR IMPROVEMENTS
 
+    o Cached Bioconductor files (VIEWS, download stats, etc.) are no longer
+      treated as stale immediately after download. Staleness is now judged
+      from the remote size, ETag and Last-Modified instead of
+      `BiocFileCache::bfcneedsupdate()`, whose day-granularity `expires`
+      check marked every file served with a short `max-age` as expired and
+      forced a re-download on every call (#92).
+    o Tests that need the network are now all gated, and setting
+      `BIOCPKGTOOLS_NO_NETWORK=true` skips them, so the suite runs offline
+      in seconds (#90).
     o `pkgBiocRevDeps(recursive = TRUE)` no longer returns forward
       (non-reverse) dependencies. Recursion now follows only strong
       dependencies, avoiding the `Suggests` / `Enhances` explosion that pulled

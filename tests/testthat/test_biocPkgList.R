@@ -1,24 +1,36 @@
 context("biocPkgList")
 library(BiocPkgTools)
 
-bpkgl = biocPkgList()
+## fetch the package list once, on first use, so the offline-capable tests
+## below still run without network access
+.bpkgl <- new.env(parent = emptyenv())
+get_bpkgl <- function() {
+    skip_if_bioc_offline()
+    if (is.null(.bpkgl$value))
+        .bpkgl$value <- biocPkgList()
+    .bpkgl$value
+}
 
 
 test_that("pkg list has correct classes", {
+    bpkgl <- get_bpkgl()
     expect_is(bpkgl, 'tbl_df')
     expect_is(bpkgl, 'tbl')
     expect_is(bpkgl, 'data.frame')
 })
 
 test_that("ncol is approximately correct", {
+    bpkgl <- get_bpkgl()
   expect_gt(ncol(bpkgl), 35)
 })
 
 test_that("nrow is approximately correct", {
+    bpkgl <- get_bpkgl()
   expect_gt(nrow(bpkgl), 1000)
 })
 
 test_that("fnd column is present and is a list", {
+    bpkgl <- get_bpkgl()
   expect_true("fnd" %in% colnames(bpkgl))
   expect_type(bpkgl[["fnd"]], "list")
 })
@@ -57,7 +69,7 @@ test_that("read_CRAN_url reads a valid CRAN packages.rds", {
   ## exact same failure mode diagnosed for pkgBiocRevDeps() in
   ## test-pkgBiocDeps.R (see the comment there). A direct reachability
   ## check avoids that trap.
-  testthat::skip_if_not(curl::has_internet(), "offline")
+  skip_if_no_internet()
   url <- BiocPkgTools:::CRAN_pkg_rds_url()
   df <- BiocPkgTools:::read_CRAN_url(url)
   expect_s3_class(df, "data.frame")
@@ -76,7 +88,7 @@ test_that("read_CRAN_url errors on an unreadable URL", {
   ## exact same failure mode diagnosed for pkgBiocRevDeps() in
   ## test-pkgBiocDeps.R (see the comment there). A direct reachability
   ## check avoids that trap.
-  testthat::skip_if_not(curl::has_internet(), "offline")
+  skip_if_no_internet()
   ## the 404 also raises a base warning from readRDS()/url(), which is
   ## expected and not itself under test here
   suppressWarnings(expect_error(
@@ -98,7 +110,7 @@ test_that("get_CRAN_pkg_rds returns full CRAN package data.frame", {
   ## exact same failure mode diagnosed for pkgBiocRevDeps() in
   ## test-pkgBiocDeps.R (see the comment there). A direct reachability
   ## check avoids that trap.
-  testthat::skip_if_not(curl::has_internet(), "offline")
+  skip_if_no_internet()
   df <- BiocPkgTools:::get_CRAN_pkg_rds()
   expect_s3_class(df, "data.frame")
   expect_gt(nrow(df), 1000)
