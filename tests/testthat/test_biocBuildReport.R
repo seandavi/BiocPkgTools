@@ -2,6 +2,7 @@ context("biocBuildReport")
 
 # test release build report
 test_that("columns are consistent in report output", {
+    skip_if_bioc_offline()
     columnames <- c("pkg", "author", "version", "git_last_commit",
         "git_last_commit_date", "node", "stage", "PackageStatus")
 
@@ -22,6 +23,7 @@ test_that("columns are consistent in report output", {
 })
 
 test_that("non-software package types are not dropped (#21)", {
+    skip_if_bioc_offline()
     full_build <- biocBuildReport(
         "devel",
         pkgType = c(

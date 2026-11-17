@@ -1,4 +1,5 @@
 test_that("biocVIEWSdb returns a data.frame with rows", {
+    skip_if_bioc_offline()
     pkgTypes <- c("software", "data-experiment", "data-annotation", "workflows")
     for (type in pkgTypes) {
         df <- biocVIEWSdb(pkgType = type)

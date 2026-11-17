@@ -42,7 +42,8 @@ test_that("biocBuildStatusDB errors on an invalid version", {
 
 test_that("biocBuildStatusDB errors on an invalid pkgType", {
     expect_error(
-        biocBuildStatusDB("devel", pkgType = "not-a-real-pkgtype"),
+        ## a concrete version avoids resolving "devel" over the network
+        biocBuildStatusDB("3.24", pkgType = "not-a-real-pkgtype"),
         "'arg' should be one of"
     )
 })

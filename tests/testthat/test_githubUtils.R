@@ -9,7 +9,7 @@ context("githubUtils")
 # reliable way to check whether *some* usable token is actually wired up,
 # rather than just checking the env vars.
 skip_if_no_github_token <- function() {
-    testthat::skip_if_offline("github.com")
+    skip_if_offline("github.com")
     who <- tryCatch(gh::gh_whoami(), error = function(e) NULL)
     if (is.null(who))
         testthat::skip(paste0(

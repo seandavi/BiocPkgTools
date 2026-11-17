@@ -76,6 +76,42 @@ test_that(".needs_update handles the uncached / up-to-date / stale cases", {
     expect_true(BiocPkgTools:::.needs_update(bfc, bquery, url))
 })
 
+test_that(".needs_update judges staleness by size, ETag and Last-Modified (#92)", {
+    bfc <- BiocFileCache::BiocFileCache(tempfile(), ask = FALSE)
+    path <- BiocFileCache::bfcnew(bfc, "remote-file")
+    writeLines("twelve bytes", path)
+    size <- file.size(path)
+    bquery <- data.frame(
+        rid = names(path), etag = "W/abc123",
+        last_modified_time = "2026-11-16 09:52:30"
+    )
+    url <- "https://example.org/remote-file"
+    mock_remote <- function(size, etag = NA_character_, modified = NA_character_)
+        testthat::local_mocked_bindings(
+            .get_remote_info = function(url)
+                list(size = size, etag = etag, modified = modified),
+            .package = "BiocPkgTools", .env = parent.frame()
+        )
+
+    # weak and strong forms of the same ETag are the same resource; a
+    # short-lived 'expires' must not make it stale
+    mock_remote(size, etag = '"abc123"')
+    expect_false(BiocPkgTools:::.needs_update(bfc, bquery, url))
+
+    mock_remote(size, etag = '"def456"')
+    expect_true(BiocPkgTools:::.needs_update(bfc, bquery, url))
+
+    mock_remote(size + 1, etag = '"abc123"')
+    expect_true(BiocPkgTools:::.needs_update(bfc, bquery, url))
+
+    # no ETag: fall back to Last-Modified
+    bquery[["etag"]] <- NA_character_
+    mock_remote(size, modified = "Mon, 16 Nov 2026 09:52:30 GMT")
+    expect_false(BiocPkgTools:::.needs_update(bfc, bquery, url))
+    mock_remote(size, modified = "Tue, 17 Nov 2026 09:52:30 GMT")
+    expect_true(BiocPkgTools:::.needs_update(bfc, bquery, url))
+})
+
 test_that("get_deprecated_status_df reports deprecated packages from a real VIEWS file", {
     skip_if_bioc_offline()
 
